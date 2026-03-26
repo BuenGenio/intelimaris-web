@@ -1,0 +1,34 @@
+# Assets folder for InteliMaris website
+
+Place images, icons, and other static assets here.
+
+## Recommended Assets
+
+### Icons
+- Sensor type icons (water, fire, temperature, battery, GPS)
+- Platform capability icons
+- Navigation icons
+
+### Illustrations
+- Hero visual (marina with vessels and sensor network)
+- Architecture diagram
+- Dashboard mockup screenshots
+- Sensor deployment flow
+
+### Photography
+- Vessel photos
+- Marina facilities
+- Sensor hardware
+- Team photos (optional)
+
+### Logos
+- Primary logo (light/dark variants)
+- Icon-only mark
+- Horizontal lockup
+- Vertical lockup
+
+## File Naming Convention
+
+- Use kebab-case: `sensor-water-icon.svg`
+- Include size suffix for raster images: `hero-marina-2x.png`
+- Use descriptive names: `screenshot-dashboard-fleet.png`

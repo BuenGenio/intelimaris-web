@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InteliMaris | The Intelligence Layer for the World's Waters</title>
+  <meta name="description" content="Next-generation maritime IoT platform combining real-time monitoring, predictive maintenance, and autonomous control for vessels and marinas.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <script src="translations.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Navigation -->
+    <nav class="nav-container">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <img src="assets/logo.png" alt="InteliMaris" class="brand-logo">
+          <span class="brand-text">InteliMaris</span>
+        </div>
+        
+        <div class="nav-links">
+          <a href="#platform" class="nav-link" data-i18n="nav.platform">Platform</a>
+          <a href="#capabilities" class="nav-link" data-i18n="nav.capabilities">Capabilities</a>
+          <a href="#architecture" class="nav-link" data-i18n="nav.architecture">Architecture</a>
+          <a href="#vision" class="nav-link" data-i18n="nav.vision">Vision</a>
+        </div>
+        
+        <div class="nav-actions">
+          <button class="btn-demo" onclick="scrollToSection('contact')" data-i18n="nav.demo">Request Demo</button>
+          
+          <div class="theme-switcher">
+            <button class="theme-option active" data-theme="dark" onclick="setTheme('dark')" title="Dark mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="theme-option" data-theme="light" onclick="setTheme('light')" title="Light mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="5" stroke-width="2"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="lang-selector">
+            <button class="lang-current" onclick="toggleLangDropdown()" title="Select language">
+              <img src="assets/flag-us.svg" alt="EN" class="lang-flag" id="currentLangFlag">
+              <span class="lang-code" id="currentLangCode">EN</span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="opacity: 0.6;">
+                <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="lang-dropdown" id="langDropdown">
+              <button class="lang-option active" data-lang="en" onclick="selectLanguage('en')">
+                <img src="assets/flag-us.svg" alt="EN">
+                <span class="lang-option-text">English</span>
+              </button>
+              <button class="lang-option" data-lang="es" onclick="selectLanguage('es')">
+                <img src="assets/flag-es.svg" alt="ES">
+                <span class="lang-option-text">Español</span>
+              </button>
+              <button class="lang-option" data-lang="el" onclick="selectLanguage('el')">
+                <img src="assets/flag-gr.svg" alt="EL">
+                <span class="lang-option-text">Ελληνικά</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background">
+        <canvas id="oceanCanvas"></canvas>
+        <div class="grid-overlay"></div>
+      </div>
+      
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          <span data-i18n="hero.badge">Maritime Intelligence Platform</span>
+        </div>
+        
+        <h1 class="hero-title" data-i18n="hero.title">
+          The Intelligence Layer for the World's Waters
+        </h1>
+        
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          Real-time monitoring, predictive alerts, and autonomous control for vessels and marinas.
+        </p>
+        
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="scrollToSection('contact')">
+            <span data-i18n="hero.cta.primary">Request Demo</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="btn-secondary" onclick="scrollToSection('platform')" data-i18n="hero.cta.secondary">
+            Explore Platform
+          </button>
+        </div>
+        
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label" data-i18n="hero.stat.realtime">Real-time Telemetry</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">∞</div>
+            <div class="stat-label" data-i18n="hero.stat.scalable">Scalable Architecture</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">&lt;100ms</div>
+            <div class="stat-label" data-i18n="hero.stat.latency">Alert Latency</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Problem → Opportunity Section -->
+    <section class="problem-section">
+      <div class="container">
+        <div class="split-layout">
+          <div class="problem-side">
+            <div class="section-label" data-i18n="problem.label">The Challenge</div>
+            <h2 data-i18n="problem.title">Maritime Operations Run Blind</h2>
+            <div class="problem-list">
+              <div class="problem-item">
+                <div class="problem-icon critical">!</div>
+                <div>
+                  <h4 data-i18n="problem.fragmented.title">Fragmented Monitoring</h4>
+                  <p data-i18n="problem.fragmented.desc">Disconnected sensors, proprietary systems, manual checks</p>
+                </div>
+              </div>
+              <div class="problem-item">
+                <div class="problem-icon critical">!</div>
+                <div>
+                  <h4 data-i18n="problem.expensive.title">Expensive Failures</h4>
+                  <p data-i18n="problem.expensive.desc">Water ingress, fire, battery failures cost millions annually</p>
+                </div>
+              </div>
+              <div class="problem-item">
+                <div class="problem-icon critical">!</div>
+                <div>
+                  <h4 data-i18n="problem.intelligence.title">No Real-time Intelligence</h4>
+                  <p data-i18n="problem.intelligence.desc">Data exists but doesn't drive decisions or automation</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="opportunity-side">
+            <div class="section-label accent" data-i18n="opportunity.label">The Shift</div>
+            <h2 data-i18n="opportunity.title">Data-Driven Maritime Operations</h2>
+            <div class="opportunity-content">
+              <p class="lead-text" data-i18n="opportunity.lead">
+                InteliMaris transforms maritime environments into intelligent, connected ecosystems where every sensor, vessel, and facility speaks the same language.
+              </p>
+              <div class="opportunity-metrics">
+                <div class="metric-card">
+                  <div class="metric-number" data-i18n="opportunity.metric1.value">85%</div>
+                  <div class="metric-text" data-i18n="opportunity.metric1.text">Faster incident detection</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-number" data-i18n="opportunity.metric2.value">$2M+</div>
+                  <div class="metric-text" data-i18n="opportunity.metric2.text">Average annual savings</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-number" data-i18n="opportunity.metric3.value">10x</div>
+                  <div class="metric-text" data-i18n="opportunity.metric3.text">Operational efficiency gain</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Overview Section -->
+    <section class="platform-section" id="platform">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="section-label" data-i18n="platform.label">The Operating System</div>
+          <h2 data-i18n="platform.title">InteliMaris Platform Architecture</h2>
+          <p class="section-description" data-i18n="platform.description">
+            A unified system combining sensors, connectivity, real-time processing, and intelligent automation
+          </p>
+        </div>
+        
+        <div class="platform-diagram">
+          <div class="platform-layer">
+            <div class="layer-header">
+              <div class="layer-number">01</div>
+              <h3 data-i18n="platform.layer1.title">Sensor Ecosystem</h3>
+            </div>
+            <div class="layer-content">
+              <div class="layer-items">
+                <span class="layer-tag" data-i18n="platform.layer1.tag1">LoRaWAN Devices</span>
+                <span class="layer-tag" data-i18n="platform.layer1.tag2">Edge Processors</span>
+                <span class="layer-tag" data-i18n="platform.layer1.tag3">Plug-and-Deploy</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="platform-arrow">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          
+          <div class="platform-layer">
+            <div class="layer-header">
+              <div class="layer-number">02</div>
+              <h3 data-i18n="platform.layer2.title">Connectivity Layer</h3>
+            </div>
+            <div class="layer-content">
+              <div class="layer-items">
+                <span class="layer-tag" data-i18n="platform.layer2.tag1">LoRaWAN</span>
+                <span class="layer-tag" data-i18n="platform.layer2.tag2">Satellite Fallback</span>
+                <span class="layer-tag" data-i18n="platform.layer2.tag3">Cellular Backup</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="platform-arrow">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          
+          <div class="platform-layer highlight">
+            <div class="layer-header">
+              <div class="layer-number">03</div>
+              <h3 data-i18n="platform.layer3.title">Intelligence Platform</h3>
+            </div>
+            <div class="layer-content">
+              <div class="layer-items">
+                <span class="layer-tag" data-i18n="platform.layer3.tag1">Event Ingestion</span>
+                <span class="layer-tag" data-i18n="platform.layer3.tag2">State Management</span>
+                <span class="layer-tag" data-i18n="platform.layer3.tag3">Time-series Storage</span>
+                <span class="layer-tag" data-i18n="platform.layer3.tag4">Analytics Engine</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="platform-arrow">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          
+          <div class="platform-layer">
+            <div class="layer-header">
+              <div class="layer-number">04</div>
+              <h3 data-i18n="platform.layer4.title">Automation & Control</h3>
+            </div>
+            <div class="layer-content">
+              <div class="layer-items">
+                <span class="layer-tag" data-i18n="platform.layer4.tag1">Rule Engine</span>
+                <span class="layer-tag" data-i18n="platform.layer4.tag2">Alert Workflows</span>
+                <span class="layer-tag" data-i18n="platform.layer4.tag3">Command & Control</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Capabilities Section -->
+    <section class="capabilities-section" id="capabilities">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="section-label" data-i18n="capabilities.label">Core Capabilities</div>
+          <h2 data-i18n="capabilities.title">Built for Maritime Intelligence</h2>
+        </div>
+        
+        <div class="capabilities-grid">
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 data-i18n="capabilities.realtime.title">Real-time Telemetry</h3>
+            <p data-i18n="capabilities.realtime.desc">Sub-second data ingestion from thousands of sensors. Event-driven architecture processes measurements as they arrive, maintaining live operational state across your entire fleet.</p>
+          </div>
+          
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 data-i18n="capabilities.predictive.title">Predictive Maintenance</h3>
+            <p data-i18n="capabilities.predictive.desc">Machine learning models analyze historical patterns to predict equipment failures before they occur. Reduce downtime by 70% with proactive intervention.</p>
+          </div>
+          
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v20M2 12h20M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="capabilities.alerts.title">Smart Alerts & Automation</h3>
+            <p data-i18n="capabilities.alerts.desc">Intelligent rule engine transforms raw events into actionable workflows. Auto-escalate critical issues, trigger pumps, notify teams, and log every action.</p>
+          </div>
+          
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="capabilities.visibility.title">Fleet-wide Visibility</h3>
+            <p data-i18n="capabilities.visibility.desc">Unified dashboard across all vessels, marinas, and facilities. Single pane of glass for operations teams managing distributed maritime assets.</p>
+          </div>
+          
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7v10c0 5.5 4.5 9 10 9s10-3.5 10-9V7l-10-5z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="capabilities.offline.title">Offline-first & Resilient</h3>
+            <p data-i18n="capabilities.offline.desc">Edge computing ensures critical functions work without connectivity. Automatic sync when connection restores. Built for harsh maritime environments.</p>
+          </div>
+          
+          <div class="capability-card">
+            <div class="capability-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v20M17 7l-5-5-5 5M7 17l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 data-i18n="capabilities.multitenant.title">Multi-tenant Architecture</h3>
+            <p data-i18n="capabilities.multitenant.desc">Serve multiple organizations, marinas, and fleets from a single platform. Complete data isolation with shared infrastructure efficiency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sensor Ecosystem Section -->
+    <section class="sensors-section" id="sensors">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label" data-i18n="sensors.label">Sensor Ecosystem</div>
+          <h2 data-i18n="sensors.title">Comprehensive Maritime Monitoring</h2>
+          <p class="section-description" data-i18n="sensors.description">
+            Plug-and-deploy sensor network covering every critical system
+          </p>
+        </div>
+        
+        <div class="sensors-grid">
+          <div class="sensor-category">
+            <div class="sensor-icon water">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="sensors.water.title">Water & Leak Detection</h3>
+            <ul class="sensor-list">
+              <li data-i18n="sensors.water.item1">Bilge water sensors</li>
+              <li data-i18n="sensors.water.item2">Hull breach detection</li>
+              <li data-i18n="sensors.water.item3">Pump room monitoring</li>
+              <li data-i18n="sensors.water.item4">Humidity tracking</li>
+            </ul>
+          </div>
+          
+          <div class="sensor-category">
+            <div class="sensor-icon fire">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2c-1.5 4-4 6-4 10a4 4 0 0 0 8 0c0-4-2.5-6-4-10z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="sensors.fire.title">Fire & Smoke</h3>
+            <ul class="sensor-list">
+              <li data-i18n="sensors.fire.item1">Multi-spectrum smoke detection</li>
+              <li data-i18n="sensors.fire.item2">Heat sensors</li>
+              <li data-i18n="sensors.fire.item3">Gas detection (propane, CO)</li>
+              <li data-i18n="sensors.fire.item4">Flame detection</li>
+            </ul>
+          </div>
+          
+          <div class="sensor-category">
+            <div class="sensor-icon environment">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 1v2M12 21v2M1 12h2M21 12h2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="sensors.environment.title">Environmental</h3>
+            <ul class="sensor-list">
+              <li data-i18n="sensors.environment.item1">Temperature & humidity</li>
+              <li data-i18n="sensors.environment.item2">Air quality (VOC, particulates)</li>
+              <li data-i18n="sensors.environment.item3">Barometric pressure</li>
+              <li data-i18n="sensors.environment.item4">Wind speed & direction</li>
+            </ul>
+          </div>
+          
+          <div class="sensor-category">
+            <div class="sensor-icon electrical">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="6" y="2" width="12" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M10 6h4M10 10h4M10 14h4" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="sensors.electrical.title">Electrical & Battery</h3>
+            <ul class="sensor-list">
+              <li data-i18n="sensors.electrical.item1">Battery voltage & health</li>
+              <li data-i18n="sensors.electrical.item2">Shore power monitoring</li>
+              <li data-i18n="sensors.electrical.item3">Current draw analysis</li>
+              <li data-i18n="sensors.electrical.item4">Solar panel output</li>
+            </ul>
+          </div>
+          
+          <div class="sensor-category">
+            <div class="sensor-icon location">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="sensors.location.title">GPS & Movement</h3>
+            <ul class="sensor-list">
+              <li data-i18n="sensors.location.item1">Real-time positioning</li>
+              <li data-i18n="sensors.location.item2">Geofencing & alerts</li>
+              <li data-i18n="sensors.location.item3">Motion detection</li>
+              <li data-i18n="sensors.location.item4">Track playback</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="sensor-flow">
+          <div class="flow-step">
+            <div class="flow-icon">📡</div>
+            <div class="flow-text" data-i18n="sensors.flow.step1">Deploy Sensors</div>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step">
+            <div class="flow-icon">☁️</div>
+            <div class="flow-text" data-i18n="sensors.flow.step2">Auto-provision</div>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-step">
+            <div class="flow-icon">📊</div>
+            <div class="flow-text" data-i18n="sensors.flow.step3">Live Dashboard</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Dashboard Experience Section -->
+    <section class="dashboard-section">
+      <div class="container-wide">
+        <div class="section-header centered">
+          <div class="section-label" data-i18n="dashboard.label">Live Operations</div>
+          <h2 data-i18n="dashboard.title">Command Center Experience</h2>
+          <p class="section-description" data-i18n="dashboard.description">
+            Real-time operational awareness for decision-makers
+          </p>
+        </div>
+        
+        <div class="dashboard-mockup">
+          <div class="dashboard-header">
+            <div class="dashboard-title" data-i18n="dashboard.header.title">Fleet Operations</div>
+            <div class="dashboard-time" id="dashboardTime">14:32:18 UTC</div>
+          </div>
+          
+          <div class="dashboard-grid">
+            <div class="dashboard-sidebar">
+              <div class="vessel-list">
+                <div class="vessel-card active" data-vessel="1">
+                  <div class="vessel-status status-ok"></div>
+                  <div class="vessel-info">
+                    <div class="vessel-name">Poseidon's Pride</div>
+                    <div class="vessel-meta">Marina Bay • Berth A-12</div>
+                  </div>
+                  <div class="vessel-sensors">
+                    <span class="sensor-badge ok">8</span>
+                  </div>
+                </div>
+                
+                <div class="vessel-card" data-vessel="2">
+                  <div class="vessel-status status-warning"></div>
+                  <div class="vessel-info">
+                    <div class="vessel-name">Ocean Voyager</div>
+                    <div class="vessel-meta">Harbor Point • B-05</div>
+                  </div>
+                  <div class="vessel-sensors">
+                    <span class="sensor-badge warning">1</span>
+                    <span class="sensor-badge ok">7</span>
+                  </div>
+                </div>
+                
+                <div class="vessel-card" data-vessel="3">
+                  <div class="vessel-status status-critical"></div>
+                  <div class="vessel-info">
+                    <div class="vessel-name">Marina Star</div>
+                    <div class="vessel-meta">South Dock • C-22</div>
+                  </div>
+                  <div class="vessel-sensors">
+                    <span class="sensor-badge critical">2</span>
+                    <span class="sensor-badge ok">6</span>
+                  </div>
+                </div>
+                
+                <div class="vessel-card" data-vessel="4">
+                  <div class="vessel-status status-ok"></div>
+                  <div class="vessel-info">
+                    <div class="vessel-name">Blue Horizon</div>
+                    <div class="vessel-meta">North Pier • D-08</div>
+                  </div>
+                  <div class="vessel-sensors">
+                    <span class="sensor-badge ok">10</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dashboard-main">
+              <div class="sensor-grid">
+                <div class="sensor-card status-ok">
+                  <div class="sensor-header">
+                    <div class="sensor-type" data-i18n="dashboard.sensor.battery">Battery</div>
+                    <div class="sensor-value">13.2V</div>
+                  </div>
+                  <div class="sensor-chart">
+                    <canvas class="mini-chart" data-chart="battery"></canvas>
+                  </div>
+                  <div class="sensor-footer">
+                    <span class="sensor-status" data-i18n="dashboard.status.healthy">Healthy</span>
+                    <span class="sensor-time">2m ago</span>
+                  </div>
+                </div>
+                
+                <div class="sensor-card status-ok">
+                  <div class="sensor-header">
+                    <div class="sensor-type" data-i18n="dashboard.sensor.bilge">Bilge Water</div>
+                    <div class="sensor-value" data-i18n="dashboard.status.normal">Normal</div>
+                  </div>
+                  <div class="sensor-chart">
+                    <canvas class="mini-chart" data-chart="bilge"></canvas>
+                  </div>
+                  <div class="sensor-footer">
+                    <span class="sensor-status" data-i18n="dashboard.status.dry">Dry</span>
+                    <span class="sensor-time">5m ago</span>
+                  </div>
+                </div>
+                
+                <div class="sensor-card status-ok">
+                  <div class="sensor-header">
+                    <div class="sensor-type" data-i18n="dashboard.sensor.temperature">Temperature</div>
+                    <div class="sensor-value">22°C</div>
+                  </div>
+                  <div class="sensor-chart">
+                    <canvas class="mini-chart" data-chart="temp"></canvas>
+                  </div>
+                  <div class="sensor-footer">
+                    <span class="sensor-status" data-i18n="dashboard.status.optimal">Optimal</span>
+                    <span class="sensor-time">1m ago</span>
+                  </div>
+                </div>
+                
+                <div class="sensor-card status-ok">
+                  <div class="sensor-header">
+                    <div class="sensor-type" data-i18n="dashboard.sensor.gps">GPS</div>
+                    <div class="sensor-value" data-i18n="dashboard.status.fixed">Fixed</div>
+                  </div>
+                  <div class="sensor-chart">
+                    <div class="gps-indicator">
+                      <div class="gps-dot"></div>
+                    </div>
+                  </div>
+                  <div class="sensor-footer">
+                    <span class="sensor-status">37.8°N, 23.7°E</span>
+                    <span class="sensor-time">30s ago</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="event-timeline">
+                <div class="timeline-header" data-i18n="dashboard.timeline.title">Recent Events</div>
+                <div class="timeline-events">
+                  <div class="timeline-event">
+                    <div class="event-time">14:28</div>
+                    <div class="event-dot status-ok"></div>
+                    <div class="event-content">
+                      <div class="event-title">Battery voltage normal</div>
+                      <div class="event-meta">Sensor ID: BAT-001</div>
+                    </div>
+                  </div>
+                  <div class="timeline-event">
+                    <div class="event-time">14:15</div>
+                    <div class="event-dot status-ok"></div>
+                    <div class="event-content">
+                      <div class="event-title">Bilge pump cycle completed</div>
+                      <div class="event-meta">Duration: 45s</div>
+                    </div>
+                  </div>
+                  <div class="timeline-event">
+                    <div class="event-time">13:52</div>
+                    <div class="event-dot status-warning"></div>
+                    <div class="event-content">
+                      <div class="event-title">Temperature spike detected</div>
+                      <div class="event-meta">Resolved automatically</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automation & Intelligence Section -->
+    <section class="automation-section" id="automation">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="section-label" data-i18n="automation.label">Automation Engine</div>
+          <h2 data-i18n="automation.title">From Detection to Action</h2>
+          <p class="section-description" data-i18n="automation.description">
+            Event-driven workflows that respond faster than human operators
+          </p>
+        </div>
+        
+        <div class="automation-example">
+          <div class="automation-card">
+            <div class="automation-step trigger">
+              <div class="step-icon">⚠️</div>
+              <div class="step-content">
+                <h4 data-i18n="automation.trigger.title">Trigger Event</h4>
+                <p data-i18n="automation.trigger.desc">Water leak detected in engine compartment</p>
+              </div>
+            </div>
+            
+            <div class="automation-arrow">→</div>
+            
+            <div class="automation-step action">
+              <div class="step-icon">📱</div>
+              <div class="step-content">
+                <h4 data-i18n="automation.alert.title">Immediate Alert</h4>
+                <p data-i18n="automation.alert.desc">SMS + app notification to owner & marina staff</p>
+              </div>
+            </div>
+            
+            <div class="automation-arrow">→</div>
+            
+            <div class="automation-step action">
+              <div class="step-icon">🔧</div>
+              <div class="step-content">
+                <h4 data-i18n="automation.response.title">Auto Response</h4>
+                <p data-i18n="automation.response.desc">Activate bilge pump, close valves if equipped</p>
+              </div>
+            </div>
+            
+            <div class="automation-arrow">→</div>
+            
+            <div class="automation-step result">
+              <div class="step-icon">📋</div>
+              <div class="step-content">
+                <h4 data-i18n="automation.log.title">Log & Track</h4>
+                <p data-i18n="automation.log.desc">Incident recorded, timeline captured, audit trail created</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="automation-features">
+          <div class="automation-feature">
+            <h4 data-i18n="automation.feature1.title">Rule Engine</h4>
+            <p data-i18n="automation.feature1.desc">Visual workflow builder for custom automation logic</p>
+          </div>
+          <div class="automation-feature">
+            <h4 data-i18n="automation.feature2.title">Alert Escalation</h4>
+            <p data-i18n="automation.feature2.desc">Multi-tier notification with SMS, email, webhook, and app push</p>
+          </div>
+          <div class="automation-feature">
+            <h4 data-i18n="automation.feature3.title">Command & Control</h4>
+            <p data-i18n="automation.feature3.desc">Remote device actuation with safety interlocks and audit logging</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Scalability Section -->
+    <section class="architecture-section" id="architecture">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="section-label" data-i18n="architecture.label">Technical Foundation</div>
+          <h2 data-i18n="architecture.title">Built for Scale & Reliability</h2>
+        </div>
+        
+        <div class="architecture-grid">
+          <div class="arch-card">
+            <div class="arch-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="architecture.eventdriven.title">Event-Driven Core</h3>
+            <p data-i18n="architecture.eventdriven.desc">NATS streaming backbone processes millions of events per day. Every measurement, alert, and command flows through immutable event streams.</p>
+            <div class="tech-tags">
+              <span>NATS</span>
+              <span>Event Sourcing</span>
+              <span>CQRS</span>
+            </div>
+          </div>
+          
+          <div class="arch-card">
+            <div class="arch-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="architecture.ingestion.title">High-Throughput Ingestion</h3>
+            <p data-i18n="architecture.ingestion.desc">Purpose-built decoder service handles LoRaWAN payloads at scale. Supports thousands of concurrent sensors with sub-second processing.</p>
+            <div class="tech-tags">
+              <span>Node.js</span>
+              <span>LoRaWAN</span>
+              <span>Edge Compute</span>
+            </div>
+          </div>
+          
+          <div class="arch-card">
+            <div class="arch-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="architecture.observability.title">Observability & Replay</h3>
+            <p data-i18n="architecture.observability.desc">Complete system observability with Prometheus, Grafana, and distributed tracing. Replay any event sequence for debugging or analysis.</p>
+            <div class="tech-tags">
+              <span>Prometheus</span>
+              <span>Grafana</span>
+              <span>Tempo</span>
+            </div>
+          </div>
+          
+          <div class="arch-card">
+            <div class="arch-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="architecture.timeseries.title">Time-Series Storage</h3>
+            <p data-i18n="architecture.timeseries.desc">PostgreSQL with TimescaleDB for efficient historical queries. Retain years of telemetry data with intelligent compression.</p>
+            <div class="tech-tags">
+              <span>PostgreSQL</span>
+              <span>TimescaleDB</span>
+              <span>Compression</span>
+            </div>
+          </div>
+          
+          <div class="arch-card">
+            <div class="arch-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="architecture.microservices.title">Modular Microservices</h3>
+            <p data-i18n="architecture.microservices.desc">Independent services for query, command, decoding, and real-time gateways. Scale components independently based on load.</p>
+            <div class="tech-tags">
+              <span>Microservices</span>
+              <span>Docker</span>
+              <span>Kubernetes-ready</span>
+            </div>
+          </div>
+          
+          <div class="arch-card">
+            <div class="arch-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M8.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM20 8v6M23 11h-6" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="architecture.multitenant.title">Multi-tenant Isolation</h3>
+            <p data-i18n="architecture.multitenant.desc">Complete data separation per organization. Shared infrastructure with tenant-level security, quotas, and customization.</p>
+            <div class="tech-tags">
+              <span>Row-level Security</span>
+              <span>JWT Auth</span>
+              <span>RBAC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Vision Section -->
+    <section class="vision-section" id="vision">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="section-label accent" data-i18n="vision.label">Future Roadmap</div>
+          <h2 data-i18n="vision.title">Beyond Monitoring: The Future of Maritime Intelligence</h2>
+          <p class="section-description" data-i18n="vision.description">
+            InteliMaris is building the infrastructure for autonomous maritime operations
+          </p>
+        </div>
+        
+        <div class="vision-grid">
+          <div class="vision-card">
+            <div class="vision-year">2026</div>
+            <h3 data-i18n="vision.ai.title">AI Anomaly Detection</h3>
+            <p data-i18n="vision.ai.desc">Machine learning models trained on millions of sensor readings detect subtle patterns invisible to rule-based systems. Predict failures weeks before they occur.</p>
+          </div>
+          
+          <div class="vision-card">
+            <div class="vision-year">2027</div>
+            <h3 data-i18n="vision.digital.title">Digital Twin Technology</h3>
+            <p data-i18n="vision.digital.desc">Complete virtual replicas of vessels and facilities. Simulate scenarios, test automation rules, and optimize operations in a risk-free environment.</p>
+          </div>
+          
+          <div class="vision-card">
+            <div class="vision-year">2027</div>
+            <h3 data-i18n="vision.satellite.title">Satellite-Native Connectivity</h3>
+            <p data-i18n="vision.satellite.desc">Starlink and LEO constellation integration for global coverage. Monitor vessels anywhere on Earth with consistent low-latency connectivity.</p>
+          </div>
+          
+          <div class="vision-card">
+            <div class="vision-year">2028</div>
+            <h3 data-i18n="vision.autonomous.title">Autonomous Vessel Support</h3>
+            <p data-i18n="vision.autonomous.desc">API-first platform ready for autonomous vessel integration. Provide situational awareness and decision support for AI-piloted craft.</p>
+          </div>
+          
+          <div class="vision-card">
+            <div class="vision-year">2028</div>
+            <h3 data-i18n="vision.insurance.title">Insurance & Compliance</h3>
+            <p data-i18n="vision.insurance.desc">Real-time risk scoring and automated compliance reporting. Partner with insurers to offer usage-based premiums and instant claims validation.</p>
+          </div>
+          
+          <div class="vision-card">
+            <div class="vision-year">2029</div>
+            <h3 data-i18n="vision.marketplace.title">Maritime Data Marketplace</h3>
+            <p data-i18n="vision.marketplace.desc">Anonymized, aggregated maritime intelligence as a service. Weather patterns, traffic analysis, and predictive models available via API.</p>
+          </div>
+        </div>
+        
+        <div class="vision-statement">
+          <blockquote data-i18n="vision.quote">
+            "We're not building a monitoring tool. We're building the nervous system for the maritime industry."
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label" data-i18n="usecases.label">Market Segments</div>
+          <h2 data-i18n="usecases.title">Built for Multiple Maritime Stakeholders</h2>
+        </div>
+        
+        <div class="use-cases-grid">
+          <div class="use-case-card">
+            <div class="use-case-icon">🛥️</div>
+            <h3 data-i18n="usecases.yacht.title">Private Yacht Owners</h3>
+            <p data-i18n="usecases.yacht.desc">Peace of mind with 24/7 monitoring. Know your vessel is safe whether you're aboard or thousands of miles away.</p>
+            <ul class="use-case-benefits">
+              <li data-i18n="usecases.yacht.benefit1">Water leak detection</li>
+              <li data-i18n="usecases.yacht.benefit2">Battery health monitoring</li>
+              <li data-i18n="usecases.yacht.benefit3">Security & motion alerts</li>
+              <li data-i18n="usecases.yacht.benefit4">Climate control</li>
+            </ul>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">⚓</div>
+            <h3 data-i18n="usecases.marina.title">Marina Operators</h3>
+            <p data-i18n="usecases.marina.desc">Manage hundreds of berths with confidence. Proactive maintenance, rapid incident response, and premium service differentiation.</p>
+            <ul class="use-case-benefits">
+              <li data-i18n="usecases.marina.benefit1">Facility monitoring</li>
+              <li data-i18n="usecases.marina.benefit2">Berth-level visibility</li>
+              <li data-i18n="usecases.marina.benefit3">Utility tracking</li>
+              <li data-i18n="usecases.marina.benefit4">Customer reporting</li>
+            </ul>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">🚢</div>
+            <h3 data-i18n="usecases.fleet.title">Fleet Operators</h3>
+            <p data-i18n="usecases.fleet.desc">Centralized command for commercial fleets. Optimize routes, predict maintenance, and ensure compliance across all vessels.</p>
+            <ul class="use-case-benefits">
+              <li data-i18n="usecases.fleet.benefit1">Fleet-wide dashboards</li>
+              <li data-i18n="usecases.fleet.benefit2">Predictive maintenance</li>
+              <li data-i18n="usecases.fleet.benefit3">Fuel optimization</li>
+              <li data-i18n="usecases.fleet.benefit4">Compliance tracking</li>
+            </ul>
+          </div>
+          
+          <div class="use-case-card">
+            <div class="use-case-icon">🛡️</div>
+            <h3 data-i18n="usecases.insurance.title">Insurance Companies</h3>
+            <p data-i18n="usecases.insurance.desc">Risk-based underwriting with real data. Reward safe operators, validate claims instantly, and reduce fraud.</p>
+            <ul class="use-case-benefits">
+              <li data-i18n="usecases.insurance.benefit1">Real-time risk scoring</li>
+              <li data-i18n="usecases.insurance.benefit2">Claims validation</li>
+              <li data-i18n="usecases.insurance.benefit3">Usage-based pricing</li>
+              <li data-i18n="usecases.insurance.benefit4">Loss prevention</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Model Section -->
+    <section class="business-section">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="section-label" data-i18n="business.label">Business Model</div>
+          <h2 data-i18n="business.title">Hardware + Software + Intelligence</h2>
+        </div>
+        
+        <div class="business-grid">
+          <div class="business-card">
+            <div class="business-tier" data-i18n="business.hardware.tier">Foundation</div>
+            <h3 data-i18n="business.hardware.title">Sensor Hardware</h3>
+            <div class="business-price">From $299</div>
+            <p data-i18n="business.hardware.desc">LoRaWAN sensor kits with professional installation. One-time hardware cost per vessel or facility.</p>
+            <ul class="business-features">
+              <li data-i18n="business.hardware.feature1">Core sensor package</li>
+              <li data-i18n="business.hardware.feature2">Gateway hardware</li>
+              <li data-i18n="business.hardware.feature3">Professional installation</li>
+              <li data-i18n="business.hardware.feature4">1-year warranty</li>
+            </ul>
+          </div>
+          
+          <div class="business-card featured">
+            <div class="business-tier accent" data-i18n="business.saas.tier">Platform</div>
+            <h3 data-i18n="business.saas.title">SaaS Subscription</h3>
+            <div class="business-price">$49-$499/mo</div>
+            <p data-i18n="business.saas.desc">Tiered pricing based on vessel count, sensor density, and feature access. Enterprise plans available.</p>
+            <ul class="business-features">
+              <li data-i18n="business.saas.feature1">Real-time monitoring</li>
+              <li data-i18n="business.saas.feature2">Historical analytics</li>
+              <li data-i18n="business.saas.feature3">Alert workflows</li>
+              <li data-i18n="business.saas.feature4">API access</li>
+              <li data-i18n="business.saas.feature5">Mobile apps</li>
+            </ul>
+          </div>
+          
+          <div class="business-card">
+            <div class="business-tier" data-i18n="business.data.tier">Intelligence</div>
+            <h3 data-i18n="business.data.title">Data Services</h3>
+            <div class="business-price">Custom</div>
+            <p data-i18n="business.data.desc">Advanced analytics, predictive models, and maritime intelligence as a service for enterprise customers.</p>
+            <ul class="business-features">
+              <li data-i18n="business.data.feature1">Predictive maintenance</li>
+              <li data-i18n="business.data.feature2">Custom ML models</li>
+              <li data-i18n="business.data.feature3">Risk scoring</li>
+              <li data-i18n="business.data.feature4">Compliance reporting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing CTA Section -->
+    <section class="closing-section" id="contact">
+      <div class="container">
+        <div class="closing-content">
+          <div class="closing-text">
+            <h2 data-i18n="closing.title">From Sensors to Intelligence.<br>From Alerts to Autonomy.</h2>
+            <p data-i18n="closing.description">
+              Join the next generation of maritime operators building on InteliMaris. Whether you manage a single vessel or a global fleet, we provide the intelligence layer your operations deserve.
+            </p>
+          </div>
+          
+          <div class="closing-form">
+            <div class="form-card">
+              <h3 data-i18n="closing.form.title">Request Demo</h3>
+              <form id="demoForm">
+                <input type="text" data-i18n="closing.form.name" placeholder="Full Name" required>
+                <input type="email" data-i18n="closing.form.email" placeholder="Email Address" required>
+                <input type="text" data-i18n="closing.form.company" placeholder="Company / Organization">
+                <select required>
+                  <option value="" data-i18n="closing.form.role">Select your role</option>
+                  <option value="owner" data-i18n="closing.form.role.owner">Vessel Owner</option>
+                  <option value="marina" data-i18n="closing.form.role.marina">Marina Operator</option>
+                  <option value="fleet" data-i18n="closing.form.role.fleet">Fleet Manager</option>
+                  <option value="insurance" data-i18n="closing.form.role.insurance">Insurance Provider</option>
+                  <option value="investor" data-i18n="closing.form.role.investor">Investor</option>
+                  <option value="other" data-i18n="closing.form.role.other">Other</option>
+                </select>
+                <textarea data-i18n="closing.form.message" placeholder="Tell us about your needs" rows="3"></textarea>
+                <button type="submit" class="btn-primary full-width" data-i18n="closing.form.submit">
+                  Submit Request
+                </button>
+              </form>
+              <p class="form-note" data-i18n="closing.form.note">We'll respond within 24 hours with demo access and technical documentation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="brand-icon">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 4L4 10V22L16 28L28 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M16 16L4 10M16 16L28 10M16 16V28" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="brand-text">InteliMaris</span>
+          </div>
+          
+          <div class="footer-section">
+            <h4 data-i18n="footer.platform">Platform</h4>
+            <a href="#platform" data-i18n="footer.platform.architecture">Architecture</a>
+            <a href="#capabilities" data-i18n="footer.platform.capabilities">Capabilities</a>
+            <a href="#sensors" data-i18n="footer.platform.sensors">Sensors</a>
+            <a href="#automation" data-i18n="footer.platform.automation">Automation</a>
+          </div>
+          
+          <div class="footer-section">
+            <h4 data-i18n="footer.company">Company</h4>
+            <a href="#vision" data-i18n="footer.company.vision">Vision</a>
+            <a href="#contact" data-i18n="footer.company.contact">Contact</a>
+            <a href="#" data-i18n="footer.company.careers">Careers</a>
+            <a href="#" data-i18n="footer.company.investors">Investors</a>
+          </div>
+          
+          <div class="footer-section">
+            <h4 data-i18n="footer.resources">Resources</h4>
+            <a href="#" data-i18n="footer.resources.docs">Documentation</a>
+            <a href="#" data-i18n="footer.resources.api">API Reference</a>
+            <a href="#" data-i18n="footer.resources.cases">Case Studies</a>
+            <a href="#" data-i18n="footer.resources.blog">Blog</a>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p data-i18n="footer.copyright">&copy; 2026 InteliMaris. Building the operating system for maritime environments.</p>
+          <div class="footer-legal">
+            <a href="#" data-i18n="footer.privacy">Privacy</a>
+            <a href="#" data-i18n="footer.terms">Terms</a>
+            <a href="#" data-i18n="footer.security">Security</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
