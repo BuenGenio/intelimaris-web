@@ -1,0 +1,1 @@
+import{j as s,f as t,c as o,a}from"./index-Fm8-CKYq.js";const n={},c={class:"about"};function r(i,e){return t(),o("div",c,[...e[0]||(e[0]=[a("h1",null,"This is an about page",-1)])])}const f=s(n,[["render",r]]);export{f as default};
