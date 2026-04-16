@@ -29,10 +29,11 @@ export function useI18n() {
     setLanguage(lang)
   }
 
+  const base = import.meta.env.BASE_URL
   const languageData = computed(() => ({
-    en: { flag: '/assets/flag-us.svg', code: 'EN', name: 'English' },
-    es: { flag: '/assets/flag-es.svg', code: 'ES', name: 'Español' },
-    el: { flag: '/assets/flag-gr.svg', code: 'EL', name: 'Ελληνικά' }
+    en: { flag: `${base}assets/flag-us.svg`, code: 'EN', name: 'English' },
+    es: { flag: `${base}assets/flag-es.svg`, code: 'ES', name: 'Español' },
+    el: { flag: `${base}assets/flag-gr.svg`, code: 'EL', name: 'Ελληνικά' }
   }))
 
   return {

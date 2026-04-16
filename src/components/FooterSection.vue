@@ -14,23 +14,23 @@
         
         <div class="footer-section">
           <h4>{{ t('footer.platform') }}</h4>
-          <a href="/#ecosystem">{{ t('footer.platform.ecosystem') }}</a>
-          <a href="/#platform">{{ t('nav.platform') }}</a>
-          <a href="/#ai-stack">{{ t('nav.aiStack') }}</a>
-          <a href="/#architecture">{{ t('footer.platform.architecture') }}</a>
-          <a href="/#capabilities">{{ t('footer.platform.capabilities') }}</a>
-          <a href="/#marina">{{ t('footer.platform.marina') }}</a>
-          <a href="/#sensors">{{ t('footer.platform.sensors') }}</a>
-          <a href="/products">{{ t('footer.platform.products') }}</a>
-          <a href="/intelibilge">{{ t('footer.platform.intelibilge') }}</a>
-          <a href="/#automation">{{ t('footer.platform.automation') }}</a>
+          <RouterLink :to="{ name: 'home', hash: '#ecosystem' }">{{ t('footer.platform.ecosystem') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#platform' }">{{ t('nav.platform') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#ai-stack' }">{{ t('nav.aiStack') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#architecture' }">{{ t('footer.platform.architecture') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#capabilities' }">{{ t('footer.platform.capabilities') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#marina' }">{{ t('footer.platform.marina') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#sensors' }">{{ t('footer.platform.sensors') }}</RouterLink>
+          <RouterLink to="/products">{{ t('footer.platform.products') }}</RouterLink>
+          <RouterLink to="/intelibilge">{{ t('footer.platform.intelibilge') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#automation' }">{{ t('footer.platform.automation') }}</RouterLink>
         </div>
         
         <div class="footer-section">
           <h4>{{ t('footer.company') }}</h4>
-          <a href="/about">{{ t('footer.company.about') }}</a>
-          <a href="/#vision">{{ t('footer.company.vision') }}</a>
-          <a href="/#contact">{{ t('footer.company.contact') }}</a>
+          <RouterLink to="/about">{{ t('footer.company.about') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#vision' }">{{ t('footer.company.vision') }}</RouterLink>
+          <RouterLink :to="{ name: 'home', hash: '#contact' }">{{ t('footer.company.contact') }}</RouterLink>
         </div>
       </div>
       
@@ -42,6 +42,7 @@
 </template>
 
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()

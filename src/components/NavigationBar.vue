@@ -2,7 +2,7 @@
   <nav class="nav-container">
     <div class="nav-content">
       <RouterLink to="/" class="nav-brand" @click="closeDrawer">
-        <img src="/assets/logo.png" alt="InteliMaris" class="brand-logo">
+        <img :src="logoSrc" alt="InteliMaris" class="brand-logo">
         <span class="brand-text">InteliMaris</span>
       </RouterLink>
 
@@ -212,6 +212,8 @@ import { RouterLink, useRoute } from 'vue-router'
 import { useTheme } from '@/composables/useTheme'
 import { useI18n } from '@/composables/useI18n'
 import type { Language } from '@/i18n/translations'
+
+const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
 
 const mainHomeLinks = [
   { hash: '#ai-stack', labelKey: 'nav.aiStack' as const },
