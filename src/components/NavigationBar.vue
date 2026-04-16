@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav-container">
+  <nav class="nav-container" aria-label="Main navigation">
     <div class="nav-content">
       <RouterLink to="/" class="nav-brand" @click="closeDrawer">
         <img :src="logoSrc" alt="InteliMaris" class="brand-logo">
@@ -67,9 +67,9 @@
             data-theme="dark"
             type="button"
             @click="setTheme('dark')"
-            title="Dark mode"
+            aria-label="Dark mode"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
@@ -79,9 +79,9 @@
             data-theme="light"
             type="button"
             @click="setTheme('light')"
-            title="Light mode"
+            aria-label="Light mode"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <circle cx="12" cy="12" r="5" stroke-width="2"/>
               <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
             </svg>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="lang-selector nav-desktop-inline">
-          <button class="lang-current" :class="{ open: isLangOpen }" type="button" title="Select language" @click="toggleLang">
+          <button class="lang-current" :class="{ open: isLangOpen }" type="button" aria-label="Select language" :aria-expanded="isLangOpen" aria-haspopup="true" @click="toggleLang">
             <img :src="languageData[currentLanguage].flag" :alt="languageData[currentLanguage].code" class="lang-flag">
             <span class="lang-code">{{ languageData[currentLanguage].code }}</span>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="opacity: 0.6;" aria-hidden="true">

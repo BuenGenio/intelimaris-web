@@ -1,7 +1,7 @@
 <template>
   <section class="hero-section">
-    <div class="hero-background">
-      <canvas ref="oceanCanvas" id="oceanCanvas"></canvas>
+    <div class="hero-background" role="img" aria-label="Animated ocean visualization with vessels, particles, and wave connections">
+      <canvas ref="oceanCanvas" id="oceanCanvas" aria-hidden="true"></canvas>
       <div class="grid-overlay"></div>
     </div>
     
@@ -22,7 +22,7 @@
       <div class="hero-actions">
         <button class="btn-primary" @click="scrollToSection('contact')">
           <span>{{ t('hero.cta.primary') }}</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>

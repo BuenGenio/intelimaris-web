@@ -1,9 +1,9 @@
 <template>
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container">
-      <div class="footer-grid">
+      <nav class="footer-grid" aria-label="Footer navigation">
         <div class="footer-brand">
-          <div class="brand-icon">
+          <div class="brand-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M16 4L4 10V22L16 28L28 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
               <path d="M16 16L4 10M16 16L28 10M16 16V28" stroke="currentColor" stroke-width="2"/>
@@ -32,8 +32,8 @@
           <RouterLink :to="{ name: 'home', hash: '#vision' }">{{ t('footer.company.vision') }}</RouterLink>
           <RouterLink :to="{ name: 'home', hash: '#contact' }">{{ t('footer.company.contact') }}</RouterLink>
         </div>
-      </div>
-      
+      </nav>
+
       <div class="footer-bottom">
         <p>{{ t('footer.copyright') }}</p>
       </div>

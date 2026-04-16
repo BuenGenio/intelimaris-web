@@ -164,13 +164,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
+import { useFadeIn } from '@/composables/useFadeIn'
 import ModelLinkedText from '@/components/ModelLinkedText.vue'
 import { productCatalog, isSystem, type CatalogEntry } from '@/data/productCatalog'
 
 const { t } = useI18n()
+useFadeIn('.products-page')
 
 const activeCategory = ref<CatalogEntry['category'] | null>(null)
 
@@ -190,20 +192,6 @@ function categoryLabel(cat: CatalogEntry['category']): string {
   const label = t(key)
   return label === key ? cat : label
 }
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-        }
-      })
-    },
-    { threshold: 0.08, rootMargin: '0px 0px -80px 0px' },
-  )
-  document.querySelectorAll('.products-page .fade-in').forEach((el) => observer.observe(el))
-})
 </script>
 
 <style scoped>

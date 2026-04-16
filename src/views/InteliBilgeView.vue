@@ -162,9 +162,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
+import { useFadeIn } from '@/composables/useFadeIn'
 import ModelLinkedText from '@/components/ModelLinkedText.vue'
 import {
   intelibilgeHero,
@@ -179,18 +179,7 @@ import {
 } from '@/data/intelibilgeContent'
 
 const { t } = useI18n()
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('visible')
-      })
-    },
-    { threshold: 0.08, rootMargin: '0px 0px -80px 0px' },
-  )
-  document.querySelectorAll('.bilge-page .fade-in').forEach((el) => observer.observe(el))
-})
+useFadeIn('.bilge-page')
 </script>
 
 <style scoped>

@@ -306,8 +306,8 @@ section {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   padding: 0;
   border: 1px solid var(--border-subtle);
   border-radius: 0.5rem;
@@ -609,6 +609,8 @@ section {
 .theme-option {
   width: 2rem;
   height: 2rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -644,6 +646,7 @@ section {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
+  min-height: 2.75rem;
   background: var(--glass-bg);
   border: 1px solid var(--border-subtle);
   border-radius: 0.5rem;
@@ -2234,8 +2237,8 @@ textarea {
   }
   
   .theme-option {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 2rem;
+    height: 2rem;
   }
   
   .lang-current {

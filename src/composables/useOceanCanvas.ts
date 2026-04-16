@@ -32,6 +32,10 @@ export function useOceanCanvas(canvasRef: Ref<HTMLCanvasElement | null>) {
   let vessels: Vessel[] = []
   let width = 0
   let height = 0
+  let paused = false
+  let isVisible = true
+  let isTabActive = true
+  let observer: IntersectionObserver | null = null
 
   const resize = () => {
     if (!canvasRef.value) return
@@ -178,8 +182,36 @@ export function useOceanCanvas(canvasRef: Ref<HTMLCanvasElement | null>) {
     }
   }
 
+  const pause = () => {
+    if (paused) return
+    paused = true
+    if (animationId) {
+      cancelAnimationFrame(animationId)
+      animationId = null
+    }
+  }
+
+  const resume = () => {
+    if (!paused) return
+    paused = false
+    animate()
+  }
+
+  const updatePauseState = () => {
+    if (isVisible && isTabActive) {
+      resume()
+    } else {
+      pause()
+    }
+  }
+
+  const handleVisibilityChange = () => {
+    isTabActive = !document.hidden
+    updatePauseState()
+  }
+
   const animate = () => {
-    if (!ctx || !canvasRef.value) return
+    if (!ctx || !canvasRef.value || paused) return
 
     ctx.clearRect(0, 0, width, height)
 
@@ -196,6 +228,22 @@ export function useOceanCanvas(canvasRef: Ref<HTMLCanvasElement | null>) {
     animate()
 
     window.addEventListener('resize', resize)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        if (entry) {
+          isVisible = entry.isIntersecting
+          updatePauseState()
+        }
+      },
+      { threshold: 0 }
+    )
+
+    if (canvasRef.value) {
+      observer.observe(canvasRef.value)
+    }
   })
 
   onUnmounted(() => {
@@ -203,6 +251,10 @@ export function useOceanCanvas(canvasRef: Ref<HTMLCanvasElement | null>) {
       cancelAnimationFrame(animationId)
     }
     window.removeEventListener('resize', resize)
+    document.removeEventListener('visibilitychange', handleVisibilityChange)
+    if (observer) {
+      observer.disconnect()
+    }
   })
 
   return {
