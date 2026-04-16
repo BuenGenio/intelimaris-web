@@ -69,38 +69,18 @@ website-vue/
 │       ├── flag-us.svg
 │       ├── flag-es.svg
 │       └── flag-gr.svg
-└── dist/                    # Production build (generated)
+└── dist/                    # Production build (generated, gitignored)
 ```
 
 ## Deployment to GitHub Pages
 
-The production build is automatically deployed to the `gh-pages` branch.
+Use **GitHub Actions** (workflow `.github/workflows/deploy-github-pages.yml`). The workflow builds `dist/` and publishes that artifact only. `dist/` is not committed to this repo.
 
-### Manual Deployment
+In the repository **Settings → Pages**, set **Build and deployment** source to **GitHub Actions** (not “Deploy from a branch” using the repository root, which would serve the dev `index.html` and break with `/src/main.ts`).
 
-```bash
-# Build the project
-npm run build
+### Live site (this repository)
 
-# Switch to gh-pages branch
-git checkout gh-pages
-
-# Copy dist files
-rm -rf *
-cp -r dist/* .
-
-# Commit and push
-git add -A
-git commit -m "Deploy Vue 3 website"
-git push origin gh-pages
-
-# Switch back to main
-git checkout main
-```
-
-### Live Site
-
-https://buengenio.github.io/InteliMaris-2.0/
+https://buengenio.github.io/intelimaris-web/
 
 ## Key Technologies
 

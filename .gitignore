@@ -1,0 +1,24 @@
+# Dependencies
+node_modules
+
+# Build output (deploy via GitHub Actions artifact only)
+dist
+dist-ssr
+
+# Logs / cache
+*.log
+npm-debug.log*
+.DS_Store
+*.local
+
+# Editor
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Env
+.env
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
