@@ -98,7 +98,7 @@
           </button>
           <div class="lang-dropdown" :class="{ open: isLangOpen }">
             <button
-              v-for="lang in ['en', 'es', 'el']"
+              v-for="lang in ['en', 'es', 'el', 'uk']"
               :key="lang"
               type="button"
               class="lang-option"
@@ -187,7 +187,7 @@
               <p class="nav-drawer-group-label">{{ t('nav.language') }}</p>
               <div class="nav-drawer-lang">
                 <button
-                  v-for="lang in ['en', 'es', 'el']"
+                  v-for="lang in ['en', 'es', 'el', 'uk']"
                   :key="'drawer-lang-' + lang"
                   type="button"
                   class="nav-drawer-lang-btn"

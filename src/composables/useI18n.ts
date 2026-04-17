@@ -17,7 +17,7 @@ export function useI18n() {
   const initLanguage = () => {
     const savedLang = localStorage.getItem('intelimaris-lang') as Language | null
     const browserLang = navigator.language.split('-')[0] as Language
-    const supportedLangs: Language[] = ['en', 'es', 'el']
+    const supportedLangs: Language[] = ['en', 'es', 'el', 'uk']
     
     let lang: Language = 'en'
     if (savedLang && supportedLangs.includes(savedLang)) {
@@ -33,7 +33,8 @@ export function useI18n() {
   const languageData = computed(() => ({
     en: { flag: `${base}assets/flag-us.svg`, code: 'EN', name: 'English' },
     es: { flag: `${base}assets/flag-es.svg`, code: 'ES', name: 'Español' },
-    el: { flag: `${base}assets/flag-gr.svg`, code: 'EL', name: 'Ελληνικά' }
+    el: { flag: `${base}assets/flag-gr.svg`, code: 'EL', name: 'Ελληνικά' },
+    uk: { flag: `${base}assets/flag-ua.svg`, code: 'UK', name: 'Українська' }
   }))
 
   return {
