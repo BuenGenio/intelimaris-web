@@ -8,7 +8,7 @@
       
       <div class="use-cases-grid">
         <div class="use-case-card fade-in">
-          <div class="use-case-icon">🛥️</div>
+          <div class="use-case-icon">01</div>
           <h3>{{ t('usecases.yacht.title') }}</h3>
           <p>{{ t('usecases.yacht.desc') }}</p>
           <ul class="use-case-benefits">
@@ -20,7 +20,7 @@
         </div>
         
         <div class="use-case-card fade-in">
-          <div class="use-case-icon">⚓</div>
+          <div class="use-case-icon">02</div>
           <h3>{{ t('usecases.marina.title') }}</h3>
           <p>{{ t('usecases.marina.desc') }}</p>
           <ul class="use-case-benefits">
@@ -32,7 +32,7 @@
         </div>
         
         <div class="use-case-card fade-in">
-          <div class="use-case-icon">🚢</div>
+          <div class="use-case-icon">03</div>
           <h3>{{ t('usecases.fleet.title') }}</h3>
           <p>{{ t('usecases.fleet.desc') }}</p>
           <ul class="use-case-benefits">
@@ -44,7 +44,7 @@
         </div>
         
         <div class="use-case-card fade-in">
-          <div class="use-case-icon">🛡️</div>
+          <div class="use-case-icon">04</div>
           <h3>{{ t('usecases.insurance.title') }}</h3>
           <p>{{ t('usecases.insurance.desc') }}</p>
           <ul class="use-case-benefits">

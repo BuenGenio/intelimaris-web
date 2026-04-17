@@ -7,43 +7,16 @@
       </RouterLink>
 
       <div class="nav-desktop-only nav-primary-bar">
-        <RouterLink to="/products" class="nav-link" @click="closeExplore">{{ t('nav.products') }}</RouterLink>
-        <RouterLink to="/intelibilge" class="nav-link" @click="closeExplore">{{ t('nav.intelibilge') }}</RouterLink>
         <RouterLink
-          v-for="item in mainHomeLinks"
-          :key="'top-' + item.hash"
+          v-for="item in primaryLinks"
+          :key="item.hash"
           :to="{ name: 'home', hash: item.hash }"
           class="nav-link"
-          @click="closeExplore"
         >
           {{ t(item.labelKey) }}
         </RouterLink>
-        <div class="nav-explore-wrap">
-          <button
-            type="button"
-            class="nav-explore-trigger"
-            :aria-expanded="isExploreOpen"
-            aria-haspopup="true"
-            @click="toggleExplore"
-          >
-            {{ t('nav.explore') }}
-            <svg class="nav-explore-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <div class="nav-explore-dropdown" :class="{ open: isExploreOpen }" role="menu">
-            <RouterLink
-              v-for="item in exploreLinks"
-              :key="item.hash"
-              :to="{ name: 'home', hash: item.hash }"
-              class="nav-explore-item"
-              role="menuitem"
-              @click="closeExplore"
-            >
-              {{ t(item.labelKey) }}
-            </RouterLink>
-          </div>
-        </div>
+        <RouterLink to="/products" class="nav-link">{{ t('nav.products') }}</RouterLink>
+        <RouterLink to="/about" class="nav-link">{{ t('nav.about') }}</RouterLink>
       </div>
 
       <div class="nav-actions">
@@ -89,24 +62,32 @@
         </div>
 
         <div class="lang-selector nav-desktop-inline">
-          <button class="lang-current" :class="{ open: isLangOpen }" type="button" aria-label="Select language" :aria-expanded="isLangOpen" aria-haspopup="true" @click="toggleLang">
+          <button
+            class="lang-current"
+            :class="{ open: isLangOpen }"
+            type="button"
+            aria-label="Select language"
+            :aria-expanded="isLangOpen"
+            aria-haspopup="true"
+            @click="toggleLang"
+          >
             <img :src="languageData[currentLanguage].flag" :alt="languageData[currentLanguage].code" class="lang-flag">
             <span class="lang-code">{{ languageData[currentLanguage].code }}</span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="opacity: 0.6;" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="opacity: 0.6;">
               <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           <div class="lang-dropdown" :class="{ open: isLangOpen }">
             <button
-              v-for="lang in ['en', 'es', 'el', 'uk']"
+              v-for="lang in languages"
               :key="lang"
               type="button"
               class="lang-option"
               :class="{ active: currentLanguage === lang }"
-              @click="selectLanguage(lang as Language)"
+              @click="selectLanguage(lang)"
             >
-              <img :src="languageData[lang as Language].flag" :alt="lang.toUpperCase()">
-              <span class="lang-option-text">{{ languageData[lang as Language].name }}</span>
+              <img :src="languageData[lang].flag" :alt="languageData[lang].code">
+              <span class="lang-option-text">{{ languageData[lang].name }}</span>
             </button>
           </div>
         </div>
@@ -115,10 +96,7 @@
 
     <Teleport to="body">
       <Transition name="nav-drawer-fade">
-        <div
-          v-if="isDrawerOpen"
-          class="nav-drawer-portal"
-        >
+        <div v-if="isDrawerOpen" class="nav-drawer-portal">
           <div class="nav-drawer-backdrop" @click="closeDrawer"/>
           <aside
             id="nav-mobile-drawer"
@@ -141,7 +119,7 @@
 
               <p class="nav-drawer-group-label">{{ t('nav.groupSections') }}</p>
               <RouterLink
-                v-for="item in drawerSiteLinks"
+                v-for="item in primaryLinks"
                 :key="'m-' + item.hash"
                 :to="{ name: 'home', hash: item.hash }"
                 class="nav-drawer-link"
@@ -152,7 +130,6 @@
 
               <p class="nav-drawer-group-label">{{ t('nav.groupPages') }}</p>
               <RouterLink to="/products" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.products') }}</RouterLink>
-              <RouterLink to="/intelibilge" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.intelibilge') }}</RouterLink>
               <RouterLink to="/about" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.about') }}</RouterLink>
 
               <div class="nav-drawer-divider"/>
@@ -187,15 +164,15 @@
               <p class="nav-drawer-group-label">{{ t('nav.language') }}</p>
               <div class="nav-drawer-lang">
                 <button
-                  v-for="lang in ['en', 'es', 'el', 'uk']"
+                  v-for="lang in languages"
                   :key="'drawer-lang-' + lang"
                   type="button"
                   class="nav-drawer-lang-btn"
                   :class="{ active: currentLanguage === lang }"
-                  @click="selectLanguage(lang as Language)"
+                  @click="selectLanguage(lang)"
                 >
-                  <img :src="languageData[lang as Language].flag" :alt="languageData[lang as Language].code">
-                  <span>{{ languageData[lang as Language].name }}</span>
+                  <img :src="languageData[lang].flag" :alt="languageData[lang].code">
+                  <span>{{ languageData[lang].name }}</span>
                 </button>
               </div>
             </div>
@@ -215,37 +192,25 @@ import type { Language } from '@/i18n/translations'
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
 
-const mainHomeLinks = [
-  { hash: '#ai-stack', labelKey: 'nav.aiStack' as const },
+const primaryLinks = [
+  { hash: '#platform', labelKey: 'nav.platform' as const },
   { hash: '#marina', labelKey: 'nav.marina' as const },
+  { hash: '#why-us', labelKey: 'nav.capabilities' as const },
   { hash: '#contact', labelKey: 'nav.contact' as const }
 ]
 
-const exploreLinks = [
-  { hash: '#ecosystem', labelKey: 'nav.ecosystem' as const },
-  { hash: '#platform', labelKey: 'nav.platform' as const },
-  { hash: '#capabilities', labelKey: 'nav.capabilities' as const },
-  { hash: '#vision', labelKey: 'nav.vision' as const }
-]
-
-const drawerSiteLinks = [...mainHomeLinks, ...exploreLinks]
+const languages: Language[] = ['en', 'es', 'el', 'uk']
 
 const { theme, setTheme } = useTheme()
 const { currentLanguage, t, setLanguage, languageData } = useI18n()
 const route = useRoute()
 
 const isLangOpen = ref(false)
-const isExploreOpen = ref(false)
 const isDrawerOpen = ref(false)
-
-const closeExplore = () => {
-  isExploreOpen.value = false
-}
 
 const openDrawer = () => {
   isDrawerOpen.value = true
   isLangOpen.value = false
-  isExploreOpen.value = false
 }
 
 const closeDrawer = () => {
@@ -254,16 +219,6 @@ const closeDrawer = () => {
 
 const toggleLang = () => {
   isLangOpen.value = !isLangOpen.value
-  if (isLangOpen.value) {
-    isExploreOpen.value = false
-  }
-}
-
-const toggleExplore = () => {
-  isExploreOpen.value = !isExploreOpen.value
-  if (isExploreOpen.value) {
-    isLangOpen.value = false
-  }
 }
 
 const selectLanguage = (lang: Language) => {
@@ -276,15 +231,11 @@ const handleClickOutside = (e: MouseEvent) => {
   if (!target.closest('.lang-selector')) {
     isLangOpen.value = false
   }
-  if (!target.closest('.nav-explore-wrap')) {
-    isExploreOpen.value = false
-  }
 }
 
 const handleEscape = (e: KeyboardEvent) => {
   if (e.key !== 'Escape') return
   isLangOpen.value = false
-  isExploreOpen.value = false
   isDrawerOpen.value = false
 }
 

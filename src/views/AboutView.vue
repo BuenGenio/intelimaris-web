@@ -2,118 +2,118 @@
   <main class="about-page">
     <section class="about-hero">
       <div class="container">
-        <div class="section-label">{{ t('about.label') }}</div>
-        <h1>{{ t('about.title') }}</h1>
-        <p class="about-lead">{{ t('about.lead') }}</p>
+        <div class="about-hero-grid">
+          <div>
+            <div class="section-label">{{ t('about.label') }}</div>
+            <h1>{{ t('about.title') }}</h1>
+            <p class="about-lead">{{ t('about.lead') }}</p>
+          </div>
+
+          <div class="about-hero-panel">
+            <div class="about-panel-card">
+              <span class="panel-kicker">Positioning</span>
+              <h2>Operational intelligence for marine risk</h2>
+              <p>
+                The platform is designed to make vessel issues visible early, route the signal to the right people,
+                and turn marine monitoring into an operational system rather than a disconnected set of alarms.
+              </p>
+            </div>
+            <div class="about-panel-metrics">
+              <div class="metric-card">
+                <strong>3</strong>
+                <span>{{ t('about.stats.layers') }}</span>
+              </div>
+              <div class="metric-card">
+                <strong>10+</strong>
+                <span>{{ t('about.stats.sensors') }}</span>
+              </div>
+              <div class="metric-card">
+                <strong>24/7</strong>
+                <span>{{ t('about.stats.monitoring') }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="about-mission">
       <div class="container">
+        <div class="about-section-header">
+          <div class="section-label accent">{{ t('about.mission.title') }}</div>
+          <h2>Why InteliMaris exists</h2>
+        </div>
         <div class="mission-grid">
-          <div class="mission-text">
-            <h2>{{ t('about.mission.title') }}</h2>
-            <p>{{ t('about.mission.p1') }}</p>
-            <p>{{ t('about.mission.p2') }}</p>
-          </div>
-          <div class="mission-stats">
-            <div class="stat-card">
-              <span class="stat-number">3</span>
-              <span class="stat-label">{{ t('about.stats.layers') }}</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number">10+</span>
-              <span class="stat-label">{{ t('about.stats.sensors') }}</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number">24/7</span>
-              <span class="stat-label">{{ t('about.stats.monitoring') }}</span>
-            </div>
-          </div>
+          <p>{{ t('about.mission.p1') }}</p>
+          <p>{{ t('about.mission.p2') }}</p>
         </div>
       </div>
     </section>
 
     <section class="about-ecosystem">
       <div class="container">
-        <h2>{{ t('about.ecosystem.title') }}</h2>
-        <p class="ecosystem-intro">{{ t('about.ecosystem.intro') }}</p>
+        <div class="about-section-header">
+          <div class="section-label">{{ t('about.ecosystem.title') }}</div>
+          <h2>{{ t('about.ecosystem.title') }}</h2>
+          <p class="ecosystem-intro">{{ t('about.ecosystem.intro') }}</p>
+        </div>
         <div class="ecosystem-grid">
-          <div class="ecosystem-card">
+          <article class="ecosystem-card">
+            <span class="ecosystem-index">01</span>
             <h3>InteliMarine</h3>
             <p>{{ t('about.ecosystem.marine') }}</p>
-          </div>
-          <div class="ecosystem-card">
+          </article>
+          <article class="ecosystem-card">
+            <span class="ecosystem-index">02</span>
             <h3>InteliMaris</h3>
             <p>{{ t('about.ecosystem.maris') }}</p>
-          </div>
-          <div class="ecosystem-card">
+          </article>
+          <article class="ecosystem-card">
+            <span class="ecosystem-index">03</span>
             <h3>InteliMarina</h3>
             <p>{{ t('about.ecosystem.marina') }}</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="about-values">
       <div class="container">
-        <h2>{{ t('about.values.title') }}</h2>
+        <div class="about-section-header">
+          <div class="section-label">{{ t('about.values.title') }}</div>
+          <h2>{{ t('about.values.title') }}</h2>
+        </div>
         <div class="values-grid">
-          <div class="value-card">
-            <div class="value-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
+          <article class="value-card">
             <h3>{{ t('about.values.safety.title') }}</h3>
             <p>{{ t('about.values.safety.desc') }}</p>
-          </div>
-          <div class="value-card">
-            <div class="value-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-            </div>
+          </article>
+          <article class="value-card">
             <h3>{{ t('about.values.innovation.title') }}</h3>
             <p>{{ t('about.values.innovation.desc') }}</p>
-          </div>
-          <div class="value-card">
-            <div class="value-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
+          </article>
+          <article class="value-card">
             <h3>{{ t('about.values.community.title') }}</h3>
             <p>{{ t('about.values.community.desc') }}</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="about-contact">
       <div class="container">
-        <h2>{{ t('about.contact.title') }}</h2>
-        <p>{{ t('about.contact.desc') }}</p>
-        <div class="contact-links">
-          <a href="mailto:info@intelimarine.com" class="contact-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            info@intelimarine.com
-          </a>
-          <a href="https://www.intelimaris.com" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-            intelimaris.com
-          </a>
+        <div class="contact-panel">
+          <div>
+            <div class="section-label accent">{{ t('about.contact.title') }}</div>
+            <h2>{{ t('about.contact.title') }}</h2>
+            <p>{{ t('about.contact.desc') }}</p>
+          </div>
+          <div class="contact-links">
+            <a href="mailto:info@intelimarine.com" class="contact-link">info@intelimarine.com</a>
+            <a href="https://www.intelimaris.com" target="_blank" rel="noopener noreferrer" class="contact-link">intelimaris.com</a>
+            <RouterLink to="/" class="back-link">{{ t('about.backHome') }}</RouterLink>
+          </div>
         </div>
-        <RouterLink to="/" class="back-link">{{ t('about.backHome') }}</RouterLink>
       </div>
     </section>
   </main>
@@ -132,224 +132,146 @@ const { t } = useI18n()
   min-height: 60vh;
 }
 
-.about-hero {
-  padding: 6rem 0 3rem;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.about-hero h1 {
-  margin-bottom: 1rem;
-}
-
-.about-lead {
-  max-width: 42rem;
-  color: var(--text-secondary);
-  font-size: 1.125rem;
-  line-height: 1.7;
-}
-
-.about-mission {
+.about-hero,
+.about-mission,
+.about-ecosystem,
+.about-values,
+.about-contact {
   padding: 5rem 0;
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.mission-grid {
+.about-hero-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+  gap: 2rem;
+  align-items: start;
 }
 
-@media (min-width: 768px) {
-  .mission-grid {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
-.mission-text h2 {
-  margin-bottom: 1.5rem;
-}
-
-.mission-text p {
+.about-lead,
+.ecosystem-intro,
+.mission-grid p,
+.value-card p,
+.contact-panel p {
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: 1rem;
 }
 
-.mission-stats {
+.about-hero-panel,
+.contact-panel {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
-.stat-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem 1rem;
-  border-radius: 0.75rem;
+.about-panel-card,
+.contact-panel,
+.value-card,
+.ecosystem-card {
+  padding: 1.6rem;
+  border-radius: 1.25rem;
   border: 1px solid var(--border-medium);
   background: var(--glass-bg);
 }
 
-.stat-number {
-  font-family: 'Outfit', sans-serif;
-  font-size: 2rem;
-  font-weight: 800;
+.panel-kicker,
+.ecosystem-index {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--cyan-bright);
 }
 
-.stat-label {
-  font-size: 0.8rem;
+.about-panel-card h2 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.about-panel-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.metric-card {
+  padding: 1.1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-soft);
+}
+
+.metric-card strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  color: var(--text-primary);
+}
+
+.metric-card span {
   color: var(--text-secondary);
-  text-align: center;
-  margin-top: 0.25rem;
+  font-size: 0.9rem;
 }
 
-.about-ecosystem {
-  padding: 5rem 0;
-  border-bottom: 1px solid var(--border-subtle);
+.about-section-header {
+  margin-bottom: 2rem;
 }
 
-.about-ecosystem h2 {
-  margin-bottom: 1rem;
-}
-
-.ecosystem-intro {
-  color: var(--text-secondary);
-  max-width: 48rem;
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
-}
-
+.mission-grid,
+.values-grid,
 .ecosystem-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-@media (min-width: 768px) {
-  .ecosystem-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.mission-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.ecosystem-card {
-  padding: 2rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border-medium);
-  background: var(--glass-bg);
+.values-grid,
+.ecosystem-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.value-card h3,
 .ecosystem-card h3 {
-  color: var(--cyan-bright);
   margin-bottom: 0.75rem;
 }
 
-.ecosystem-card p {
-  color: var(--text-secondary);
-  line-height: 1.65;
-}
-
-.about-values {
-  padding: 5rem 0;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.about-values h2 {
-  margin-bottom: 2.5rem;
-}
-
-.values-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .values-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.value-card {
-  padding: 2rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border-medium);
-  background: var(--glass-bg);
-}
-
-.value-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  color: var(--cyan-bright);
-  margin-bottom: 1rem;
-}
-
-.value-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.value-card h3 {
-  margin-bottom: 0.75rem;
-}
-
-.value-card p {
-  color: var(--text-secondary);
-  line-height: 1.65;
-}
-
-.about-contact {
-  padding: 5rem 0 6rem;
-}
-
-.about-contact h2 {
-  margin-bottom: 1rem;
-}
-
-.about-contact > .container > p {
-  color: var(--text-secondary);
-  max-width: 42rem;
-  margin-bottom: 2rem;
-  line-height: 1.7;
+.contact-panel {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+  align-items: center;
 }
 
 .contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  display: grid;
+  gap: 0.85rem;
 }
 
-.contact-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--cyan-bright);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.contact-link svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  flex-shrink: 0;
-}
-
-.contact-link:hover {
-  text-decoration: underline;
-}
-
+.contact-link,
 .back-link {
-  display: inline-block;
-  margin-top: 1rem;
-  color: var(--cyan-bright);
-  font-weight: 600;
+  color: var(--text-primary);
   text-decoration: none;
+  font-weight: 600;
 }
 
+.contact-link:hover,
 .back-link:hover {
-  text-decoration: underline;
+  color: var(--cyan-bright);
+}
+
+@media (max-width: 920px) {
+  .about-hero-grid,
+  .mission-grid,
+  .values-grid,
+  .ecosystem-grid,
+  .contact-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .about-panel-metrics {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

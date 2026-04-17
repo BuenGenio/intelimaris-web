@@ -4,24 +4,25 @@
       <div class="section-header centered">
         <div class="section-label">{{ t('compare.label') }}</div>
         <h2>{{ t('compare.title') }}</h2>
+        <p class="section-description">
+          One operating model for owners, marina operators, and fleet teams.
+        </p>
       </div>
-      <div class="compare-table-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>{{ t('compare.col.benefit') }}</th>
-              <th>{{ t('compare.col.owners') }}</th>
-              <th>{{ t('compare.col.marinas') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="r in 7" :key="r">
-              <td>{{ t(`compare.r${r}b`) }}</td>
-              <td>{{ t(`compare.r${r}o`) }}</td>
-              <td>{{ t(`compare.r${r}m`) }}</td>
-            </tr>
-          </tbody>
-        </table>
+
+      <div class="compare-grid">
+        <article v-for="r in 7" :key="r" class="compare-card fade-in">
+          <div class="compare-card-kicker">{{ t(`compare.r${r}b`) }}</div>
+          <div class="compare-card-columns">
+            <div>
+              <span class="compare-card-label">{{ t('compare.col.owners') }}</span>
+              <p>{{ t(`compare.r${r}o`) }}</p>
+            </div>
+            <div>
+              <span class="compare-card-label">{{ t('compare.col.marinas') }}</span>
+              <p>{{ t(`compare.r${r}m`) }}</p>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -34,47 +35,52 @@ const { t } = useI18n()
 </script>
 
 <style scoped>
-.compare-section {
-  background: linear-gradient(180deg, var(--ocean-blue) 0%, var(--deep-navy) 100%);
-  border-top: 1px solid var(--border-subtle);
-}
-.compare-table-wrap {
-  max-width: 56rem;
+.compare-grid {
+  display: grid;
+  gap: 1rem;
+  max-width: 72rem;
   margin: 0 auto;
-  overflow-x: auto;
-  border-radius: 0.75rem;
+}
+
+.compare-card {
+  padding: 1.5rem;
+  border-radius: 1.25rem;
   border: 1px solid var(--border-medium);
   background: var(--glass-bg);
 }
-.compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-.compare-table th,
-.compare-table td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-subtle);
-  vertical-align: top;
-}
-.compare-table th {
-  font-weight: 600;
+
+.compare-card-kicker {
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--cyan-bright);
+}
+
+.compare-card-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+}
+
+.compare-card-label {
+  display: inline-block;
+  margin-bottom: 0.4rem;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  background: var(--border-subtle);
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
-.compare-table tr:last-child td {
-  border-bottom: none;
-}
-.compare-table td {
+
+.compare-card p {
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
 }
-.compare-table td:first-child {
-  color: var(--text-primary);
-  font-weight: 500;
+
+@media (max-width: 720px) {
+  .compare-card-columns {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
