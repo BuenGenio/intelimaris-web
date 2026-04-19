@@ -31,6 +31,11 @@ const router = createRouter({
       name: 'about',
       component: () => import('../views/AboutView.vue'),
     },
+    {
+      path: '/home-alt',
+      name: 'home-alt',
+      component: () => import('../views/HomeAltView.vue'),
+    },
   ],
 })
 

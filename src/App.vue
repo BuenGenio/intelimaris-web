@@ -1,16 +1,17 @@
 <template>
   <div id="app">
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <NavigationBar />
+    <NavigationBar v-if="!isStandalone" />
     <div id="main-content">
       <router-view />
     </div>
-    <FooterSection />
+    <FooterSection v-if="!isStandalone" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import FooterSection from './components/FooterSection.vue'
 import { useTheme } from './composables/useTheme'
@@ -18,6 +19,9 @@ import { useI18n } from './composables/useI18n'
 
 const { initTheme } = useTheme()
 const { initLanguage } = useI18n()
+
+const route = useRoute()
+const isStandalone = computed(() => route.name === 'home-alt')
 
 onMounted(() => {
   initTheme()
