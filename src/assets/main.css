@@ -203,8 +203,8 @@ section {
 }
 
 .brand-logo {
-  height: 1.1rem;
-  max-height: 1.1rem;
+  height: 2.2rem;
+  max-height: 2.2rem;
   width: auto;
   display: block;
 }
@@ -2228,7 +2228,7 @@ textarea {
 }
 
 .footer-logo {
-  height: 1.1rem;
+  height: 2.2rem;
   width: auto;
 }
 

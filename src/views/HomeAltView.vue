@@ -9,11 +9,8 @@
   <div class="home-alt-root min-h-screen bg-background text-foreground">
     <header class="sticky top-0 z-50 border-b border-white/40 bg-[rgba(244,249,251,0.82)] backdrop-blur-xl">
       <div class="container flex items-center justify-between gap-6 py-4">
-        <a href="#top" class="flex items-center gap-3 text-sm font-semibold tracking-[0.22em] text-slate-800 uppercase">
-          <span class="flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(18,76,94,0.18)] bg-white shadow-[0_12px_30px_rgba(14,40,52,0.08)]">
-            <Icon name="waves" class="h-5 w-5 text-[var(--brand-deep)]" />
-          </span>
-          InteliMaris
+        <a href="#top" class="flex items-center">
+          <img :src="logoSrc" alt="InteliMaris" class="h-12 w-auto" />
         </a>
 
         <nav class="hidden items-center gap-8 text-[0.82rem] font-medium tracking-[0.16em] text-slate-600 uppercase lg:flex">
@@ -361,6 +358,8 @@
 <script setup lang="ts">
 import { h, onBeforeUnmount, onMounted, type FunctionalComponent } from 'vue'
 import homeAltCss from '@/assets/home-alt.css?inline'
+
+const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 
 const themeVars = `
 :root {

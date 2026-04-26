@@ -3,7 +3,6 @@
     <div class="nav-content">
       <RouterLink to="/" class="nav-brand" @click="closeDrawer">
         <img :src="logoSrc" alt="InteliMaris" class="brand-logo">
-        <span class="brand-text">InteliMaris</span>
       </RouterLink>
 
       <div class="nav-desktop-only nav-primary-bar">
@@ -190,7 +189,7 @@ import { useTheme } from '@/composables/useTheme'
 import { useI18n } from '@/composables/useI18n'
 import type { Language } from '@/i18n/translations'
 
-const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
+const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 
 const primaryLinks = [
   { hash: '#platform', labelKey: 'nav.platform' as const },

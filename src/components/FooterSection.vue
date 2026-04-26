@@ -44,6 +44,6 @@
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
 
-const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
+const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 const { t } = useI18n()
 </script>
