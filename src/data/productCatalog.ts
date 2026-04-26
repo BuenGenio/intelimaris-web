@@ -18,6 +18,7 @@ export interface CatalogProduct {
   applications: string
   ordering: string
   category: 'safety' | 'water' | 'environment' | 'electrical' | 'motion' | 'control' | 'system'
+  image?: string
 }
 
 export interface CatalogSystem extends Omit<CatalogProduct, 'category'> {
@@ -66,6 +67,7 @@ export const productCatalog: CatalogEntry[] = [
     model: 'IM201',
     name: 'Precision Moisture Leak Detector (3-Pin)',
     category: 'water',
+    image: 'assets/products/im201-leak-pins.webp',
     overview:
       'Freestanding moisture sensor for flat surfaces. Three adjustable conductivity probes detect water instantly – when moisture bridges all three, an alert is sent. Catches small leaks before they rot interiors.',
     features: [
@@ -127,6 +129,7 @@ export const productCatalog: CatalogEntry[] = [
     model: 'IM301',
     name: 'Temperature & Humidity Sensor (IP64)',
     category: 'environment',
+    image: 'assets/products/im301-temp-humidity-ip64.webp',
     overview:
       'High-accuracy temperature and humidity monitoring (±0.1°C / ±1.5% RH) in a rugged, IP64 splash-proof enclosure. Designed for engine rooms, galleys, heads, and other wet areas.',
     features: [
@@ -157,6 +160,7 @@ export const productCatalog: CatalogEntry[] = [
     model: 'IM302',
     name: 'Temperature & Humidity Sensor (Living Areas, Round)',
     category: 'environment',
+    image: 'assets/products/im302-temp-humidity-round.webp',
     overview:
       'Same high accuracy (±0.1°C / ±1.5% RH) in a round, non-waterproof enclosure for dry living spaces (cabins, salons). Sleek design, replaceable 5-year lithium battery.',
     features: [
@@ -187,6 +191,7 @@ export const productCatalog: CatalogEntry[] = [
     model: 'IM401',
     name: 'AC Shore Power Monitor',
     category: 'electrical',
+    image: 'assets/products/im401-ac-monitor.webp',
     overview:
       'Plugs into a standard AC outlet and monitors 110V/220V shore power presence every 4 seconds. Alerts instantly on power loss to prevent spoilage, battery drain, mold, and other costly damage.',
     features: [
@@ -259,6 +264,7 @@ export const productCatalog: CatalogEntry[] = [
     model: 'IM601',
     name: 'Solid-State Water Level Sensor',
     category: 'water',
+    image: 'assets/products/im601-water-level.webp',
     overview:
       'Solid-state water level sensor with no moving parts for harsh bilge environments. Detects rising water at multiple thresholds. Can be used with the InteliBilge system for automated pump control.',
     features: [
@@ -326,6 +332,7 @@ export const productCatalog: CatalogEntry[] = [
     model: 'IM801',
     name: 'DC Power Monitor',
     category: 'electrical',
+    image: 'assets/products/im801-dc-monitor.webp',
     overview:
       'Monitors voltage and current on multiple DC branches (12V/24V): solar input, alternator output, battery charge current, individual loads. Alerts on unexpected discharge, charging failure, voltage drops.',
     features: [
@@ -356,6 +363,7 @@ export const productCatalog: CatalogEntry[] = [
     model: 'IM901',
     name: 'I/O Remote AC Switch',
     category: 'control',
+    image: 'assets/products/im901-remote-io.webp',
     overview:
       'Solid-state remote AC switch. Turn off non-critical AC loads, reset electronics, trigger emergency systems – manually from the InteliMaris app or automatically by AI (e.g., shed loads when battery voltage drops).',
     features: [

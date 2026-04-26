@@ -86,6 +86,9 @@
 
         <div class="product-body">
           <div class="product-main">
+            <figure v-if="entry.image" class="product-image">
+              <img :src="`${baseUrl}${entry.image}`" :alt="`${entry.model} ${entry.name}`" loading="lazy" />
+            </figure>
             <div class="product-section">
               <h3>{{ t('products.overview') }}</h3>
               <p class="product-overview">
@@ -214,6 +217,7 @@ import { productCatalog, isSystem, type CatalogEntry } from '@/data/productCatal
 
 const { t } = useI18n()
 useFadeIn('.products-page')
+const baseUrl = import.meta.env.BASE_URL
 
 const activeCategory = ref<CatalogEntry['category'] | null>(null)
 
@@ -413,11 +417,28 @@ function categoryLabel(cat: CatalogEntry['category']): string {
 }
 
 .product-section,
-.product-aside {
+.product-aside,
+.product-image {
   padding: 1.4rem;
   border-radius: 1.25rem;
   border: 1px solid var(--border-medium);
   background: var(--glass-bg);
+}
+
+.product-image {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 18rem;
+}
+
+.product-image img {
+  max-width: 100%;
+  max-height: 22rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .product-grid-two {
