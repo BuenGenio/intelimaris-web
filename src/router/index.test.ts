@@ -26,7 +26,7 @@ describe('router', () => {
     expect(about!.path).toBe('/about')
   })
 
-  it('has exactly 4 routes', () => {
-    expect(router.getRoutes().length).toBe(4)
+  it('has exactly 5 routes', () => {
+    expect(router.getRoutes().length).toBe(5)
   })
 })
