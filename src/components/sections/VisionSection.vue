@@ -40,7 +40,7 @@ const { t } = useI18n()
   border: 1px solid var(--cyan-electric);
   border-radius: 0.5rem;
   color: var(--cyan-bright);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
   margin-bottom: 1.5rem;

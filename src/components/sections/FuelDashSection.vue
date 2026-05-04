@@ -84,7 +84,7 @@ const { t } = useI18n()
 .fuel-dash-outro {
   text-align: center;
   margin-top: 2rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   color: var(--text-primary);
 }

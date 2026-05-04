@@ -177,10 +177,17 @@ const { t } = useI18n()
 .ecosystem-index {
   display: inline-block;
   margin-bottom: 0.75rem;
-  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--cyan-bright);
+  letter-spacing: 0.12em;
+  color: var(--brand-marine-blue);
+}
+
+[data-theme="dark"] .panel-kicker,
+[data-theme="dark"] .ecosystem-index {
+  color: #6FA0CC;
 }
 
 .about-panel-card h2 {
@@ -204,9 +211,14 @@ const { t } = useI18n()
 .metric-card strong {
   display: block;
   margin-bottom: 0.25rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
   font-size: 1.8rem;
-  color: var(--text-primary);
+  color: var(--brand-marine-blue);
+}
+
+[data-theme="dark"] .metric-card strong {
+  color: #6FA0CC;
 }
 
 .metric-card span {
@@ -258,7 +270,12 @@ const { t } = useI18n()
 
 .contact-link:hover,
 .back-link:hover {
-  color: var(--cyan-bright);
+  color: var(--brand-marine-blue);
+}
+
+[data-theme="dark"] .contact-link:hover,
+[data-theme="dark"] .back-link:hover {
+  color: #6FA0CC;
 }
 
 @media (max-width: 920px) {

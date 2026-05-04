@@ -291,10 +291,15 @@ function categoryLabel(cat: CatalogEntry['category']): string {
 
 .panel-kicker {
   display: inline-block;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cyan-bright);
+  color: var(--brand-marine-blue);
+}
+
+[data-theme="dark"] .panel-kicker {
+  color: #6FA0CC;
 }
 
 .hero-panel-card h2 {
@@ -342,17 +347,27 @@ function categoryLabel(cat: CatalogEntry['category']): string {
 
 .filter-chip {
   padding: 0.55rem 1rem;
-  border: 1px solid var(--border-medium);
-  background: var(--surface-soft);
+  border: 1.5px solid var(--border-medium);
+  background: transparent;
   color: var(--text-secondary);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.filter-chip.active,
 .filter-chip:hover {
-  border-color: var(--cyan-bright);
+  border-color: var(--brand-marine-blue);
   color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: var(--brand-marine-blue);
+  border-color: var(--brand-marine-blue);
+  color: #ffffff;
 }
 
 .toc-grid {
@@ -369,11 +384,24 @@ function categoryLabel(cat: CatalogEntry['category']): string {
   border: 1px solid var(--border-medium);
   color: var(--text-secondary);
   background: var(--surface-soft);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
 .toc-chip:hover {
   color: var(--text-primary);
-  border-color: var(--cyan-electric);
+  border-color: var(--brand-marine-blue);
+  background: rgba(31, 78, 121, 0.06);
+}
+
+.toc-model {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--brand-marine-blue);
+}
+
+[data-theme="dark"] .toc-model {
+  color: #6FA0CC;
 }
 
 .product-block {
@@ -391,10 +419,16 @@ function categoryLabel(cat: CatalogEntry['category']): string {
 .product-model {
   display: inline-block;
   margin-bottom: 0.6rem;
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--cyan-bright);
+  letter-spacing: 0.12em;
+  color: var(--brand-marine-blue);
+}
+
+[data-theme="dark"] .product-model {
+  color: #6FA0CC;
 }
 
 .product-cat {
@@ -431,6 +465,13 @@ function categoryLabel(cat: CatalogEntry['category']): string {
   align-items: center;
   justify-content: center;
   min-height: 18rem;
+  background: #ffffff;
+  border: 1px solid rgba(15, 42, 68, 0.08);
+  box-shadow: 0 8px 24px rgba(15, 42, 68, 0.06);
+}
+
+[data-theme="dark"] .product-image {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .product-image img {
@@ -457,9 +498,14 @@ function categoryLabel(cat: CatalogEntry['category']): string {
 
 .product-deep-link a,
 .back-link {
-  color: var(--cyan-bright);
+  color: var(--brand-marine-blue);
   font-weight: 600;
   text-decoration: none;
+}
+
+[data-theme="dark"] .product-deep-link a,
+[data-theme="dark"] .back-link {
+  color: #6FA0CC;
 }
 
 .product-deep-link a:hover,

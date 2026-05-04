@@ -213,8 +213,15 @@ useFadeIn('.bilge-page')
 .bilge-subhead {
   font-size: 1.05rem;
   margin: 2rem 0 1rem;
-  color: var(--cyan-bright);
-  font-family: 'Outfit', sans-serif;
+  color: var(--brand-marine-blue);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+[data-theme="dark"] .bilge-subhead {
+  color: #6FA0CC;
 }
 .bilge-table-wrap {
   overflow-x: auto;
@@ -256,8 +263,14 @@ useFadeIn('.bilge-page')
   line-height: 1.55;
 }
 .bilge-table code {
-  color: var(--cyan-bright);
+  color: var(--brand-marine-blue);
   font-size: 0.9em;
+  font-family: 'Montserrat', monospace;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .bilge-table code {
+  color: #6FA0CC;
 }
 .bilge-steps {
   margin: 0;
@@ -318,8 +331,12 @@ useFadeIn('.bilge-page')
   margin-bottom: 0.75rem;
 }
 .bilge-foot a {
-  color: var(--cyan-bright);
+  color: var(--brand-marine-blue);
   text-decoration: none;
+}
+
+[data-theme="dark"] .bilge-foot a {
+  color: #6FA0CC;
 }
 .bilge-foot a:hover {
   text-decoration: underline;
@@ -338,9 +355,13 @@ useFadeIn('.bilge-page')
   margin-top: 2rem;
 }
 .bilge-nav-links a {
-  color: var(--cyan-bright);
+  color: var(--brand-marine-blue);
   font-weight: 600;
   text-decoration: none;
+}
+
+[data-theme="dark"] .bilge-nav-links a {
+  color: #6FA0CC;
 }
 .bilge-nav-links a:hover {
   text-decoration: underline;

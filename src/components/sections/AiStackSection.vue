@@ -32,7 +32,7 @@ const { t } = useI18n()
   font-size: 1.05rem;
 }
 .ai-stack-tagline {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0 !important;
