@@ -2,7 +2,12 @@
   <nav class="nav-container" aria-label="Main navigation">
     <div class="nav-content">
       <RouterLink to="/" class="nav-brand" @click="closeDrawer">
-        <img :src="logoSrc" alt="InteliMaris" class="brand-logo">
+        <span
+          class="brand-logo"
+          role="img"
+          aria-label="InteliMaris"
+          :style="{ '--logo-url': `url(${logoSrc})` }"
+        />
       </RouterLink>
 
       <div class="nav-desktop-only nav-primary-bar">
@@ -32,33 +37,20 @@
           <span class="nav-drawer-toggle-bar" aria-hidden="true"/>
         </button>
 
-        <div class="theme-switcher nav-desktop-inline">
-          <button
-            class="theme-option"
-            :class="{ active: theme === 'dark' }"
-            data-theme="dark"
-            type="button"
-            @click="setTheme('dark')"
-            aria-label="Dark mode"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button
-            class="theme-option"
-            :class="{ active: theme === 'light' }"
-            data-theme="light"
-            type="button"
-            @click="setTheme('light')"
-            aria-label="Light mode"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-              <circle cx="12" cy="12" r="5" stroke-width="2"/>
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </div>
+        <button
+          type="button"
+          class="theme-toggle nav-desktop-inline"
+          :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          @click="setTheme(theme === 'dark' ? 'light' : 'dark')"
+        >
+          <svg v-if="theme === 'dark'" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" stroke-width="2"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
 
         <div class="lang-selector nav-desktop-inline">
           <button
