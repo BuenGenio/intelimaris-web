@@ -3289,10 +3289,16 @@ textarea {
 }
 
 @media (max-width: 720px) {
-  .lp-hero { padding: 6rem 0 12rem; min-height: auto; }
-  .lp-hero-bg-image { opacity: 0.4; }
+  .lp-hero { padding: 5rem 0 14rem; min-height: auto; }
+  .lp-hero-bg-image {
+    opacity: 1;
+    background-position: center 65%;
+  }
+  .lp-hero-bg-image::before {
+    background: linear-gradient(180deg, rgba(15, 42, 68, 0.82) 0%, rgba(15, 42, 68, 0.55) 45%, rgba(15, 42, 68, 0.25) 75%, rgba(15, 42, 68, 0.55) 100%);
+  }
   .lp-hero-bg-fade {
-    background: linear-gradient(180deg, rgba(15, 42, 68, 0.7) 0%, #0F2A44 80%);
+    background: linear-gradient(180deg, transparent 0%, transparent 65%, rgba(15, 42, 68, 0.85) 100%);
   }
   .lp-pillars { grid-template-columns: minmax(0, 1fr); }
   .lp-featured { margin-top: -9rem; }
