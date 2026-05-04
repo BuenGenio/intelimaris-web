@@ -2590,11 +2590,19 @@ textarea {
   background-repeat: no-repeat;
 }
 
+[data-theme="light"] .lp-hero-bg-image {
+  background-image: url('/assets/yacht-light.jpg');
+}
+
 .lp-hero-bg-image::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(15, 42, 68, 0.30) 0%, rgba(15, 42, 68, 0.15) 50%, rgba(15, 42, 68, 0.45) 100%);
+}
+
+[data-theme="light"] .lp-hero-bg-image::before {
+  background: linear-gradient(180deg, rgba(15, 42, 68, 0.45) 0%, rgba(15, 42, 68, 0.20) 45%, rgba(15, 42, 68, 0.40) 100%);
 }
 
 .lp-hero-bg-fade {
