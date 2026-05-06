@@ -22,6 +22,23 @@ const router = createRouter({
       component: () => import('../views/ProductsView.vue'),
     },
     {
+      path: '/products/categories',
+      name: 'product-categories',
+      component: () => import('../views/CategoriesView.vue'),
+    },
+    {
+      path: '/products/category/:category',
+      name: 'product-category',
+      component: () => import('../views/CategoryView.vue'),
+      props: true,
+    },
+    {
+      path: '/products/:id',
+      name: 'product-detail',
+      component: () => import('../views/ProductDetailView.vue'),
+      props: true,
+    },
+    {
       path: '/intelibilge',
       name: 'intelibilge',
       component: () => import('../views/InteliBilgeView.vue'),

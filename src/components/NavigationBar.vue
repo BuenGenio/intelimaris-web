@@ -19,7 +19,31 @@
         >
           {{ t(item.labelKey) }}
         </RouterLink>
-        <RouterLink to="/products" class="nav-link">{{ t('nav.products') }}</RouterLink>
+
+        <div
+          ref="productsMenuEl"
+          class="nav-products-menu"
+          @mouseenter="openProducts"
+          @mouseleave="closeProductsDeferred"
+          @focusin="openProducts"
+          @focusout="closeProductsOnBlur"
+        >
+          <RouterLink
+            ref="productsTriggerEl"
+            to="/products"
+            class="nav-link nav-products-trigger"
+            :class="{ open: isProductsOpen }"
+            :aria-expanded="isProductsOpen"
+            aria-haspopup="true"
+            @click="closeProductsImmediate"
+          >
+            {{ t('nav.products') }}
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </RouterLink>
+        </div>
+
         <RouterLink to="/about" class="nav-link">{{ t('nav.about') }}</RouterLink>
       </div>
 
@@ -121,6 +145,18 @@
 
               <p class="nav-drawer-group-label">{{ t('nav.groupPages') }}</p>
               <RouterLink to="/products" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.products') }}</RouterLink>
+              <RouterLink :to="{ name: 'product-categories' }" class="nav-drawer-link nav-drawer-sublink" @click="closeDrawer">
+                {{ t('nav.productsAllCategories') }}
+              </RouterLink>
+              <RouterLink
+                v-for="cat in categories"
+                :key="'drawer-cat-' + cat"
+                :to="{ name: 'product-category', params: { category: cat } }"
+                class="nav-drawer-link nav-drawer-sublink"
+                @click="closeDrawer"
+              >
+                {{ categoryLabel(cat) }}
+              </RouterLink>
               <RouterLink to="/about" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.about') }}</RouterLink>
 
               <div class="nav-drawer-divider"/>
@@ -171,15 +207,54 @@
         </div>
       </Transition>
     </Teleport>
+
+    <Teleport to="body">
+      <div
+        class="nav-products-dropdown"
+        :class="{ open: isProductsOpen }"
+        role="menu"
+        :style="dropdownStyle"
+        @mouseenter="openProducts"
+        @mouseleave="closeProductsDeferred"
+      >
+        <RouterLink
+          :to="{ name: 'product-categories' }"
+          class="nav-products-item nav-products-item--all"
+          role="menuitem"
+          @click="closeProductsImmediate"
+        >
+          <span class="nav-products-label">{{ t('nav.productsAllCategories') }}</span>
+          <span class="nav-products-hint">{{ t('nav.productsAllHint') }}</span>
+        </RouterLink>
+        <div class="nav-products-divider"/>
+        <RouterLink
+          v-for="cat in categories"
+          :key="cat"
+          :to="{ name: 'product-category', params: { category: cat } }"
+          class="nav-products-item"
+          role="menuitem"
+          @click="closeProductsImmediate"
+        >
+          <span class="nav-products-label">{{ categoryLabel(cat) }}</span>
+          <span class="nav-products-hint">{{ categoryCount(cat) }}</span>
+        </RouterLink>
+      </div>
+    </Teleport>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { computed, nextTick, ref, onMounted, onUnmounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import type { ComponentPublicInstance } from 'vue'
 import { useTheme } from '@/composables/useTheme'
 import { useI18n } from '@/composables/useI18n'
 import type { Language } from '@/i18n/translations'
+import {
+  CATEGORY_ORDER,
+  productsByCategory,
+  type ProductCategory,
+} from '@/data/productCatalog'
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 
@@ -198,6 +273,82 @@ const route = useRoute()
 
 const isLangOpen = ref(false)
 const isDrawerOpen = ref(false)
+const isProductsOpen = ref(false)
+let productsCloseTimer: ReturnType<typeof setTimeout> | null = null
+
+const productsTriggerEl = ref<ComponentPublicInstance | null>(null)
+const productsMenuEl = ref<HTMLElement | null>(null)
+const dropdownAnchor = ref<{ top: number; left: number } | null>(null)
+
+const dropdownStyle = computed(() => {
+  if (!dropdownAnchor.value) return { visibility: 'hidden' as const }
+  return {
+    top: `${dropdownAnchor.value.top}px`,
+    left: `${dropdownAnchor.value.left}px`,
+  }
+})
+
+const updateDropdownAnchor = () => {
+  const inst = productsTriggerEl.value
+  const el = (inst?.$el ?? inst) as HTMLElement | null
+  if (!el || typeof el.getBoundingClientRect !== 'function') return
+  const rect = el.getBoundingClientRect()
+  dropdownAnchor.value = {
+    top: rect.bottom + 12,
+    left: rect.left + rect.width / 2,
+  }
+}
+
+const categories: ProductCategory[] = CATEGORY_ORDER.filter(
+  (id) => productsByCategory(id).length > 0,
+)
+
+const categoryLabel = (cat: ProductCategory): string => {
+  const key = `products.category.${cat}`
+  const label = t(key)
+  return label === key ? cat : label
+}
+
+const categoryCount = (cat: ProductCategory): string => {
+  const n = productsByCategory(cat).length
+  const labelKey = n === 1 ? 'categories.productSingular' : 'categories.productPlural'
+  const word = t(labelKey)
+  return `${n} ${word === labelKey ? '' : word}`.trim()
+}
+
+const clearProductsTimer = () => {
+  if (productsCloseTimer) {
+    clearTimeout(productsCloseTimer)
+    productsCloseTimer = null
+  }
+}
+
+const openProducts = () => {
+  clearProductsTimer()
+  updateDropdownAnchor()
+  isProductsOpen.value = true
+  void nextTick(updateDropdownAnchor)
+}
+
+const closeProductsImmediate = () => {
+  clearProductsTimer()
+  isProductsOpen.value = false
+}
+
+const closeProductsDeferred = () => {
+  clearProductsTimer()
+  productsCloseTimer = setTimeout(() => {
+    isProductsOpen.value = false
+  }, 120)
+}
+
+const closeProductsOnBlur = (event: FocusEvent) => {
+  const next = event.relatedTarget as Node | null
+  const current = event.currentTarget as HTMLElement | null
+  if (!next || !current?.contains(next)) {
+    closeProductsImmediate()
+  }
+}
 
 const openDrawer = () => {
   isDrawerOpen.value = true
@@ -222,12 +373,16 @@ const handleClickOutside = (e: MouseEvent) => {
   if (!target.closest('.lang-selector')) {
     isLangOpen.value = false
   }
+  if (!target.closest('.nav-products-menu') && !target.closest('.nav-products-dropdown')) {
+    isProductsOpen.value = false
+  }
 }
 
 const handleEscape = (e: KeyboardEvent) => {
   if (e.key !== 'Escape') return
   isLangOpen.value = false
   isDrawerOpen.value = false
+  isProductsOpen.value = false
 }
 
 watch(isDrawerOpen, (open) => {
@@ -238,17 +393,26 @@ watch(
   () => route.fullPath,
   () => {
     isDrawerOpen.value = false
+    closeProductsImmediate()
   }
 )
+
+const handleViewportChange = () => {
+  if (isProductsOpen.value) updateDropdownAnchor()
+}
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   document.addEventListener('keydown', handleEscape)
+  window.addEventListener('resize', handleViewportChange)
+  window.addEventListener('scroll', handleViewportChange, true)
 })
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
   document.removeEventListener('keydown', handleEscape)
+  window.removeEventListener('resize', handleViewportChange)
+  window.removeEventListener('scroll', handleViewportChange, true)
   document.body.style.overflow = ''
 })
 </script>

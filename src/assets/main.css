@@ -738,6 +738,108 @@ section {
   flex: 1;
 }
 
+.nav-products-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-products-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-products-trigger svg {
+  opacity: 0.6;
+  transition: transform 0.2s;
+}
+
+.nav-products-trigger.open svg {
+  transform: rotate(180deg);
+}
+
+.nav-products-dropdown {
+  position: fixed;
+  transform: translate(-50%, -8px);
+  min-width: 18rem;
+  padding: 0.5rem;
+  background: rgba(15, 42, 68, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.85rem;
+  backdrop-filter: blur(48px) saturate(200%);
+  -webkit-backdrop-filter: blur(48px) saturate(200%);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.18) inset,
+    0 24px 48px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 1500;
+  display: grid;
+  gap: 0.15rem;
+}
+
+[data-theme="light"] .nav-products-dropdown {
+  background: rgba(255, 255, 255, 0.38);
+  border-color: rgba(15, 42, 68, 0.14);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 24px 48px rgba(15, 42, 68, 0.18);
+}
+
+.nav-products-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.nav-products-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-products-item:hover,
+.nav-products-item.router-link-active {
+  background: var(--slate-medium);
+  color: var(--text-primary);
+}
+
+.nav-products-item--all .nav-products-label {
+  color: var(--cyan-bright);
+}
+
+.nav-products-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.nav-products-hint {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.nav-products-divider {
+  height: 1px;
+  margin: 0.25rem 0.4rem;
+  background: var(--border-subtle);
+}
+
+.nav-drawer-sublink {
+  padding-left: 1.75rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -2244,8 +2346,12 @@ textarea {
 
 .footer {
   background: rgba(6, 14, 24, 0.96);
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 3rem 0 2rem;
+  --text-primary: #FFFFFF;
+  --text-secondary: #C7D4E0;
+  --text-muted: #8AA0B5;
+  color: var(--text-secondary);
 }
 
 .footer-grid {

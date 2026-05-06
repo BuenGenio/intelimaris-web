@@ -26,7 +26,25 @@ describe('router', () => {
     expect(about!.path).toBe('/about')
   })
 
-  it('has exactly 5 routes', () => {
-    expect(router.getRoutes().length).toBe(5)
+  it('defines the product-categories route', () => {
+    const route = router.getRoutes().find(r => r.name === 'product-categories')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/products/categories')
+  })
+
+  it('defines the product-category route', () => {
+    const route = router.getRoutes().find(r => r.name === 'product-category')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/products/category/:category')
+  })
+
+  it('defines the product-detail route', () => {
+    const route = router.getRoutes().find(r => r.name === 'product-detail')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/products/:id')
+  })
+
+  it('has exactly 8 routes', () => {
+    expect(router.getRoutes().length).toBe(8)
   })
 })

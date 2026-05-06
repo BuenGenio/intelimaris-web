@@ -448,3 +448,80 @@ export const productCatalog: CatalogEntry[] = [
 export function isSystem(entry: CatalogEntry): entry is CatalogSystem {
   return entry.category === 'system'
 }
+
+export type ProductCategory = CatalogEntry['category']
+
+export interface CategoryMeta {
+  id: ProductCategory
+  labelKey: string
+  blurbKey: string
+  image: string
+}
+
+export const CATEGORY_ORDER: ProductCategory[] = [
+  'safety',
+  'water',
+  'environment',
+  'electrical',
+  'motion',
+  'control',
+  'system',
+]
+
+export const categoryMeta: Record<ProductCategory, CategoryMeta> = {
+  safety: {
+    id: 'safety',
+    labelKey: 'products.category.safety',
+    blurbKey: 'products.categoryBlurb.safety',
+    image: 'assets/products/im301-temp-humidity-ip64.webp',
+  },
+  water: {
+    id: 'water',
+    labelKey: 'products.category.water',
+    blurbKey: 'products.categoryBlurb.water',
+    image: 'assets/products/im601-water-level.webp',
+  },
+  environment: {
+    id: 'environment',
+    labelKey: 'products.category.environment',
+    blurbKey: 'products.categoryBlurb.environment',
+    image: 'assets/products/im302-temp-humidity-round.webp',
+  },
+  electrical: {
+    id: 'electrical',
+    labelKey: 'products.category.electrical',
+    blurbKey: 'products.categoryBlurb.electrical',
+    image: 'assets/products/im401-ac-monitor.webp',
+  },
+  motion: {
+    id: 'motion',
+    labelKey: 'products.category.motion',
+    blurbKey: 'products.categoryBlurb.motion',
+    image: 'assets/products/im801-dc-monitor.webp',
+  },
+  control: {
+    id: 'control',
+    labelKey: 'products.category.control',
+    blurbKey: 'products.categoryBlurb.control',
+    image: 'assets/products/im901-remote-io.webp',
+  },
+  system: {
+    id: 'system',
+    labelKey: 'products.category.system',
+    blurbKey: 'products.categoryBlurb.system',
+    image: 'assets/products/im201-leak-pins.webp',
+  },
+}
+
+export function getCategoryMeta(cat: ProductCategory): CategoryMeta {
+  return categoryMeta[cat]
+}
+
+export function findProduct(id: string): CatalogEntry | undefined {
+  const target = id.toLowerCase()
+  return productCatalog.find((p) => p.id === target)
+}
+
+export function productsByCategory(cat: ProductCategory): CatalogEntry[] {
+  return productCatalog.filter((p) => p.category === cat)
+}
