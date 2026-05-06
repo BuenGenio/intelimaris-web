@@ -109,7 +109,7 @@
             <p>{{ t('about.contact.desc') }}</p>
           </div>
           <div class="contact-links">
-            <a href="mailto:info@intelimarine.com" class="contact-link">info@intelimarine.com</a>
+            <MailLink class="contact-link" />
             <a href="https://www.intelimaris.com" target="_blank" rel="noopener noreferrer" class="contact-link">intelimaris.com</a>
             <RouterLink to="/" class="back-link">{{ t('about.backHome') }}</RouterLink>
           </div>
@@ -122,6 +122,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
+import MailLink from '@/components/MailLink.vue'
 
 const { t } = useI18n()
 </script>

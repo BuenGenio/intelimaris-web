@@ -383,18 +383,20 @@
                   {{ t('homeAlt.contact.websiteLabel') }}: <a class="text-white underline decoration-white/30 underline-offset-4" href="https://intelimaris.com">intelimaris.com</a>
                 </p>
                 <p>
-                  {{ t('homeAlt.contact.emailLabel') }}: <a class="text-white underline decoration-white/30 underline-offset-4" href="mailto:info@intelimarine.com">info@intelimarine.com</a>
+                  {{ t('homeAlt.contact.emailLabel') }}: <MailLink class="text-white underline decoration-white/30 underline-offset-4" />
                 </p>
               </div>
 
               <div class="mt-8">
-                <a
-                  href="mailto:info@intelimarine.com?subject=InteliMaris%20Consultation%20Request"
+                <MailLink
+                  subject="InteliMaris Consultation Request"
                   class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-semibold tracking-[0.14em] uppercase text-slate-950 transition-colors hover:bg-white/95"
                 >
-                  {{ t('homeAlt.contact.startConversation') }}
-                  <Icon name="arrow-right" class="h-4 w-4" />
-                </a>
+                  <template #default>
+                    {{ t('homeAlt.contact.startConversation') }}
+                    <Icon name="arrow-right" class="h-4 w-4" />
+                  </template>
+                </MailLink>
               </div>
             </div>
           </div>
@@ -411,6 +413,7 @@ import homeAltCss from '@/assets/home-alt.css?inline'
 import { useTheme } from '@/composables/useTheme'
 import { useI18n } from '@/composables/useI18n'
 import type { Language } from '@/i18n/translations'
+import MailLink from '@/components/MailLink.vue'
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 

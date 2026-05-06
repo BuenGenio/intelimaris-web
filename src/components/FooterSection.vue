@@ -11,7 +11,7 @@
             Maritime intelligence infrastructure for vessels, marinas, and fleets.
           </p>
           <div class="footer-contact">
-            <a href="mailto:info@intelimarine.com">info@intelimarine.com</a>
+            <MailLink />
             <a href="https://www.intelimaris.com" target="_blank" rel="noopener noreferrer">intelimaris.com</a>
           </div>
         </div>
@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
+import MailLink from '@/components/MailLink.vue'
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 const { t } = useI18n()

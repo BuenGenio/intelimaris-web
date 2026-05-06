@@ -160,7 +160,6 @@ export const intelibilgeContact = {
   company: 'InteliMaris LLC',
   websiteUrl: 'https://www.intelimaris.com',
   websiteDisplay: 'www.intelimaris.com',
-  email: 'info@intelimarine.com',
   footnote:
     'Specifications subject to change without notice. Professional installation recommended. InteliMarine AI Stack subscription required after first year. All trademarks property of their respective owners.',
 }

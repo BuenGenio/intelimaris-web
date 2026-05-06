@@ -12,7 +12,9 @@
 
           <div class="closing-contact-links">
             <a href="https://www.intelimaris.com" target="_blank" rel="noopener noreferrer">{{ t('closing.websiteLabel') }}: intelimaris.com</a>
-            <a href="mailto:info@intelimarine.com">{{ t('closing.emailLabel') }}: info@intelimarine.com</a>
+            <MailLink>
+              <template #default="{ address }">{{ t('closing.emailLabel') }}: {{ address }}</template>
+            </MailLink>
           </div>
 
           <div class="closing-trust-list">
@@ -78,6 +80,8 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import { useI18n } from '@/composables/useI18n'
+import MailLink from '@/components/MailLink.vue'
+import { buildMailto } from '@/utils/email'
 
 type SubmitState = 'idle' | 'submitting' | 'success'
 
@@ -135,19 +139,17 @@ const handleSubmit = async () => {
 
       successMessage.value = t('closing.form.success')
     } else {
-      const subject = encodeURIComponent(`InteliMaris inquiry from ${form.name}`)
-      const body = encodeURIComponent(
-        [
-          `Name: ${form.name}`,
-          `Email: ${form.email}`,
-          `Company: ${form.company || 'Not provided'}`,
-          `Role: ${form.role}`,
-          '',
-          form.message,
-        ].join('\n')
-      )
+      const subject = `InteliMaris inquiry from ${form.name}`
+      const body = [
+        `Name: ${form.name}`,
+        `Email: ${form.email}`,
+        `Company: ${form.company || 'Not provided'}`,
+        `Role: ${form.role}`,
+        '',
+        form.message,
+      ].join('\n')
 
-      window.location.href = `mailto:info@intelimarine.com?subject=${subject}&body=${body}`
+      window.location.href = buildMailto({ subject, body })
       successMessage.value = 'Your email client was opened with a prefilled inquiry.'
     }
 
@@ -155,7 +157,7 @@ const handleSubmit = async () => {
     resetForm()
   } catch {
     submitState.value = 'idle'
-    submitError.value = 'We could not send your request. Please email info@intelimarine.com directly.'
+    submitError.value = 'We could not send your request. Please email our support team directly.'
   }
 }
 </script>

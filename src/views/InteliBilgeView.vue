@@ -147,9 +147,9 @@
           </a>
         </p>
         <p>
-          <a :href="`mailto:${intelibilgeContact.email}`">
-            {{ t('closing.emailLabel') }}: {{ intelibilgeContact.email }}
-          </a>
+          <MailLink>
+            <template #default="{ address }">{{ t('closing.emailLabel') }}: {{ address }}</template>
+          </MailLink>
         </p>
         <p class="bilge-footnote">{{ intelibilgeContact.footnote }}</p>
         <div class="bilge-nav-links">
@@ -166,6 +166,7 @@ import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
 import { useFadeIn } from '@/composables/useFadeIn'
 import ModelLinkedText from '@/components/ModelLinkedText.vue'
+import MailLink from '@/components/MailLink.vue'
 import {
   intelibilgeHero,
   intelibilgeHowComponents,
