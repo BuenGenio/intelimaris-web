@@ -44,7 +44,25 @@ describe('router', () => {
     expect(route!.path).toBe('/products/:id')
   })
 
-  it('has exactly 8 routes', () => {
-    expect(router.getRoutes().length).toBe(8)
+  it('defines the marinas route', () => {
+    const route = router.getRoutes().find(r => r.name === 'marinas')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/marinas')
+  })
+
+  it('defines the capabilities route', () => {
+    const route = router.getRoutes().find(r => r.name === 'capabilities')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/capabilities')
+  })
+
+  it('defines the contact route', () => {
+    const route = router.getRoutes().find(r => r.name === 'contact')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/contact')
+  })
+
+  it('has exactly 11 routes', () => {
+    expect(router.getRoutes().length).toBe(11)
   })
 })

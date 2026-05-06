@@ -49,6 +49,21 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
+      path: '/marinas',
+      name: 'marinas',
+      component: () => import('../views/MarinasView.vue'),
+    },
+    {
+      path: '/capabilities',
+      name: 'capabilities',
+      component: () => import('../views/CapabilitiesView.vue'),
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('../views/ContactView.vue'),
+    },
+    {
       path: '/home-alt',
       name: 'home-alt',
       component: () => import('../views/HomeAltView.vue'),

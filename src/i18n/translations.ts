@@ -289,6 +289,13 @@ export const translations: Record<Language, Translations> = {
     'productDetail.notFoundLead': 'The product you’re looking for isn’t in the catalog. Browse all categories to find what you need.',
     'categoryView.notFound': 'Category not found',
 
+    'marinas.footnote': 'Want a walk-through of how InteliMarina would deploy at your facility? We will tailor a coverage map and rollout plan.',
+    'marinas.contactCta': 'Talk to InteliMaris →',
+    'capabilities.footnote': 'Each capability maps to specific hardware and AI behaviors. Explore the catalog or get in touch for a tailored deployment plan.',
+    'capabilities.exploreProducts': 'Explore products →',
+    'contact.title': 'Talk to InteliMaris',
+    'contact.lead': 'Whether you operate a single vessel, run a marina, or manage a fleet, we will map the fastest path from sensors to actionable alerts.',
+
     'aiStack.label': 'Cloud intelligence',
     'aiStack.title': 'The InteliMarine AI Stack: your vessel’s digital guardian',
     'aiStack.p1': 'InteliMaris sensors communicate through a resilient star-of-stars network on the InteliMarine Long Range Network. Each sensor whispers to the nearest gateway — onboard, on a nearby dock, or inside InteliMarina infrastructure. Multiple gateways forward data to the InteliMarine AI Stack in the cloud, giving you redundancy, ultra-low battery consumption, and 24/7/365 visibility from anywhere on Earth.',
@@ -860,6 +867,13 @@ export const translations: Record<Language, Translations> = {
     'productDetail.notFound': 'Producto no encontrado',
     'productDetail.notFoundLead': 'El producto que buscas no está en el catálogo. Explora todas las categorías para encontrar lo que necesitas.',
     'categoryView.notFound': 'Categoría no encontrada',
+
+    'marinas.footnote': '¿Quiere un recorrido de cómo se desplegaría InteliMarina en sus instalaciones? Personalizaremos un mapa de cobertura y un plan de implementación.',
+    'marinas.contactCta': 'Hablar con InteliMaris →',
+    'capabilities.footnote': 'Cada capacidad se traduce en hardware y comportamientos de IA específicos. Explore el catálogo o contáctenos para un plan a medida.',
+    'capabilities.exploreProducts': 'Explorar productos →',
+    'contact.title': 'Hable con InteliMaris',
+    'contact.lead': 'Ya opere un solo buque, una marina o una flota, trazaremos la ruta más rápida desde los sensores hasta alertas accionables.',
 
     'aiStack.label': 'Inteligencia en la nube',
     'aiStack.title': 'InteliMarine AI Stack: el guardián digital de su embarcación',
@@ -1433,6 +1447,13 @@ export const translations: Record<Language, Translations> = {
     'productDetail.notFoundLead': 'Το προϊόν που αναζητάτε δεν βρίσκεται στον κατάλογο. Περιηγηθείτε σε όλες τις κατηγορίες.',
     'categoryView.notFound': 'Η κατηγορία δεν βρέθηκε',
 
+    'marinas.footnote': 'Θέλετε αναλυτική παρουσίαση για το πώς θα αναπτυχθεί το InteliMarina στις εγκαταστάσεις σας; Θα προσαρμόσουμε χάρτη κάλυψης και πλάνο εφαρμογής.',
+    'marinas.contactCta': 'Επικοινωνία με την InteliMaris →',
+    'capabilities.footnote': 'Κάθε δυνατότητα συνδέεται με συγκεκριμένο υλικό και συμπεριφορές AI. Εξερευνήστε τον κατάλογο ή επικοινωνήστε για εξατομικευμένο πλάνο.',
+    'capabilities.exploreProducts': 'Εξερεύνηση προϊόντων →',
+    'contact.title': 'Επικοινωνία με την InteliMaris',
+    'contact.lead': 'Είτε λειτουργείτε ένα σκάφος, είτε μια μαρίνα, είτε στόλο, θα χαράξουμε τον γρηγορότερο δρόμο από τους αισθητήρες σε ειδοποιήσεις δράσης.',
+
     'aiStack.label': 'Νοημοσύνη στο νέφος',
     'aiStack.title': 'Το InteliMarine AI Stack: ο ψηφιακός φρουρός του σκάφους σας',
     'aiStack.p1': 'Οι αισθητήρες InteliMaris επικοινωνούν μέσω ενός ανθεκτικού δικτύου αστέρα-αστέρων στο InteliMarine Long Range Network. Κάθε αισθητήρας μεταδίδει στον πλησιέστερο πύλωνα — εν πλω, σε κοντινό προβλήτα ή εντός υποδομής InteliMarina. Πολλαπλοί πύλωνες προωθούν δεδομένα στο InteliMarine AI Stack στο νέφος, παρέχοντας πλεονασμό, εξαιρετικά χαμηλή κατανάλωση μπαταρίας και ορατότητα 24/7/365 από οπουδήποτε στη Γη.',
@@ -2004,6 +2025,13 @@ export const translations: Record<Language, Translations> = {
     'productDetail.notFound': 'Продукт не знайдено',
     'productDetail.notFoundLead': 'Продукт, який ви шукаєте, відсутній у каталозі. Перегляньте всі категорії.',
     'categoryView.notFound': 'Категорію не знайдено',
+
+    'marinas.footnote': 'Хочете дізнатися, як InteliMarina розгорнеться у ваших об’єктах? Ми підготуємо персональну карту покриття та план впровадження.',
+    'marinas.contactCta': 'Зв’язатися з InteliMaris →',
+    'capabilities.footnote': 'Кожна можливість прив’язана до конкретного обладнання та поведінки ШІ. Перегляньте каталог або зв’яжіться з нами для індивідуального плану.',
+    'capabilities.exploreProducts': 'Переглянути продукти →',
+    'contact.title': 'Зв’язатися з InteliMaris',
+    'contact.lead': 'Незалежно від того, чи керуєте ви одним судном, мариною чи флотом, ми прокладемо найшвидший шлях від датчиків до дієвих сповіщень.',
 
     'aiStack.label': 'Хмарний інтелект',
     'aiStack.title': 'InteliMarine AI Stack: цифровий вартовий вашого судна',

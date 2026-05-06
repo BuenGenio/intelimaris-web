@@ -13,8 +13,8 @@
       <div class="nav-desktop-only nav-primary-bar">
         <RouterLink
           v-for="item in primaryLinks"
-          :key="item.hash"
-          :to="{ name: 'home', hash: item.hash }"
+          :key="item.to.name ?? String(item.to.path)"
+          :to="item.to"
           class="nav-link"
         >
           {{ t(item.labelKey) }}
@@ -135,8 +135,8 @@
               <p class="nav-drawer-group-label">{{ t('nav.groupSections') }}</p>
               <RouterLink
                 v-for="item in primaryLinks"
-                :key="'m-' + item.hash"
-                :to="{ name: 'home', hash: item.hash }"
+                :key="'m-' + (item.to.name ?? item.to.path)"
+                :to="item.to"
                 class="nav-drawer-link"
                 @click="closeDrawer"
               >
@@ -258,11 +258,16 @@ import {
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 
-const primaryLinks = [
-  { hash: '#platform', labelKey: 'nav.platform' as const },
-  { hash: '#marina', labelKey: 'nav.marina' as const },
-  { hash: '#why-us', labelKey: 'nav.capabilities' as const },
-  { hash: '#contact', labelKey: 'nav.contact' as const }
+interface PrimaryLink {
+  to: { name?: string; path?: string; hash?: string }
+  labelKey: 'nav.platform' | 'nav.marina' | 'nav.capabilities' | 'nav.contact'
+}
+
+const primaryLinks: PrimaryLink[] = [
+  { to: { name: 'home', hash: '#platform' }, labelKey: 'nav.platform' },
+  { to: { name: 'marinas' }, labelKey: 'nav.marina' },
+  { to: { name: 'capabilities' }, labelKey: 'nav.capabilities' },
+  { to: { name: 'contact' }, labelKey: 'nav.contact' },
 ]
 
 const languages: Language[] = ['en', 'es', 'el', 'uk']
