@@ -62,7 +62,13 @@ describe('router', () => {
     expect(route!.path).toBe('/contact')
   })
 
-  it('has exactly 11 routes', () => {
-    expect(router.getRoutes().length).toBe(11)
+  it('defines the waterwayz route', () => {
+    const route = router.getRoutes().find(r => r.name === 'waterwayz')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/waterwayz')
+  })
+
+  it('has exactly 12 routes', () => {
+    expect(router.getRoutes().length).toBe(12)
   })
 })

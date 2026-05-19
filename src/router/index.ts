@@ -64,6 +64,11 @@ const router = createRouter({
       component: () => import('../views/ContactView.vue'),
     },
     {
+      path: '/waterwayz',
+      name: 'waterwayz',
+      component: () => import('../views/WaterWayzView.vue'),
+    },
+    {
       path: '/home-alt',
       name: 'home-alt',
       component: () => import('../views/HomeAltView.vue'),
