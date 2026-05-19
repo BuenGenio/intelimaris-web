@@ -19,7 +19,11 @@
       <!-- Hero -->
       <section class="ww-hero">
         <div class="ww-hero-copy">
-          <div class="ww-badge fade-in">
+          <div class="ww-brand fade-in">
+            <img :src="logoSrc" alt="WaterWayz" width="240" height="50" />
+          </div>
+
+          <div class="ww-badge fade-in" :style="{ transitionDelay: '0.04s' }">
             <svg
               class="ww-ic ww-ic-sm"
               viewBox="0 0 24 24"
@@ -362,6 +366,8 @@ import { useFadeIn } from '@/composables/useFadeIn'
 
 useFadeIn('.ww-page')
 
+const logoSrc = `${import.meta.env.BASE_URL}assets/waterwayz-logo.png`
+
 type IconName =
   | 'route'
   | 'bell'
@@ -611,6 +617,24 @@ const bgWaves = Array.from(
   gap: 3.5rem;
   align-items: center;
   padding: 2.5rem 0 5rem;
+}
+
+.ww-brand {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.4) inset,
+    0 18px 38px -16px rgba(13, 102, 255, 0.55);
+}
+
+.ww-brand img {
+  display: block;
+  height: 40px;
+  width: auto;
 }
 
 .ww-badge {
