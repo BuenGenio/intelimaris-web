@@ -49,8 +49,25 @@
           </p>
 
           <div class="ww-cta-row fade-in" :style="{ transitionDelay: '0.24s' }">
-            <button type="button" class="ww-btn ww-btn-primary">Request Early Access</button>
-            <button type="button" class="ww-btn ww-btn-ghost">View Demo Route</button>
+            <a
+              class="ww-btn ww-btn-primary"
+              href="https://waterwayz.intelimaris.anthill.hk/downloads/waterwayz.apk"
+              download
+            >
+              <svg
+                class="ww-btn-icon"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4483.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4483-.9993.9993-.9993c.5511 0 .9993.4483.9993.9993 0 .5511-.4483.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1367 1.0989L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.0775-9.4396"
+                />
+              </svg>
+              Download App
+            </a>
           </div>
 
           <div class="ww-stats fade-in" :style="{ transitionDelay: '0.32s' }">
@@ -570,11 +587,13 @@ const bgWaves = Array.from(
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.55rem;
   border-radius: 9999px;
   padding: 1.1rem 2.1rem;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
+  text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
