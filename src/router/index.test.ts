@@ -62,13 +62,19 @@ describe('router', () => {
     expect(route!.path).toBe('/contact')
   })
 
-  it('defines the waterwayz route', () => {
-    const route = router.getRoutes().find(r => r.name === 'waterwayz')
+  it('defines the inteliwaterwayz route', () => {
+    const route = router.getRoutes().find(r => r.name === 'inteliwaterwayz')
     expect(route).toBeDefined()
-    expect(route!.path).toBe('/waterwayz')
+    expect(route!.path).toBe('/inteliwaterwayz')
   })
 
-  it('has exactly 12 routes', () => {
-    expect(router.getRoutes().length).toBe(12)
+  it('redirects the legacy waterwayz path', () => {
+    const route = router.getRoutes().find(r => r.path === '/waterwayz')
+    expect(route).toBeDefined()
+    expect(route!.redirect).toEqual({ name: 'inteliwaterwayz' })
+  })
+
+  it('has exactly 13 routes', () => {
+    expect(router.getRoutes().length).toBe(13)
   })
 })

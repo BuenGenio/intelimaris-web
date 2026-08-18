@@ -260,14 +260,14 @@ const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
 
 interface PrimaryLink {
   to: { name?: string; path?: string; hash?: string }
-  labelKey: 'nav.platform' | 'nav.marina' | 'nav.capabilities' | 'nav.waterwayz' | 'nav.contact'
+  labelKey: 'nav.platform' | 'nav.marina' | 'nav.capabilities' | 'nav.inteliwaterwayz' | 'nav.contact'
 }
 
 const primaryLinks: PrimaryLink[] = [
   { to: { name: 'home', hash: '#platform' }, labelKey: 'nav.platform' },
   { to: { name: 'marinas' }, labelKey: 'nav.marina' },
   { to: { name: 'capabilities' }, labelKey: 'nav.capabilities' },
-  { to: { name: 'waterwayz' }, labelKey: 'nav.waterwayz' },
+  { to: { name: 'inteliwaterwayz' }, labelKey: 'nav.inteliwaterwayz' },
   { to: { name: 'contact' }, labelKey: 'nav.contact' },
 ]
 

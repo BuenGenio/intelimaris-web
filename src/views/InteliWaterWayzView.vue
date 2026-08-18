@@ -20,7 +20,7 @@
       <section class="ww-hero">
         <div class="ww-hero-copy">
           <div class="ww-brand fade-in">
-            <img :src="logoSrc" alt="WaterWayz" width="240" height="50" />
+            <img :src="logoSrc" alt="InteliWaterWayz" width="307" height="50" />
           </div>
 
           <div class="ww-badge fade-in" :style="{ transitionDelay: '0.04s' }">
@@ -42,18 +42,14 @@
           </h1>
 
           <p class="ww-hero-lead fade-in" :style="{ transitionDelay: '0.16s' }">
-            WaterWayz is a real-time marine navigation app that helps boaters route around
+            InteliWaterWayz is a real-time marine navigation app that helps boaters route around
             hazards, shallow water, no-wake zones, dock congestion, bridges, weather, and local
             reports. Built as part of the InteliMarine ecosystem, it turns connected vessels and
             marinas into a living map of the water.
           </p>
 
           <div class="ww-cta-row fade-in" :style="{ transitionDelay: '0.24s' }">
-            <a
-              class="ww-btn ww-btn-primary"
-              href="https://waterwayz.intelimaris.anthill.hk/downloads/waterwayz.apk"
-              download
-            >
+            <a class="ww-btn ww-btn-primary" href="#">
               <svg
                 class="ww-btn-icon"
                 viewBox="0 0 24 24"
@@ -89,7 +85,7 @@
               </div>
               <div class="ww-phone-routehead">
                 <div>
-                  <p class="ww-phone-eyebrow">WaterWayz</p>
+                  <p class="ww-phone-eyebrow">InteliWaterWayz</p>
                   <h3 class="ww-phone-route">Route to Marina Bay</h3>
                 </div>
                 <div class="ww-phone-navbtn">
@@ -325,7 +321,7 @@
                 More than a map. A connected marine intelligence layer.
               </h2>
               <p class="ww-eco-desc">
-                WaterWayz becomes more powerful when connected to InteliMARIS sensors, InteliBilge
+                InteliWaterWayz becomes more powerful when connected to InteliMARIS sensors, InteliBilge
                 events, marina networks, and the InteliMarine AI Stack.
               </p>
             </div>
@@ -366,12 +362,12 @@
         </div>
         <h2 class="ww-final-title">Ready to make every route smarter?</h2>
         <p class="ww-final-lead">
-          Launch WaterWayz as the friendly marine navigation companion for modern boaters,
+          Launch InteliWaterWayz as the friendly marine navigation companion for modern boaters,
           marinas, and connected InteliMarine vessels.
         </p>
         <div class="ww-cta-row ww-cta-center">
-          <button type="button" class="ww-btn ww-btn-primary">Join the WaterWayz Beta</button>
-          <button type="button" class="ww-btn ww-btn-ghost">Partner with WaterWayz</button>
+          <button type="button" class="ww-btn ww-btn-primary">Join the InteliWaterWayz Beta</button>
+          <button type="button" class="ww-btn ww-btn-ghost">Partner with InteliWaterWayz</button>
         </div>
       </section>
     </div>
@@ -383,7 +379,7 @@ import { useFadeIn } from '@/composables/useFadeIn'
 
 useFadeIn('.ww-page')
 
-const logoSrc = `${import.meta.env.BASE_URL}assets/waterwayz-logo.png`
+const logoSrc = `${import.meta.env.BASE_URL}assets/inteliwaterwayz-logo.png`
 
 type IconName =
   | 'route'
