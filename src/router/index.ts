@@ -73,6 +73,11 @@ const router = createRouter({
       redirect: { name: 'inteliwaterwayz' },
     },
     {
+      path: '/software',
+      name: 'software',
+      component: () => import('../views/SoftwareView.vue'),
+    },
+    {
       path: '/home-alt',
       name: 'home-alt',
       component: () => import('../views/HomeAltView.vue'),

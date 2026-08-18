@@ -74,7 +74,13 @@ describe('router', () => {
     expect(route!.redirect).toEqual({ name: 'inteliwaterwayz' })
   })
 
-  it('has exactly 13 routes', () => {
-    expect(router.getRoutes().length).toBe(13)
+  it('defines the software route', () => {
+    const route = router.getRoutes().find(r => r.name === 'software')
+    expect(route).toBeDefined()
+    expect(route!.path).toBe('/software')
+  })
+
+  it('has exactly 14 routes', () => {
+    expect(router.getRoutes().length).toBe(14)
   })
 })

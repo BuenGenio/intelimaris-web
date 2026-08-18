@@ -23,6 +23,7 @@
             <RouterLink :to="{ name: 'home', hash: '#marina' }">{{ t('footer.platform.marina') }}</RouterLink>
             <RouterLink :to="{ name: 'home', hash: '#why-us' }">{{ t('nav.capabilities') }}</RouterLink>
             <RouterLink to="/products">{{ t('footer.platform.products') }}</RouterLink>
+            <RouterLink :to="{ name: 'software' }">{{ t('footer.platform.software') }}</RouterLink>
           </div>
 
           <div class="footer-section">
