@@ -79,117 +79,13 @@
           <div class="ww-phone-glow" aria-hidden="true" />
           <div class="ww-phone-frame">
             <div class="ww-phone-screen">
-              <div class="ww-phone-statusbar">
-                <span>9:41</span>
-                <span class="ww-phone-lte">LTE</span>
-              </div>
-              <div class="ww-phone-routehead">
-                <div>
-                  <p class="ww-phone-eyebrow">InteliWaterWayz</p>
-                  <h3 class="ww-phone-route">Route to Marina Bay</h3>
-                </div>
-                <div class="ww-phone-navbtn">
-                  <svg
-                    class="ww-ic ww-ic-md"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    v-html="icons.navigation"
-                  />
-                </div>
-              </div>
-
-              <div class="ww-phone-map">
-                <svg viewBox="0 0 360 390" class="ww-phone-mapsvg">
-                  <defs>
-                    <linearGradient id="ww-water" x1="0" x2="1" y1="0" y2="1">
-                      <stop offset="0" stop-color="#062348" />
-                      <stop offset="0.55" stop-color="#031225" />
-                      <stop offset="1" stop-color="#020815" />
-                    </linearGradient>
-                    <filter id="ww-glow">
-                      <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                      <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  <rect width="360" height="390" fill="url(#ww-water)" />
-                  <path
-                    v-for="(d, i) in phoneWaves"
-                    :key="i"
-                    :d="d"
-                    fill="none"
-                    stroke="#0c4d8c"
-                    stroke-width="1"
-                    opacity="0.35"
-                  />
-                  <path
-                    d="M 65 315 C 110 270, 105 218, 168 190 C 219 166, 225 110, 292 73"
-                    fill="none"
-                    stroke="#1d4ed8"
-                    stroke-width="18"
-                    opacity="0.2"
-                  />
-                  <path
-                    d="M 65 315 C 110 270, 105 218, 168 190 C 219 166, 225 110, 292 73"
-                    fill="none"
-                    stroke="#1188ff"
-                    stroke-width="6"
-                    stroke-linecap="round"
-                    filter="url(#ww-glow)"
-                  />
-                  <circle cx="65" cy="315" r="11" fill="#16a34a" stroke="white" stroke-width="3" />
-                  <circle cx="292" cy="73" r="11" fill="#ef4444" stroke="white" stroke-width="3" />
-                  <circle cx="178" cy="185" r="8" fill="#fbbf24" stroke="white" stroke-width="2" />
-                  <circle cx="238" cy="130" r="8" fill="#f97316" stroke="white" stroke-width="2" />
-                  <path d="M 20 65 L 82 38 L 118 88 L 55 126 Z" fill="#0f172a" opacity="0.8" stroke="#1e40af" />
-                  <path d="M 245 315 L 325 277 L 356 330 L 291 374 Z" fill="#0f172a" opacity="0.8" stroke="#1e40af" />
-                  <text x="42" y="85" fill="#93c5fd" font-size="11">Marina</text>
-                  <text x="250" y="336" fill="#93c5fd" font-size="11">No Wake</text>
-                </svg>
-
-                <div class="ww-phone-eta">
-                  <div>
-                    <p class="ww-phone-eta-label">ETA</p>
-                    <p class="ww-phone-eta-value">24 min</p>
-                  </div>
-                  <div>
-                    <p class="ww-phone-eta-label">Distance</p>
-                    <p class="ww-phone-eta-value">7.8 NM</p>
-                  </div>
-                  <div>
-                    <p class="ww-phone-eta-label">Hazards</p>
-                    <p class="ww-phone-eta-value ww-amber">2</p>
-                  </div>
-                </div>
-
-                <div class="ww-phone-alerts">
-                  <div
-                    v-for="(alert, index) in alerts.slice(0, 2)"
-                    :key="alert"
-                    class="ww-phone-alert"
-                  >
-                    <div class="ww-phone-alert-icon" :class="index === 0 ? 'ww-tone-amber' : 'ww-tone-blue'">
-                      <svg
-                        class="ww-ic ww-ic-sm"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        v-html="index === 0 ? icons.waves : icons.wind"
-                      />
-                    </div>
-                    <p>{{ alert }}</p>
-                  </div>
-                </div>
-              </div>
+              <img
+                class="ww-phone-shot"
+                :src="appShotSrc"
+                alt="InteliWaterWayz app showing the IDS screen with live forward, stern, port and starboard camera awareness"
+                width="720"
+                height="1442"
+              />
             </div>
           </div>
         </div>
@@ -380,6 +276,7 @@ import { useFadeIn } from '@/composables/useFadeIn'
 useFadeIn('.ww-page')
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/inteliwaterwayz-logo.png`
+const appShotSrc = `${import.meta.env.BASE_URL}assets/inteliwaterwayz-app.jpg`
 
 type IconName =
   | 'route'
@@ -484,12 +381,6 @@ const routeSteps: { name: string; dist: string; tone: 'blue' | 'amber' | 'green'
 
 const dotClass = (tone: 'blue' | 'amber' | 'green') =>
   tone === 'amber' ? 'ww-dot-amber' : tone === 'green' ? 'ww-dot-green' : 'ww-dot-blue'
-
-const phoneWaves = Array.from(
-  { length: 13 },
-  (_, i) =>
-    `M -30 ${40 + i * 28} C 70 ${15 + i * 32}, 128 ${70 + i * 16}, 230 ${38 + i * 30} S 390 ${50 + i * 27}, 420 ${25 + i * 22}`,
-)
 
 const bgWaves = Array.from(
   { length: 18 },
@@ -755,143 +646,13 @@ const bgWaves = Array.from(
   overflow: hidden;
   border-radius: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #061225;
+  background: #ffffff;
 }
 
-.ww-phone-statusbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.25rem;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.ww-phone-lte {
-  letter-spacing: 0.2em;
-}
-
-.ww-phone-routehead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.25rem 1rem;
-}
-
-.ww-phone-eyebrow {
-  margin: 0;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: #93c5fd;
-}
-
-.ww-phone-route {
-  margin: 0.15rem 0 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-.ww-phone-navbtn {
-  display: flex;
-  border-radius: 9999px;
-  background: #3b82f6;
-  padding: 0.5rem;
-  box-shadow: 0 10px 22px -6px rgba(59, 130, 246, 0.6);
-}
-
-.ww-phone-map {
-  position: relative;
-  height: 390px;
-  overflow: hidden;
-  background: #041225;
-}
-
-.ww-phone-mapsvg {
-  position: absolute;
-  inset: 0;
+.ww-phone-shot {
+  display: block;
   width: 100%;
-  height: 100%;
-}
-
-.ww-phone-eta {
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  top: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 1rem;
-  border: 1px solid rgba(147, 197, 253, 0.2);
-  background: rgba(2, 6, 23, 0.75);
-  padding: 0.75rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.ww-phone-eta p {
-  margin: 0;
-}
-
-.ww-phone-eta-label {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.ww-phone-eta-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ww-phone-eta-value.ww-amber {
-  color: #fcd34d;
-}
-
-.ww-phone-alerts {
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.ww-phone-alert {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(2, 6, 23, 0.8);
-  padding: 0.75rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.ww-phone-alert p {
-  margin: 0;
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.ww-phone-alert-icon {
-  display: flex;
-  border-radius: 9999px;
-  padding: 0.5rem;
-}
-
-.ww-tone-amber {
-  background: rgba(251, 191, 36, 0.2);
-  color: #fcd34d;
-}
-
-.ww-tone-blue {
-  background: rgba(59, 130, 246, 0.2);
-  color: #93c5fd;
+  height: auto;
 }
 
 /* Sections */
