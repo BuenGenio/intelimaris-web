@@ -95,13 +95,14 @@
       <section id="features" class="ww-section">
         <div class="ww-section-head">
           <div>
-            <p class="ww-eyebrow">Navigation intelligence</p>
+            <p class="ww-eyebrow">What the app does</p>
             <h2 class="ww-section-title">
-              Built for captains, crews, marinas, and weekend boaters.
+              Eight things WaterWayz does on the water.
             </h2>
           </div>
           <p class="ww-section-note">
-            A clean, friendly interface with the intelligence of the InteliMarine stack behind it.
+            Every one of them reads from the same platform data, and every value carries its
+            source and its age.
           </p>
         </div>
 
@@ -124,7 +125,7 @@
                 v-html="icons[feature.icon]"
               />
             </div>
-            <h3 class="ww-feature-title">{{ feature.title }}</h3>
+            <h3 class="ww-feature-title ww-feature-pillar">{{ feature.title }}</h3>
             <p class="ww-feature-text">{{ feature.text }}</p>
           </div>
         </div>
@@ -292,6 +293,8 @@ type IconName =
   | 'zap'
   | 'anchor'
   | 'smartphone'
+  | 'users'
+  | 'calendar-check'
 
 /* Inline SVG icon paths (Lucide), replacing the lucide-react dependency. */
 const icons: Record<IconName, string> = {
@@ -320,28 +323,52 @@ const icons: Record<IconName, string> = {
     '<path d="M12 22V8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><circle cx="12" cy="5" r="3"/>',
   smartphone:
     '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+  users:
+    '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'calendar-check':
+    '<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/>',
 }
 
 const features: { icon: IconName; title: string; text: string }[] = [
   {
     icon: 'route',
-    title: 'Smart Marine Routing',
-    text: 'Plan safer routes around shoals, no-wake zones, bridges, fuel stops, marina entrances, weather, and live local reports.',
-  },
-  {
-    icon: 'bell',
-    title: 'Real-Time Boater Alerts',
-    text: 'Get instant warnings for hazards, debris, shallow water, closed channels, speed zones, rough conditions, and dock congestion.',
+    title: 'Navigate',
+    text: 'Plan a passage end to end and see what the water is doing along it: bridge clearances against your air draft, opening schedules, and conditions timed to when you will actually be there.',
   },
   {
     icon: 'radio-tower',
-    title: 'Community-Powered Updates',
-    text: 'Captains, marinas, and connected InteliMarine devices contribute live intelligence to improve every trip.',
+    title: 'Monitor',
+    text: 'Live readings from the InteliMARIS unit on your vessel, every channel with its age on it, twenty-four hours of history behind it, and predictive insights where the platform has them.',
   },
   {
-    icon: 'shield-check',
-    title: 'Vessel-Aware Navigation',
-    text: 'Routes can account for draft, beam, bridge clearance, fuel range, preferred speed, home marina, and restricted zones.',
+    icon: 'compass',
+    title: 'Discover',
+    text: 'Marinas, fuel, yards, provisioning and events near you or anywhere on the chart. Each listing shows where its facts came from, so you know what you are trusting.',
+  },
+  {
+    icon: 'users',
+    title: 'Connect',
+    text: 'Crews, feed and messages built on shared workspaces. Invite by email or an eight-character join code, and everyone sees the same vessel, the same passage, the same alerts.',
+  },
+  {
+    icon: 'map-pinned',
+    title: 'Report',
+    text: 'Report a hazard or a depth sounding in one tap. Reports go up as Reported, gain weight as others confirm them, and expire on their own if nobody sees them again.',
+  },
+  {
+    icon: 'zap',
+    title: 'Assist',
+    text: 'Every alert arrives with a reason and a suggested action, never a bare number. Where the platform can help further it answers from live data: your vessel, your route, the reports around you.',
+  },
+  {
+    icon: 'calendar-check',
+    title: 'Book',
+    text: 'Search transient berths by position and dates, see honest availability before you request, and book instantly where a host allows it. A confirmed stay cannot be double-booked.',
+  },
+  {
+    icon: 'anchor',
+    title: 'Dock',
+    text: 'IDS, the Intelligent Docking System, reads the berth as you come in: forward, stern, port and starboard views with distances to pilings and dock edges, and one clear suggested action.',
   },
 ]
 
@@ -707,6 +734,12 @@ const bgWaves = Array.from(
   font-size: 1.25rem;
   font-weight: 600;
   color: #fff;
+}
+
+.ww-feature-pillar {
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .ww-feature-text {
