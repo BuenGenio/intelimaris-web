@@ -333,7 +333,7 @@ const features: { icon: IconName; title: string; text: string }[] = [
   {
     icon: 'route',
     title: 'Navigate',
-    text: 'Plan a passage end to end and see what the water is doing along it: bridge clearances against your air draft, opening schedules, and conditions timed to when you will actually be there.',
+    text: 'Plan a passage end to end and see what the water is doing along it: tide and depth under the keel, bridge clearances against your air draft, and the schedules those bridges open on. Change your departure and every step re-times, because the tide moves both numbers.',
   },
   {
     icon: 'radio-tower',
