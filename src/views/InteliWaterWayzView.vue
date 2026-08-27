@@ -20,7 +20,7 @@
       <section class="ww-hero">
         <div class="ww-hero-copy">
           <div class="ww-brand fade-in">
-            <img :src="logoSrc" alt="InteliWaterWayz" width="307" height="50" />
+            <img :src="logoSrc" alt="InteliMaris" width="364" height="50" />
           </div>
 
           <div class="ww-badge fade-in" :style="{ transitionDelay: '0.04s' }">
@@ -276,7 +276,7 @@ import { useFadeIn } from '@/composables/useFadeIn'
 
 useFadeIn('.ww-page')
 
-const logoSrc = `${import.meta.env.BASE_URL}assets/inteliwaterwayz-logo.png`
+const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
 const appShotSrc = `${import.meta.env.BASE_URL}assets/inteliwaterwayz-app.jpg`
 
 type IconName =
