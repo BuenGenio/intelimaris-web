@@ -80,7 +80,7 @@
               <img
                 class="ww-phone-shot"
                 :src="appShotSrc"
-                alt="InteliWaterWayz app showing the IDS screen with live forward, stern, port and starboard camera awareness"
+                alt="WaterWayz app showing the IDS screen with live forward, stern, port and starboard camera awareness"
                 width="720"
                 height="1442"
               />
@@ -275,7 +275,7 @@ import { useFadeIn } from '@/composables/useFadeIn'
 useFadeIn('.ww-page')
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
-const appShotSrc = `${import.meta.env.BASE_URL}assets/inteliwaterwayz-app.jpg`
+const appShotSrc = `${import.meta.env.BASE_URL}assets/waterwayz-app.jpg`
 
 type IconName =
   | 'route'

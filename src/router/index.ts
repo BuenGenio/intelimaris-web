@@ -64,13 +64,13 @@ const router = createRouter({
       component: () => import('../views/ContactView.vue'),
     },
     {
-      path: '/inteliwaterwayz',
-      name: 'inteliwaterwayz',
-      component: () => import('../views/InteliWaterWayzView.vue'),
+      path: '/waterwayz',
+      name: 'waterwayz',
+      component: () => import('../views/WaterWayzView.vue'),
     },
     {
-      path: '/waterwayz',
-      redirect: { name: 'inteliwaterwayz' },
+      path: '/inteliwaterwayz',
+      redirect: { name: 'waterwayz' },
     },
     {
       path: '/software',

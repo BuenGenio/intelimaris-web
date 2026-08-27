@@ -28,7 +28,7 @@ export const translations: Record<Language, Translations> = {
     'nav.themeLight': 'Light',
     'nav.language': 'Language',
     'nav.about': 'About',
-    'nav.inteliwaterwayz': 'InteliWaterWayz',
+    'nav.waterwayz': 'WaterWayz',
     'nav.productsAllCategories': 'All categories',
     'nav.productsAllHint': 'Browse the catalog by domain',
 
@@ -609,7 +609,7 @@ export const translations: Record<Language, Translations> = {
     'nav.themeLight': 'Claro',
     'nav.language': 'Idioma',
     'nav.about': 'Sobre nosotros',
-    'nav.inteliwaterwayz': 'InteliWaterWayz',
+    'nav.waterwayz': 'WaterWayz',
     'nav.productsAllCategories': 'Todas las categorías',
     'nav.productsAllHint': 'Explora el catálogo por dominio',
 
@@ -1190,7 +1190,7 @@ export const translations: Record<Language, Translations> = {
     'nav.themeLight': 'Φωτεινό',
     'nav.language': 'Γλώσσα',
     'nav.about': 'Σχετικά',
-    'nav.inteliwaterwayz': 'InteliWaterWayz',
+    'nav.waterwayz': 'WaterWayz',
     'nav.productsAllCategories': 'Όλες οι κατηγορίες',
     'nav.productsAllHint': 'Περιήγηση στον κατάλογο ανά τομέα',
 
@@ -1771,7 +1771,7 @@ export const translations: Record<Language, Translations> = {
     'nav.themeLight': 'Світла',
     'nav.language': 'Мова',
     'nav.about': 'Про нас',
-    'nav.inteliwaterwayz': 'InteliWaterWayz',
+    'nav.waterwayz': 'WaterWayz',
     'nav.productsAllCategories': 'Усі категорії',
     'nav.productsAllHint': 'Перегляд каталогу за напрямом',
 

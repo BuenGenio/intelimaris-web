@@ -42,7 +42,7 @@
           </h1>
 
           <p class="ww-hero-lead fade-in" :style="{ transitionDelay: '0.16s' }">
-            InteliWaterWayz is a real-time marine navigation app that helps boaters route around
+            WaterWayz is a real-time marine navigation app that helps boaters route around
             hazards, shallow water, no-wake zones, dock congestion, bridges, weather, and local
             reports. Built as part of the InteliMarine ecosystem, it turns connected vessels and
             marinas into a living map of the water.
@@ -82,7 +82,7 @@
               <img
                 class="ww-phone-shot"
                 :src="appShotSrc"
-                alt="InteliWaterWayz app showing the IDS screen with live forward, stern, port and starboard camera awareness"
+                alt="WaterWayz app showing the IDS screen with live forward, stern, port and starboard camera awareness"
                 width="720"
                 height="1442"
               />
@@ -218,7 +218,7 @@
                 More than a map. A connected marine intelligence layer.
               </h2>
               <p class="ww-eco-desc">
-                InteliWaterWayz becomes more powerful when connected to InteliMARIS sensors, InteliBilge
+                WaterWayz becomes more powerful when connected to InteliMARIS sensors, InteliBilge
                 events, marina networks, and the InteliMarine AI Stack.
               </p>
             </div>
@@ -259,12 +259,12 @@
         </div>
         <h2 class="ww-final-title">Ready to make every route smarter?</h2>
         <p class="ww-final-lead">
-          Launch InteliWaterWayz as the friendly marine navigation companion for modern boaters,
+          Launch WaterWayz as the friendly marine navigation companion for modern boaters,
           marinas, and connected InteliMarine vessels.
         </p>
         <div class="ww-cta-row ww-cta-center">
-          <button type="button" class="ww-btn ww-btn-primary">Join the InteliWaterWayz Beta</button>
-          <button type="button" class="ww-btn ww-btn-ghost">Partner with InteliWaterWayz</button>
+          <button type="button" class="ww-btn ww-btn-primary">Join the WaterWayz Beta</button>
+          <button type="button" class="ww-btn ww-btn-ghost">Partner with WaterWayz</button>
         </div>
       </section>
     </div>
@@ -277,7 +277,7 @@ import { useFadeIn } from '@/composables/useFadeIn'
 useFadeIn('.ww-page')
 
 const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
-const appShotSrc = `${import.meta.env.BASE_URL}assets/inteliwaterwayz-app.jpg`
+const appShotSrc = `${import.meta.env.BASE_URL}assets/waterwayz-app.jpg`
 
 type IconName =
   | 'route'

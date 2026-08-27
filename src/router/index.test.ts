@@ -62,16 +62,16 @@ describe('router', () => {
     expect(route!.path).toBe('/contact')
   })
 
-  it('defines the inteliwaterwayz route', () => {
-    const route = router.getRoutes().find(r => r.name === 'inteliwaterwayz')
+  it('defines the waterwayz route', () => {
+    const route = router.getRoutes().find(r => r.name === 'waterwayz')
     expect(route).toBeDefined()
-    expect(route!.path).toBe('/inteliwaterwayz')
+    expect(route!.path).toBe('/waterwayz')
   })
 
-  it('redirects the legacy waterwayz path', () => {
-    const route = router.getRoutes().find(r => r.path === '/waterwayz')
+  it('redirects the legacy inteliwaterwayz path', () => {
+    const route = router.getRoutes().find(r => r.path === '/inteliwaterwayz')
     expect(route).toBeDefined()
-    expect(route!.redirect).toEqual({ name: 'inteliwaterwayz' })
+    expect(route!.redirect).toEqual({ name: 'waterwayz' })
   })
 
   it('defines the software route', () => {
