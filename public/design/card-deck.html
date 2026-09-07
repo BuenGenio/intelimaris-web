@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Reference sheet of the information cards used across the InteliMaris and WaterWayz apps.">
 <title>InteliMaris Card Deck</title>
 </head>
 <body>
@@ -4318,15 +4317,43 @@
     });
   }
 
+  /**
+   * Outside the claude.ai viewer there is no downloads capability and no
+   * sandbox blocking us either, so an ordinary blob download works and is
+   * what a designer expects. Returns false if the browser refuses.
+   */
+  function browserSave(filename, data) {
+    try {
+      var blob = data instanceof Blob ? data : new Blob([data], { type: 'application/octet-stream' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.rel = 'noopener';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () { a.remove(); URL.revokeObjectURL(url); }, 4000);
+      return true;
+    } catch (e) { return false; }
+  }
+
   function deliver(filename, data, fallback) {
     downloadsP.then(function (dl) {
-      if (!dl) return fallback(null);        /* no capability in this view at all */
+      if (!dl) {
+        /* Hosted normally: just download it. */
+        if (browserSave(filename, data)) { toast('Downloading ' + filename); return; }
+        return fallback(null);
+      }
       dl.save({ filename: filename, data: data }).then(
         function (r) { toast((r && r.status === 'delivered' ? 'Sent ' : 'Saved ') + filename); },
         function (err) {
           var code = (err && err.code) || 'unavailable';
           if (code === 'declined') return;                     /* they said no */
           if (code === 'rate_limited') { toast('A save prompt is already open'); return; }
+          /* The viewer refused the format. A plain download is worth one try
+             before falling back to showing source. */
+          if (browserSave(filename, data)) { toast('Downloading ' + filename); return; }
           /* Hand the reason on, so the fallback can say it out loud rather
              than looking like the export silently chose to show source. */
           fallback(code);
