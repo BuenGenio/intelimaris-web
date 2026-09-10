@@ -100,6 +100,33 @@
       </div>
     </section>
 
+    <section class="about-team">
+      <div class="container">
+        <div class="about-section-header">
+          <div class="section-label">{{ t('about.team.title') }}</div>
+          <h2>{{ t('about.team.title') }}</h2>
+          <p class="team-intro">{{ t('about.team.intro') }}</p>
+        </div>
+        <div class="team-grid">
+          <article v-for="member in team" :key="member.slug" class="team-card">
+            <img
+              v-if="member.photo"
+              :src="member.photo"
+              :alt="member.name"
+              class="team-photo"
+              width="480"
+              height="480"
+              loading="lazy"
+            />
+            <div v-else class="team-photo team-photo--initials" aria-hidden="true">{{ member.initials }}</div>
+            <h3>{{ member.name }}</h3>
+            <span class="team-role">{{ t(member.roleKey) }}</span>
+            <p>{{ t(member.bioKey) }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="about-contact">
       <div class="container">
         <div class="contact-panel">
@@ -125,6 +152,16 @@ import { useI18n } from '@/composables/useI18n'
 import MailLink from '@/components/MailLink.vue'
 
 const { t } = useI18n()
+
+const teamBase = `${import.meta.env.BASE_URL}assets/team/`
+
+/* Photos live in public/assets/team/<slug>.jpg; a member without one renders initials. */
+const team = [
+  { slug: 'ron-bishop', name: 'Ron Bishop', initials: 'RB', photo: null, roleKey: 'about.team.ron.role', bioKey: 'about.team.ron.bio' },
+  { slug: 'tristan-mullane', name: 'Tristan Mullane', initials: 'TM', photo: null, roleKey: 'about.team.tristan.role', bioKey: 'about.team.tristan.bio' },
+  { slug: 'sam-skolnik', name: 'Sam Skolnik', initials: 'SS', photo: null, roleKey: 'about.team.sam.role', bioKey: 'about.team.sam.bio' },
+  { slug: 'yevgen-trotsan', name: 'Yevgen Trotsan', initials: 'YT', photo: `${teamBase}yevgen-trotsan.jpg`, roleKey: 'about.team.yevgen.role', bioKey: 'about.team.yevgen.bio' },
+] as const
 </script>
 
 <style scoped>
@@ -137,6 +174,7 @@ const { t } = useI18n()
 .about-mission,
 .about-ecosystem,
 .about-values,
+.about-team,
 .about-contact {
   padding: 5rem 0;
   border-bottom: 1px solid var(--border-subtle);
@@ -279,6 +317,74 @@ const { t } = useI18n()
   color: #6FA0CC;
 }
 
+/* Team */
+.team-intro {
+  max-width: 60ch;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.team-card {
+  padding: 1.6rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--border-medium);
+  background: var(--glass-bg);
+}
+
+.team-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-bottom: 1.1rem;
+  border-radius: 1rem;
+  background: var(--surface-soft);
+}
+
+.team-photo--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border-medium);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.04em;
+  color: var(--brand-marine-blue);
+}
+
+.team-card h3 {
+  margin-bottom: 0.25rem;
+}
+
+.team-role {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand-marine-blue);
+}
+
+[data-theme="dark"] .team-photo--initials,
+[data-theme="dark"] .team-role {
+  color: #6FA0CC;
+}
+
+.team-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
 @media (max-width: 920px) {
   .about-hero-grid,
   .mission-grid,
@@ -288,7 +394,17 @@ const { t } = useI18n()
     grid-template-columns: 1fr;
   }
 
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .about-panel-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .team-grid {
     grid-template-columns: 1fr;
   }
 }
