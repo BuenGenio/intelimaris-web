@@ -78,6 +78,16 @@ const router = createRouter({
       component: () => import('../views/SoftwareView.vue'),
     },
     {
+      path: '/demo',
+      name: 'demo',
+      component: () => import('../views/DemoView.vue'),
+    },
+    {
+      path: '/demo/marina/bahia-mar',
+      name: 'demo-marina',
+      component: () => import('../views/DemoMarinaView.vue'),
+    },
+    {
       path: '/home-alt',
       name: 'home-alt',
       component: () => import('../views/HomeAltView.vue'),

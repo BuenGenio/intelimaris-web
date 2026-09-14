@@ -80,7 +80,14 @@ describe('router', () => {
     expect(route!.path).toBe('/software')
   })
 
-  it('has exactly 14 routes', () => {
-    expect(router.getRoutes().length).toBe(14)
+  it('defines the technology demo routes', () => {
+    const demo = router.getRoutes().find(r => r.name === 'demo')
+    const marina = router.getRoutes().find(r => r.name === 'demo-marina')
+    expect(demo?.path).toBe('/demo')
+    expect(marina?.path).toBe('/demo/marina/bahia-mar')
+  })
+
+  it('has exactly 16 routes', () => {
+    expect(router.getRoutes().length).toBe(16)
   })
 })
