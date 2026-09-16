@@ -1,0 +1,18 @@
+name = "intelimaris-crm-bridge"
+main = "src/worker.ts"
+compatibility_date = "2026-01-01"
+
+# Non-secret configuration. Secrets (CRM_SHARED_SECRET) are set with
+# `wrangler secret put` — see README.md — never committed here.
+[vars]
+ALLOWED_ORIGIN = "https://intelimaris.com"
+CRM_BASE_URL = "https://REPLACE-ME.example.com/api"
+CRM_WORKSPACE_ID = "ws_demo"
+
+# Optional: enables per-IP rate limiting. Create with:
+#   npx wrangler kv namespace create RATE_LIMIT
+# and paste the returned id below. Omit this whole block to run without
+# rate limiting (not recommended for a public endpoint).
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "REPLACE-ME"

@@ -48,6 +48,15 @@
             </div>
 
             <form v-else @submit.prevent="handleSubmit">
+              <input
+                v-model="form.website"
+                type="text"
+                name="website"
+                class="hp-field"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              >
               <input v-model.trim="form.name" type="text" :placeholder="t('closing.form.name')" autocomplete="name" required>
               <input v-model.trim="form.email" type="email" :placeholder="t('closing.form.email')" autocomplete="email" required>
               <input v-model.trim="form.company" type="text" :placeholder="t('closing.form.company')" autocomplete="organization">
@@ -93,6 +102,8 @@ const form = reactive({
   company: '',
   role: '',
   message: '',
+  /** Honeypot: hidden from real visitors via .hp-field; a filled value marks the submission as spam. */
+  website: '',
 })
 
 const submitState = ref<SubmitState>('idle')
@@ -113,6 +124,7 @@ const resetForm = () => {
   form.company = ''
   form.role = ''
   form.message = ''
+  form.website = ''
 }
 
 const handleSubmit = async () => {
@@ -219,6 +231,18 @@ const handleSubmit = async () => {
   font-size: 0.8rem;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+.hp-field {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .form-error {

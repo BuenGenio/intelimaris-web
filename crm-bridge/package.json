@@ -1,0 +1,16 @@
+{
+  "name": "intelimaris-crm-bridge",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Cloudflare Worker that turns intelimaris.com contact-form submissions into Threadwise CRM records.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260916.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.0.0"
+  }
+}
