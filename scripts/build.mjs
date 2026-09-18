@@ -12,7 +12,7 @@ try {
   const template = await readFile('dist/index.html', 'utf8')
   const manifest = JSON.parse(await readFile('dist/.vite/ssr-manifest.json', 'utf8'))
   const results = []
-  for (const path of [...INDEXABLE_PATHS, '/home-alt', '/404']) {
+  for (const path of [...INDEXABLE_PATHS, '/home-alt', '/playbook', '/404']) {
     const page = await render(path)
     const styles = [...new Set(page.modules.flatMap(id => manifest[id] || []))].filter(file => file.endsWith('.css') && !template.includes(`href="${file}"`))
     const css = styles.map(file => `<link rel="stylesheet" href="${escapeHtml(file)}">`).join('\n')
@@ -33,7 +33,7 @@ try {
   await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${INDEXABLE_PATHS.map(path => `  <url><loc>${escapeHtml(canonicalUrl(path))}</loc></url>`).join('\n')}\n</urlset>\n`)
   await writeFile('dist/robots.txt', `User-agent: *\nAllow: /\nDisallow: /design/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`)
   await writeFile('dist/prerender-manifest.json', JSON.stringify(results, null, 2))
-  console.log(`Pre-rendered ${INDEXABLE_PATHS.length} indexable pages, 2 preview/error pages and ${Object.keys(REDIRECTS).length} legacy redirects.`)
+  console.log(`Pre-rendered ${INDEXABLE_PATHS.length} indexable pages, 3 preview/error pages and ${Object.keys(REDIRECTS).length} legacy redirects.`)
 } finally {
   await rm(serverDir, { recursive: true, force: true })
 }

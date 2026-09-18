@@ -38,12 +38,14 @@
     >
       <div class="container-wide">
         <div class="playbook-frame">
-          <Suspense>
+          <!-- Journeys mount on the client only; the page itself pre-renders. -->
+          <Suspense v-if="mounted">
             <component :is="current.component" :key="current.id" />
             <template #fallback>
               <div class="playbook-loading t-caption">Loading the journey…</div>
             </template>
           </Suspense>
+          <div v-else class="playbook-loading t-caption">Loading the journey…</div>
         </div>
       </div>
     </section>
@@ -75,6 +77,7 @@ import { JOURNEYS } from '@/data/playbook/journeys'
 const route = useRoute()
 const router = useRouter()
 const tablist = ref<HTMLElement | null>(null)
+const mounted = ref(false)
 
 const fromHash = (hash: string) => JOURNEYS.find((j) => `#${j.id}` === hash)
 const current = computed(() => fromHash(route.hash) ?? JOURNEYS[0]!)
@@ -103,6 +106,7 @@ watch(current, async () => {
 })
 
 onMounted(() => {
+  mounted.value = true
   if (!fromHash(route.hash)) void select(JOURNEYS[0]!.id)
 })
 </script>
