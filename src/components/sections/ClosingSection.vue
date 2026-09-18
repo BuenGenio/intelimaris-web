@@ -1,14 +1,14 @@
 <template>
   <section class="closing-section" id="contact">
-    <div class="container">
+    <div class="editorial-shell">
       <div class="closing-content">
-        <div class="closing-text fade-in">
+        <div class="closing-text">
           <div class="section-label accent">{{ t('nav.contact') }}</div>
-          <h2 v-html="t('closing.title')"></h2>
+          <h2>Start with what you need to do.</h2>
           <p>
-            {{ t('closing.description') }}
+            Tell us about your vessel, team, dock or business. We’ll help you understand the relevant workflow, what is available today and what your setup needs.
           </p>
-          <p class="closing-contact-lead">{{ t('closing.contactLead') }}</p>
+          <p class="closing-contact-lead">Ask for a walkthrough, discuss an installation or get help finding your starting point.</p>
 
           <div class="closing-contact-links">
             <a href="https://www.intelimaris.com" target="_blank" rel="noopener noreferrer">{{ t('closing.websiteLabel') }}: intelimaris.com</a>
@@ -20,24 +20,24 @@
           <div class="closing-trust-list">
             <div class="trust-item">
               <span class="trust-label">Response</span>
-              <strong>Commercial follow-up within 1 business day</strong>
+              <strong>Talk directly with the team</strong>
             </div>
             <div class="trust-item">
               <span class="trust-label">Deliverables</span>
-              <strong>Demo path, hardware fit, and deployment guidance</strong>
+              <strong>A walkthrough matched to your role and requirements</strong>
             </div>
             <div class="trust-item">
               <span class="trust-label">Deployment</span>
-              <strong>Single vessel, marina, and fleet conversations supported</strong>
+              <strong>Vessels, marinas, private docks, businesses and service teams</strong>
             </div>
           </div>
 
           <p class="closing-disclaimer">{{ t('closing.disclaimer') }}</p>
         </div>
 
-        <div class="closing-form fade-in">
+        <div class="closing-form">
           <div class="form-card">
-            <h3>{{ t('closing.form.title') }}</h3>
+            <h3>Tell us about your setup</h3>
 
             <div v-if="submitState === 'success'" class="form-success" role="status" aria-live="polite">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -57,19 +57,19 @@
                 autocomplete="off"
                 aria-hidden="true"
               >
-              <input v-model.trim="form.name" type="text" :placeholder="t('closing.form.name')" autocomplete="name" required>
-              <input v-model.trim="form.email" type="email" :placeholder="t('closing.form.email')" autocomplete="email" required>
-              <input v-model.trim="form.company" type="text" :placeholder="t('closing.form.company')" autocomplete="organization">
-              <select v-model="form.role" required>
+              <label class="contact-field"><span>{{ t('closing.form.name') }}</span><input v-model.trim="form.name" type="text" :aria-label="t('closing.form.name')" :placeholder="t('closing.form.name')" autocomplete="name" required></label>
+              <label class="contact-field"><span>{{ t('closing.form.email') }}</span><input v-model.trim="form.email" type="email" :aria-label="t('closing.form.email')" :placeholder="t('closing.form.email')" autocomplete="email" required></label>
+              <label class="contact-field"><span>{{ t('closing.form.company') }}</span><input v-model.trim="form.company" type="text" :aria-label="t('closing.form.company')" :placeholder="t('closing.form.company')" autocomplete="organization"></label>
+              <label class="contact-field"><span>Your role</span>
+              <select v-model="form.role" aria-label="Your role" required>
                 <option value="">{{ t('closing.form.role') }}</option>
-                <option value="owner">{{ t('closing.form.role.owner') }}</option>
-                <option value="marina">{{ t('closing.form.role.marina') }}</option>
-                <option value="fleet">{{ t('closing.form.role.fleet') }}</option>
+                <option v-for="person in AUDIENCES" :key="person.id" :value="person.id">{{ person.label }}</option>
                 <option value="insurance">{{ t('closing.form.role.insurance') }}</option>
                 <option value="investor">{{ t('closing.form.role.investor') }}</option>
                 <option value="other">{{ t('closing.form.role.other') }}</option>
               </select>
-              <textarea v-model.trim="form.message" :placeholder="t('closing.form.message')" rows="4" required></textarea>
+              </label>
+              <label class="contact-field"><span>What would you like to do?</span><textarea v-model.trim="form.message" :aria-label="t('closing.form.message')" :placeholder="t('closing.form.message')" rows="4" required></textarea></label>
 
               <p v-if="submitError" class="form-error" role="alert">{{ submitError }}</p>
 
@@ -88,20 +88,22 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
+import { AUDIENCES } from '@/data/audiences'
 import { useI18n } from '@/composables/useI18n'
 import MailLink from '@/components/MailLink.vue'
 import { buildMailto } from '@/utils/email'
 
 type SubmitState = 'idle' | 'submitting' | 'success'
 
+const props = withDefaults(defineProps<{ initialRole?: string; initialMessage?: string }>(), { initialRole: '', initialMessage: '' })
 const { t } = useI18n()
 
 const form = reactive({
   name: '',
   email: '',
   company: '',
-  role: '',
-  message: '',
+  role: props.initialRole,
+  message: props.initialMessage,
   /** Honeypot: hidden from real visitors via .hp-field; a filled value marks the submission as spam. */
   website: '',
 })
@@ -115,7 +117,7 @@ const endpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT?.trim()
 const formNote = computed(() =>
   endpoint
     ? t('closing.form.note')
-    : 'If no web form endpoint is configured, submission opens a prefilled email to the InteliMaris team.'
+    : 'This form opens a draft in your email app. Review it there before sending.'
 )
 
 const resetForm = () => {

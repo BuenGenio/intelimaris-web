@@ -1,420 +1,63 @@
 <template>
-  <nav class="nav-container" aria-label="Main navigation">
-    <div class="nav-content">
-      <RouterLink to="/" class="nav-brand" @click="closeDrawer">
-        <Wordmark :size="28" tm animate />
+  <header class="site-header" lang="en" @keydown.esc="closeMenu(true)">
+    <div class="site-nav editorial-shell">
+      <RouterLink to="/" class="site-brand" aria-label="InteliMaris home">
+        <Wordmark :size="27" />
       </RouterLink>
-
-      <div class="nav-desktop-only nav-primary-bar">
-        <RouterLink
-          v-for="item in primaryLinks"
-          :key="item.to.name ?? String(item.to.path)"
-          :to="item.to"
-          class="nav-link"
-        >
-          {{ t(item.labelKey) }}
+      <nav class="site-desktop-nav" aria-label="Main navigation">
+        <RouterLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
+      </nav>
+      <div class="site-utilities">
+        <button type="button" class="site-theme" :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'" @click="setTheme(theme === 'dark' ? 'light' : 'dark')">{{ theme === 'dark' ? 'Light' : 'Dark' }}</button>
+        <label class="site-language">
+          <span class="sr-only">Language</span>
+          <select aria-label="Language" :value="currentLanguage" @change="changeLanguage">
+            <option v-for="lang in languages" :value="lang" :key="lang">{{ languageData[lang].code }}</option>
+          </select>
+        </label>
+        <RouterLink :to="contactLink(audience)" class="site-contact">Talk to us <span aria-hidden="true">↗</span>
         </RouterLink>
-
-        <div
-          ref="productsMenuEl"
-          class="nav-products-menu"
-          @mouseenter="openProducts"
-          @mouseleave="closeProductsDeferred"
-          @focusin="openProducts"
-          @focusout="closeProductsOnBlur"
-        >
-          <RouterLink
-            ref="productsTriggerEl"
-            to="/products"
-            class="nav-link nav-products-trigger"
-            :class="{ open: isProductsOpen }"
-            :aria-expanded="isProductsOpen"
-            aria-haspopup="true"
-            @click="closeProductsImmediate"
-          >
-            {{ t('nav.products') }}
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </RouterLink>
-        </div>
-
-        <RouterLink to="/about" class="nav-link">{{ t('nav.about') }}</RouterLink>
-      </div>
-
-      <div class="nav-actions">
-        <button
-          type="button"
-          class="nav-drawer-toggle nav-mobile-only"
-          :aria-label="t('nav.openMenu')"
-          :aria-expanded="isDrawerOpen"
-          aria-controls="nav-mobile-drawer"
-          @click="openDrawer"
-        >
-          <span class="nav-drawer-toggle-bar" aria-hidden="true"/>
-          <span class="nav-drawer-toggle-bar" aria-hidden="true"/>
-          <span class="nav-drawer-toggle-bar" aria-hidden="true"/>
-        </button>
-
-        <button
-          type="button"
-          class="theme-toggle nav-desktop-inline"
-          :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-          @click="setTheme(theme === 'dark' ? 'light' : 'dark')"
-        >
-          <svg v-if="theme === 'dark'" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-            <circle cx="12" cy="12" r="5" stroke-width="2"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-
-        <div class="lang-selector nav-desktop-inline">
-          <button
-            class="lang-current"
-            :class="{ open: isLangOpen }"
-            type="button"
-            aria-label="Select language"
-            :aria-expanded="isLangOpen"
-            aria-haspopup="true"
-            @click="toggleLang"
-          >
-            <img :src="languageData[currentLanguage].flag" :alt="languageData[currentLanguage].code" class="lang-flag">
-            <span class="lang-code">{{ languageData[currentLanguage].code }}</span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="opacity: 0.6;">
-              <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <div class="lang-dropdown" :class="{ open: isLangOpen }">
-            <button
-              v-for="lang in languages"
-              :key="lang"
-              type="button"
-              class="lang-option"
-              :class="{ active: currentLanguage === lang }"
-              @click="selectLanguage(lang)"
-            >
-              <img :src="languageData[lang].flag" :alt="languageData[lang].code">
-              <span class="lang-option-text">{{ languageData[lang].name }}</span>
-            </button>
-          </div>
-        </div>
-
-        <RouterLink to="/contact" class="nav-cta nav-desktop-inline">{{ t('nav.contact') }}</RouterLink>
+        <button ref="menuButton" type="button" class="site-menu-button" :aria-expanded="menuOpen" aria-controls="site-mobile-nav" @click="menuOpen = !menuOpen">{{ menuOpen ? 'Close' : 'Menu' }}</button>
       </div>
     </div>
-
-    <Teleport to="body">
-      <Transition name="nav-drawer-fade">
-        <div v-if="isDrawerOpen" class="nav-drawer-portal">
-          <div class="nav-drawer-backdrop" @click="closeDrawer"/>
-          <aside
-            id="nav-mobile-drawer"
-            class="nav-drawer-panel"
-            role="dialog"
-            aria-modal="true"
-            :aria-label="t('nav.menuTitle')"
-          >
-            <div class="nav-drawer-header">
-              <span class="nav-drawer-title">{{ t('nav.menuTitle') }}</span>
-              <button type="button" class="nav-drawer-close" :aria-label="t('nav.closeMenu')" @click="closeDrawer">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                  <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </button>
-            </div>
-
-            <div class="nav-drawer-scroll">
-              <RouterLink to="/" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.home') }}</RouterLink>
-
-              <p class="nav-drawer-group-label">{{ t('nav.groupSections') }}</p>
-              <RouterLink
-                v-for="item in primaryLinks"
-                :key="'m-' + (item.to.name ?? item.to.path)"
-                :to="item.to"
-                class="nav-drawer-link"
-                @click="closeDrawer"
-              >
-                {{ t(item.labelKey) }}
-              </RouterLink>
-
-              <p class="nav-drawer-group-label">{{ t('nav.groupPages') }}</p>
-              <RouterLink to="/products" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.products') }}</RouterLink>
-              <RouterLink :to="{ name: 'product-categories' }" class="nav-drawer-link nav-drawer-sublink" @click="closeDrawer">
-                {{ t('nav.productsAllCategories') }}
-              </RouterLink>
-              <RouterLink
-                v-for="cat in categories"
-                :key="'drawer-cat-' + cat"
-                :to="{ name: 'product-category', params: { category: cat } }"
-                class="nav-drawer-link nav-drawer-sublink"
-                @click="closeDrawer"
-              >
-                {{ categoryLabel(cat) }}
-              </RouterLink>
-              <RouterLink to="/about" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.about') }}</RouterLink>
-              <RouterLink to="/contact" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.contact') }}</RouterLink>
-
-              <div class="nav-drawer-divider"/>
-
-              <p class="nav-drawer-group-label">{{ t('nav.appearance') }}</p>
-              <div class="nav-drawer-theme">
-                <button
-                  type="button"
-                  class="theme-option"
-                  :class="{ active: theme === 'dark' }"
-                  @click="setTheme('dark')"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>{{ t('nav.themeDark') }}</span>
-                </button>
-                <button
-                  type="button"
-                  class="theme-option"
-                  :class="{ active: theme === 'light' }"
-                  @click="setTheme('light')"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <circle cx="12" cy="12" r="5" stroke-width="2"/>
-                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                  <span>{{ t('nav.themeLight') }}</span>
-                </button>
-              </div>
-
-              <p class="nav-drawer-group-label">{{ t('nav.language') }}</p>
-              <div class="nav-drawer-lang">
-                <button
-                  v-for="lang in languages"
-                  :key="'drawer-lang-' + lang"
-                  type="button"
-                  class="nav-drawer-lang-btn"
-                  :class="{ active: currentLanguage === lang }"
-                  @click="selectLanguage(lang)"
-                >
-                  <img :src="languageData[lang].flag" :alt="languageData[lang].code">
-                  <span>{{ languageData[lang].name }}</span>
-                </button>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </Transition>
-    </Teleport>
-
-    <Teleport to="body">
-      <div
-        class="nav-products-dropdown"
-        :class="{ open: isProductsOpen }"
-        role="menu"
-        :style="dropdownStyle"
-        @mouseenter="openProducts"
-        @mouseleave="closeProductsDeferred"
-      >
-        <RouterLink
-          :to="{ name: 'product-categories' }"
-          class="nav-products-item nav-products-item--all"
-          role="menuitem"
-          @click="closeProductsImmediate"
-        >
-          <span class="nav-products-label">{{ t('nav.productsAllCategories') }}</span>
-          <span class="nav-products-hint">{{ t('nav.productsAllHint') }}</span>
-        </RouterLink>
-        <div class="nav-products-divider"/>
-        <RouterLink
-          v-for="cat in categories"
-          :key="cat"
-          :to="{ name: 'product-category', params: { category: cat } }"
-          class="nav-products-item"
-          role="menuitem"
-          @click="closeProductsImmediate"
-        >
-          <span class="nav-products-label">{{ categoryLabel(cat) }}</span>
-          <span class="nav-products-hint">{{ categoryCount(cat) }}</span>
+    <nav v-if="menuOpen" id="site-mobile-nav" class="site-mobile-nav editorial-shell" aria-label="Mobile navigation">
+      <RouterLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
+      <RouterLink to="/waterwayz">WaterWAYZ</RouterLink>
+      <RouterLink to="/marinas">Marina / PMS</RouterLink>
+      <RouterLink :to="contactLink(audience)">Talk to us</RouterLink>
+      <button type="button" class="mobile-theme" @click="setTheme(theme === 'dark' ? 'light' : 'dark')">{{ theme === 'dark' ? 'Use light appearance' : 'Use dark appearance' }}</button>
+    </nav>
+    <div class="audience-context">
+      <div class="editorial-shell">
+        <span v-if="audience">Your perspective <RouterLink :to="audienceLink(audience.id)">{{ audience.short }}</RouterLink>
+        </span>
+        <span v-else>WaterWAYZ <span aria-hidden="true">/</span> InteliMARIS <span aria-hidden="true">/</span> Marina operations</span>
+        <button v-if="audience" type="button" @click="reset">Change role <span aria-hidden="true">↗</span>
+        </button>
+        <RouterLink v-else to="/#choose">Find your role <span aria-hidden="true">↗</span>
         </RouterLink>
       </div>
-    </Teleport>
-  </nav>
+    </div>
+  </header>
 </template>
-
 <script setup lang="ts">
-import { computed, nextTick, ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import type { ComponentPublicInstance } from 'vue'
 import Wordmark from '@/components/v2/Wordmark.vue'
 import { useTheme } from '@/composables/useTheme'
 import { useI18n } from '@/composables/useI18n'
+import { useAudience } from '@/composables/useAudience'
+import { audienceLink, contactLink } from '@/data/audiences'
 import type { Language } from '@/i18n/translations'
-import {
-  CATEGORY_ORDER,
-  productsByCategory,
-  type ProductCategory,
-} from '@/data/productCatalog'
-
-interface PrimaryLink {
-  to: { name?: string; path?: string; hash?: string }
-  labelKey: 'nav.platform' | 'nav.marina' | 'nav.capabilities' | 'nav.waterwayz'
-}
-
-const primaryLinks: PrimaryLink[] = [
-  { to: { name: 'home', hash: '#platform' }, labelKey: 'nav.platform' },
-  { to: { name: 'marinas' }, labelKey: 'nav.marina' },
-  { to: { name: 'capabilities' }, labelKey: 'nav.capabilities' },
-  { to: { name: 'waterwayz' }, labelKey: 'nav.waterwayz' },
-]
-
-const languages: Language[] = ['en', 'es', 'el', 'uk']
-
+const links = [{ to: '/#choose', label: 'For you' }, { to: '/capabilities', label: 'The platform' }, { to: '/products', label: 'Hardware' }, { to: '/about', label: 'Our story' }]
 const { theme, setTheme } = useTheme()
-const { currentLanguage, t, setLanguage, languageData } = useI18n()
+const { currentLanguage, setLanguage, languageData } = useI18n()
+const { audience, reset } = useAudience()
+const languages: Language[] = ['en', 'es', 'el', 'uk']
 const route = useRoute()
-
-const isLangOpen = ref(false)
-const isDrawerOpen = ref(false)
-const isProductsOpen = ref(false)
-let productsCloseTimer: ReturnType<typeof setTimeout> | null = null
-
-const productsTriggerEl = ref<ComponentPublicInstance | null>(null)
-const productsMenuEl = ref<HTMLElement | null>(null)
-const dropdownAnchor = ref<{ top: number; left: number } | null>(null)
-
-const dropdownStyle = computed(() => {
-  if (!dropdownAnchor.value) return { visibility: 'hidden' as const }
-  return {
-    top: `${dropdownAnchor.value.top}px`,
-    left: `${dropdownAnchor.value.left}px`,
-  }
-})
-
-const updateDropdownAnchor = () => {
-  const inst = productsTriggerEl.value
-  const el = (inst?.$el ?? inst) as HTMLElement | null
-  if (!el || typeof el.getBoundingClientRect !== 'function') return
-  const rect = el.getBoundingClientRect()
-  dropdownAnchor.value = {
-    top: rect.bottom + 12,
-    left: rect.left + rect.width / 2,
-  }
-}
-
-const categories: ProductCategory[] = CATEGORY_ORDER.filter(
-  (id) => productsByCategory(id).length > 0,
-)
-
-const categoryLabel = (cat: ProductCategory): string => {
-  const key = `products.category.${cat}`
-  const label = t(key)
-  return label === key ? cat : label
-}
-
-const categoryCount = (cat: ProductCategory): string => {
-  const n = productsByCategory(cat).length
-  const labelKey = n === 1 ? 'categories.productSingular' : 'categories.productPlural'
-  const word = t(labelKey)
-  return `${n} ${word === labelKey ? '' : word}`.trim()
-}
-
-const clearProductsTimer = () => {
-  if (productsCloseTimer) {
-    clearTimeout(productsCloseTimer)
-    productsCloseTimer = null
-  }
-}
-
-const openProducts = () => {
-  clearProductsTimer()
-  updateDropdownAnchor()
-  isProductsOpen.value = true
-  void nextTick(updateDropdownAnchor)
-}
-
-const closeProductsImmediate = () => {
-  clearProductsTimer()
-  isProductsOpen.value = false
-}
-
-const closeProductsDeferred = () => {
-  clearProductsTimer()
-  productsCloseTimer = setTimeout(() => {
-    isProductsOpen.value = false
-  }, 120)
-}
-
-const closeProductsOnBlur = (event: FocusEvent) => {
-  const next = event.relatedTarget as Node | null
-  const current = event.currentTarget as HTMLElement | null
-  if (!next || !current?.contains(next)) {
-    closeProductsImmediate()
-  }
-}
-
-const openDrawer = () => {
-  isDrawerOpen.value = true
-  isLangOpen.value = false
-}
-
-const closeDrawer = () => {
-  isDrawerOpen.value = false
-}
-
-const toggleLang = () => {
-  isLangOpen.value = !isLangOpen.value
-}
-
-const selectLanguage = (lang: Language) => {
-  setLanguage(lang)
-  isLangOpen.value = false
-}
-
-const handleClickOutside = (e: MouseEvent) => {
-  const target = e.target as HTMLElement
-  if (!target.closest('.lang-selector')) {
-    isLangOpen.value = false
-  }
-  if (!target.closest('.nav-products-menu') && !target.closest('.nav-products-dropdown')) {
-    isProductsOpen.value = false
-  }
-}
-
-const handleEscape = (e: KeyboardEvent) => {
-  if (e.key !== 'Escape') return
-  isLangOpen.value = false
-  isDrawerOpen.value = false
-  isProductsOpen.value = false
-}
-
-watch(isDrawerOpen, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
-})
-
-watch(
-  () => route.fullPath,
-  () => {
-    isDrawerOpen.value = false
-    closeProductsImmediate()
-  }
-)
-
-const handleViewportChange = () => {
-  if (isProductsOpen.value) updateDropdownAnchor()
-}
-
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-  document.addEventListener('keydown', handleEscape)
-  window.addEventListener('resize', handleViewportChange)
-  window.addEventListener('scroll', handleViewportChange, true)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-  document.removeEventListener('keydown', handleEscape)
-  window.removeEventListener('resize', handleViewportChange)
-  window.removeEventListener('scroll', handleViewportChange, true)
-  document.body.style.overflow = ''
-})
+const menuOpen = ref(false)
+const menuButton = ref<HTMLButtonElement | null>(null)
+const closeMenu = async (restoreFocus = false) => { menuOpen.value = false; if (restoreFocus) { await nextTick(); menuButton.value?.focus() } }
+function changeLanguage(event: Event) { setLanguage((event.target as HTMLSelectElement).value as Language) }
+watch(() => route.fullPath, () => closeMenu())
 </script>

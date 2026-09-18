@@ -14,9 +14,11 @@ import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import FooterSection from './components/FooterSection.vue'
+import { useAudienceRouteSync } from './composables/useAudience'
 import { useTheme } from './composables/useTheme'
 import { useI18n } from './composables/useI18n'
 
+useAudienceRouteSync()
 const { initTheme } = useTheme()
 const { initLanguage } = useI18n()
 
@@ -32,6 +34,7 @@ onMounted(() => {
 <style>
 @import './assets/main.css';
 @import './assets/v2.css';
+@import './assets/audience.css';
 
 .skip-link {
   position: absolute;

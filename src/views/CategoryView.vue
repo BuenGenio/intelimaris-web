@@ -3,13 +3,7 @@
     <template v-if="meta">
       <section class="cv-hero">
         <div class="container">
-          <nav class="cv-breadcrumb" aria-label="Breadcrumb">
-            <RouterLink to="/products">{{ t('nav.products') }}</RouterLink>
-            <span aria-hidden="true">›</span>
-            <RouterLink :to="{ name: 'product-categories' }">{{ t('categories.title') }}</RouterLink>
-            <span aria-hidden="true">›</span>
-            <span class="cv-breadcrumb-current">{{ categoryLabel(meta.id) }}</span>
-          </nav>
+          <SiteBreadcrumbs :items="[{ label: t('nav.products'), to: '/products' }, { label: t('categories.title'), to: '/products/categories' }, { label: categoryLabel(meta.id) }]" />
 
           <div class="cv-hero-grid">
             <div>
@@ -77,6 +71,8 @@
 </template>
 
 <script setup lang="ts">
+import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
+
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
@@ -143,34 +139,6 @@ function categoryLabel(id: ProductCategory): string {
 .cv-missing {
   padding: 5rem 0;
   text-align: center;
-}
-
-.cv-breadcrumb {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  align-items: center;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.cv-breadcrumb a {
-  color: var(--brand-marine-blue);
-  text-decoration: none;
-}
-
-[data-theme="dark"] .cv-breadcrumb a {
-  color: #6FA0CC;
-}
-
-.cv-breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.cv-breadcrumb-current {
-  color: var(--text-primary);
-  font-weight: 600;
 }
 
 .cv-hero-grid {

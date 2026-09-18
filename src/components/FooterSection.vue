@@ -21,7 +21,9 @@
           <h4>{{ t('footer.platform') }}</h4>
           <RouterLink :to="{ name: 'waterwayz' }">{{ t('nav.waterwayz') }}</RouterLink>
           <RouterLink :to="{ name: 'marinas' }">{{ t('nav.marina') }}</RouterLink>
-          <RouterLink :to="{ name: 'home', hash: '#platform' }">{{ t('nav.platform') }}</RouterLink>
+          <RouterLink to="/capabilities/monitoring">{{ t('nav.platform') }}</RouterLink>
+          <RouterLink to="/capabilities">Explore all capabilities</RouterLink>
+          <RouterLink to="/#choose">Find your role</RouterLink>
           <RouterLink to="/products">{{ t('footer.platform.products') }}</RouterLink>
           <RouterLink :to="{ name: 'software' }">{{ t('footer.platform.software') }}</RouterLink>
           <RouterLink :to="{ name: 'demo' }">{{ t('footer.platform.demo') }}</RouterLink>
@@ -36,6 +38,7 @@
       </nav>
     </div>
 
+    <nav class="container-wide footer-audiences" aria-label="Audience guides" lang="en"><RouterLink v-for="person in AUDIENCES" :key="person.id" :to="audienceLink(person.id)">{{ person.label }}</RouterLink></nav>
     <div class="container-wide footer-bottom">
       <hr class="line" />
       <p class="t-caption">{{ t('footer.copyright') }}</p>
@@ -45,6 +48,7 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { AUDIENCES, audienceLink } from '@/data/audiences'
 import Wordmark from '@/components/v2/Wordmark.vue'
 import MailLink from '@/components/MailLink.vue'
 import { useI18n } from '@/composables/useI18n'
@@ -53,6 +57,9 @@ const { t } = useI18n()
 </script>
 
 <style scoped>
+.footer-audiences { display:flex; flex-wrap:wrap; gap:16px 28px; margin-top:36px; padding-top:26px; border-top:1px solid var(--border-subtle); }
+.footer-audiences a { color:var(--text-secondary); font-size:.8rem; text-decoration:none; }
+.footer-audiences a:hover { color:#fff; }
 .footer {
   padding: var(--space-16) 0 var(--space-8);
 }

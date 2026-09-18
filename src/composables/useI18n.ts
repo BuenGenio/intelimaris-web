@@ -11,11 +11,12 @@ export function useI18n() {
   const setLanguage = (lang: Language) => {
     currentLanguage.value = lang
     document.documentElement.setAttribute('lang', lang)
-    localStorage.setItem('intelimaris-lang', lang)
+    try { localStorage.setItem('intelimaris-lang', lang) } catch { /* Storage is optional. */ }
   }
 
   const initLanguage = () => {
-    const savedLang = localStorage.getItem('intelimaris-lang') as Language | null
+    let savedLang: Language | null = null
+    try { savedLang = localStorage.getItem('intelimaris-lang') as Language | null } catch { /* Storage is optional. */ }
     const browserLang = navigator.language.split('-')[0] as Language
     const supportedLangs: Language[] = ['en', 'es', 'el', 'uk']
     

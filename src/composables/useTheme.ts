@@ -10,12 +10,13 @@ export function useTheme() {
   const setTheme = (newTheme: Theme) => {
     theme.value = newTheme
     document.body.setAttribute('data-theme', newTheme)
-    localStorage.setItem('intelimaris-theme', newTheme)
+    try { localStorage.setItem('intelimaris-theme', newTheme) } catch { /* Storage is optional. */ }
   }
 
   const initTheme = () => {
-    const savedTheme = localStorage.getItem('intelimaris-theme') as Theme | null
-    setTheme(savedTheme ?? 'light')
+    let savedTheme: string | null = null
+    try { savedTheme = localStorage.getItem('intelimaris-theme') } catch { /* Storage is optional. */ }
+    setTheme(savedTheme === 'dark' ? 'dark' : 'light')
   }
 
   return {

@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import router from './index'
+import { AUDIENCES, audienceLink } from '../data/audiences'
+import { CAPABILITIES, capabilityLink } from '../data/capabilities'
 
 describe('router', () => {
   it('defines the home route', () => {
@@ -87,7 +89,19 @@ describe('router', () => {
     expect(marina?.path).toBe('/demo/marina/bahia-mar')
   })
 
-  it('has exactly 16 routes', () => {
-    expect(router.getRoutes().length).toBe(16)
+  it('resolves every audience guide and capability without falling through to 404', () => {
+    for (const path of [...AUDIENCES.map(a => audienceLink(a.id)), ...CAPABILITIES.map(c => capabilityLink(c.id))]) {
+      expect(router.resolve(path).name, path).not.toBe('not-found')
+      expect(router.resolve(path).matched.length, path).toBeGreaterThan(0)
+    }
+  })
+
+  it('gives unknown audience and capability URLs a recovery page', () => {
+    expect(router.resolve('/for/unknown').name).toBe('not-found')
+    expect(router.resolve('/capabilities/unknown').name).toBe('not-found')
+  })
+
+  it('keeps the marina capability URL as an alias to the existing landing page', () => {
+    expect(router.getRoutes().find(r => r.path === '/capabilities/marina-pms')?.redirect).toBe('/marinas')
   })
 })

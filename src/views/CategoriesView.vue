@@ -2,6 +2,7 @@
   <main class="categories-page">
     <section class="cats-hero">
       <div class="container">
+      <SiteBreadcrumbs :items="[{ label: t('nav.products'), to: '/products' }, { label: t('categories.title') }]" />
         <div class="section-label">{{ t('categories.label') }}</div>
         <h1>{{ t('categories.title') }}</h1>
         <p class="cats-lead">{{ t('categories.lead') }}</p>
@@ -45,6 +46,8 @@
 </template>
 
 <script setup lang="ts">
+import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
+
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'

@@ -3,15 +3,7 @@
     <template v-if="entry">
       <section class="pd-hero">
         <div class="container">
-          <nav class="pd-breadcrumb" aria-label="Breadcrumb">
-            <RouterLink to="/products">{{ t('nav.products') }}</RouterLink>
-            <span aria-hidden="true">›</span>
-            <RouterLink :to="{ name: 'product-category', params: { category: entry.category } }">
-              {{ categoryLabel(entry.category) }}
-            </RouterLink>
-            <span aria-hidden="true">›</span>
-            <span class="pd-breadcrumb-current">{{ entry.model }}</span>
-          </nav>
+          <SiteBreadcrumbs :items="[{ label: t('nav.products'), to: '/products' }, { label: t('categories.title'), to: '/products/categories' }, { label: categoryLabel(entry.category), to: { name: 'product-category', params: { category: entry.category } } }, { label: entry.model }]" />
 
           <header class="pd-header">
             <div>
@@ -180,6 +172,8 @@
 </template>
 
 <script setup lang="ts">
+import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
+
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
@@ -249,34 +243,6 @@ function categoryLabel(cat: CatalogEntry['category']): string {
 .pd-missing {
   padding: 5rem 0;
   text-align: center;
-}
-
-.pd-breadcrumb {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  align-items: center;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.pd-breadcrumb a {
-  color: var(--brand-marine-blue);
-  text-decoration: none;
-}
-
-[data-theme="dark"] .pd-breadcrumb a {
-  color: #6FA0CC;
-}
-
-.pd-breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.pd-breadcrumb-current {
-  color: var(--text-primary);
-  font-weight: 600;
 }
 
 .pd-header {

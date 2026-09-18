@@ -2,6 +2,7 @@
   <main class="bilge-page">
     <section class="bilge-hero">
       <div class="container">
+      <SiteBreadcrumbs :items="[{ label: t('nav.products'), to: '/products' }, { label: 'InteliBilge' }]" />
         <div class="section-label">{{ t('bilge.label') }}</div>
         <h1>{{ intelibilgeHero.title }}</h1>
         <p class="bilge-overview">
@@ -162,6 +163,8 @@
 </template>
 
 <script setup lang="ts">
+import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
+
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
 import { useFadeIn } from '@/composables/useFadeIn'

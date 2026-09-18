@@ -2,13 +2,7 @@
   <main class="dm-page">
     <section class="page-hero">
       <div class="container">
-        <nav class="page-breadcrumb" aria-label="Breadcrumb">
-          <RouterLink to="/">{{ t('nav.home') }}</RouterLink>
-          <span aria-hidden="true">›</span>
-          <RouterLink :to="{ name: 'demo' }">{{ t('demo.label') }}</RouterLink>
-          <span aria-hidden="true">›</span>
-          <span class="page-breadcrumb-current">{{ marina.name }}</span>
-        </nav>
+        <SiteBreadcrumbs :items="[{ label: t('demo.label'), to: '/demo' }, { label: marina.name }]" />
         <div class="dm-title-row">
           <div>
             <div class="section-label">{{ t('demo.marina.label') }}</div>
@@ -93,6 +87,8 @@
 </template>
 
 <script setup lang="ts">
+import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
+
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
@@ -151,11 +147,6 @@ function select(a: Aspect) {
 <style scoped>
 .dm-page { padding-top: 5rem; min-height: 60vh; }
 .page-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border-subtle); }
-.page-breadcrumb { display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
-.page-breadcrumb a { color: var(--brand-marine-blue); text-decoration: none; }
-[data-theme="dark"] .page-breadcrumb a { color: #6FA0CC; }
-.page-breadcrumb a:hover { text-decoration: underline; }
-.page-breadcrumb-current { color: var(--text-primary); font-weight: 600; }
 .dm-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
 .dm-title-row h1 { margin: 0.5rem 0 0.5rem; }
 .dm-address { color: var(--text-secondary); }

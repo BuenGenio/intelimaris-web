@@ -2,6 +2,7 @@
   <main class="products-page">
     <section class="products-hero">
       <div class="container">
+      <SiteBreadcrumbs :items="[{ label: t('nav.products') }]" />
         <div class="products-hero-grid">
           <div>
             <div class="section-label">{{ t('products.label') }}</div>
@@ -208,6 +209,8 @@
 </template>
 
 <script setup lang="ts">
+import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
+
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
