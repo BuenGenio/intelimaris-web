@@ -66,10 +66,12 @@ export function getSeo(route: RouteLocationNormalizedLoaded | RouteLocationResol
   const path = product ? `/products/${product.id}` : route.path
   const canonical = canonicalUrl(path)
   const imageKey = name.startsWith('product') ? 'hardware' : route.meta.audience ? 'audiences' : name === 'marinas' ? 'marinas' : name === 'waterwayz' ? 'waterwayz' : name.startsWith('demo') ? 'geospatial' : name === 'about' || name === 'contact' ? 'company' : name === 'home' ? 'home' : 'platform'
-  const image = `${SITE_URL}/assets/social/${imageKey}.png`
-  const imageAlt = `InteliMARIS — ${ { home: 'Your day on the water. Connected.', hardware: 'Connected marine hardware.', audiences: 'Find your view on the water.', marinas: 'From approach to alongside.', waterwayz: 'Your whole boating experience.', geospatial: 'A closer look at the waterfront.', company: 'Technology for life on the water.', platform: 'One connected marine platform.' }[imageKey] }`
+  const image = `${SITE_URL}/assets/social/${name === 'home' ? 'home-lidar' : imageKey}.png`
+  const imageWidth = name === 'home' ? 1730 : 1200
+  const imageHeight = name === 'home' ? 1035 : 630
+  const imageAlt = name === 'home' ? 'InteliMARIS marina LiDAR view showing berths, vessels and waterfront structures in a coloured 3D point cloud.' : `InteliMARIS — ${ { home: 'Your day on the water. Connected.', hardware: 'Connected marine hardware.', audiences: 'Find your view on the water.', marinas: 'From approach to alongside.', waterwayz: 'Your whole boating experience.', geospatial: 'A closer look at the waterfront.', company: 'Technology for life on the water.', platform: 'One connected marine platform.' }[imageKey] }`
   const indexable = !missing && name !== 'home-alt'
-  return { title: `${title} | InteliMARIS`, description: excerpt(description), canonical, image, imageAlt, indexable, product }
+  return { title: `${title} | InteliMARIS`, description: excerpt(description), canonical, image, imageAlt, imageWidth, imageHeight, indexable, product }
 }
 export function structuredData(route: RouteLocationNormalizedLoaded | RouteLocationResolved) {
   const seo = getSeo(route)
@@ -79,7 +81,7 @@ export function structuredData(route: RouteLocationNormalizedLoaded | RouteLocat
     { '@type': 'Organization', '@id': orgId, name: 'InteliMARIS', legalName: 'InteliMarine LLC', url: `${SITE_URL}/`, logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/wordmark.png`, width: 705, height: 182 }, email: 'info@intelimarine.com' },
     { '@type': 'WebSite', '@id': websiteId, name: 'InteliMARIS', alternateName: 'InteliMARIS by InteliMarine', url: `${SITE_URL}/`, inLanguage: 'en', publisher: { '@id': orgId } },
   ]
-  const page: Record<string, unknown> = { '@type': route.name === 'about' ? 'AboutPage' : route.name === 'contact' ? 'ContactPage' : route.name === 'products' || route.name === 'product-categories' || route.name === 'product-category' ? 'CollectionPage' : 'WebPage', '@id': `${seo.canonical}#webpage`, url: seo.canonical, name: seo.title, description: seo.description, inLanguage: 'en', isPartOf: { '@id': websiteId }, publisher: { '@id': orgId }, primaryImageOfPage: { '@type': 'ImageObject', url: seo.image, width: 1200, height: 630 } }
+  const page: Record<string, unknown> = { '@type': route.name === 'about' ? 'AboutPage' : route.name === 'contact' ? 'ContactPage' : route.name === 'products' || route.name === 'product-categories' || route.name === 'product-category' ? 'CollectionPage' : 'WebPage', '@id': `${seo.canonical}#webpage`, url: seo.canonical, name: seo.title, description: seo.description, inLanguage: 'en', isPartOf: { '@id': websiteId }, publisher: { '@id': orgId }, primaryImageOfPage: { '@type': 'ImageObject', url: seo.image, width: seo.imageWidth, height: seo.imageHeight } }
   const breadcrumbs = getBreadcrumbs(route)
   if (breadcrumbs.length) {
     page.breadcrumb = { '@id': `${seo.canonical}#breadcrumb` }
@@ -106,7 +108,7 @@ export function renderHead(route: RouteLocationNormalizedLoaded | RouteLocationR
     `<title data-seo>${escapeHtml(seo.title)}</title>`,
     meta('description', seo.description), meta('robots', seo.indexable ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' : 'noindex, follow'),
     `<link data-seo rel="canonical" href="${escapeHtml(seo.canonical)}">`,
-    ...Object.entries({ 'og:type': 'website', 'og:site_name': 'InteliMARIS', 'og:locale': 'en_US', 'og:title': seo.title, 'og:description': seo.description, 'og:url': seo.canonical, 'og:image': seo.image, 'og:image:secure_url': seo.image, 'og:image:type': 'image/png', 'og:image:width': '1200', 'og:image:height': '630', 'og:image:alt': seo.imageAlt }).map(([key, value]) => meta(key, value, true)),
+    ...Object.entries({ 'og:type': 'website', 'og:site_name': 'InteliMARIS', 'og:locale': 'en_US', 'og:title': seo.title, 'og:description': seo.description, 'og:url': seo.canonical, 'og:image': seo.image, 'og:image:secure_url': seo.image, 'og:image:type': 'image/png', 'og:image:width': String(seo.imageWidth), 'og:image:height': String(seo.imageHeight), 'og:image:alt': seo.imageAlt }).map(([key, value]) => meta(key, value, true)),
     ...Object.entries({ 'twitter:card': 'summary_large_image', 'twitter:title': seo.title, 'twitter:description': seo.description, 'twitter:image': seo.image, 'twitter:image:alt': seo.imageAlt }).map(([key, value]) => meta(key, value)),
     `<script data-seo type="application/ld+json">${JSON.stringify(structuredData(route)).replace(/</g, '\\u003c')}</script>`,
   ].join('\n    ')

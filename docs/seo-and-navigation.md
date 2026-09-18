@@ -40,8 +40,11 @@ IDs remain stable between server and client.
 - HTTPS apex-domain canonical directory URLs, matching `public/CNAME` and static
   hosting. Tracking parameters, role choices and fragments are excluded.
 - Open Graph and X/Twitter large-image metadata, dimensions, MIME type and alt text.
-  Eight branded 1200 × 630 PNGs cover the main content families. The editable SVGs
-  and optional `scripts/generate-social.py` are committed; CI needs no Python.
+  The homepage uses the supplied marina LiDAR screenshot (`home-lidar.png`),
+  unchanged at 1730 × 1035. Other content families use the branded 1200 × 630 cards.
+  Both Open Graph and structured data declare each image’s actual dimensions.
+  The editable card SVGs and optional `scripts/generate-social.py` are committed;
+  CI needs no Python, and the generator does not overwrite the supplied image.
 - Organization, WebSite, WebPage/AboutPage/ContactPage/CollectionPage,
   BreadcrumbList, Product and catalog ItemList structured data where relevant.
   No invented prices, reviews, availability, certifications or social handles.
