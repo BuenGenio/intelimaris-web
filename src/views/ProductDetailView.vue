@@ -323,6 +323,9 @@ function categoryLabel(cat: CatalogEntry['category']): string {
 .product-aside {
   display: grid;
   gap: 1rem;
+  /* The aside is stretched by the page grid; without this its heading row
+     grows and opens a gap above the table. */
+  align-content: start;
 }
 
 .product-section,

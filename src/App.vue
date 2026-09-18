@@ -31,6 +31,7 @@ onMounted(() => {
 
 <style>
 @import './assets/main.css';
+@import './assets/v2.css';
 
 .skip-link {
   position: absolute;

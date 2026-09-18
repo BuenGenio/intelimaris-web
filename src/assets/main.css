@@ -1,66 +1,4 @@
-:root {
-  --brand-deep-navy: #0F2A44;
-  --brand-marine-blue: #1F4E79;
-  --brand-light-grey: #F4F6F8;
-  --brand-dark-grey: #333333;
-  --brand-alert-red: #D64545;
-  --brand-warning-amber: #F5A623;
-  --brand-safe-green: #3AA76D;
-
-  --deep-navy: #0F2A44;
-  --ocean-blue: #133353;
-  --slate-dark: #1A3D63;
-  --slate-medium: #1F4E79;
-  --page-background:
-    radial-gradient(circle at top, rgba(31, 78, 121, 0.18), transparent 28%),
-    linear-gradient(180deg, #0F2A44 0%, #133353 32%, #0F2A44 100%);
-  --cyan-bright: #4A8FBF;
-  --cyan-electric: #1F4E79;
-  --cyan-glow: rgba(31, 78, 121, 0.18);
-  --accent-warm: #F5A623;
-  --accent-purple: #4A8FBF;
-  --text-primary: #FFFFFF;
-  --text-secondary: #C7D4E0;
-  --text-muted: #8AA0B5;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.16);
-  --glass-bg: rgba(15, 42, 68, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.11);
-  --surface-soft: rgba(255, 255, 255, 0.04);
-  --surface-strong: rgba(255, 255, 255, 0.08);
-  --shadow-sm: 0 6px 18px rgba(15, 42, 68, 0.20);
-  --shadow-md: 0 18px 42px rgba(15, 42, 68, 0.28);
-  --shadow-lg: 0 28px 72px rgba(15, 42, 68, 0.36);
-  --shadow-glow: 0 18px 42px rgba(31, 78, 121, 0.28);
-}
-
-[data-theme="light"] {
-  --deep-navy: #FFFFFF;
-  --ocean-blue: #F4F6F8;
-  --slate-dark: #E5EAF0;
-  --slate-medium: #CFD7E0;
-  --page-background:
-    radial-gradient(circle at top, rgba(31, 78, 121, 0.06), transparent 26%),
-    linear-gradient(180deg, #FFFFFF 0%, #F4F6F8 40%, #FFFFFF 100%);
-  --cyan-bright: #1F4E79;
-  --cyan-electric: #0F2A44;
-  --cyan-glow: rgba(31, 78, 121, 0.10);
-  --accent-warm: #F5A623;
-  --accent-purple: #1F4E79;
-  --text-primary: #0F2A44;
-  --text-secondary: #333333;
-  --text-muted: #6B7B8C;
-  --border-subtle: rgba(15, 42, 68, 0.08);
-  --border-medium: rgba(15, 42, 68, 0.14);
-  --glass-bg: rgba(255, 255, 255, 0.78);
-  --glass-border: rgba(15, 42, 68, 0.10);
-  --surface-soft: rgba(15, 42, 68, 0.04);
-  --surface-strong: rgba(15, 42, 68, 0.08);
-  --shadow-sm: 0 2px 8px rgba(15, 42, 68, 0.06);
-  --shadow-md: 0 8px 24px rgba(15, 42, 68, 0.08);
-  --shadow-lg: 0 16px 48px rgba(15, 42, 68, 0.12);
-  --shadow-glow: 0 0 40px rgba(31, 78, 121, 0.12);
-}
+@import './tokens.css';
 
 @layer base {
   * {
@@ -75,7 +13,7 @@ html {
 }
 
 body {
-  font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
+  font-family: var(--font-sans);
   background: var(--page-background);
   color: var(--text-primary);
   line-height: 1.6;
@@ -97,7 +35,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0;
@@ -108,23 +46,30 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: var(--type-h1);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 1.05;
+  letter-spacing: var(--type-h1-ls);
+  line-height: var(--type-h1-lh);
 }
 
 h2 {
-  font-size: clamp(1.25rem, 2.4vw, 2.25rem);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  font-size: var(--type-h2);
+  font-weight: 700;
+  letter-spacing: var(--type-h2-ls);
+  line-height: var(--type-h2-lh);
 }
 
 h3 {
-  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
-  font-weight: 500;
+  font-size: var(--type-h3);
+  font-weight: 600;
+  letter-spacing: var(--type-h3-ls);
+  line-height: var(--type-h3-lh);
+}
+
+h4 {
+  font-size: var(--type-h4);
+  font-weight: 600;
+  line-height: var(--type-h4-lh);
 }
 
 section {
@@ -138,7 +83,7 @@ section {
   background: transparent;
   border: none;
   color: var(--brand-marine-blue);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -208,7 +153,7 @@ section {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 700;
   cursor: pointer;
@@ -238,9 +183,6 @@ section {
 
 .brand-text {
   letter-spacing: -0.02em;
-  text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    0 4px 16px rgba(0, 217, 255, 0.2);
 }
 
 .nav-primary-bar {
@@ -337,7 +279,7 @@ section {
 }
 
 .nav-drawer-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
   font-size: 1.125rem;
   color: var(--text-primary);
@@ -644,7 +586,7 @@ section {
   backdrop-filter: blur(10px);
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 600;
   font-size: 0.875rem;
   color: var(--text-primary);
@@ -710,7 +652,7 @@ section {
   width: 100%;
   text-align: left;
   color: var(--text-secondary);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 500;
   border-bottom: 1px solid var(--border-subtle);
@@ -922,7 +864,7 @@ section {
   border-radius: 2rem;
   backdrop-filter: blur(10px);
   margin-bottom: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -971,7 +913,7 @@ section {
   gap: 0.65rem;
   padding: 0.9rem 1.6rem;
   border-radius: 0.6rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 600;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -1047,7 +989,7 @@ section {
 }
 
 .stat-value {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 2.1rem;
   font-weight: 700;
   color: var(--cyan-bright);
@@ -1125,7 +1067,7 @@ section {
 
 .panel-title {
   margin: 0.35rem 0 0.8rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.35rem;
   font-weight: 700;
 }
@@ -1146,7 +1088,7 @@ section {
 
 .panel-figure {
   margin: 0.4rem 0 0.75rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.6rem;
   font-weight: 700;
 }
@@ -1288,7 +1230,7 @@ section {
 }
 
 .metric-number {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 3rem;
   font-weight: 700;
   color: var(--cyan-bright);
@@ -1339,7 +1281,7 @@ section {
 }
 
 .layer-number {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--cyan-bright);
@@ -1580,13 +1522,13 @@ section {
 }
 
 .dashboard-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 700;
 }
 
 .dashboard-time {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   color: var(--text-muted);
   font-size: 0.875rem;
   font-weight: 500;
@@ -1689,7 +1631,7 @@ section {
   border-radius: 0.375rem;
   font-size: 0.75rem;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
 }
 
 .sensor-badge.ok {
@@ -1761,7 +1703,7 @@ section {
 }
 
 .sensor-value {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -1837,7 +1779,7 @@ section {
 }
 
 .event-time {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -2022,7 +1964,7 @@ section {
   border-radius: 0.375rem;
   font-size: 0.75rem;
   color: var(--text-muted);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 500;
 }
 
@@ -2075,7 +2017,7 @@ section {
   border: 1px solid var(--cyan-electric);
   border-radius: 0.5rem;
   color: var(--cyan-bright);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -2100,7 +2042,7 @@ section {
 }
 
 .vision-statement blockquote {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.4;
@@ -2231,7 +2173,7 @@ section {
   letter-spacing: 0.1em;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
 }
 
 .business-tier.accent {
@@ -2245,7 +2187,7 @@ section {
 }
 
 .business-price {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 2rem;
   font-weight: 700;
   color: var(--cyan-bright);
@@ -2374,7 +2316,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -2384,6 +2326,8 @@ textarea {
 .footer-logo {
   height: 2.2rem;
   width: auto;
+  /* The footer is always dark; the logo asset is the dark-ink one. */
+  filter: brightness(0) invert(1);
 }
 
 .footer-summary {
@@ -2622,7 +2566,7 @@ textarea {
 }
 
 .eco-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.35rem;
   margin-bottom: 0.75rem;
   color: var(--cyan-bright);
@@ -2640,7 +2584,7 @@ textarea {
   margin: 3rem auto 0;
   font-size: 1.1rem;
   color: var(--text-primary);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 600;
   line-height: 1.5;
 }
@@ -2748,7 +2692,7 @@ textarea {
 }
 
 .lp-hero-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -2792,7 +2736,7 @@ textarea {
   color: #fff;
   border: none;
   border-radius: 0.6rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 600;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -2823,7 +2767,7 @@ textarea {
   color: #fff;
   border: 1.5px solid rgba(255, 255, 255, 0.35);
   border-radius: 0.6rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 600;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -2894,7 +2838,7 @@ textarea {
 .lp-pillar-text { display: flex; flex-direction: column; gap: 0.1rem; }
 
 .lp-pillar-text strong {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -2953,7 +2897,7 @@ textarea {
 }
 
 .lp-featured-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(1.5rem, 2.4vw, 2rem);
   font-weight: 400;
   margin: 0 0 0.25rem;
@@ -3013,7 +2957,7 @@ textarea {
 .lp-stat-icon svg { width: 100%; height: 100%; }
 
 .lp-stat-value {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(1.4rem, 2vw, 1.85rem);
   font-weight: 700;
   color: var(--lp-marine);
@@ -3056,7 +3000,7 @@ textarea {
 }
 
 .lp-features-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(1.6rem, 2.6vw, 2.25rem);
   font-weight: 600;
   text-transform: none;
@@ -3101,7 +3045,7 @@ textarea {
 .lp-feature-icon svg { width: 100%; height: 100%; }
 
 .lp-feature-card h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -3158,7 +3102,7 @@ textarea {
 }
 
 .lp-mockup-brand {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
   font-size: 0.7rem;
   color: #fff;
@@ -3245,7 +3189,7 @@ textarea {
 }
 
 .lp-mockup-card strong {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 700;
   font-size: 1rem;
   color: var(--lp-marine);
@@ -3360,7 +3304,7 @@ textarea {
 
 .lp-trust-item strong {
   display: block;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   font-weight: 600;
   color: #fff;

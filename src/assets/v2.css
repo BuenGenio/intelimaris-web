@@ -1,0 +1,412 @@
+/* ==========================================================================
+   v2 primitives — chapters, glass, type roles, the wave rule.
+   Imported after main.css so these win on equal specificity.
+   ========================================================================== */
+
+/* --- Chapters ------------------------------------------------------------
+   Sections alternate value so the page reads as chapters. A chapter carries
+   its own surface + text tokens, so children need no theme awareness.
+   ------------------------------------------------------------------------ */
+
+.chapter {
+  position: relative;
+  padding: var(--section-pad) 0;
+  background: var(--chapter-bg, transparent);
+  color: var(--text-primary);
+  isolation: isolate;
+}
+
+.chapter[data-chapter='light'] {
+  --chapter-bg: var(--grad-hero-water);
+  --text-primary: #182036;
+  --text-secondary: #2e3650;
+  --text-muted: #66708a;
+  --border-subtle: rgba(24, 35, 66, 0.1);
+  --border-medium: rgba(24, 35, 66, 0.18);
+  --surface-soft: rgba(24, 35, 66, 0.035);
+  --surface-strong: rgba(24, 35, 66, 0.07);
+  --glass-fill: rgba(255, 255, 255, 0.84);
+  --glass-fill-strong: rgba(255, 255, 255, 0.94);
+  --glass-border: rgba(24, 35, 66, 0.12);
+  --panel-halo: 0 0 0 2px rgba(255, 255, 255, 0.9);
+  --shadow-panel: 0 18px 44px rgba(24, 35, 66, 0.16);
+  --badge-safe: #1f7a3a;
+  --badge-warn: #9a5c0c;
+  --badge-concept: #8a6410;
+  --text-muted: #5d6780;
+  color-scheme: light;
+}
+
+.chapter[data-chapter='dark'] {
+  --chapter-bg: var(--grad-deep-water);
+  --text-primary: #ffffff;
+  --text-secondary: #b7bfcf;
+  --text-muted: #8e99af;
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --surface-soft: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --glass-fill: rgba(24, 35, 66, 0.82);
+  --glass-fill-strong: rgba(24, 35, 66, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --panel-halo: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-panel: 0 18px 48px rgba(5, 7, 13, 0.46);
+  --badge-safe: #38b65d;
+  --badge-warn: #e38b1c;
+  --badge-concept: #d9a21b;
+  color-scheme: dark;
+}
+
+.chapter[data-chapter='black'] {
+  --chapter-bg: var(--brand-black);
+  --text-primary: #ffffff;
+  --text-secondary: #b7bfcf;
+  --text-muted: #8e99af;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --glass-fill: rgba(15, 20, 36, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --badge-safe: #38b65d;
+  --badge-warn: #e38b1c;
+  --badge-concept: #d9a21b;
+  color-scheme: dark;
+}
+
+/* --- Type roles ---------------------------------------------------------- */
+
+.t-display {
+  font-family: var(--font-sans);
+  font-size: var(--type-display);
+  font-weight: 800;
+  line-height: var(--type-display-lh);
+  letter-spacing: var(--type-display-ls);
+  text-wrap: balance;
+}
+
+.t-lede {
+  font-size: var(--type-lede);
+  line-height: var(--type-lede-lh);
+  color: var(--text-secondary);
+  font-weight: 400;
+  text-wrap: pretty;
+}
+
+.t-overline {
+  display: inline-block;
+  font-size: var(--type-overline);
+  font-weight: 700;
+  letter-spacing: var(--type-overline-ls);
+  text-transform: uppercase;
+  color: var(--brand-wave-400);
+}
+
+.chapter[data-chapter='light'] .t-overline {
+  color: var(--brand-wave-ink);
+}
+
+.t-caption {
+  font-size: var(--type-caption);
+  letter-spacing: var(--type-caption-ls);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Every number on the site is mono and tabular. */
+.t-telemetry,
+.t-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.t-telemetry {
+  font-size: var(--type-telemetry);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* --- The wave rule -------------------------------------------------------
+   The brand's only decorative device. At most once per surface.
+   ------------------------------------------------------------------------ */
+
+.wave-rule {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: 14px;
+  border: 0;
+  margin: 0;
+  color: var(--brand-wave);
+}
+
+.wave-rule--center {
+  margin-inline: auto;
+}
+
+/* --- Glass ---------------------------------------------------------------
+   CSS tier of the ladder. The WebGL tier renders behind and this stays as
+   the readable scrim on top of it.
+   ------------------------------------------------------------------------ */
+
+.glass {
+  position: relative;
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel), var(--panel-halo);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass {
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  }
+}
+
+/* A single specular sweep along the top edge — the "lit edge" of glass. */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    var(--glass-highlight) 0%,
+    transparent 38%
+  );
+  opacity: 0.6;
+}
+
+.glass--strong {
+  background: var(--glass-fill-strong);
+}
+
+/* Gradient border — the third sanctioned gradient, used as a stroke only. */
+.glass--stroked {
+  border-color: transparent;
+  background-image: linear-gradient(var(--glass-fill), var(--glass-fill)),
+    var(--grad-hero-stroke);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1.5px solid transparent;
+}
+
+/* --- Buttons -------------------------------------------------------------
+   Signal orange is the primary CTA and nothing else. One per view.
+   ------------------------------------------------------------------------ */
+
+.btn-signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent-signal);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: var(--type-body-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+
+.btn-signal:hover {
+  background: var(--accent-signal-hover);
+  transform: translateY(-1px);
+}
+
+.btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  background: var(--surface-soft);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-body-sm);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out);
+}
+
+.btn-quiet:hover {
+  border-color: var(--brand-wave);
+  background: var(--surface-strong);
+}
+
+/* --- Availability badges -------------------------------------------------
+   Honesty is a copy rule: nothing unshipped is presented as live.
+   ------------------------------------------------------------------------ */
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--type-micro);
+  font-weight: 600;
+  letter-spacing: var(--type-micro-ls);
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.badge-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge-status[data-state='live'] {
+  color: var(--badge-safe);
+  border-color: color-mix(in srgb, var(--badge-safe) 34%, transparent);
+  background: color-mix(in srgb, var(--badge-safe) 12%, transparent);
+}
+
+.badge-status[data-state='building'] {
+  color: var(--badge-warn);
+  border-color: color-mix(in srgb, var(--badge-warn) 34%, transparent);
+  background: color-mix(in srgb, var(--badge-warn) 12%, transparent);
+}
+
+.badge-status[data-state='planned'] {
+  color: var(--text-muted);
+  border-color: var(--border-medium);
+  background: var(--surface-soft);
+}
+
+.badge-status[data-state='concept'] {
+  color: var(--badge-concept);
+  border-color: color-mix(in srgb, var(--badge-concept) 34%, transparent);
+  background: color-mix(in srgb, var(--badge-concept) 12%, transparent);
+}
+
+/* --- Focus + motion ------------------------------------------------------ */
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand-wave-400);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.chapter[data-chapter='light'] :where(a, button, [tabindex]):focus-visible {
+  outline-color: var(--brand-navy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Layout helpers ------------------------------------------------------ */
+
+.stack-6 > * + * {
+  margin-top: var(--space-6);
+}
+
+.section-head {
+  max-width: 46rem;
+}
+
+.section-head .t-display,
+.section-head h2 {
+  margin-top: var(--space-3);
+}
+
+.section-head .t-lede {
+  margin-top: var(--space-4);
+}
+
+/* --- Navigation tone ------------------------------------------------------
+   The bar is fixed over chapters that alternate light and dark, so it takes
+   the tone of whichever chapter is under it rather than the page theme.
+   ------------------------------------------------------------------------ */
+
+[data-nav-tone='dark'] .nav-container {
+  background: rgba(15, 20, 36, 0.62);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
+    0 12px 36px rgba(5, 7, 13, 0.34);
+}
+
+[data-nav-tone='dark'] .nav-container .brand-logo {
+  background-color: #ffffff;
+}
+
+[data-nav-tone='dark'] .nav-container .nav-link,
+[data-nav-tone='dark'] .nav-container .lang-code,
+[data-nav-tone='dark'] .nav-container .theme-toggle,
+[data-nav-tone='dark'] .nav-container .lang-current,
+[data-nav-tone='dark'] .nav-container .nav-drawer-toggle {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+[data-nav-tone='dark'] .nav-container .nav-link:hover {
+  color: #ffffff;
+}
+
+[data-nav-tone='dark'] .nav-container .nav-drawer-toggle-bar {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+[data-nav-tone='light'] .nav-container {
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom-color: rgba(24, 35, 66, 0.1);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.85) inset,
+    0 10px 30px rgba(24, 35, 66, 0.08);
+}
+
+[data-nav-tone='light'] .nav-container .brand-logo {
+  background-color: var(--brand-navy);
+}
+
+[data-nav-tone='light'] .nav-container .nav-link,
+[data-nav-tone='light'] .nav-container .lang-code,
+[data-nav-tone='light'] .nav-container .theme-toggle,
+[data-nav-tone='light'] .nav-container .lang-current,
+[data-nav-tone='light'] .nav-container .nav-drawer-toggle {
+  color: #2e3650;
+}
+
+[data-nav-tone='light'] .nav-container .nav-link:hover {
+  color: var(--brand-navy);
+}
+
+[data-nav-tone='light'] .nav-container .nav-drawer-toggle-bar {
+  background: #2e3650;
+}
+
+/* --- Interior content pages ----------------------------------------------
+   Card headings are labels within a page, not chapter openers, so they sit a
+   step down from the section scale.
+   ------------------------------------------------------------------------ */
+
+.product-section h2,
+.product-aside h2,
+.pd-aside h2,
+.spec-panel h2,
+.capability-card h2,
+.page-section h2 {
+  font-size: var(--type-h3);
+  font-weight: 600;
+  letter-spacing: var(--type-h3-ls);
+  line-height: var(--type-h3-lh);
+}

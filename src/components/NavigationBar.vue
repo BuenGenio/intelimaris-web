@@ -248,6 +248,7 @@ import { computed, nextTick, ref, onMounted, onUnmounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import type { ComponentPublicInstance } from 'vue'
 import { useTheme } from '@/composables/useTheme'
+import { useNavTone } from '@/composables/useNavTone'
 import { useI18n } from '@/composables/useI18n'
 import type { Language } from '@/i18n/translations'
 import {
@@ -275,6 +276,7 @@ const languages: Language[] = ['en', 'es', 'el', 'uk']
 
 const { theme, setTheme } = useTheme()
 const { currentLanguage, t, setLanguage, languageData } = useI18n()
+useNavTone()
 const route = useRoute()
 
 const isLangOpen = ref(false)

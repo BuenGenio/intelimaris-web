@@ -1,136 +1,156 @@
 <template>
   <main class="marinas-page">
-    <section class="page-hero">
-      <div class="container">
-        <nav class="page-breadcrumb" aria-label="Breadcrumb">
-          <RouterLink to="/">{{ t('nav.home') }}</RouterLink>
-          <span aria-hidden="true">›</span>
-          <span class="page-breadcrumb-current">{{ t('nav.marina') }}</span>
-        </nav>
-        <div class="section-label">{{ t('marina.label') }}</div>
-        <h1>{{ t('marina.title') }}</h1>
-        <p class="page-lead">{{ t('marina.what.p1') }}</p>
-      </div>
-    </section>
+    <PageHero
+      :overline="t('v2.pms.overline')"
+      :title="t('v2.pms.title')"
+      :lede="t('v2.pms.lede')"
+      shot="pms-berth-layout"
+      :shot-caption="t('v2.pms.shot.layout')"
+      chrome="console.intelimaris.com"
+      tone="dark"
+    >
+      <template #actions>
+        <RouterLink to="/contact" class="btn-signal">{{ t('v2.pms.cta') }}</RouterLink>
+        <RouterLink to="/demo/marina" class="btn-quiet">{{ t('v2.marinas.demoCta') }}</RouterLink>
+      </template>
+    </PageHero>
 
-    <MarinaSection />
+    <section class="chapter" data-chapter="light">
+      <div class="container-wide">
+        <div class="section-head">
+          <span class="t-overline">{{ t('v2.marinas.howOverline') }}</span>
+          <h2 class="t-display">{{ t('v2.marinas.howTitle') }}</h2>
+        </div>
 
-    <section class="page-footnote">
-      <div class="container">
-        <div class="footnote-panel">
-          <p>{{ t('marinas.footnote') }}</p>
-          <RouterLink to="/contact" class="back-link">{{ t('marinas.contactCta') }}</RouterLink>
+        <ol class="marinas-steps">
+          <li v-for="(step, index) in steps" :key="step" class="marinas-step">
+            <span class="marinas-step-index t-num">{{ String(index + 1).padStart(2, '0') }}</span>
+            <h3>{{ t(`v2.marinas.step.${step}.title`) }}</h3>
+            <p>{{ t(`v2.marinas.step.${step}.body`) }}</p>
+          </li>
+        </ol>
+
+        <div class="marinas-gallery">
+          <GlassShot
+            id="pms-dashboard"
+            :caption="t('v2.pms.shot.dashboard')"
+            chrome="console.intelimaris.com"
+            sizes="(min-width: 1080px) 560px, 94vw"
+          />
+          <GlassShot
+            id="pms-operations"
+            :caption="t('v2.marinas.shot.operations')"
+            chrome="console.intelimaris.com"
+            sizes="(min-width: 1080px) 560px, 94vw"
+          />
         </div>
       </div>
     </section>
+
+    <MarinaPmsSection />
+
+    <section class="chapter" data-chapter="light">
+      <div class="container-wide marinas-hosts">
+        <div class="section-head">
+          <span class="t-overline">{{ t('v2.marinas.hostOverline') }}</span>
+          <h2 class="t-display">{{ t('v2.marinas.hostTitle') }}</h2>
+          <p class="t-lede">{{ t('v2.marinas.hostLede') }}</p>
+          <RouterLink to="/contact" class="btn-quiet marinas-host-cta">{{ t('v2.marinas.hostCta') }}</RouterLink>
+        </div>
+        <GlassShot
+          id="dock-host-dashboard"
+          :caption="t('v2.marinas.shot.host')"
+          chrome="console.intelimaris.com"
+          sizes="(min-width: 1080px) 600px, 94vw"
+        />
+      </div>
+    </section>
+
+    <ClosingCtaSection />
   </main>
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import PageHero from '@/components/v2/PageHero.vue'
+import GlassShot from '@/components/v2/GlassShot.vue'
+import MarinaPmsSection from '@/components/v2/MarinaPmsSection.vue'
+import ClosingCtaSection from '@/components/v2/ClosingCtaSection.vue'
 import { useI18n } from '@/composables/useI18n'
 import { useFadeIn } from '@/composables/useFadeIn'
-import MarinaSection from '@/components/sections/MarinaSection.vue'
 
 const { t } = useI18n()
+const steps = ['claim', 'draw', 'rates', 'run'] as const
+
 useFadeIn('.marinas-page')
 </script>
 
 <style scoped>
-.marinas-page {
-  padding-top: 5rem;
-  min-height: 60vh;
-}
-
-.page-hero,
-.page-footnote {
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.page-hero {
-  padding: 3rem 0 2.5rem;
-}
-
-.page-footnote {
-  padding: 2.5rem 0;
-}
-
-.page-breadcrumb {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  align-items: center;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.page-breadcrumb a {
-  color: var(--brand-marine-blue);
-  text-decoration: none;
-}
-
-[data-theme="dark"] .page-breadcrumb a {
-  color: #6FA0CC;
-}
-
-.page-breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.page-breadcrumb-current {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.page-hero h1 {
-  margin: 0.5rem 0 1rem;
-}
-
-.page-lead {
-  max-width: 48rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-.footnote-panel {
+.marinas-steps {
+  list-style: none;
+  margin: var(--space-16) 0 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1rem;
-  align-items: center;
-  padding: 1.5rem;
-  border-radius: 1.25rem;
-  border: 1px solid var(--border-medium);
-  background: var(--glass-bg);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-6);
 }
 
-.footnote-panel p {
+.marinas-step {
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--brand-wave);
+}
+
+.marinas-step-index {
+  display: block;
+  font-size: var(--type-caption);
+  color: var(--brand-wave);
+  margin-bottom: var(--space-3);
+}
+
+.marinas-step h3 {
+  margin-bottom: var(--space-2);
+}
+
+.marinas-step p {
+  margin: 0;
   color: var(--text-secondary);
+  font-size: var(--type-body-sm);
   line-height: 1.6;
 }
 
-.back-link {
-  color: var(--brand-marine-blue);
-  font-weight: 600;
-  text-decoration: none;
-  text-align: right;
+.marinas-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-16);
 }
 
-[data-theme="dark"] .back-link {
-  color: #6FA0CC;
+.marinas-hosts {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 1rem + 4vw, 4rem);
+  align-items: center;
 }
 
-.back-link:hover {
-  text-decoration: underline;
+.marinas-host-cta {
+  margin-top: var(--space-8);
 }
 
-@media (max-width: 720px) {
-  .footnote-panel {
-    grid-template-columns: 1fr;
+@media (max-width: 1040px) {
+  .marinas-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-8) var(--space-6);
   }
 
-  .back-link {
-    text-align: left;
+  .marinas-gallery,
+  .marinas-hosts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .marinas-steps {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 </style>

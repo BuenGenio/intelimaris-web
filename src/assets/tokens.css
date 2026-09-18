@@ -1,0 +1,310 @@
+/* ==========================================================================
+   InteliMaris design tokens — aligned to brand bible v2.0.
+   Loaded before main.css; legacy token names are re-mapped at the bottom so
+   the existing stylesheets re-skin without being rewritten.
+   ========================================================================== */
+
+/* --- Self-hosted variable fonts (Latin, Latin-ext, Greek, Cyrillic) ------ */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-cyrillic-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-cyrillic-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-greek-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/assets/fonts/jetbrains-mono-cyrillic-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/assets/fonts/jetbrains-mono-cyrillic-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/assets/fonts/jetbrains-mono-greek-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/assets/fonts/jetbrains-mono-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/assets/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* --- Brand constants — identical in both themes ------------------------- */
+
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --brand-navy: #2c3d68;
+  --brand-navy-900: #182342;
+  --brand-black: #05070d;
+  --brand-wave: #4274bb;
+  --brand-wave-400: #6390cb;
+
+  /* Ink ramp — brand bible numbering. There is deliberately no ink-600. */
+  --ink-0: #ffffff;
+  --ink-50: #f3f5f9;
+  --ink-100: #eaedf3;
+  --ink-200: #dce1ea;
+  --ink-300: #b7bfcf;
+  --ink-400: #8e99af;
+  --ink-500: #66708a;
+  --ink-700: #2e3650;
+  --ink-800: #222a40;
+  --ink-900: #182036;
+  --ink-950: #0f1424;
+
+  /* Workspace colours — accent only, never a surface. */
+  --ws-platform: #2c3d68;
+  --ws-vessel: #4274bb;
+  --ws-marina: #14919b;
+  --ws-private: #1f6e5e;
+  --ws-business: #d9a21b;
+  --ws-maintenance: #b7472a;
+
+  /* Status — UI only, never on the water. */
+  --status-safe: #2e9b4e;
+  --status-warn: #e38b1c;
+  --status-high: #d9571e;
+  --status-danger: #c8322b;
+  --status-low: #3a9e8f;
+  --status-offline: #8e99af;
+  --status-info: #4274bb;
+
+  /* The single marketing accent. Primary CTAs and nothing else.
+     Held at a value that clears 4.5:1 with white button text. */
+  --accent-signal: #bf5114;
+  --accent-signal-hover: #a8460f;
+
+  /* Wave blue darkened for text on light surfaces. */
+  --brand-wave-ink: #325a94;
+
+  /* The three sanctioned gradients. */
+  --grad-hero-water:
+    radial-gradient(60% 50% at 18% 12%, rgba(66, 116, 187, 0.22), transparent 70%),
+    radial-gradient(55% 45% at 82% 0%, rgba(20, 145, 155, 0.18), transparent 72%),
+    linear-gradient(180deg, #eef3fa 0%, #ffffff 100%);
+  --grad-deep-water:
+    radial-gradient(60% 50% at 18% 8%, rgba(66, 116, 187, 0.3), transparent 70%),
+    radial-gradient(55% 45% at 84% 4%, rgba(20, 145, 155, 0.22), transparent 72%),
+    linear-gradient(180deg, #0f1424 0%, #182342 48%, #05070d 100%);
+  --grad-hero-stroke: linear-gradient(135deg, #4274bb 0%, #14919b 100%);
+
+  /* Type scale — fluid, tuned to the bible's static scale at desktop width. */
+  --type-display: clamp(2.5rem, 1.6rem + 3.8vw, 4.5rem);
+  --type-display-lh: 1.04;
+  --type-display-ls: -0.025em;
+  --type-h1: clamp(2rem, 1.45rem + 2.4vw, 3.125rem);
+  --type-h1-lh: 1.1;
+  --type-h1-ls: -0.02em;
+  --type-h2: clamp(1.5rem, 1.2rem + 1.3vw, 2.25rem);
+  --type-h2-lh: 1.16;
+  --type-h2-ls: -0.015em;
+  --type-h3: clamp(1.125rem, 1.03rem + 0.4vw, 1.375rem);
+  --type-h3-lh: 1.32;
+  --type-h3-ls: -0.005em;
+  --type-h4: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --type-h4-lh: 1.4;
+  --type-lede: clamp(1.0625rem, 0.97rem + 0.42vw, 1.3125rem);
+  --type-lede-lh: 1.55;
+  --type-body: 1rem;
+  --type-body-lh: 1.5;
+  --type-body-sm: 0.875rem;
+  --type-caption: 0.75rem;
+  --type-caption-ls: 0.01em;
+  --type-overline: 0.6875rem;
+  --type-overline-ls: 0.14em;
+  --type-micro: 0.625rem;
+  --type-micro-ls: 0.08em;
+  --type-telemetry: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+
+  /* Spacing — 8px grid with 4 and 12 permitted. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --section-pad: clamp(4rem, 2.5rem + 6vw, 8rem);
+
+  /* Radius — nothing is square-cornered. */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* --- Dark theme (default) ----------------------------------------------- */
+
+:root {
+  color-scheme: dark;
+
+  --surface-page: var(--grad-deep-water);
+  --surface-base: #0f1424;
+  --surface-raised: #182342;
+  --surface-sunken: #05070d;
+  --surface-soft: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #ffffff;
+  --text-secondary: #b7bfcf;
+  --text-muted: #8e99af;
+  --text-inverse: #182036;
+
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-medium: rgba(255, 255, 255, 0.16);
+
+  /* Glass: 0.80 is the legibility floor. Never go below it. */
+  --glass-fill: rgba(24, 35, 66, 0.82);
+  --glass-fill-strong: rgba(24, 35, 66, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-blur: 22px;
+  --glass-highlight: rgba(255, 255, 255, 0.14);
+
+  --badge-safe: #38b65d;
+  --badge-warn: #e38b1c;
+  --badge-concept: #d9a21b;
+
+  --shadow-sm: 0 2px 10px rgba(5, 7, 13, 0.34);
+  --shadow-md: 0 10px 30px rgba(5, 7, 13, 0.42);
+  --shadow-lg: 0 24px 64px rgba(5, 7, 13, 0.5);
+  --shadow-panel: 0 18px 48px rgba(5, 7, 13, 0.46);
+  --panel-halo: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* --- Light theme --------------------------------------------------------
+   Brand hues never flip between themes; only surfaces, text and borders do.
+   ------------------------------------------------------------------------ */
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --surface-page: var(--grad-hero-water);
+  --surface-base: #ffffff;
+  --surface-raised: #f3f5f9;
+  --surface-sunken: #eaedf3;
+  --surface-soft: rgba(24, 35, 66, 0.035);
+  --surface-strong: rgba(24, 35, 66, 0.07);
+
+  --text-primary: #182036;
+  --text-secondary: #2e3650;
+  --text-muted: #66708a;
+  --text-inverse: #ffffff;
+
+  --border-subtle: rgba(24, 35, 66, 0.1);
+  --border-medium: rgba(24, 35, 66, 0.18);
+
+  --glass-fill: rgba(255, 255, 255, 0.84);
+  --glass-fill-strong: rgba(255, 255, 255, 0.94);
+  --glass-border: rgba(24, 35, 66, 0.12);
+  --glass-blur: 20px;
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+
+  --badge-safe: #1f7a3a;
+  --badge-warn: #9a5c0c;
+  --badge-concept: #8a6410;
+
+  --shadow-sm: 0 2px 8px rgba(24, 35, 66, 0.07);
+  --shadow-md: 0 10px 28px rgba(24, 35, 66, 0.1);
+  --shadow-lg: 0 24px 56px rgba(24, 35, 66, 0.14);
+  --shadow-panel: 0 18px 44px rgba(24, 35, 66, 0.16);
+  --panel-halo: 0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+/* --- Legacy token bridge -------------------------------------------------
+   main.css and home-alt.css (9,000+ lines) reference the old names. Mapping
+   them here re-skins the existing pages to the brand palette with no rewrite.
+   ------------------------------------------------------------------------ */
+
+:root,
+[data-theme='light'] {
+  --brand-deep-navy: var(--brand-navy);
+  --brand-marine-blue: var(--brand-wave);
+  --brand-light-grey: var(--ink-50);
+  --brand-dark-grey: var(--ink-700);
+  --brand-alert-red: var(--status-danger);
+  --brand-warning-amber: var(--status-warn);
+  --brand-safe-green: var(--status-safe);
+
+  --deep-navy: var(--surface-base);
+  --ocean-blue: var(--surface-raised);
+  --slate-dark: var(--surface-raised);
+  --slate-medium: var(--brand-navy);
+  --page-background: var(--surface-page);
+
+  --cyan-bright: var(--brand-wave);
+  --cyan-electric: var(--brand-wave-400);
+  --cyan-glow: rgba(66, 116, 187, 0.18);
+  --accent-warm: var(--ws-business);
+  --accent-purple: var(--brand-wave);
+
+  --glass-bg: var(--glass-fill);
+  --shadow-glow: 0 18px 42px rgba(66, 116, 187, 0.26);
+}

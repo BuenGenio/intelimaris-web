@@ -1,3 +1,5 @@
+import { v2Translations } from './v2'
+
 export type Language = 'en' | 'es' | 'el' | 'uk'
 
 export interface Translations {
@@ -6,7 +8,7 @@ export interface Translations {
 
 export const translations: Record<Language, Translations> = {
   en: {
-    'nav.platform': 'Three layers',
+    'nav.platform': 'Sensors',
     'nav.aiStack': 'Cloud & AI',
     'nav.capabilities': 'Capabilities',
     'nav.marina': 'Marinas',
@@ -677,7 +679,7 @@ export const translations: Record<Language, Translations> = {
   },
   
   es: {
-    'nav.platform': 'Tres capas',
+    'nav.platform': 'Sensores',
     'nav.aiStack': 'Nube e IA',
     'nav.capabilities': 'Capacidades',
     'nav.marina': 'Marinas',
@@ -1348,7 +1350,7 @@ export const translations: Record<Language, Translations> = {
   },
   
   el: {
-    'nav.platform': 'Τρία επίπεδα',
+    'nav.platform': 'Αισθητήρες',
     'nav.aiStack': 'Νέφος & AI',
     'nav.capabilities': 'Δυνατότητες',
     'nav.marina': 'Μαρίνες',
@@ -2019,7 +2021,7 @@ export const translations: Record<Language, Translations> = {
   },
 
   uk: {
-    'nav.platform': 'Три рівні',
+    'nav.platform': 'Сенсори',
     'nav.aiStack': 'Хмара та ШІ',
     'nav.capabilities': 'Можливості',
     'nav.marina': 'Марини',
@@ -2688,4 +2690,10 @@ export const translations: Record<Language, Translations> = {
     'footer.company.contact': 'Контакти',
     'footer.copyright': '© 2026 InteliMaris. Будуємо операційну систему для морського середовища.'
   }
+}
+
+/* v2 marketing copy lives in its own module and is merged in here so the
+   per-locale dictionaries above stay readable. */
+for (const lang of Object.keys(translations) as Language[]) {
+  Object.assign(translations[lang], v2Translations[lang])
 }
