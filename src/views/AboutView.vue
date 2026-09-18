@@ -6,8 +6,9 @@
       <p class="editorial-eyebrow">Our story</p>
       <div class="guide-heading">
         <h1>The water connects us.<br>The tools should too.</h1>
-        <p class="editorial-lede">A passage touches more than the helm. It involves crew, guests, dock teams, service companies and the places that welcome a vessel. InteliMaris brings those working lives into a connected platform.</p>
+        <p class="editorial-lede">A passage touches more than the helm. It involves crew, guests, dock teams, service companies and the places that welcome a vessel. InteliMARIS™ brings those working lives into a connected ecosystem, with WaterWayz™ as the boater-facing experience.</p>
       </div>
+      <p class="identity-note">InteliMarine LLC does business as InteliMARIS. It is the company behind WaterWayz™, the connected vessel systems and the developing marina and geospatial capabilities.</p>
     </section>
     <section class="editorial-section section-wash">
       <div class="editorial-shell">
@@ -17,13 +18,13 @@
           <li>
             <span class="editorial-index">01</span>
             <h3>The journey</h3>
-            <p>WaterWAYZ brings navigation, vessel-specific passage planning, hazard awareness and dockage together.</p>
-            <RouterLink to="/waterwayz" class="editorial-text-link">Explore WaterWAYZ →</RouterLink>
+            <p>WaterWayz™ brings navigation, vessel-specific passage planning, hazard awareness and dockage together.</p>
+            <RouterLink to="/waterwayz" class="editorial-text-link">Explore WaterWayz™ →</RouterLink>
           </li>
           <li>
             <span class="editorial-index">02</span>
             <h3>The vessel</h3>
-            <p>InteliMARIS brings installed sensors and their readings into view, with the freshness and context needed to interpret them.</p>
+            <p>PWTS, InteliBilge and InteliBMS bring compatible vessel systems into the ecosystem. The MX MariWavz™ radio network links devices and gateways; software presents the useful information in WaterWayz™.</p>
             <RouterLink to="/capabilities/monitoring" class="editorial-text-link">Explore monitoring →</RouterLink>
           </li>
           <li>

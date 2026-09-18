@@ -4,11 +4,13 @@
       <LanguageNote />
       <div class="entry-heading">
         <div>
-          <p class="editorial-eyebrow">Different roles. The same water.</p>
-          <h1>Where do <br>you come in?</h1>
+          <p class="editorial-eyebrow">InteliMARIS™ / One connected boating experience</p>
+          <h1>Your day on the water. <br>Connected.</h1>
         </div>
-        <p class="editorial-lede">At the helm. On the dock. Behind the scenes.<br>Choose your role to find what matters to you.</p>
+        <p class="editorial-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS brings it together through WaterWayz™.</p>
       </div>
+      <h2 class="chooser-heading">Where do you come in?</h2>
+      <p class="chooser-intro">Choose your role. We’ll start with what matters to you.</p>
       <div class="entry-grid">
         <AudienceChooser :selected="audience?.id" @choose="onChoose" />
         <div id="audience-preview" class="audience-preview">
@@ -19,8 +21,8 @@
           <div class="preview-copy">
             <div aria-live="polite" aria-atomic="true">
               <p class="editorial-eyebrow">{{ audience ? `For ${audience.short.toLowerCase()}` : 'One connected platform' }}</p>
-              <h2>{{ audience ? audience.headline : 'Every role has a different view.' }}</h2>
-              <p>{{ audience ? audience.intro : 'WaterWAYZ for the passage. InteliMARIS for the vessel. Connected workspaces for the people who keep the water moving.' }}</p>
+              <h2>{{ audience ? audience.headline : 'Navigate. Monitor. Arrive.' }}</h2>
+              <p>{{ audience ? audience.intro : 'WaterWayz™ connects the journey with vessel information and the people on shore. Choose your role to find your starting point.' }}</p>
             </div>
             <RouterLink v-if="audience" :to="audienceLink(audience.id)" class="editorial-button">Explore your guide <span aria-hidden="true">↗</span>
             </RouterLink>
@@ -35,6 +37,10 @@
         </RouterLink>
       </div>
     </section>
+    <section class="editorial-section editorial-shell waterwayz-feature">
+      <div><p class="editorial-eyebrow">WaterWayz™ by InteliMARIS</p><h2>Your whole boating experience. Intelligently connected.</h2><p class="editorial-lede">A passage starts before departure and carries on after you tie up. Bring the route, connected vessel information and your next stop into the same view.</p><RouterLink to="/waterwayz" class="editorial-button">Explore WaterWayz™ <span aria-hidden="true">↗</span></RouterLink></div>
+      <EditorialShot id="waterwayz-route" caption="The actual WaterWayz passage-planning view." />
+    </section>
     <section id="platform" class="editorial-section section-wash">
       <div class="editorial-shell">
         <div class="section-intro">
@@ -44,28 +50,25 @@
           </div>
           <p>Explore the workflows, see the actual product and check what is available today.</p>
         </div>
-        <FeatureLinks :ids="audience?.features" />
+        <FeatureLinks :ids="audience?.features || ['navigation', 'monitoring', 'dockpass', 'emergency-assistance']" />
       </div>
     </section>
-    <section id="marina" class="editorial-section editorial-shell">
-      <div class="section-intro">
-        <div>
-          <p class="editorial-eyebrow">Connected, with purpose</p>
-          <h2>The right information.<br>The right people.</h2>
-        </div>
-        <p>A captain plans the passage. A dockmaster prepares the berth. A technician looks after the systems. Separate responsibilities, connected around the same vessel.</p>
-      </div>
-      <div class="connection-line">
-        <span>Plan a passage</span>
-        <span>Understand the vessel</span>
-        <span>Prepare the arrival</span>
-        <span>Care for what comes next</span>
-      </div>
+    <section class="editorial-section editorial-shell">
+      <div class="section-intro"><div><p class="editorial-eyebrow">Connected vessel systems</p><h2>Your vessel never stops communicating.</h2></div><p>Power, water, temperature and the systems beneath your feet. Build your view around what you want to know, then choose the hardware to support it.</p></div>
+      <SystemLinks :ids="['pwts', 'intelibilge', 'intelibms']" />
+    </section>
+    <EcosystemSection />
+    <section class="editorial-section editorial-shell">
+      <div class="section-intro"><div><p class="editorial-eyebrow">Beyond the passage</p><h2>More detail.<br>More useful context.</h2></div><p>Explore a real survey demonstration and the capabilities we are developing around connected information. Each guide explains what is available and what comes next.</p></div>
+      <SystemLinks :ids="['geospatial', 'intelligence', 'vision']" />
     </section>
     <GuideClosing :audience="audience" />
   </main>
 </template>
 <script setup lang="ts">
+import EditorialShot from '@/components/audience/EditorialShot.vue'
+import SystemLinks from '@/components/audience/SystemLinks.vue'
+import EcosystemSection from '@/components/audience/EcosystemSection.vue'
 import { nextTick } from 'vue'
 import { RouterLink } from 'vue-router'
 import AudienceChooser from '@/components/audience/AudienceChooser.vue'

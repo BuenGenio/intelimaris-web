@@ -12,8 +12,9 @@
           </RouterLink>
         </div>
       </div>
+      <aside class="release-note"><strong>{{ feature.status || 'Current workflow · Availability depends on coverage and setup' }}</strong><p>{{ feature.availability }}</p><p v-if="feature.id === 'emergency-assistance'">WaterWayz™ does not replace emergency services, a marine radio or the applicable emergency number.</p></aside>
       <EditorialShot :key="feature.shot" :id="feature.shot" :caption="feature.caption" priority />
-      <p v-if="feature.chart" class="chart-disclaimer">WaterWAYZ is not a certified navigation system. Chart data supports situational awareness. Always cross-check official charts and local notices.</p>
+      <p v-if="feature.chart" class="chart-disclaimer">WaterWayz™ is not a certified navigation system. Chart data supports situational awareness. Always cross-check official charts and local notices.</p>
     </section>
     <section class="editorial-shell editorial-section">
       <p class="editorial-eyebrow">How it works</p>
@@ -33,7 +34,7 @@
             <p class="editorial-eyebrow">Availability</p>
             <h2>Know what you can use today.</h2>
           </div>
-          <p>{{ feature.availability }}</p>
+          <p>Explore the working tools and the limits that matter for your setup.</p>
         </div>
         <div class="availability-grid">
           <div>
@@ -43,7 +44,7 @@
             </ul>
           </div>
           <div>
-            <h3>{{ feature.id === 'hazard-reporting' || feature.id === 'marina-pms' ? 'In development' : 'Before you get started' }}</h3>
+            <h3>{{ feature.id === 'hazard-reporting' || feature.id === 'marina-pms' || feature.id === 'emergency-assistance' ? 'In development / planned' : 'Before you get started' }}</h3>
             <ul>
               <li v-for="item in feature.pending" :key="item">{{ item }}</li>
             </ul>

@@ -5,15 +5,15 @@
         <p class="t-overline footer-label">{{ t('footer.family') }}</p>
         <ul class="footer-family-list">
           <li>
-            <RouterLink to="/" class="footer-mark"><Wordmark :size="22" /></RouterLink>
+            <RouterLink to="/" class="footer-mark"><Wordmark :size="22" tm /></RouterLink>
             <span class="t-caption">{{ t('footer.family.sea') }}</span>
           </li>
           <li>
-            <RouterLink to="/waterwayz" class="footer-mark"><Wordmark root="Water" domain="Wayz" product :size="22" /></RouterLink>
+            <RouterLink to="/waterwayz" class="footer-mark"><Wordmark root="Water" domain="Wayz" product :size="22" tm /></RouterLink>
             <span class="t-caption">{{ t('footer.family.waterwayz') }}</span>
           </li>
         </ul>
-        <p class="footer-sentence">{{ t('v2.closing.sentence') }}</p>
+        <p class="footer-sentence">Know more. Worry less.<br>Enjoy the water.</p>
       </div>
 
       <nav class="footer-links" aria-label="Footer navigation">
@@ -38,16 +38,19 @@
       </nav>
     </div>
 
+    <nav class="container-wide footer-audiences" aria-label="Connected systems and developing capabilities" lang="en"><RouterLink v-for="solution in SOLUTIONS" :key="solution.id" :to="solutionLink(solution.id)">{{ solution.label }}</RouterLink><RouterLink to="/capabilities/emergency-assistance">Emergency Assistance</RouterLink></nav>
     <nav class="container-wide footer-audiences" aria-label="Audience guides" lang="en"><RouterLink v-for="person in AUDIENCES" :key="person.id" :to="audienceLink(person.id)">{{ person.label }}</RouterLink></nav>
     <div class="container-wide footer-bottom">
       <hr class="line" />
       <p class="t-caption">{{ t('footer.copyright') }}</p>
+      <p class="t-caption" lang="en">InteliMarine LLC d/b/a InteliMARIS™. WaterWayz™ is the connected boating experience.</p>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { SOLUTIONS, solutionLink } from '@/data/solutions'
 import { AUDIENCES, audienceLink } from '@/data/audiences'
 import Wordmark from '@/components/v2/Wordmark.vue'
 import MailLink from '@/components/MailLink.vue'

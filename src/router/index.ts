@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { nextTick } from 'vue'
 import { AUDIENCES } from '../data/audiences'
+import { SOLUTIONS } from '../data/solutions'
 import { CAPABILITIES } from '../data/capabilities'
 
 const router = createRouter({
@@ -14,6 +15,13 @@ const router = createRouter({
     return { top: 0, behavior }
   },
   routes: [
+    ...SOLUTIONS.filter(solution => solution.id !== 'intelibilge').map(solution => ({
+      path: `/${solution.id}`,
+      name: `solution-${solution.id}`,
+      component: () => import('../views/SolutionView.vue'),
+      props: { solutionId: solution.id },
+      meta: { title: solution.label, description: solution.summary },
+    })),
     ...AUDIENCES.map(audience => ({
       path: `/for/${audience.id}`,
       name: `audience-${audience.id}`,
@@ -32,7 +40,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      meta: { title: 'Find your place on the water', description: 'Find your guide to navigation, vessel monitoring, dockage and marina operations. Built around captains, crew, guests and the people working on shore.' },
+      meta: { title: 'Your day on the water, connected', description: 'InteliMARIS connects navigation, vessel monitoring and marina operations through WaterWayz. Find the guide for your role on the water or on shore.' },
       component: HomeView,
     },
     {
@@ -60,6 +68,7 @@ const router = createRouter({
     {
       path: '/intelibilge',
       name: 'intelibilge',
+      meta: { title: 'InteliBilge — Water-ingress monitoring', description: SOLUTIONS.find(s => s.id === 'intelibilge')!.summary },
       component: () => import('../views/InteliBilgeView.vue'),
     },
     {
@@ -70,7 +79,7 @@ const router = createRouter({
     {
       path: '/marinas',
       name: 'marinas',
-      meta: { title: 'Marina management / PMS', description: CAPABILITIES.find(c => c.id === 'marina-pms')!.summary },
+      meta: { title: 'InteliMarina + Dock Pass / Marina management', description: CAPABILITIES.find(c => c.id === 'marina-pms')!.summary },
       component: () => import('../views/MarinasView.vue'),
     },
     {
@@ -125,8 +134,8 @@ router.beforeEach(to => {
 
 router.afterEach(async (to, from, failure) => {
   if (failure) return
-  const titles: Record<string, string> = { waterwayz: 'WaterWAYZ — Navigation and passage planning', capabilities: 'Explore the platform', software: 'Connected maritime software', contact: 'Talk to the team', about: 'Our story', products: 'Marine hardware' }
-  const title = `${String(to.meta.title || titles[String(to.name)] || 'Marine technology')} | InteliMaris`
+  const titles: Record<string, string> = { waterwayz: 'WaterWayz — Your connected boating experience', capabilities: 'Explore the platform', software: 'Connected maritime software', contact: 'Talk to the team', about: 'Our story', products: 'Marine hardware' }
+  const title = `${String(to.meta.title || titles[String(to.name)] || 'Marine technology')} | InteliMARIS`
   const description = String(to.meta.description || 'Navigation, monitoring, dockage and marina operations. Find the tools and workflows for your place on the water.')
   document.title = title
   for (const [selector, value] of [

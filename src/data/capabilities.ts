@@ -14,13 +14,14 @@ export interface Capability {
   pending: string[]
   related: string[]
   chart?: boolean
+  status?: string
 }
 
 export const CAPABILITIES: Capability[] = [
   {
-    id: 'navigation', label: 'Navigation', product: 'WaterWAYZ',
-    headline: 'Read the water. Keep the context.',
-    summary: 'Bring the vessel, chart, destinations and available traffic information into one view. Switch perspective without losing the passage you are following.',
+    id: 'navigation', label: 'Navigation', product: 'WaterWayz™',
+    headline: 'Navigate with the bigger picture.',
+    summary: 'Find your next stop, understand the water around you and keep the passage in view. Charts, vessel position and available traffic information share the same context.',
     shot: 'waterwayz-map', caption: 'The Above view: vessel, route and nearby places on the same chart.',
     availability: 'Map and vessel views are implemented. Layer coverage, connectivity and data freshness affect what can be shown.',
     steps: [
@@ -33,7 +34,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['route-planning', 'hazard-reporting', 'dockpass'], chart: true,
   },
   {
-    id: 'route-planning', label: 'Route planning', product: 'WaterWAYZ',
+    id: 'route-planning', label: 'Route planning', product: 'WaterWayz™',
     headline: 'A passage planned for your vessel.',
     summary: 'Choose the two ends of a passage and let the planner evaluate the route against your vessel’s dimensions and the available waterway information.',
     shot: 'waterwayz-route', caption: 'Review the passage, arrival time and conditions before setting off.',
@@ -48,9 +49,9 @@ export const CAPABILITIES: Capability[] = [
     related: ['navigation', 'hazard-reporting', 'dockpass'], chart: true,
   },
   {
-    id: 'hazard-reporting', label: 'Hazards & reporting', product: 'WaterWAYZ',
-    headline: 'Know what was reported. Know how recently.',
-    summary: 'Read nearby hazards with their severity, status and provenance. Community reporting is the next part of the workflow, and its availability is stated separately.',
+    id: 'hazard-reporting', label: 'Hazards & reporting', product: 'WaterWayz™',
+    headline: 'A clearer picture of what lies ahead.', status: 'Hazard viewing · Reporting in development',
+    summary: 'See reported hazards in the context of your passage, with enough detail to judge how recent and well supported the information is. Community reporting is being developed alongside the existing viewing tools.',
     shot: 'waterwayz-map', caption: 'Hazards belong in the context of the water and the passage.',
     availability: 'Hazard viewing is implemented. Submitting, confirming and clearing community reports are in development in the current web app.',
     steps: [
@@ -63,24 +64,24 @@ export const CAPABILITIES: Capability[] = [
     related: ['navigation', 'route-planning'], chart: true,
   },
   {
-    id: 'monitoring', label: 'Vessel monitoring', product: 'InteliMARIS',
-    headline: 'Understand the reading behind the alert.',
-    summary: 'Bring installed vessel sensors into a shared view. Read system values alongside their age, then connect what needs attention with the people looking after the vessel.',
+    id: 'monitoring', label: 'Vessel monitoring', product: 'InteliMARIS™ connected systems',
+    headline: 'Stay connected to the vessel you care about.',
+    summary: 'See what supported sensors are telling you about power, water and conditions aboard. WaterWayz™ brings the readings, available history and the people looking after the vessel into one connected experience.',
     shot: 'waterwayz-sensors', caption: 'Voltage, current, bilge level and temperature with reading freshness.',
     availability: 'Vessel sensor and monitoring surfaces are implemented. Readings require compatible hardware and connectivity; the fleet overview currently contains sample data.',
     steps: [
-      { title: 'Connect the right sensors', body: 'Choose compatible hardware for the systems you want to monitor. LoRaWAN provides the sensor link; a suitable gateway and uplink are part of the installation.' },
+      { title: 'Connect the right sensors', body: 'Choose compatible hardware for the systems you want to monitor. The MX MariWavz™ radio network links compatible devices and gateways; a suitable uplink carries data onward. Confirm the installation’s radio compatibility and coverage.' },
       { title: 'Read value and freshness together', body: 'A stale reading should not look current. Review the age of the data and investigate missing or delayed readings before relying on a value.' },
       { title: 'Bring service into the picture', body: 'Use monitoring alongside maintenance reminders and service records. Assigned technicians can inspect the vessel through their service engagement.' },
     ],
-    available: ['Vessel sensor inventory and readings', 'Reading freshness and connection context', 'Monitoring access for assigned service technicians', 'Hardware catalog for installation planning'],
+    available: ['Vessel sensor inventory, readings and available channel history', 'Reading freshness and connection context', 'Monitoring access for assigned service technicians', 'Hardware catalog for installation planning'],
     pending: ['The consolidated fleet dashboard and its predictions use sample data today. Discuss deployment-specific monitoring requirements with the team.'],
     related: ['maintenance', 'navigation'],
   },
   {
-    id: 'marina-pms', label: 'Marina / PMS', product: 'Marina operations',
-    headline: 'Every arrival has a place. Every team has a view.',
-    summary: 'Run the marina’s working day from a shared basin layout, booking records and duty roster. Give the office and dock team the information and authority each needs.',
+    id: 'marina-pms', label: 'InteliMarina / PMS', product: 'InteliMarina + Dock Pass',
+    headline: 'Better arrivals. A clearer working day.', status: 'Core marina workflows · Advanced PMS in development',
+    summary: 'InteliMarina brings berth layouts, arrivals, residents and staff together. Dock Pass connects the vessel’s request with the host’s stay record, so the office, dock team and arriving crew can work from the right information.',
     shot: 'pms-berth-layout', caption: 'A berth layout over the actual basin, connected to the day’s work.',
     availability: 'Core marina operations are implemented. The full reservation, finance and reporting suite is still being built.',
     steps: [
@@ -93,9 +94,9 @@ export const CAPABILITIES: Capability[] = [
     related: ['dockpass', 'monitoring', 'maintenance'],
   },
   {
-    id: 'dockpass', label: 'Dockage & DockPass', product: 'WaterWAYZ · Hosts',
-    headline: 'From finding a berth to finding your way in.',
-    summary: 'Bring berth discovery, requests and stays into the same journey. Vessel users see the destination; marina and private-dock hosts work the other side of the request.',
+    id: 'dockpass', label: 'Dockage & Dock Pass', product: 'InteliMarina + Dock Pass',
+    headline: 'Know the berth before you arrive.',
+    summary: 'Find a suitable marina or private dock, request a stay and carry confirmed arrival details into the passage. Vessel requirements and approach information help make the next conversation with the host more useful.',
     shot: 'waterwayz-marina-card', caption: 'A destination’s details lead into planning and dockage.',
     availability: 'Dockage search, request and host-management surfaces are implemented. Listing availability and confirmation depend on the host and deployment.',
     steps: [
@@ -106,6 +107,22 @@ export const CAPABILITIES: Capability[] = [
     available: ['Vessel-side listing search and booking requests', 'Booking details and stay records', 'Private-host listings and incoming requests', 'Marina-side berth assignment and approach details'],
     pending: ['Do not assume online payment collection, instant confirmation or a complete marina finance suite. Confirm the host’s booking arrangements.'],
     related: ['route-planning', 'marina-pms', 'navigation'], chart: true,
+  },
+  {
+    id: 'emergency-assistance', label: 'Emergency Assistance', product: 'WaterWayz™',
+    headline: 'When every minute matters.',
+    summary: 'Clear information can help you explain where you are and which vessel needs assistance. WaterWayz brings the device’s position and vessel context into an emergency information screen.',
+    status: 'Information tools available · Access-routing concepts planned',
+    shot: 'waterwayz-marina-card', caption: 'Marina context in WaterWayz. This is a destination view, not the emergency screen.',
+    availability: 'The current emergency screen shows device coordinates, position age, a copy control, vessel-name context and communication references. It does not dispatch responders or broadcast an alert to nearby vessels.',
+    steps: [
+      { title: 'Make the position clear', body: 'Read the device position in the formats shown, with its age visible. The screen distinguishes a current fix from a last-known position; it cannot supply a position the device does not have.' },
+      { title: 'Put the vessel in context', body: 'The current screen brings the vessel name together with information for communicating a request for help. WaterWayz is an assistance and information tool; established emergency communication channels remain essential.' },
+      { title: 'Close the last-mile gap', body: 'A marina address may not explain how to reach a particular vessel. We are exploring a richer information pack with vessel identity, dock and slip, contacts and landside access guidance. Shareable access-to-vessel routes are a proposed integration.' },
+    ],
+    available: ['Device position with visible freshness', 'Copyable coordinates and vessel-name context', 'Emergency communication reference information'],
+    pending: ['Nearby-vessel distress broadcast is not connected', 'Vessel-photo, contact and marina-access information pack', 'Shareable routes from landside access or staging areas to a vessel', 'No emergency dispatch or responder-system integration is offered'],
+    related: ['navigation', 'dockpass'],
   },
   {
     id: 'maintenance', label: 'Maintenance & service', product: 'Vessels · Service companies',

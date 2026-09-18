@@ -11,7 +11,7 @@ export const translations: Record<Language, Translations> = {
     'nav.platform': 'Sensors',
     'nav.aiStack': 'Cloud & AI',
     'nav.capabilities': 'Capabilities',
-    'nav.marina': 'Marinas',
+    'nav.marina': 'InteliMarina / PMS',
     'nav.vision': 'Roadmap',
     'nav.architecture': 'Architecture',
     'nav.products': 'Products',
@@ -30,7 +30,7 @@ export const translations: Record<Language, Translations> = {
     'nav.themeLight': 'Light',
     'nav.language': 'Language',
     'nav.about': 'About',
-    'nav.waterwayz': 'WaterWayz',
+    'nav.waterwayz': 'WaterWayz™',
     'nav.productsAllCategories': 'All categories',
     'nav.productsAllHint': 'Browse the catalog by domain',
 
@@ -132,7 +132,7 @@ export const translations: Record<Language, Translations> = {
     'homeAlt.contact.emailLabel': 'Email',
     'homeAlt.contact.startConversation': 'Start the conversation',
 
-    'bilge.label': 'Flood prevention',
+    'bilge.label': 'Water-ingress monitoring',
     'bilge.howTitle': 'How it works',
     'bilge.componentsTitle': 'Component overview',
     'bilge.sequenceTitle': 'Sequence of operation',
@@ -205,7 +205,7 @@ export const translations: Record<Language, Translations> = {
     'capabilities.action.desc': 'Critical events reach the InteliMaris App, SMS, or email. For severe scenarios the system can disconnect batteries, run pumps, or notify emergency contacts — based on your rules.',
     'capabilities.marina.title': 'Marina-scale safety',
     'capabilities.marina.desc': 'When the AI determines a serious event is unfolding, InteliMarina can alert the marina control center in real time — not just the owner — so someone is always in the loop.',
-    
+
     'sensors.label': 'InteliMaris sensor family',
     'sensors.title': 'Complete vessel coverage',
     'sensors.description': 'From smoke and CO to bilge intelligence, shore power, batteries, DC branches, vibration-based fuel insight, and remote AC control — every critical system is represented.',
@@ -240,10 +240,10 @@ export const translations: Record<Language, Translations> = {
     'sensors.flow.step3': 'Act on unified dashboards',
     'sensors.catalogLink': 'View hardware specifications',
     'sensors.catalogHint': ' — IM series sensors & InteliBilge.',
-    
+
     'products.label': 'Product catalog',
-    'products.title': 'InteliMaris hardware specifications',
-    'products.lead': 'Marine-grade sensors and systems designed for the InteliMarine AI Stack.',
+    'products.title': 'InteliMARIS hardware specifications',
+    'products.lead': 'Explore compatible devices for PWTS, InteliBilge and InteliBMS. Confirm the supplied configuration, tested ratings and supported software features for your installation.',
     'products.filterBy': 'Filter by category',
     'products.category.all': 'All',
     'products.jumpNav': 'Quick links',
@@ -277,7 +277,7 @@ export const translations: Record<Language, Translations> = {
     'products.categoryBlurb.system': 'Systems that combine sensors, actuators and the cloud.',
 
     'categories.label': 'Browse by category',
-    'categories.title': 'InteliMaris product categories',
+    'categories.title': 'InteliMARIS product categories',
     'categories.lead': 'Pick a domain to see the sensors, monitors, and systems built for it. Each category groups hardware that shares an installation pattern, alert profile, or vessel role.',
     'categories.viewCategory': 'View category',
     'categories.viewProduct': 'View product',
@@ -424,7 +424,7 @@ export const translations: Record<Language, Translations> = {
     'dashboard.status.optimal': 'Optimal',
     'dashboard.status.normal': 'Normal',
     'dashboard.status.fixed': 'Fixed',
-    
+
     'automation.label': 'Automation Engine',
     'automation.title': 'From detection to decisive action',
     'automation.description': 'When seconds matter, the stack coordinates owners, marina staff, and onboard equipment automatically.',
@@ -442,7 +442,7 @@ export const translations: Record<Language, Translations> = {
     'automation.feature2.desc': 'Multi-tier notification with SMS, email, webhook, and app push',
     'automation.feature3.title': 'Command & Control',
     'automation.feature3.desc': 'Remote device actuation with safety interlocks and audit logging',
-    
+
     'architecture.label': 'Technical Foundation',
     'architecture.title': 'Built for Scale & Reliability',
     'architecture.eventdriven.title': 'Event-Driven Core',
@@ -457,7 +457,7 @@ export const translations: Record<Language, Translations> = {
     'architecture.microservices.desc': 'Independent services for query, command, decoding, and real-time gateways. Scale components independently based on load.',
     'architecture.multitenant.title': 'Multi-tenant Isolation',
     'architecture.multitenant.desc': 'Complete data separation per organization. Shared infrastructure with tenant-level security, quotas, and customization.',
-    
+
     'vision.label': 'Product roadmap',
     'vision.title': 'The InteliMarine AI Stack roadmap',
     'vision.description': 'A staged plan from unified ingestion to marina-scale automation — shipping incrementally, not as vaporware.',
@@ -470,7 +470,7 @@ export const translations: Record<Language, Translations> = {
     'vision.roadmap.s4.title': '4 · Marina-scale safety automation',
     'vision.roadmap.s4.desc': 'Critical events automatically notify InteliMarina with GPS, vessel ID, and event type; optional integrations for sirens, strobes, or fire suppression.',
     'vision.quote': 'InteliMarine — smart sensors, smarter AI, safer vessels, safer marinas.',
-    
+
     'usecases.label': 'Market Segments',
     'usecases.title': 'Built for Multiple Maritime Stakeholders',
     'usecases.yacht.title': 'Private Yacht Owners',
@@ -497,7 +497,7 @@ export const translations: Record<Language, Translations> = {
     'usecases.insurance.benefit2': 'Claims validation',
     'usecases.insurance.benefit3': 'Usage-based pricing',
     'usecases.insurance.benefit4': 'Loss prevention',
-    
+
     'business.label': 'Engagement models',
     'business.title': 'Choose your starting point',
     'business.hardware.tier': 'Vessel owners',
@@ -545,7 +545,7 @@ export const translations: Record<Language, Translations> = {
     'closing.form.submit': 'Submit Request',
     'closing.form.note': 'We\'ll respond within 24 hours with demo access and technical documentation.',
     'closing.form.success': 'Thank you for your interest! Our team will contact you within 24 hours.',
-    
+
     'about.label': 'About us',
     'about.title': 'The intelligence layer for the world\'s waters',
     'about.lead': 'InteliMaris builds the sensors, the app and the marina console that watch a vessel, a passage and a basin, and say what changed before it matters.',
@@ -595,7 +595,7 @@ export const translations: Record<Language, Translations> = {
     'footer.platform.software': 'Software',
     'demo.label': 'Technology demonstration',
     'demo.title': 'See the platform work on real survey data',
-    'demo.lead': 'Two live demonstrations of the InteliMarine technology stack: an in-browser LiDAR point-cloud viewer that renders a 220-million-point survey after decimation to web size, and a sample marina details page that uses it to explore a site by structure, height, vegetation and laser return.',
+    'demo.lead': 'Two interactive demonstrations using real survey data: an in-browser LiDAR point-cloud viewer that renders a 220-million-point survey after decimation to web size, and a sample marina details page that uses it to explore a site by structure, height, vegetation and laser return.',
     'demo.card.lidar.title': 'Interactive LiDAR viewer',
     'demo.card.lidar.desc': 'A LAS 1.4 aerial scan, decimated on a 0.8 m voxel grid to 1.18 million points and streamed to a WebGL renderer. Colour by scan RGB, height above ground, laser intensity, derived structure band or return count; slice by height; toggle bands; orbit, top-down and dock-level views.',
     'demo.card.marina.title': 'Sample marina details page',
@@ -681,7 +681,7 @@ export const translations: Record<Language, Translations> = {
     'footer.company.contact': 'Contact',
     'footer.copyright': '© 2026 InteliMaris'
   },
-  
+
   es: {
     'nav.platform': 'Sensores',
     'nav.aiStack': 'Nube e IA',
@@ -880,7 +880,7 @@ export const translations: Record<Language, Translations> = {
     'capabilities.action.desc': 'Los eventos críticos llegan a la app InteliMaris, SMS o correo. En escenarios severos puede desconectar baterías, accionar bombas o avisar a contactos de emergencia según sus reglas.',
     'capabilities.marina.title': 'Seguridad a escala de marina',
     'capabilities.marina.desc': 'Cuando la IA determina un evento grave, InteliMarina puede alertar al centro de control en tiempo real — no solo al propietario — para que siempre haya alguien en guardia.',
-    
+
     'sensors.label': 'Familia de sensores InteliMaris',
     'sensors.title': 'Cobertura completa del buque',
     'sensors.description': 'Desde humo y CO hasta inteligencia de sentina, energía de tierra, baterías, CC, combustible virtual y control remoto de CA — cada sistema crítico está cubierto.',
@@ -915,7 +915,7 @@ export const translations: Record<Language, Translations> = {
     'sensors.flow.step3': 'Opere con paneles unificados',
     'sensors.catalogLink': 'Ver especificaciones de hardware',
     'sensors.catalogHint': ' — sensores serie IM e InteliBilge.',
-    
+
     'products.label': 'Catálogo de productos',
     'products.title': 'Especificaciones de hardware InteliMaris',
     'products.lead': 'Sensores y sistemas marinos diseñados para InteliMarine AI Stack.',
@@ -1099,7 +1099,7 @@ export const translations: Record<Language, Translations> = {
     'dashboard.status.optimal': 'Óptimo',
     'dashboard.status.normal': 'Normal',
     'dashboard.status.fixed': 'Fijo',
-    
+
     'automation.label': 'Motor de Automatización',
     'automation.title': 'De la detección a la acción decisiva',
     'automation.description': 'Cuando importan los segundos, el stack coordina armadores, marina y equipos a bordo de forma automática.',
@@ -1117,7 +1117,7 @@ export const translations: Record<Language, Translations> = {
     'automation.feature2.desc': 'Notificación multinivel con SMS, correo electrónico, webhook y push de app',
     'automation.feature3.title': 'Comando y Control',
     'automation.feature3.desc': 'Actuación remota de dispositivos con bloqueos de seguridad y registro de auditoría',
-    
+
     'architecture.label': 'Fundamento Técnico',
     'architecture.title': 'Construido para Escala y Confiabilidad',
     'architecture.eventdriven.title': 'Núcleo Basado en Eventos',
@@ -1132,7 +1132,7 @@ export const translations: Record<Language, Translations> = {
     'architecture.microservices.desc': 'Servicios independientes para consulta, comando, decodificación y gateways en tiempo real. Escale componentes de forma independiente según la carga.',
     'architecture.multitenant.title': 'Aislamiento Multi-tenant',
     'architecture.multitenant.desc': 'Separación completa de datos por organización. Infraestructura compartida con seguridad, cuotas y personalización a nivel de inquilino.',
-    
+
     'vision.label': 'Hoja de ruta del producto',
     'vision.title': 'Hoja de ruta del InteliMarine AI Stack',
     'vision.description': 'Un plan por fases desde la ingesta unificada hasta la automatización a escala de marina — entregado de forma incremental.',
@@ -1145,7 +1145,7 @@ export const translations: Record<Language, Translations> = {
     'vision.roadmap.s4.title': '4 · Automatización de seguridad a escala de marina',
     'vision.roadmap.s4.desc': 'Los eventos críticos notifican automáticamente a InteliMarina con GPS, ID de buque y tipo; integraciones opcionales con sirenas, strobes o supresión.',
     'vision.quote': 'InteliMarine — sensores inteligentes, IA más lista, buques más seguros, marinas más seguras.',
-    
+
     'usecases.label': 'Segmentos de Mercado',
     'usecases.title': 'Construido para Múltiples Partes Interesadas Marítimas',
     'usecases.yacht.title': 'Propietarios de Yates Privados',
@@ -1172,7 +1172,7 @@ export const translations: Record<Language, Translations> = {
     'usecases.insurance.benefit2': 'Validación de reclamos',
     'usecases.insurance.benefit3': 'Precios basados en uso',
     'usecases.insurance.benefit4': 'Prevención de pérdidas',
-    
+
     'business.label': 'Modelos de colaboración',
     'business.title': 'Elija su punto de partida',
     'business.hardware.tier': 'Armadores',
@@ -1220,7 +1220,7 @@ export const translations: Record<Language, Translations> = {
     'closing.form.submit': 'Enviar Solicitud',
     'closing.form.note': 'Responderemos en 24 horas con acceso de demostración y documentación técnica.',
     'closing.form.success': '¡Gracias por su interés! Nuestro equipo se pondrá en contacto con usted en 24 horas.',
-    
+
     'about.label': 'Sobre nosotros',
     'about.title': 'La capa de inteligencia para las aguas del mundo',
     'about.lead': 'InteliMaris construye los sensores, la app y la consola de marina que vigilan un barco, una travesía y una dársena, y dicen qué cambió antes de que importe.',
@@ -1356,7 +1356,7 @@ export const translations: Record<Language, Translations> = {
     'footer.company.contact': 'Contacto',
     'footer.copyright': '© 2026 InteliMaris'
   },
-  
+
   el: {
     'nav.platform': 'Αισθητήρες',
     'nav.aiStack': 'Νέφος & AI',
@@ -1555,7 +1555,7 @@ export const translations: Record<Language, Translations> = {
     'capabilities.action.desc': 'Τα κρίσιμα συμβάντα φτάνουν στην εφαρμογή InteliMaris, SMS ή email. Σε σοβαρά σενάρια το σύστημα μπορεί να αποσυνδέσει μπαταρίες, να τρέξει αντλίες ή να ειδοποιήσει επαφές έκτακτης ανάγκης σύμφωνα με τους κανόνες σας.',
     'capabilities.marina.title': 'Ασφάλεια κλίμακας μαρίνας',
     'capabilities.marina.desc': 'Όταν το AI κρίνει σοβαρό συμβάν, η InteliMarina μπορεί να ειδοποιήσει το κέντρο ελέγχου σε πραγματικό χρόνο — όχι μόνο τον ιδιοκτήτη — ώστε κάποιος να είναι πάντα σε επιφυλακή.',
-    
+
     'sensors.label': 'Οικογένεια αισθητήρων InteliMaris',
     'sensors.title': 'Πλήρης κάλυψη σκάφους',
     'sensors.description': 'Από καπνό και CO έως νοημοσύνη σεντίνας, ισχύ ξηράς, μπαταρίες, DC, εικονικό καύσιμο και απομακρυσμένο έλεγχο AC — κάθε κρίσιμο σύστημα καλύπτεται.',
@@ -1590,7 +1590,7 @@ export const translations: Record<Language, Translations> = {
     'sensors.flow.step3': 'Λειτουργήστε με ενοποιημένους πίνακες',
     'sensors.catalogLink': 'Δείτε τις προδιαγραφές υλικού',
     'sensors.catalogHint': ' — αισθητήρες σειράς IM & InteliBilge.',
-    
+
     'products.label': 'Κατάλογος προϊόντων',
     'products.title': 'Προδιαγραφές υλικού InteliMaris',
     'products.lead': 'Ναυτικοί βαθμού αισθητήρες και συστήματα για το InteliMarine AI Stack.',
@@ -1774,7 +1774,7 @@ export const translations: Record<Language, Translations> = {
     'dashboard.status.optimal': 'Βέλτιστο',
     'dashboard.status.normal': 'Κανονικό',
     'dashboard.status.fixed': 'Σταθερό',
-    
+
     'automation.label': 'Μηχανή Αυτοματισμού',
     'automation.title': 'Από την ανίχνευση στην αποφασιστική δράση',
     'automation.description': 'Όταν μετρούν τα δευτερόλεπτα, το stack συντονίζει αυτόματα ιδιοκτήτες, μαρίνα και εξοπλισμό στο σκάφος.',
@@ -1792,7 +1792,7 @@ export const translations: Record<Language, Translations> = {
     'automation.feature2.desc': 'Ειδοποίηση πολλαπλών επιπέδων με SMS, email, webhook και push εφαρμογής',
     'automation.feature3.title': 'Εντολή & Έλεγχος',
     'automation.feature3.desc': 'Απομακρυσμένη ενεργοποίηση συσκευής με ασφαλιστικά κλειδώματα και καταγραφή ελέγχου',
-    
+
     'architecture.label': 'Τεχνικό Θεμέλιο',
     'architecture.title': 'Κατασκευασμένο για Κλίμακα & Αξιοπιστία',
     'architecture.eventdriven.title': 'Πυρήνας Βασισμένος σε Συμβάντα',
@@ -1807,7 +1807,7 @@ export const translations: Record<Language, Translations> = {
     'architecture.microservices.desc': 'Ανεξάρτητες υπηρεσίες για ερώτημα, εντολή, αποκωδικοποίηση και πύλες σε πραγματικό χρόνο. Κλιμακώστε στοιχεία ανεξάρτητα με βάση το φορτίο.',
     'architecture.multitenant.title': 'Απομόνωση Multi-tenant',
     'architecture.multitenant.desc': 'Πλήρης διαχωρισμός δεδομένων ανά οργανισμό. Κοινόχρηστη υποδομή με ασφάλεια, ποσοστώσεις και προσαρμογή σε επίπεδο μισθωτή.',
-    
+
     'vision.label': 'Οδικός χάρτης προϊόντος',
     'vision.title': 'Οδικός χάρτης InteliMarine AI Stack',
     'vision.description': 'Σταδιακό σχέδιο από την ενοποιημένη πρόσληψη έως τον αυτοματισμό κλίμακας μαρίνας — παραδίδεται σταδιακά, όχι ως ατμός.',
@@ -1820,7 +1820,7 @@ export const translations: Record<Language, Translations> = {
     'vision.roadmap.s4.title': '4 · Αυτοματισμός ασφαλείας κλίμακας μαρίνας',
     'vision.roadmap.s4.desc': 'Τα κρίσιμα συμβάντα ειδοποιούν αυτόματα την InteliMarina με GPS, ID σκάφους και τύπο· προαιρετικές ενσωματώσεις με σειρήνες, strobes ή καταστολή πυρός.',
     'vision.quote': 'InteliMarine — έξυπνοι αισθητήρες, πιο έξυπνο AI, ασφαλέστερα σκάφη, ασφαλέστερες μαρίνες.',
-    
+
     'usecases.label': 'Τμήματα Αγοράς',
     'usecases.title': 'Κατασκευασμένο για Πολλαπλά Ναυτικά Ενδιαφερόμενα Μέρη',
     'usecases.yacht.title': 'Ιδιοκτήτες Ιδιωτικών Γιοτ',
@@ -1847,7 +1847,7 @@ export const translations: Record<Language, Translations> = {
     'usecases.insurance.benefit2': 'Επικύρωση αξιώσεων',
     'usecases.insurance.benefit3': 'Τιμολόγηση βασισμένη σε χρήση',
     'usecases.insurance.benefit4': 'Πρόληψη απώλειας',
-    
+
     'business.label': 'Μοντέλα συνεργασίας',
     'business.title': 'Επιλέξτε το σημείο εκκίνησης',
     'business.hardware.tier': 'Ιδιοκτήτες σκαφών',
@@ -1895,7 +1895,7 @@ export const translations: Record<Language, Translations> = {
     'closing.form.submit': 'Υποβολή Αιτήματος',
     'closing.form.note': 'Θα απαντήσουμε εντός 24 ωρών με πρόσβαση demo και τεχνική τεκμηρίωση.',
     'closing.form.success': 'Ευχαριστούμε για το ενδιαφέρον σας! Η ομάδα μας θα επικοινωνήσει μαζί σας εντός 24 ωρών.',
-    
+
     'about.label': 'Σχετικά με εμάς',
     'about.title': 'Το επίπεδο νοημοσύνης για τα νερά του κόσμου',
     'about.lead': 'Η InteliMaris φτιάχνει τους αισθητήρες, την εφαρμογή και την κονσόλα μαρίνας που παρακολουθούν ένα σκάφος, έναν πλου και έναν λιμενίσκο, και λένε τι άλλαξε πριν μετρήσει.',

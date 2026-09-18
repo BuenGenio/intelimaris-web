@@ -21,9 +21,9 @@ export const AUDIENCES: Audience[] = [
   {
     id: 'captains', group: 'aboard', label: 'Captain / navigator', short: 'Captains & navigators',
     intent: 'Plan the passage. Take the helm.', headline: 'Your vessel. Your passage. The detail that matters.',
-    intro: 'Build a passage around your vessel’s dimensions, inspect the route and arrive with the berth details in hand. WaterWAYZ brings the decisions before departure and the view underway together.',
+    intro: 'Build a passage around your vessel’s dimensions, inspect the route and arrive with the berth details in hand. WaterWayz™ brings the decisions before departure and the view underway together.',
     shot: 'waterwayz-route', caption: 'A passage, its conditions and the destination in one view.',
-    features: ['route-planning', 'navigation', 'hazard-reporting', 'dockpass'],
+    features: ['route-planning', 'navigation', 'hazard-reporting', 'dockpass', 'emergency-assistance'],
     steps: [
       { title: 'Start with your vessel', body: 'Keep length, beam, draft and air draft in the vessel workspace. Choose a departure and destination; you can plan from somewhere other than your current position.' },
       { title: 'Read the answer before leaving', body: 'Review the route, duration and constraints. Where the planner cannot find a passage or evaluate a clearance, it explains the gap instead of treating unknown as safe.' },
@@ -35,15 +35,15 @@ export const AUDIENCES: Audience[] = [
   {
     id: 'passengers', group: 'aboard', label: 'Passenger / guest', short: 'Passengers & guests',
     intent: 'Understand the trip you’re joining.', headline: 'A place in the journey. A clearer view of the day.',
-    intro: 'Get familiar with the destination, understand the passage and ask the captain about shared access. You do not need to own a vessel to find your way around WaterWAYZ.',
+    intro: 'Get familiar with the destination, understand the passage and ask the captain about shared access. You do not need to own a vessel to find your way around WaterWayz™.',
     shot: 'waterwayz-marina-card', caption: 'Explore the destination before you step aboard.',
-    features: ['navigation', 'dockpass', 'hazard-reporting'],
+    features: ['navigation', 'dockpass', 'emergency-assistance'],
     steps: [
       { title: 'Explore where you are going', body: 'Browse the map and marina information to get to know the destination and the services around it.' },
       { title: 'Ask the captain for an invitation', body: 'A vessel owner or administrator can invite you with appropriate access. Read-only access lets you see the workspace without changing it.' },
       { title: 'Keep decisions with the helm', body: 'Use the shared information to follow the day. Passage decisions, vessel settings and berth changes remain with the people authorized to make them.' },
     ],
-    access: 'There is no separate passenger account type or public live-trip link today. Shared vessel access is by invitation, using an appropriate workspace role such as Viewer.',
+    access: 'Join by invitation, with access set by the vessel owner or administrator. Read-only access lets you follow the shared information without changing it. A public live-trip link is not currently offered.',
     cta: 'Ask about guest access',
   },
   {
@@ -51,13 +51,13 @@ export const AUDIENCES: Audience[] = [
     intent: 'Stay connected to the vessel and team.', headline: 'One vessel. A crew on the same page.',
     intro: 'Join the vessel workspace for its map, systems, crew and conversations. See the information relevant to your work, with access set by the people responsible for the vessel.',
     shot: 'waterwayz-map', caption: 'The same vessel and operating picture for the people aboard.',
-    features: ['navigation', 'monitoring', 'hazard-reporting', 'maintenance'],
+    features: ['navigation', 'monitoring', 'emergency-assistance', 'maintenance'],
     steps: [
       { title: 'Join the right vessel', body: 'Accept an invitation from the owner or administrator. Each vessel has its own workspace, so information and membership stay with that vessel.' },
       { title: 'Read the situation together', body: 'Open the map, review system readings and use the workspace’s crew channel. Data age helps distinguish a recent reading from one that needs checking.' },
       { title: 'Work within your access', body: 'Crew membership gives the team its operational view. Management, billing and service work remain controlled by the permissions granted to each person.' },
     ],
-    access: 'Crew is the vessel’s Member role. Maintenance technicians receive a separate service view through an active engagement; they do not automatically join the crew.',
+    access: 'Your vessel administrator sets crew access. Inviting a service company gives assigned technicians a separate service view and keeps private crew conversations with the crew.',
     cta: 'Talk about your crew setup',
   },
   {
@@ -77,7 +77,7 @@ export const AUDIENCES: Audience[] = [
   {
     id: 'marina-owners', group: 'ashore', label: 'Marina owner / operator', short: 'Marina owners & operators',
     intent: 'Run the basin and welcome arrivals.', headline: 'The whole basin. One working day.',
-    intro: 'Connect your berth layout, arriving vessels, residents and staff. The marina management system brings the office and the pontoon into the same operating picture.',
+    intro: 'Connect your berth layout, arriving vessels, residents and staff. InteliMarina brings the office and the pontoon into the same operating picture, while Dock Pass keeps arrival requests and stays connected.',
     shot: 'pms-berth-layout', caption: 'Your real basin, with berth dimensions and availability.',
     features: ['marina-pms', 'dockpass', 'monitoring'],
     steps: [

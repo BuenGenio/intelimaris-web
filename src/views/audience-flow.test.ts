@@ -64,7 +64,7 @@ describe('audience journey', () => {
     await router.push('/?choose=1')
     await nextTick()
     expect(wrapper.findAll('button[aria-pressed="true"]')).toHaveLength(0)
-    expect(wrapper.findAll('.feature-link')).toHaveLength(CAPABILITIES.length)
+    expect(wrapper.findAll('.feature-link')).toHaveLength(4)
   })
 
   it('keeps the chooser usable when local storage is blocked', async () => {
@@ -83,10 +83,18 @@ describe('audience journey', () => {
     expect((wrapper.get('select[aria-label="Your role"]').element as HTMLSelectElement).value).toBe('maintenance')
     const message = wrapper.get('textarea')
     expect((message.element as HTMLTextAreaElement).value).toContain('service companies & technicians')
-    expect((message.element as HTMLTextAreaElement).value).toContain('vessel monitoring')
+    expect((message.element as HTMLTextAreaElement).value).toContain('Vessel monitoring')
     await message.setValue('I need help with three vessels.')
     expect((message.element as HTMLTextAreaElement).value).toBe('I need help with three vessels.')
     expect(send).not.toHaveBeenCalled()
+  })
+
+  it('prefills a product-family enquiry without losing the audience context', async () => {
+    const router = await setup('/contact?audience=fleet-owners&topic=intelibms')
+    wrapper = mount(ContactView, { global: { plugins: [router] } })
+    expect((wrapper.get('select[aria-label="Your role"]').element as HTMLSelectElement).value).toBe('fleet-owners')
+    expect((wrapper.get('textarea').element as HTMLTextAreaElement).value).toContain('InteliBMS')
+    expect(wrapper.get('.contact-topic').text()).toContain('InteliBMS')
   })
 
   it('updates copy and images when navigating between guides using the same view', async () => {
@@ -102,7 +110,7 @@ describe('audience journey', () => {
     const router = await setup('/capabilities/hazard-reporting')
     wrapper = mount(CapabilityView, { props: { featureId: 'hazard-reporting' }, global: { plugins: [router] } })
     const availability = wrapper.get('#availability')
-    expect(availability.text()).toContain('Hazard viewing is implemented')
+    expect(wrapper.get('.release-note').text()).toContain('Hazard viewing is implemented')
     expect(availability.text()).toContain('In development')
     expect(availability.text()).toContain('Place and submit a new report')
     expect(wrapper.find('button[type="submit"]').exists()).toBe(false)

@@ -10,8 +10,8 @@ export const v2Translations: Record<Language, Translations> = {
   en: {
     'shot.zoomAria': 'Open full size',
     'footer.family': 'The family',
-    'footer.family.sea': 'The sea',
-    'footer.family.waterwayz': 'The app, by Intelimaris',
+    'footer.family.sea': 'The company and connected systems',
+    'footer.family.waterwayz': 'The connected boating experience',
     'v2.closing.sentence': 'We see what is happening on the water, and tell you before it matters.',
     'shot.close': 'Close',
     'shot.panHint': 'Pinch or drag to read the full screen',

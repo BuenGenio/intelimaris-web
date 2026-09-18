@@ -203,3 +203,46 @@ html { scroll-padding-top: 124px; }
 .editorial-page .closing-section .section-label { color:var(--domain-ink); }
 [data-theme='dark'] .editorial-page .form-card button[type='submit'] { color:var(--navy); }
 .footer .footer-links .footer-section a { overflow-wrap:anywhere; }
+
+/* Connected ecosystem and product family guides. */
+.home-audience .entry-heading h1 { font-size:clamp(2.7rem,4.7vw,4.65rem); }
+.chooser-heading { font-size:1.35rem !important; letter-spacing:-.02em !important; }
+.chooser-intro { color:var(--text-secondary); font-size:.92rem; margin:10px 0 24px; }
+.waterwayz-feature { display:grid; grid-template-columns:1fr 1.25fr; gap:56px; align-items:center; }
+.waterwayz-feature h2 { max-width:16ch; }
+.waterwayz-feature .editorial-lede { margin-block:24px; font-size:1.05rem; }
+.waterwayz-feature .editorial-shot figcaption { flex-direction:column; gap:6px; }
+.system-links { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; margin-top:34px; }
+.system-links > a { display:block; border-top:2px solid var(--domain); padding-top:22px; text-decoration:none; color:var(--text-primary); }
+.system-links .editorial-eyebrow { font-size:.62rem !important; letter-spacing:.08em; }
+.system-links h3 { display:flex; justify-content:space-between; gap:14px; }
+.system-links p { margin:0; color:var(--text-secondary); }
+.system-links > a:hover h3 { color:var(--domain-ink); text-decoration:underline; text-underline-offset:5px; }
+.ecosystem-section { background:var(--surface-raised); }
+.ecosystem-flow { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+.ecosystem-flow li { padding:24px; border-top:2px solid var(--domain); border-left:1px solid var(--border-medium); }
+.ecosystem-flow li:first-child { border-left:0; padding-left:0; }
+.ecosystem-flow .editorial-index { display:block; margin-bottom:24px; }
+.ecosystem-flow h3 { font-size:1.25rem; }
+.ecosystem-flow p { color:var(--text-secondary); font-size:.92rem; }
+.ecosystem-flow a { color:var(--domain-ink); font-size:.82rem; font-weight:600; }
+.ecosystem-context { border-top:1px solid var(--border-medium); padding-top:20px; margin:16px 0 0; font-size:.8rem; color:var(--text-secondary); }
+.release-note { border-left:3px solid var(--domain); padding:18px 24px; margin:0 0 36px; background:var(--surface-raised); }
+.release-note strong { font-size:.83rem; color:var(--domain-ink); }
+.release-note p { margin:8px 0 0; font-size:.9rem; color:var(--text-secondary); max-width:100ch; }
+.solution-next { display:flex; flex-wrap:wrap; gap:16px 36px; margin-top:28px; }
+.solution-next a { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-block:16px; color:var(--domain-ink); font-weight:600; border-bottom:1px solid var(--border-medium); }
+.survey-preview { display:grid; grid-template-columns:1fr 1fr; background:var(--surface-raised); }
+.survey-preview > div { padding:36px; }
+.survey-preview img { width:100%; height:100%; object-fit:cover; max-height:500px; }
+.survey-preview p:not(.editorial-eyebrow) { color:var(--text-secondary); }
+.intelligence-flow { display:flex; flex-wrap:wrap; gap:20px 36px; list-style:none; padding:0; margin:28px 0; }
+.intelligence-flow li { border-top:2px solid var(--domain); padding-top:16px; font-family:var(--font-display); font-size:1.25rem; font-weight:600; }
+.identity-note { max-width:85ch; color:var(--text-secondary); font-size:.9rem; }
+@media(max-width:1000px) { .ecosystem-flow { grid-template-columns:1fr 1fr; } .ecosystem-flow li:nth-child(odd) { border-left:0; padding-left:0; } .waterwayz-feature { grid-template-columns:1fr; gap:32px; } .waterwayz-feature h2 { max-width:24ch; } }
+@media(max-width:700px) { .system-links,.survey-preview { grid-template-columns:1fr; } .system-links { gap:30px; } .survey-preview > div { padding:24px; } .survey-preview img { max-height:240px; } }
+@media(max-width:560px) { .ecosystem-flow { grid-template-columns:1fr; } .ecosystem-flow li { border-left:0; padding:24px 0; } .home-audience .entry-heading h1 { font-size:2.8rem; } .release-note { padding:16px; } }
+
+.survey-preview figure { margin:0; display:flex; flex-direction:column; min-width:0; }
+.survey-preview figure img { flex:1; min-height:0; }
+.survey-preview figcaption { padding:12px 16px; font-size:.72rem; color:var(--text-secondary); }

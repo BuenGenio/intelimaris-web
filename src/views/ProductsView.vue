@@ -13,22 +13,22 @@
           <aside class="products-hero-panel">
             <div class="hero-panel-card">
               <span class="panel-kicker">Catalog focus</span>
-              <h2>Hardware built to feed the InteliMarine AI Stack</h2>
+              <h2>Start with what you want to know.</h2>
               <p>
-                Use this catalog to evaluate vessel coverage, shortlist sensor families, and map a deployment from
-                individual products to full-system rollouts such as InteliBilge.
+                Explore the devices behind PWTS, InteliBilge and InteliBMS. Match each system to the vessel, then confirm the supplied hardware, tested ratings and supported WaterWayz™ features.
               </p>
             </div>
             <div class="hero-panel-points">
               <span>Marine-grade sensing</span>
-              <span>Cloud-connected alerts</span>
-              <span>Automation-ready workflows</span>
+              <span>Connected vessel data</span>
+              <span>Installation-specific controls</span>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
+    <section class="editorial-shell editorial-section" lang="en"><p class="editorial-eyebrow">Start with the system</p><h2>See how the hardware fits together.</h2><SystemLinks :ids="['pwts', 'intelibilge', 'intelibms']" /></section>
     <section class="products-filter">
       <div class="container">
         <div class="filter-header">
@@ -209,6 +209,7 @@
 </template>
 
 <script setup lang="ts">
+import SystemLinks from '@/components/audience/SystemLinks.vue'
 import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { ref, computed } from 'vue'

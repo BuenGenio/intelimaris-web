@@ -5,8 +5,8 @@
       <SiteBreadcrumbs :items="[{ label: 'The platform' }]" />
       <p class="editorial-eyebrow">The connected platform</p>
       <div class="guide-heading">
-        <h1>One waterway.<br>Many working lives.</h1>
-        <p class="editorial-lede">Plan the passage, look after the vessel and prepare the berth. Explore each workflow, or start with the guide for your role.</p>
+        <h1>One connected experience.<br>Find your starting point.</h1>
+        <p class="editorial-lede">Navigate with context, stay connected to the vessel and make the next arrival easier. Explore WaterWayz™ workflows, InteliMARIS connected systems and the capabilities in development.</p>
       </div>
       <RouterLink to="/#choose" class="editorial-text-link">Find your role <span aria-hidden="true">→</span>
       </RouterLink>
@@ -24,10 +24,12 @@
         </nav>
       </div>
     </section>
+    <section class="editorial-shell editorial-section"><p class="editorial-eyebrow">Products and developing capabilities</p><h2>Explore the ecosystem.</h2><SystemLinks /></section>
     <GuideClosing :audience="audience" />
   </main>
 </template>
 <script setup lang="ts">
+import SystemLinks from '@/components/audience/SystemLinks.vue'
 import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { RouterLink } from 'vue-router'

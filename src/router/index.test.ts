@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import router from './index'
+import { SOLUTIONS, solutionLink } from '../data/solutions'
 import { AUDIENCES, audienceLink } from '../data/audiences'
 import { CAPABILITIES, capabilityLink } from '../data/capabilities'
 
@@ -90,7 +91,7 @@ describe('router', () => {
   })
 
   it('resolves every audience guide and capability without falling through to 404', () => {
-    for (const path of [...AUDIENCES.map(a => audienceLink(a.id)), ...CAPABILITIES.map(c => capabilityLink(c.id))]) {
+    for (const path of [...AUDIENCES.map(a => audienceLink(a.id)), ...CAPABILITIES.map(c => capabilityLink(c.id)), ...SOLUTIONS.map(s => solutionLink(s.id))]) {
       expect(router.resolve(path).name, path).not.toBe('not-found')
       expect(router.resolve(path).matched.length, path).toBeGreaterThan(0)
     }

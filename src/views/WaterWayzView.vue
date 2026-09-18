@@ -2,33 +2,34 @@
   <main class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'The platform', to: '/capabilities' }, { label: 'WaterWAYZ' }]" />
-      <p class="editorial-eyebrow">WaterWAYZ</p>
+      <SiteBreadcrumbs :items="[{ label: 'The platform', to: '/capabilities' }, { label: 'WaterWayz™' }]" />
+      <p class="editorial-eyebrow">WaterWayz™</p>
       <div class="guide-heading">
-        <h1>Know the<br>water ahead.</h1>
+        <h1>Your whole boating experience.<br>Connected.</h1>
         <div>
-          <p class="editorial-lede">A passage begins before departure and ends at the berth. Bring planning, navigation, hazard awareness and dockage into the same journey.</p>
+          <p class="editorial-lede">Navigate, monitor, discover and connect. WaterWayz™ brings the passage, supported vessel readings and arrival coordination together, with reporting and further assistance workflows in development.</p>
           <RouterLink to="/for/captains" class="editorial-button">Start at the helm <span aria-hidden="true">↗</span>
           </RouterLink>
         </div>
       </div>
       <EditorialShot id="waterwayz-route" caption="Plan the route with the vessel and destination in view." priority />
-      <p class="chart-disclaimer">WaterWAYZ is not a certified navigation system. Always cross-check official charts and local notices.</p>
+      <p class="chart-disclaimer">WaterWayz™ is not a certified navigation system. Always cross-check official charts and local notices.</p>
     </section>
     <section class="editorial-section section-wash">
       <div class="editorial-shell">
         <p class="editorial-eyebrow">Before departure. Underway. Alongside.</p>
         <h2>Follow the passage.</h2>
-        <FeatureLinks :ids="['route-planning', 'navigation', 'hazard-reporting', 'dockpass']" />
+        <FeatureLinks :ids="['route-planning', 'navigation', 'monitoring', 'hazard-reporting', 'dockpass', 'emergency-assistance']" />
       </div>
     </section>
+    <section class="editorial-shell editorial-section"><div class="section-intro"><div><p class="editorial-eyebrow">InteliMarina + Dock Pass</p><h2>Know the berth<br>before you arrive.</h2></div><p>Find the marina, check the vessel requirements and request a stay. Once the host confirms and assigns a berth, keep the arrival information with the journey.</p></div><RouterLink to="/marinas" class="editorial-button">Discover InteliMarina <span aria-hidden="true">↗</span></RouterLink></section>
     <VoyageSection />
     <section class="editorial-shell editorial-section role-directory">
       <div>
         <p class="editorial-eyebrow">Find your view</p>
         <h2>There is more than one way aboard.</h2>
       </div>
-      <nav aria-label="WaterWAYZ audience guides">
+      <nav aria-label="WaterWayz™ audience guides">
         <RouterLink v-for="person in AUDIENCES.filter(a => a.group === 'aboard')" :key="person.id" :to="audienceLink(person.id)">{{ person.label }} <span aria-hidden="true">↗</span>
         </RouterLink>
       </nav>

@@ -1,6 +1,7 @@
 # Audience-first marketing site
 
-English-first rewrite, 18 September 2026. Source of product facts: the local
+English-first rewrite, 18 September 2026. See `content-reconciliation.md` for the
+subsequent comparison with the supplied Final Architecture v2.0 review. Source of product facts: the local
 InteliMaris platform repository at `/home/buengenio/Projects/workspace`.
 “Implemented” here describes reviewed product code, not a verification of a
 particular production deployment, data provider or hardware installation.
@@ -65,8 +66,10 @@ investors remain general contact options, not fabricated product workspaces.
 
 - `src/data/audiences.ts`: the nine audience guides, copy, feature order and
   contact intent. Keep customer-facing prose here.
-- `src/data/capabilities.ts`: seven capability guides, available workflows,
+- `src/data/capabilities.ts`: eight capability guides, available workflows,
   limitations and related links. `/marinas` remains the canonical PMS URL.
+- `src/data/solutions.ts`: six connected-system and developing-capability guides,
+  including the existing InteliBilge route.
 - `src/composables/useAudience.ts`: validated, optional local preference; public
   URL context. Storage exceptions do not break the flow.
 - `HomeView`: chooser, immediate preview and reordered capability content.
