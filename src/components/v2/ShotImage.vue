@@ -5,6 +5,7 @@
       <source type="image/avif" :srcset="avifSet" :sizes="sizes" />
       <source type="image/webp" :srcset="webpSet" :sizes="sizes" />
       <img
+        ref="imgEl"
         :src="fallback"
         :alt="shot.alt"
         :width="shot.width"
@@ -19,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { SHOTS, shotSrcSet, shotFallback, shotLqip, type ShotId } from '@/data/shots'
 
 const props = withDefaults(
@@ -37,6 +38,14 @@ const webpSet = shotSrcSet(props.id, 'webp')
 const fallback = shotFallback(props.id)
 const lqip = shotLqip(props.id)
 const loaded = ref(false)
+const imgEl = ref<HTMLImageElement | null>(null)
+
+/* On a pre-rendered page the image can be complete before this listener is
+   attached, so the placeholder would otherwise never clear. */
+onMounted(() => {
+  const img = imgEl.value
+  if (img?.complete && img.naturalWidth > 0) loaded.value = true
+})
 </script>
 
 <style scoped>

@@ -16,7 +16,8 @@
       <strong>{{ solution.status }}</strong>
       <p>{{ solution.statusDetail }}</p>
       </aside>
-      <EditorialShot v-if="solution.shot" :key="solution.shot" :id="solution.shot" :caption="solution.caption || solution.label" priority />
+      <JourneySection v-if="solution.journey" :id="solution.journey" hero />
+      <EditorialShot v-else-if="solution.shot" :key="solution.shot" :id="solution.shot" :caption="solution.caption || solution.label" priority />
       <div v-else-if="solution.id === 'geospatial'" class="survey-preview">
         <div>
       <p class="editorial-eyebrow">Fly → Map → Analyze → Connect</p>
@@ -42,7 +43,6 @@
       </li>
       </ol>
     </section>
-    <JourneySection :id="solution.journey" />
     <section class="editorial-section section-wash">
       <div class="editorial-shell availability-grid">
       <div>
