@@ -15,13 +15,12 @@
         </li>
       </ol>
 
-      <WaveRule class="position-rule" center />
+      <hr class="line position-rule" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import WaveRule from './WaveRule.vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()
@@ -41,13 +40,13 @@ const jobs = ['navigate', 'monitor', 'dock', 'operate'] as const
 
 .position-card {
   padding: var(--space-6) 0 0;
-  border-top: 2px solid var(--brand-wave);
+  border-top: 2px solid var(--domain);
 }
 
 .position-index {
   display: block;
   font-size: var(--type-caption);
-  color: var(--brand-wave);
+  color: var(--domain-ink);
   margin-bottom: var(--space-3);
 }
 

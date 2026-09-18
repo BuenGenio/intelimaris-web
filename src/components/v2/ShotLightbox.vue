@@ -76,9 +76,7 @@ watch(
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-4);
-  background: rgba(5, 7, 13, 0.88);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: rgba(36, 44, 56, 0.96);
 }
 
 .lightbox-bar {

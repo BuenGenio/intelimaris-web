@@ -15,11 +15,11 @@
           </li>
         </ul>
 
-        <RouterLink to="/products" class="btn-quiet">{{ t('v2.sensors.cta') }}</RouterLink>
+        <RouterLink to="/products" class="link-arrow">{{ t('v2.sensors.cta') }}</RouterLink>
       </div>
 
       <div class="sensors-shot">
-        <GlassShot
+        <ShotFrame
           id="waterwayz-sensors"
           :caption="t('v2.sensors.shotCaption')"
           sizes="(min-width: 1080px) 560px, 94vw"
@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import GlassShot from './GlassShot.vue'
+import ShotFrame from './ShotFrame.vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()

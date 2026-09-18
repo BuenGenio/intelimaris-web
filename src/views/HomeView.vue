@@ -1,6 +1,6 @@
 <template>
   <main class="home-v2">
-    <GlassHero />
+    <HomeHero />
     <PositionSection />
     <VoyageSection />
     <AppShowcaseSection />
@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
-import GlassHero from '@/components/v2/GlassHero.vue'
+import HomeHero from '@/components/v2/HomeHero.vue'
 import { useFadeIn } from '@/composables/useFadeIn'
 
 /* Only the hero is needed for first paint; the chapters below load as the
@@ -31,8 +31,6 @@ useFadeIn()
 
 <style scoped>
 .home-v2 {
-  /* Chapters carry their own background, so the page gradient stays behind
-     only the gaps. */
-  background: var(--surface-sunken);
+  background: var(--surface-base);
 }
 </style>

@@ -6,12 +6,11 @@
       :lede="t('v2.pms.lede')"
       shot="pms-berth-layout"
       :shot-caption="t('v2.pms.shot.layout')"
-      chrome="console.intelimaris.com"
-      tone="dark"
+      tone="slate"
     >
       <template #actions>
-        <RouterLink to="/contact" class="btn-signal">{{ t('v2.pms.cta') }}</RouterLink>
-        <RouterLink to="/demo/marina" class="btn-quiet">{{ t('v2.marinas.demoCta') }}</RouterLink>
+        <RouterLink to="/contact" class="link-arrow">{{ t('v2.pms.cta') }}</RouterLink>
+        <RouterLink to="/demo/marina" class="link-arrow">{{ t('v2.marinas.demoCta') }}</RouterLink>
       </template>
     </PageHero>
 
@@ -31,16 +30,14 @@
         </ol>
 
         <div class="marinas-gallery">
-          <GlassShot
+          <ShotFrame
             id="pms-dashboard"
             :caption="t('v2.pms.shot.dashboard')"
-            chrome="console.intelimaris.com"
             sizes="(min-width: 1080px) 560px, 94vw"
           />
-          <GlassShot
+          <ShotFrame
             id="pms-operations"
             :caption="t('v2.marinas.shot.operations')"
-            chrome="console.intelimaris.com"
             sizes="(min-width: 1080px) 560px, 94vw"
           />
         </div>
@@ -55,12 +52,11 @@
           <span class="t-overline">{{ t('v2.marinas.hostOverline') }}</span>
           <h2 class="t-display">{{ t('v2.marinas.hostTitle') }}</h2>
           <p class="t-lede">{{ t('v2.marinas.hostLede') }}</p>
-          <RouterLink to="/contact" class="btn-quiet marinas-host-cta">{{ t('v2.marinas.hostCta') }}</RouterLink>
+          <RouterLink to="/contact" class="link-arrow marinas-host-cta">{{ t('v2.marinas.hostCta') }}</RouterLink>
         </div>
-        <GlassShot
+        <ShotFrame
           id="dock-host-dashboard"
           :caption="t('v2.marinas.shot.host')"
-          chrome="console.intelimaris.com"
           sizes="(min-width: 1080px) 600px, 94vw"
         />
       </div>
@@ -73,7 +69,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import PageHero from '@/components/v2/PageHero.vue'
-import GlassShot from '@/components/v2/GlassShot.vue'
+import ShotFrame from '@/components/v2/ShotFrame.vue'
 import MarinaPmsSection from '@/components/v2/MarinaPmsSection.vue'
 import ClosingCtaSection from '@/components/v2/ClosingCtaSection.vue'
 import { useI18n } from '@/composables/useI18n'
@@ -97,13 +93,13 @@ useFadeIn('.marinas-page')
 
 .marinas-step {
   padding-top: var(--space-6);
-  border-top: 2px solid var(--brand-wave);
+  border-top: 2px solid var(--domain);
 }
 
 .marinas-step-index {
   display: block;
   font-size: var(--type-caption);
-  color: var(--brand-wave);
+  color: var(--domain-ink);
   margin-bottom: var(--space-3);
 }
 

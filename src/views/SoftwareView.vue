@@ -20,7 +20,7 @@
       <section class="ww-hero">
         <div class="ww-hero-copy">
           <div class="ww-brand fade-in">
-            <img :src="logoSrc" alt="InteliMaris" width="364" height="50" />
+            <Wordmark root="Water" domain="Wayz" product endorse="left" :size="44" />
           </div>
 
           <div class="ww-badge fade-in" :style="{ transitionDelay: '0.04s' }">
@@ -270,11 +270,11 @@
 </template>
 
 <script setup lang="ts">
+import Wordmark from '@/components/v2/Wordmark.vue'
 import { useFadeIn } from '@/composables/useFadeIn'
 
 useFadeIn('.ww-page')
 
-const logoSrc = `${import.meta.env.BASE_URL}assets/logo.png`
 const appShotSrc = `${import.meta.env.BASE_URL}assets/waterwayz-app.jpg`
 
 type IconName =

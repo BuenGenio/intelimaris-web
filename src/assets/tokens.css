@@ -1,29 +1,52 @@
 /* ==========================================================================
-   InteliMaris design tokens — aligned to brand bible v2.0.
+   Design tokens — brand bible working draft, September 2026.
    Loaded before main.css; legacy token names are re-mapped at the bottom so
-   the existing stylesheets re-skin without being rewritten.
+   the older stylesheets re-skin without being rewritten.
    ========================================================================== */
 
-/* --- Self-hosted variable fonts (Latin, Latin-ext, Greek, Cyrillic) ------ */
+/* --- Type ------------------------------------------------------------------
+   Red Hat Display for the marks and headings, Red Hat Text for reading. Both
+   cover Latin only, so the Greek and Cyrillic locales fall through to Inter,
+   which is declared for those ranges alone.
+   ------------------------------------------------------------------------ */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Red Hat Display';
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url('/assets/fonts/inter-cyrillic-ext-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  font-weight: 300 900;
+  src: url('/assets/fonts/red-hat-display-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Red Hat Display';
   font-style: normal;
   font-display: swap;
-  font-weight: 100 900;
-  src: url('/assets/fonts/inter-cyrillic-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  font-weight: 300 900;
+  src: url('/assets/fonts/red-hat-display-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Red Hat Text';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('/assets/fonts/red-hat-text-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Red Hat Text';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('/assets/fonts/red-hat-text-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Greek and Cyrillic fallback. */
+@font-face {
+  font-family: 'Inter Fallback';
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
@@ -31,153 +54,107 @@
   unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
 }
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Inter Fallback';
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url('/assets/fonts/inter-latin-ext-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('/assets/fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 800;
-  src: url('/assets/fonts/jetbrains-mono-cyrillic-ext-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 800;
-  src: url('/assets/fonts/jetbrains-mono-cyrillic-wght-normal.woff2') format('woff2-variations');
+  src: url('/assets/fonts/inter-cyrillic-wght-normal.woff2') format('woff2-variations');
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 @font-face {
-  font-family: 'JetBrains Mono';
+  font-family: 'Inter Fallback';
   font-style: normal;
   font-display: swap;
-  font-weight: 100 800;
-  src: url('/assets/fonts/jetbrains-mono-greek-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 800;
-  src: url('/assets/fonts/jetbrains-mono-latin-ext-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 800;
-  src: url('/assets/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-weight: 100 900;
+  src: url('/assets/fonts/inter-cyrillic-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
-/* --- Brand constants — identical in both themes ------------------------- */
+/* --- Constants — identical on every surface ------------------------------ */
 
 :root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Red Hat Display', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-text: 'Red Hat Text', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-sans: var(--font-text);
+  --font-mono: var(--font-text);
 
-  --brand-navy: #2c3d68;
-  --brand-navy-900: #182342;
-  --brand-black: #05070d;
-  --brand-wave: #4274bb;
-  --brand-wave-400: #6390cb;
+  /* The root, and the app's surfaces. */
+  --slate: #242c38;
+  --navy: #0b1220;
+  --black: #000000;
+  --white: #ffffff;
 
-  /* Ink ramp — brand bible numbering. There is deliberately no ink-600. */
-  --ink-0: #ffffff;
-  --ink-50: #f3f5f9;
-  --ink-100: #eaedf3;
-  --ink-200: #dce1ea;
-  --ink-300: #b7bfcf;
-  --ink-400: #8e99af;
-  --ink-500: #66708a;
-  --ink-700: #2e3650;
-  --ink-800: #222a40;
-  --ink-900: #182036;
-  --ink-950: #0f1424;
+  /* Orbis — the parent. */
+  --orbis-wash: #f4f5f7;
+  --orbis-tint: #d7dadf;
+  --orbis-light: #b6bcc5;
+  --orbis-day: #7b8595;
+  --orbis-night: #aeb7c4;
+  --orbis-deep: #323a49;
+  --orbis-dark: #444952;
 
-  /* Workspace colours — accent only, never a surface. */
-  --ws-platform: #2c3d68;
-  --ws-vessel: #4274bb;
-  --ws-marina: #14919b;
-  --ws-private: #1f6e5e;
-  --ws-business: #d9a21b;
-  --ws-maintenance: #b7472a;
+  /* Maris — the sea. This site's domain. */
+  --maris-wash: #edf2f7;
+  --maris-tint: #bbcfe2;
+  --maris-light: #82a6ca;
+  --maris-day: #1b5e9e;
+  --maris-night: #3d8ee0;
+  --maris-deep: #112d4c;
+  --maris-dark: #0f3457;
 
-  /* Status — UI only, never on the water. */
-  --status-safe: #2e9b4e;
-  --status-warn: #e38b1c;
-  --status-high: #d9571e;
-  --status-danger: #c8322b;
-  --status-low: #3a9e8f;
-  --status-offline: #8e99af;
-  --status-info: #4274bb;
+  /* The other domains, defined so the family can be shown; none is used as
+     a surface or an accent on the sea domain's pages. */
+  --tellus-day: #465a22;
+  --tellus-night: #8cb24a;
+  --caelum-day: #c24e14;
+  --caelum-night: #f08a52;
+  --strata-day: #8a6508;
+  --strata-night: #d9b03a;
 
-  /* The single marketing accent. Primary CTAs and nothing else.
-     Held at a value that clears 4.5:1 with white button text. */
-  --accent-signal: #bf5114;
-  --accent-signal-hover: #a8460f;
+  /* Status — the products' palette, used here only where a state is stated. */
+  --status-ok: #2e9b4e;
+  --status-warn: #e0a100;
+  --status-alert: #d0342c;
 
-  /* Wave blue darkened for text on light surfaces. */
-  --brand-wave-ink: #325a94;
+  /* The two gradients. Dusk is a large surface only; the field is the icon's
+     construction — slate above, the domain below, the line between. */
+  --surface-dusk: linear-gradient(180deg, #242c38 0%, #112d4c 58%, #1b5e9e 100%);
+  --field-split: 48%;
 
-  /* The three sanctioned gradients. */
-  --grad-hero-water:
-    radial-gradient(60% 50% at 18% 12%, rgba(66, 116, 187, 0.22), transparent 70%),
-    radial-gradient(55% 45% at 82% 0%, rgba(20, 145, 155, 0.18), transparent 72%),
-    linear-gradient(180deg, #eef3fa 0%, #ffffff 100%);
-  --grad-deep-water:
-    radial-gradient(60% 50% at 18% 8%, rgba(66, 116, 187, 0.3), transparent 70%),
-    radial-gradient(55% 45% at 84% 4%, rgba(20, 145, 155, 0.22), transparent 72%),
-    linear-gradient(180deg, #0f1424 0%, #182342 48%, #05070d 100%);
-  --grad-hero-stroke: linear-gradient(135deg, #4274bb 0%, #14919b 100%);
+  /* The line: 0.4 of a stem, at 70% of the x-height. As a page rule it is a
+     hairline in the slate at 55%, or the domain colour at a band's foot. */
+  --line-rule: rgba(36, 44, 56, 0.55);
+  --line-rule-on-dark: rgba(255, 255, 255, 0.55);
 
-  /* Type scale — fluid, tuned to the bible's static scale at desktop width. */
-  --type-display: clamp(2.5rem, 1.6rem + 3.8vw, 4.5rem);
+  /* Type scale. Display 700 for headings, Text for reading. */
+  --type-display: clamp(2.375rem, 1.55rem + 3.6vw, 4.25rem);
   --type-display-lh: 1.04;
-  --type-display-ls: -0.025em;
-  --type-h1: clamp(2rem, 1.45rem + 2.4vw, 3.125rem);
-  --type-h1-lh: 1.1;
-  --type-h1-ls: -0.02em;
-  --type-h2: clamp(1.5rem, 1.2rem + 1.3vw, 2.25rem);
-  --type-h2-lh: 1.16;
-  --type-h2-ls: -0.015em;
+  --type-display-ls: -0.02em;
+  --type-h1: clamp(2rem, 1.45rem + 2.4vw, 3rem);
+  --type-h1-lh: 1.08;
+  --type-h1-ls: -0.015em;
+  --type-h2: clamp(1.5rem, 1.2rem + 1.3vw, 2.125rem);
+  --type-h2-lh: 1.15;
+  --type-h2-ls: -0.01em;
   --type-h3: clamp(1.125rem, 1.03rem + 0.4vw, 1.375rem);
-  --type-h3-lh: 1.32;
+  --type-h3-lh: 1.3;
   --type-h3-ls: -0.005em;
   --type-h4: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
   --type-h4-lh: 1.4;
   --type-lede: clamp(1.0625rem, 0.97rem + 0.42vw, 1.3125rem);
   --type-lede-lh: 1.55;
   --type-body: 1rem;
-  --type-body-lh: 1.5;
-  --type-body-sm: 0.875rem;
-  --type-caption: 0.75rem;
-  --type-caption-ls: 0.01em;
+  --type-body-lh: 1.55;
+  --type-body-sm: 0.9375rem;
+  --type-caption: 0.8125rem;
+  --type-caption-ls: 0;
   --type-overline: 0.6875rem;
-  --type-overline-ls: 0.14em;
-  --type-micro: 0.625rem;
+  --type-overline-ls: 0.12em;
+  --type-micro: 0.6875rem;
   --type-micro-ls: 0.08em;
   --type-telemetry: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
 
-  /* Spacing — 8px grid with 4 and 12 permitted. */
+  /* Spacing. */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -188,123 +165,161 @@
   --space-16: 4rem;
   --space-24: 6rem;
   --space-32: 8rem;
-  --section-pad: clamp(4rem, 2.5rem + 6vw, 8rem);
+  --section-pad: clamp(4rem, 2.5rem + 5vw, 7rem);
 
-  /* Radius — nothing is square-cornered. */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-pill: 9999px;
+  /* Radius. The icon's corner is 22.5%; everything else is modest. */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 6px;
 
   --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* --- Dark theme (default) ----------------------------------------------- */
+/* --- Light surfaces (default) ---------------------------------------------
+   The site is white. Panels use the wash; gradients never appear on white.
+   ------------------------------------------------------------------------ */
 
 :root {
+  color-scheme: light;
+
+  --surface-page: #ffffff;
+  --surface-base: #ffffff;
+  --surface-raised: var(--orbis-wash);
+  --surface-sunken: var(--maris-wash);
+  --surface-soft: rgba(36, 44, 56, 0.04);
+  --surface-strong: rgba(36, 44, 56, 0.08);
+
+  --text-primary: var(--slate);
+  --text-secondary: var(--orbis-dark);
+  --text-muted: #5f6a7b;
+  --text-inverse: #ffffff;
+
+  --border-subtle: rgba(36, 44, 56, 0.12);
+  --border-medium: rgba(36, 44, 56, 0.22);
+  --line: var(--line-rule);
+
+  --domain: var(--maris-day);
+  --domain-ink: var(--maris-day);
+  --domain-soft: var(--maris-wash);
+  --domain-tint: var(--maris-tint);
+
+  --panel-bg: #ffffff;
+  --panel-border: var(--border-subtle);
+  --shadow-sm: 0 1px 2px rgba(36, 44, 56, 0.06);
+  --shadow-md: 0 6px 20px rgba(36, 44, 56, 0.08);
+  --shadow-lg: 0 16px 44px rgba(36, 44, 56, 0.12);
+  --shadow-panel: var(--shadow-md);
+  --panel-halo: none;
+
+  --mark-root: var(--slate);
+  --mark-domain: var(--maris-day);
+  --mark-cut: #ffffff;
+}
+
+/* The theme switch stays in the menu; "dark" now means the app's navy. */
+[data-theme='dark'] {
   color-scheme: dark;
 
-  --surface-page: var(--grad-deep-water);
-  --surface-base: #0f1424;
-  --surface-raised: #182342;
-  --surface-sunken: #05070d;
+  --surface-page: var(--navy);
+  --surface-base: var(--navy);
+  --surface-raised: #121a2b;
+  --surface-sunken: #060b14;
   --surface-soft: rgba(255, 255, 255, 0.04);
   --surface-strong: rgba(255, 255, 255, 0.08);
 
   --text-primary: #ffffff;
-  --text-secondary: #b7bfcf;
-  --text-muted: #8e99af;
-  --text-inverse: #182036;
+  --text-secondary: var(--orbis-night);
+  --text-muted: #8b95a6;
+  --text-inverse: var(--slate);
 
-  --border-subtle: rgba(255, 255, 255, 0.09);
-  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.18);
+  --line: var(--line-rule-on-dark);
 
-  /* Glass: 0.80 is the legibility floor. Never go below it. */
-  --glass-fill: rgba(24, 35, 66, 0.82);
-  --glass-fill-strong: rgba(24, 35, 66, 0.92);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-blur: 22px;
-  --glass-highlight: rgba(255, 255, 255, 0.14);
+  --domain: var(--maris-night);
+  --domain-ink: var(--maris-night);
+  --domain-soft: rgba(61, 142, 224, 0.12);
+  --domain-tint: rgba(61, 142, 224, 0.24);
 
-  --badge-safe: #38b65d;
-  --badge-warn: #e38b1c;
-  --badge-concept: #d9a21b;
+  --panel-bg: #121a2b;
+  --panel-border: var(--border-subtle);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+  --shadow-panel: var(--shadow-md);
 
-  --shadow-sm: 0 2px 10px rgba(5, 7, 13, 0.34);
-  --shadow-md: 0 10px 30px rgba(5, 7, 13, 0.42);
-  --shadow-lg: 0 24px 64px rgba(5, 7, 13, 0.5);
-  --shadow-panel: 0 18px 48px rgba(5, 7, 13, 0.46);
-  --panel-halo: 0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-/* --- Light theme --------------------------------------------------------
-   Brand hues never flip between themes; only surfaces, text and borders do.
-   ------------------------------------------------------------------------ */
-
-[data-theme='light'] {
-  color-scheme: light;
-
-  --surface-page: var(--grad-hero-water);
-  --surface-base: #ffffff;
-  --surface-raised: #f3f5f9;
-  --surface-sunken: #eaedf3;
-  --surface-soft: rgba(24, 35, 66, 0.035);
-  --surface-strong: rgba(24, 35, 66, 0.07);
-
-  --text-primary: #182036;
-  --text-secondary: #2e3650;
-  --text-muted: #66708a;
-  --text-inverse: #ffffff;
-
-  --border-subtle: rgba(24, 35, 66, 0.1);
-  --border-medium: rgba(24, 35, 66, 0.18);
-
-  --glass-fill: rgba(255, 255, 255, 0.84);
-  --glass-fill-strong: rgba(255, 255, 255, 0.94);
-  --glass-border: rgba(24, 35, 66, 0.12);
-  --glass-blur: 20px;
-  --glass-highlight: rgba(255, 255, 255, 0.7);
-
-  --badge-safe: #1f7a3a;
-  --badge-warn: #9a5c0c;
-  --badge-concept: #8a6410;
-
-  --shadow-sm: 0 2px 8px rgba(24, 35, 66, 0.07);
-  --shadow-md: 0 10px 28px rgba(24, 35, 66, 0.1);
-  --shadow-lg: 0 24px 56px rgba(24, 35, 66, 0.14);
-  --shadow-panel: 0 18px 44px rgba(24, 35, 66, 0.16);
-  --panel-halo: 0 0 0 2px rgba(255, 255, 255, 0.9);
+  --mark-root: #ffffff;
+  --mark-domain: var(--maris-night);
+  --mark-cut: var(--navy);
 }
 
 /* --- Legacy token bridge -------------------------------------------------
-   main.css and home-alt.css (9,000+ lines) reference the old names. Mapping
-   them here re-skins the existing pages to the brand palette with no rewrite.
+   main.css and home-alt.css reference the older names. Mapping them here
+   re-skins the untouched pages to the new palette.
    ------------------------------------------------------------------------ */
 
 :root,
-[data-theme='light'] {
-  --brand-deep-navy: var(--brand-navy);
-  --brand-marine-blue: var(--brand-wave);
-  --brand-light-grey: var(--ink-50);
-  --brand-dark-grey: var(--ink-700);
-  --brand-alert-red: var(--status-danger);
+[data-theme='dark'] {
+  --brand-navy: var(--slate);
+  --brand-navy-900: var(--navy);
+  --brand-black: var(--black);
+  --brand-wave: var(--domain);
+  --brand-wave-400: var(--maris-night);
+  --brand-wave-ink: var(--maris-day);
+  --accent-signal: var(--domain);
+  --accent-signal-hover: var(--maris-dark);
+
+  --brand-deep-navy: var(--slate);
+  --brand-marine-blue: var(--domain);
+  --brand-light-grey: var(--orbis-wash);
+  --brand-dark-grey: var(--orbis-dark);
+  --brand-alert-red: var(--status-alert);
   --brand-warning-amber: var(--status-warn);
-  --brand-safe-green: var(--status-safe);
+  --brand-safe-green: var(--status-ok);
 
   --deep-navy: var(--surface-base);
   --ocean-blue: var(--surface-raised);
   --slate-dark: var(--surface-raised);
-  --slate-medium: var(--brand-navy);
+  --slate-medium: var(--slate);
   --page-background: var(--surface-page);
 
-  --cyan-bright: var(--brand-wave);
-  --cyan-electric: var(--brand-wave-400);
-  --cyan-glow: rgba(66, 116, 187, 0.18);
-  --accent-warm: var(--ws-business);
-  --accent-purple: var(--brand-wave);
+  --cyan-bright: var(--domain);
+  --cyan-electric: var(--maris-night);
+  --cyan-glow: rgba(27, 94, 158, 0.14);
+  --accent-warm: var(--strata-day);
+  --accent-purple: var(--domain);
 
-  --glass-bg: var(--glass-fill);
-  --shadow-glow: 0 18px 42px rgba(66, 116, 187, 0.26);
+  --glass-bg: var(--panel-bg);
+  --glass-fill: var(--panel-bg);
+  --glass-fill-strong: var(--panel-bg);
+  --glass-border: var(--panel-border);
+  --glass-blur: 0px;
+  --glass-highlight: transparent;
+  --shadow-glow: var(--shadow-md);
+
+  --ink-0: #ffffff;
+  --ink-50: var(--orbis-wash);
+  --ink-100: var(--orbis-tint);
+  --ink-300: var(--orbis-light);
+  --ink-400: var(--orbis-day);
+  --ink-500: #5f6a7b;
+  --ink-700: var(--orbis-dark);
+  --ink-800: var(--orbis-deep);
+  --ink-900: var(--slate);
+  --ink-950: var(--navy);
+
+  --ws-vessel: var(--maris-day);
+  --ws-marina: var(--maris-day);
+  --ws-private: var(--maris-dark);
+  --ws-business: var(--orbis-day);
+  --ws-maintenance: var(--orbis-dark);
+  --status-safe: var(--status-ok);
+  --status-danger: var(--status-alert);
+  --status-high: var(--status-alert);
+  --status-low: var(--maris-light);
+  --status-offline: var(--orbis-day);
+  --status-info: var(--domain);
 }

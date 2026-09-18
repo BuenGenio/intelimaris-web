@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="voyage chapter" data-chapter="dark" :style="{ '--voyage-scroll': `${scrollHeight}vh` }">
+  <section ref="sectionRef" class="voyage chapter" data-chapter="slate" :style="{ '--voyage-scroll': `${scrollHeight}vh` }">
     <div class="voyage-sticky">
       <div class="container-wide voyage-head">
         <span class="t-overline">{{ t('v2.voyage.overline') }}</span>
@@ -8,7 +8,7 @@
       </div>
 
       <div class="container-wide voyage-stage">
-        <figure class="voyage-map glass">
+        <figure class="voyage-map panel">
           <canvas ref="canvasRef" class="voyage-canvas" role="img" :aria-label="mapLabel" />
 
           <figcaption class="voyage-hud" :data-stage="stage.key">
@@ -34,7 +34,7 @@
           </figcaption>
 
           <Transition name="voyage-card">
-            <aside v-if="stage.key === 'approach'" class="voyage-card glass glass--strong">
+            <aside v-if="stage.key === 'approach'" class="voyage-card panel">
               <p class="t-caption">{{ data.bridge.name }}</p>
               <p class="t-telemetry voyage-card-value">{{ data.bridge.clearance.toFixed(1) }} m</p>
               <p class="t-caption">
@@ -44,7 +44,7 @@
           </Transition>
 
           <Transition name="voyage-card">
-            <aside v-if="stage.key === 'berth'" class="voyage-card glass glass--strong">
+            <aside v-if="stage.key === 'berth'" class="voyage-card panel">
               <p class="t-caption">{{ data.to }}</p>
               <p class="t-telemetry voyage-card-value">{{ data.berth.id }}</p>
               <p class="t-caption">
@@ -74,7 +74,7 @@
           </ol>
 
           <div class="voyage-controls">
-            <button type="button" class="btn-quiet voyage-control" :disabled="stageIndex === 0" @click="goToStage(stageIndex - 1)">
+            <button type="button" class="voyage-control voyage-control--prev" :disabled="stageIndex === 0" @click="goToStage(stageIndex - 1)">
               {{ t('v2.voyage.prev') }}
             </button>
             <div
@@ -89,7 +89,7 @@
             </div>
             <button
               type="button"
-              class="btn-quiet voyage-control"
+              class="voyage-control voyage-control--next"
               :disabled="stageIndex === data.stages.length - 1"
               @click="goToStage(stageIndex + 1)"
             >
@@ -267,11 +267,11 @@ const draw = () => {
   const px = (u: number) => ox + u * dw
   const py = (v: number) => oy + v * dh
 
-  ctx.fillStyle = '#0f1424'
+  ctx.fillStyle = '#242c38'
   ctx.fillRect(0, 0, w, h)
   if (mapReady) ctx.drawImage(basemap, ox, oy, dw, dh)
 
-  ctx.fillStyle = 'rgba(15, 20, 36, 0.32)'
+  ctx.fillStyle = 'rgba(36, 44, 56, 0.3)'
   ctx.fillRect(0, 0, w, h)
 
   const p = progress.value
@@ -316,7 +316,7 @@ const draw = () => {
     const bridgePoint = data.route.find((pt) => pt.f >= data.bridge.f) ?? data.route[0]!
     const bx = px(bridgePoint.u)
     const by = py(bridgePoint.v)
-    ctx.strokeStyle = p >= data.bridge.f ? '#2E9B4E' : '#E38B1C'
+    ctx.strokeStyle = p >= data.bridge.f ? '#2E9B4E' : '#E0A100'
     ctx.lineWidth = 3
     ctx.beginPath()
     ctx.moveTo(bx - 26, by - 8)
@@ -349,7 +349,7 @@ const draw = () => {
   ctx.fill()
   ctx.restore()
 
-  ctx.strokeStyle = 'rgba(66, 116, 187, 0.55)'
+  ctx.strokeStyle = 'rgba(61, 142, 224, 0.6)'
   ctx.lineWidth = 2
   ctx.beginPath()
   ctx.arc(vx, vy, 19, 0, Math.PI * 2)
@@ -398,7 +398,8 @@ onBeforeUnmount(() => {
 }
 
 .voyage-head {
-  max-width: 100%;
+  width: 100%;
+  max-width: 1440px;
 }
 
 .voyage-title {
@@ -440,15 +441,13 @@ onBeforeUnmount(() => {
   max-width: min(30rem, calc(100% - var(--space-8)));
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
-  background: rgba(15, 20, 36, 0.86);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--slate);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .voyage-hud-stage {
   margin: 0 0 var(--space-2);
-  color: var(--brand-wave-400);
+  color: var(--domain-ink);
 }
 
 .voyage-hud-grid {
@@ -537,7 +536,7 @@ onBeforeUnmount(() => {
 
 .voyage-step.active .voyage-step-button {
   background: var(--surface-strong);
-  border-color: var(--glass-border);
+  border-color: var(--panel-border);
 }
 
 .voyage-step-index {
@@ -547,7 +546,7 @@ onBeforeUnmount(() => {
 }
 
 .voyage-step.active .voyage-step-index {
-  color: var(--brand-wave-400);
+  color: var(--domain-ink);
 }
 
 .voyage-step-text {
@@ -576,8 +575,25 @@ onBeforeUnmount(() => {
 }
 
 .voyage-control {
-  padding: 0.5rem 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--domain-ink);
+  font-family: var(--font-text);
   font-size: var(--type-caption);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.voyage-control--prev::before {
+  content: '←';
+}
+
+.voyage-control--next::after {
+  content: '→';
 }
 
 .voyage-control:disabled {
@@ -596,7 +612,7 @@ onBeforeUnmount(() => {
 .voyage-track-fill {
   display: block;
   height: 100%;
-  background: var(--brand-wave);
+  background: var(--domain);
 }
 
 @media (max-width: 980px) {

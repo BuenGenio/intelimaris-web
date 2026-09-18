@@ -2,7 +2,8 @@
   <section class="chapter page-hero" :data-chapter="tone">
     <div class="container-wide page-hero-inner">
       <div class="page-hero-copy">
-        <span class="t-overline">{{ overline }}</span>
+        <div v-if="$slots.mark" class="page-hero-mark"><slot name="mark" /></div>
+        <span v-else class="t-overline">{{ overline }}</span>
         <h1 class="t-display">{{ title }}</h1>
         <p class="t-lede">{{ lede }}</p>
         <div v-if="$slots.actions" class="page-hero-actions">
@@ -10,14 +11,14 @@
         </div>
       </div>
       <div v-if="shot" class="page-hero-shot">
-        <GlassShot :id="shot" :caption="shotCaption" :chrome="chrome" sizes="(min-width: 1180px) 640px, 92vw" priority bleed />
+        <ShotFrame :id="shot" :caption="shotCaption" sizes="(min-width: 1180px) 640px, 92vw" priority bleed />
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import GlassShot from './GlassShot.vue'
+import ShotFrame from './ShotFrame.vue'
 import type { ShotId } from '@/data/shots'
 
 withDefaults(
@@ -27,10 +28,9 @@ withDefaults(
     lede: string
     shot?: ShotId
     shotCaption?: string
-    chrome?: string
-    tone?: 'dark' | 'light'
+    tone?: 'slate' | 'light' | 'dark'
   }>(),
-  { shotCaption: '', chrome: 'app.waterwayz.com', tone: 'dark' },
+  { shotCaption: '', tone: 'slate' },
 )
 </script>
 
@@ -44,6 +44,10 @@ withDefaults(
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: clamp(2rem, 1rem + 4vw, 4.5rem);
   align-items: center;
+}
+
+.page-hero-mark {
+  margin-bottom: var(--space-2);
 }
 
 .page-hero-copy .t-display {

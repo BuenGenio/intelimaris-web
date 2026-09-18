@@ -1,5 +1,5 @@
 <template>
-  <section class="chapter trust" data-chapter="dark">
+  <section class="chapter trust" data-chapter="slate">
     <div class="container-wide trust-inner">
       <div class="trust-copy">
         <h2>{{ t('v2.trust.title') }}</h2>
@@ -61,7 +61,7 @@ const stats = ['marinas', 'workspaces', 'roles', 'locales'] as const
 
 .trust-stat dd {
   margin: 0;
-  color: var(--brand-wave-400);
+  color: var(--domain-ink);
 }
 
 @media (max-width: 1040px) {

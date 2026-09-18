@@ -1,5 +1,5 @@
 <template>
-  <section id="marina" class="chapter pms" data-chapter="dark">
+  <section id="marina" class="chapter pms" data-chapter="slate">
     <div class="container-wide">
       <div class="section-head">
         <span class="t-overline">{{ t('v2.pms.overline') }}</span>
@@ -8,10 +8,9 @@
       </div>
 
       <div class="pms-lead">
-        <GlassShot
+        <ShotFrame
           id="pms-berth-layout"
           :caption="t('v2.pms.shot.layout')"
-          chrome="console.intelimaris.com"
           sizes="(min-width: 1100px) 1180px, 94vw"
           bleed
         />
@@ -26,23 +25,21 @@
         </ul>
 
         <div class="pms-side">
-          <GlassShot
+          <ShotFrame
             id="pms-dashboard"
             :caption="t('v2.pms.shot.dashboard')"
-            chrome="console.intelimaris.com"
             sizes="(min-width: 1100px) 480px, 94vw"
           />
-          <GlassShot
+          <ShotFrame
             id="pms-dock-editor"
             :caption="t('v2.pms.shot.dock')"
-            chrome="console.intelimaris.com"
             sizes="(min-width: 1100px) 480px, 94vw"
           />
         </div>
       </div>
 
       <!-- Honesty is a copy rule: the unfinished rooms are listed, not hidden. -->
-      <div class="pms-roadmap glass">
+      <div class="pms-roadmap panel">
         <div class="pms-roadmap-head">
           <h3>{{ t('v2.pms.roadmap.title') }}</h3>
           <p class="t-caption">{{ t('v2.pms.roadmap.lede') }}</p>
@@ -53,7 +50,7 @@
             <span class="pms-roadmap-name">{{ t(`v2.pms.roadmap.${room.key}`) }}</span>
           </li>
         </ul>
-        <RouterLink to="/marinas" class="btn-signal pms-cta">{{ t('v2.pms.cta') }}</RouterLink>
+        <RouterLink to="/marinas" class="link-arrow pms-cta">{{ t('v2.pms.cta') }}</RouterLink>
       </div>
     </div>
   </section>
@@ -61,7 +58,7 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import GlassShot from './GlassShot.vue'
+import ShotFrame from './ShotFrame.vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()

@@ -9,6 +9,10 @@ import type { Language, Translations } from './translations'
 export const v2Translations: Record<Language, Translations> = {
   en: {
     'shot.zoomAria': 'Open full size',
+    'footer.family': 'The family',
+    'footer.family.sea': 'The sea',
+    'footer.family.waterwayz': 'The app, by Intelimaris',
+    'v2.closing.sentence': 'We see what is happening on the water, and tell you before it matters.',
     'shot.close': 'Close',
     'shot.panHint': 'Pinch or drag to read the full screen',
     'availability.live': 'Shipping now',
@@ -16,12 +20,11 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Planned',
     'availability.concept': 'Design concept',
     'v2.disclaimer.charts':
-      'WaterWayz is not a certified navigation system. Chart data supports situational awareness — always navigate with official charts.',
+      'WaterWayz supports what you can see from the helm. It does not replace official charts, and it is not approved as a navigation system.',
 
-    'v2.hero.eyebrow': 'Navigation · Monitoring · Dockage · Marina ops',
-    'v2.hero.title': 'Know the water ahead.',
-    'v2.hero.lede':
-      'WaterWayz plans passages your vessel can actually make. InteliMARIS watches her systems. Marinas run the basin. One platform, one sign-in.',
+    'v2.hero.eyebrow': 'Navigation · Sensors · Dockage · Marina operations',
+    'v2.hero.title': 'We see what is happening on the water, and tell you before it matters.',
+    'v2.hero.lede': 'WaterWayz plans passages your vessel can make. The sensors watch her systems and say how old every reading is. Marinas run the basin from the pontoon. One platform, one sign-in.',
     'v2.hero.primary': 'Explore WaterWayz',
     'v2.hero.secondary': 'For marina operators',
     'v2.hero.shotCaption': 'Route, depth, wind, tide and a berth — on one screen.',
@@ -102,7 +105,7 @@ export const v2Translations: Record<Language, Translations> = {
       'Every berth, every date, is exactly one of closed, resident, courtesy, assigned or free. Nothing else counts as available.',
     'v2.pms.feature.assign.title': 'Guests book the marina, not a berth',
     'v2.pms.feature.assign.body':
-      'Quotes come off a rate card by LOA band and season. The dockmaster assigns the actual berth — often on the morning. A reassignment is a new row, never an edit.',
+      'Quotes come off a rate card by LOA band and season. The dockmaster assigns the actual berth — often on the morning. A reassignment is a new row, not an edit.',
     'v2.pms.feature.brief.title': 'The approach brief travels with the berth',
     'v2.pms.feature.brief.body':
       'B-7 · enter 240° stern-in · starboard-to · 2.4 m MLLW. Arrive and depart in one tap; departure frees the berth in the same transaction.',
@@ -140,9 +143,8 @@ export const v2Translations: Record<Language, Translations> = {
       'Engine hours and calendar dates, tracked together — because whichever comes first is the one that matters.',
     'v2.sensors.cta': 'See the hardware',
 
-    'v2.trust.title': 'Built for boaters. Backed by InteliMarine.',
-    'v2.trust.lede':
-      'One API behind both products, Rust services, and identity shared across web, mobile and the operator console.',
+    'v2.trust.title': 'One way of seeing. Several places to point it.',
+    'v2.trust.lede': 'One API behind both products, Rust services, and one sign-in across web, mobile and the operator console.',
     'v2.trust.stat.workspaces.value': '5',
     'v2.trust.stat.workspaces.label': 'Workspace types',
     'v2.trust.stat.locales.value': '4',
@@ -152,9 +154,8 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.trust.stat.marinas.value': '27,000+',
     'v2.trust.stat.marinas.label': 'Marinas in the directory',
 
-    'v2.closing.title': 'Bring your water online.',
-    'v2.closing.lede':
-      'Plan a passage, watch your systems, or open your basin to bookings — tell us which and we will start there.',
+    'v2.closing.title': 'We tell you before it matters.',
+    'v2.closing.lede': 'Plan a passage, watch your systems, or open your basin to bookings. Tell us which, and we start there.',
     'v2.closing.primary': 'Talk to us',
     'v2.closing.secondary': 'Browse the hardware',
     'v2.waterwayz.cta': 'Talk to us about access',
@@ -219,6 +220,10 @@ export const v2Translations: Record<Language, Translations> = {
 
   es: {
     'shot.zoomAria': 'Abrir a tamaño completo',
+    'footer.family': 'La familia',
+    'footer.family.sea': 'El mar',
+    'footer.family.waterwayz': 'La app, de Intelimaris',
+    'v2.closing.sentence': 'Vemos lo que pasa en el agua, y te lo decimos antes de que importe.',
     'shot.close': 'Cerrar',
     'shot.panHint': 'Pellizca o arrastra para leer la pantalla completa',
     'availability.live': 'Disponible ya',
@@ -226,12 +231,11 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Previsto',
     'availability.concept': 'Concepto de diseño',
     'v2.disclaimer.charts':
-      'WaterWayz no es un sistema de navegación certificado. Los datos cartográficos sirven para la conciencia situacional: navega siempre con cartas oficiales.',
+      'WaterWayz apoya lo que ves desde el timón. No sustituye a las cartas oficiales y no está aprobado como sistema de navegación.',
 
-    'v2.hero.eyebrow': 'Navegación · Monitorización · Amarre · Operación de marinas',
-    'v2.hero.title': 'Conoce el agua que tienes delante.',
-    'v2.hero.lede':
-      'WaterWayz planifica travesías que tu barco puede hacer de verdad. InteliMARIS vigila sus sistemas. Las marinas gestionan la dársena. Una plataforma, un único acceso.',
+    'v2.hero.eyebrow': 'Navegación · Sensores · Amarre · Operación de marinas',
+    'v2.hero.title': 'Vemos lo que pasa en el agua, y te lo decimos antes de que importe.',
+    'v2.hero.lede': 'WaterWayz planifica travesías que tu barco puede hacer. Los sensores vigilan sus sistemas y dicen la antigüedad de cada lectura. Las marinas gestionan la dársena desde el pantalán. Una plataforma, un único acceso.',
     'v2.hero.primary': 'Descubre WaterWayz',
     'v2.hero.secondary': 'Para marinas',
     'v2.hero.shotCaption': 'Ruta, sonda, viento, marea y amarre — en una sola pantalla.',
@@ -312,7 +316,7 @@ export const v2Translations: Record<Language, Translations> = {
       'Cada amarre, cada fecha, es exactamente uno de: cerrado, residente, cortesía, asignado o libre. Nada más cuenta como disponible.',
     'v2.pms.feature.assign.title': 'El cliente reserva la marina, no el amarre',
     'v2.pms.feature.assign.body':
-      'Los presupuestos salen de un tarifario por franja de eslora y temporada. El capitán de puerto asigna el amarre real, a menudo esa misma mañana. Reasignar crea una fila nueva, nunca edita.',
+      'Los presupuestos salen de un tarifario por franja de eslora y temporada. El capitán de puerto asigna el amarre real, a menudo esa misma mañana. Reasignar crea una fila nueva, no edita.',
     'v2.pms.feature.brief.title': 'La ficha de aproximación viaja con el amarre',
     'v2.pms.feature.brief.body':
       'B-7 · entrada 240° de popa · amarre a estribor · 2,4 m MLLW. Llegada y salida en un toque; la salida libera el amarre en la misma transacción.',
@@ -350,9 +354,8 @@ export const v2Translations: Record<Language, Translations> = {
       'Horas de motor y fechas de calendario, juntas — porque lo que importa es lo que llegue primero.',
     'v2.sensors.cta': 'Ver el hardware',
 
-    'v2.trust.title': 'Hecho para navegantes. Respaldado por InteliMarine.',
-    'v2.trust.lede':
-      'Una sola API detrás de ambos productos, servicios en Rust e identidad compartida entre web, móvil y la consola del operador.',
+    'v2.trust.title': 'Una forma de mirar. Varios lugares a los que apuntarla.',
+    'v2.trust.lede': 'Una sola API detrás de ambos productos, servicios en Rust y un único acceso en web, móvil y la consola del operador.',
     'v2.trust.stat.workspaces.value': '5',
     'v2.trust.stat.workspaces.label': 'Tipos de espacio',
     'v2.trust.stat.locales.value': '4',
@@ -362,9 +365,8 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.trust.stat.marinas.value': '27.000+',
     'v2.trust.stat.marinas.label': 'Marinas en el directorio',
 
-    'v2.closing.title': 'Pon tu agua en línea.',
-    'v2.closing.lede':
-      'Planifica una travesía, vigila tus sistemas o abre tu dársena a reservas — dinos por dónde y empezamos ahí.',
+    'v2.closing.title': 'Te lo decimos antes de que importe.',
+    'v2.closing.lede': 'Planifica una travesía, vigila tus sistemas o abre tu dársena a reservas. Dinos cuál, y empezamos ahí.',
     'v2.closing.primary': 'Hablemos',
     'v2.closing.secondary': 'Ver el hardware',
     'v2.waterwayz.cta': 'Habla con nosotros',
@@ -429,6 +431,10 @@ export const v2Translations: Record<Language, Translations> = {
 
   el: {
     'shot.zoomAria': 'Άνοιγμα σε πλήρες μέγεθος',
+    'footer.family': 'Η οικογένεια',
+    'footer.family.sea': 'Η θάλασσα',
+    'footer.family.waterwayz': 'Η εφαρμογή, από την Intelimaris',
+    'v2.closing.sentence': 'Βλέπουμε τι συμβαίνει στο νερό, και σου το λέμε πριν μετρήσει.',
     'shot.close': 'Κλείσιμο',
     'shot.panHint': 'Κάνε pinch ή σύρε για να διαβάσεις όλη την οθόνη',
     'availability.live': 'Διαθέσιμο τώρα',
@@ -436,12 +442,11 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Σχεδιασμένο',
     'availability.concept': 'Σχεδιαστική ιδέα',
     'v2.disclaimer.charts':
-      'Το WaterWayz δεν είναι πιστοποιημένο σύστημα ναυσιπλοΐας. Τα χαρτογραφικά δεδομένα υποστηρίζουν την εποπτεία — πλοηγείσαι πάντα με επίσημους χάρτες.',
+      'Το WaterWayz υποστηρίζει ό,τι βλέπεις από το πηδάλιο. Δεν αντικαθιστά τους επίσημους χάρτες και δεν είναι εγκεκριμένο ως σύστημα ναυσιπλοΐας.',
 
-    'v2.hero.eyebrow': 'Ναυσιπλοΐα · Παρακολούθηση · Ελλιμενισμός · Λειτουργία μαρίνας',
-    'v2.hero.title': 'Γνώρισε το νερό μπροστά σου.',
-    'v2.hero.lede':
-      'Το WaterWayz σχεδιάζει πλόες που το σκάφος σου μπορεί όντως να κάνει. Το InteliMARIS παρακολουθεί τα συστήματά του. Οι μαρίνες διαχειρίζονται τον λιμενίσκο. Μία πλατφόρμα, μία σύνδεση.',
+    'v2.hero.eyebrow': 'Ναυσιπλοΐα · Αισθητήρες · Ελλιμενισμός · Λειτουργία μαρίνας',
+    'v2.hero.title': 'Βλέπουμε τι συμβαίνει στο νερό, και σου το λέμε πριν μετρήσει.',
+    'v2.hero.lede': 'Το WaterWayz σχεδιάζει πλόες που το σκάφος σου μπορεί να κάνει. Οι αισθητήρες παρακολουθούν τα συστήματά του και λένε πόσο παλιά είναι κάθε ένδειξη. Οι μαρίνες διαχειρίζονται τον λιμενίσκο από την προβλήτα. Μία πλατφόρμα, μία σύνδεση.',
     'v2.hero.primary': 'Δες το WaterWayz',
     'v2.hero.secondary': 'Για μαρίνες',
     'v2.hero.shotCaption': 'Πορεία, βάθος, άνεμος, παλίρροια και θέση — σε μία οθόνη.',
@@ -522,7 +527,7 @@ export const v2Translations: Record<Language, Translations> = {
       'Κάθε θέση, κάθε ημερομηνία, είναι ακριβώς ένα από: κλειστή, μόνιμου, φιλοξενίας, ανατεθειμένη ή ελεύθερη. Τίποτε άλλο δεν μετράει ως διαθέσιμο.',
     'v2.pms.feature.assign.title': 'Ο επισκέπτης κλείνει τη μαρίνα, όχι τη θέση',
     'v2.pms.feature.assign.body':
-      'Οι προσφορές βγαίνουν από τιμοκατάλογο ανά ζώνη μήκους και εποχή. Ο λιμενάρχης αναθέτει την πραγματική θέση, συχνά το ίδιο πρωί. Η επανάθεση είναι νέα εγγραφή, ποτέ διόρθωση.',
+      'Οι προσφορές βγαίνουν από τιμοκατάλογο ανά ζώνη μήκους και εποχή. Ο λιμενάρχης αναθέτει την πραγματική θέση, συχνά το ίδιο πρωί. Η επανάθεση είναι νέα εγγραφή, όχι διόρθωση.',
     'v2.pms.feature.brief.title': 'Το δελτίο προσέγγισης ταξιδεύει με τη θέση',
     'v2.pms.feature.brief.body':
       'B-7 · είσοδος 240° με την πρύμνη · πρόσδεση δεξιά · 2,4 m MLLW. Άφιξη και αναχώρηση με ένα πάτημα· η αναχώρηση ελευθερώνει τη θέση στην ίδια συναλλαγή.',
@@ -560,9 +565,8 @@ export const v2Translations: Record<Language, Translations> = {
       'Ώρες μηχανής και ημερομηνίες μαζί — γιατί σημασία έχει όποιο έρθει πρώτο.',
     'v2.sensors.cta': 'Δες τον εξοπλισμό',
 
-    'v2.trust.title': 'Φτιαγμένο για ναυτικούς. Με την υποστήριξη της InteliMarine.',
-    'v2.trust.lede':
-      'Ένα API πίσω από δύο προϊόντα, υπηρεσίες σε Rust και κοινή ταυτότητα σε web, κινητό και κονσόλα διαχειριστή.',
+    'v2.trust.title': 'Ένας τρόπος να βλέπεις. Πολλά μέρη να τον στρέψεις.',
+    'v2.trust.lede': 'Ένα API πίσω από δύο προϊόντα, υπηρεσίες σε Rust και μία σύνδεση σε web, κινητό και κονσόλα διαχειριστή.',
     'v2.trust.stat.workspaces.value': '5',
     'v2.trust.stat.workspaces.label': 'Τύποι χώρων εργασίας',
     'v2.trust.stat.locales.value': '4',
@@ -572,9 +576,8 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.trust.stat.marinas.value': '27.000+',
     'v2.trust.stat.marinas.label': 'Μαρίνες στον κατάλογο',
 
-    'v2.closing.title': 'Βάλε το νερό σου online.',
-    'v2.closing.lede':
-      'Σχεδίασε έναν πλου, πρόσεχε τα συστήματά σου ή άνοιξε τον λιμενίσκο σου σε κρατήσεις — πες μας από πού και ξεκινάμε εκεί.',
+    'v2.closing.title': 'Σου το λέμε πριν μετρήσει.',
+    'v2.closing.lede': 'Σχεδίασε έναν πλου, πρόσεχε τα συστήματά σου ή άνοιξε τον λιμενίσκο σου σε κρατήσεις. Πες μας ποιο, και ξεκινάμε εκεί.',
     'v2.closing.primary': 'Μίλησε μαζί μας',
     'v2.closing.secondary': 'Δες τον εξοπλισμό',
     'v2.waterwayz.cta': 'Μίλησε μαζί μας',
@@ -639,6 +642,10 @@ export const v2Translations: Record<Language, Translations> = {
 
   uk: {
     'shot.zoomAria': 'Відкрити в повному розмірі',
+    'footer.family': 'Родина',
+    'footer.family.sea': 'Море',
+    'footer.family.waterwayz': 'Застосунок від Intelimaris',
+    'v2.closing.sentence': 'Ми бачимо, що відбувається на воді, і кажемо вам до того, як це матиме значення.',
     'shot.close': 'Закрити',
     'shot.panHint': 'Зведіть пальці або потягніть, щоб прочитати весь екран',
     'availability.live': 'Уже працює',
@@ -646,12 +653,11 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Заплановано',
     'availability.concept': 'Концепт дизайну',
     'v2.disclaimer.charts':
-      'WaterWayz не є сертифікованою навігаційною системою. Картографічні дані підтримують ситуаційну обізнаність — завжди прокладайте курс за офіційними картами.',
+      'WaterWayz допомагає бачити те, що видно зі штурвала. Він не замінює офіційні карти й не схвалений як навігаційна система.',
 
-    'v2.hero.eyebrow': 'Навігація · Моніторинг · Швартування · Робота марини',
-    'v2.hero.title': 'Знай воду попереду.',
-    'v2.hero.lede':
-      'WaterWayz прокладає переходи, які ваше судно справді здатне пройти. InteliMARIS стежить за його системами. Марини керують акваторією. Одна платформа, один вхід.',
+    'v2.hero.eyebrow': 'Навігація · Сенсори · Швартування · Робота марини',
+    'v2.hero.title': 'Ми бачимо, що відбувається на воді, і кажемо вам до того, як це матиме значення.',
+    'v2.hero.lede': 'WaterWayz прокладає переходи, які ваше судно здатне пройти. Сенсори стежать за його системами й кажуть, скільки кожному показанню. Марини керують акваторією з пірса. Одна платформа, один вхід.',
     'v2.hero.primary': 'Огляд WaterWayz',
     'v2.hero.secondary': 'Для марин',
     'v2.hero.shotCaption': 'Маршрут, глибина, вітер, приплив і місце — на одному екрані.',
@@ -770,9 +776,8 @@ export const v2Translations: Record<Language, Translations> = {
       'Мотогодини й календарні дати разом — бо важить те, що настане першим.',
     'v2.sensors.cta': 'Переглянути обладнання',
 
-    'v2.trust.title': 'Зроблено для моряків. За підтримки InteliMarine.',
-    'v2.trust.lede':
-      'Один API за обома продуктами, сервіси на Rust і спільна автентифікація у вебі, мобільному та консолі оператора.',
+    'v2.trust.title': 'Один спосіб бачити. Кілька місць, куди його спрямувати.',
+    'v2.trust.lede': 'Один API за обома продуктами, сервіси на Rust і один вхід у вебі, мобільному та консолі оператора.',
     'v2.trust.stat.workspaces.value': '5',
     'v2.trust.stat.workspaces.label': 'Типів робочих просторів',
     'v2.trust.stat.locales.value': '4',
@@ -782,9 +787,8 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.trust.stat.marinas.value': '27 000+',
     'v2.trust.stat.marinas.label': 'Марин у каталозі',
 
-    'v2.closing.title': 'Виведіть свою воду онлайн.',
-    'v2.closing.lede':
-      'Прокладіть перехід, наглядайте за системами або відкрийте акваторію для бронювань — скажіть, із чого, і ми почнемо звідти.',
+    'v2.closing.title': 'Ми кажемо вам до того, як це матиме значення.',
+    'v2.closing.lede': 'Прокладіть перехід, наглядайте за системами або відкрийте акваторію для бронювань. Скажіть, що саме, і ми почнемо звідти.',
     'v2.closing.primary': 'Напишіть нам',
     'v2.closing.secondary': 'Переглянути обладнання',
     'v2.waterwayz.cta': 'Напишіть нам',

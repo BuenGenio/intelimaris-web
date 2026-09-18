@@ -6,11 +6,14 @@
       :lede="t('v2.app.lede')"
       shot="waterwayz-route"
       :shot-caption="t('v2.hero.shotCaption')"
-      tone="dark"
+      tone="slate"
     >
+      <template #mark>
+        <Wordmark root="Water" domain="Wayz" product endorse="left" :size="34" />
+      </template>
       <template #actions>
-        <RouterLink to="/contact" class="btn-signal">{{ t('v2.waterwayz.cta') }}</RouterLink>
-        <RouterLink to="/marinas" class="btn-quiet">{{ t('v2.hero.secondary') }}</RouterLink>
+        <RouterLink to="/contact" class="link-arrow">{{ t('v2.waterwayz.cta') }}</RouterLink>
+        <RouterLink to="/marinas" class="link-arrow">{{ t('v2.hero.secondary') }}</RouterLink>
       </template>
     </PageHero>
 
@@ -45,9 +48,8 @@
         </div>
 
         <ul class="ww-workspace-list">
-          <li v-for="workspace in workspaces" :key="workspace.key" class="ww-workspace">
-            <span class="ww-workspace-dot" :style="{ background: workspace.color }" aria-hidden="true" />
-            <strong>{{ t(`v2.waterwayz.workspace.${workspace.key}`) }}</strong>
+          <li v-for="workspace in workspaces" :key="workspace" class="ww-workspace">
+            {{ t(`v2.waterwayz.workspace.${workspace}`) }}
           </li>
         </ul>
       </div>
@@ -77,6 +79,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import PageHero from '@/components/v2/PageHero.vue'
+import Wordmark from '@/components/v2/Wordmark.vue'
 import VoyageSection from '@/components/v2/VoyageSection.vue'
 import AppShowcaseSection from '@/components/v2/AppShowcaseSection.vue'
 import ClosingCtaSection from '@/components/v2/ClosingCtaSection.vue'
@@ -87,14 +90,8 @@ const { t } = useI18n()
 
 const journey = ['account', 'vessel', 'plan', 'berth'] as const
 
-/* Workspace accents come straight from the brand book. */
-const workspaces = [
-  { key: 'vessel', color: '#4274BB' },
-  { key: 'marina', color: '#14919B' },
-  { key: 'private', color: '#1F6E5E' },
-  { key: 'business', color: '#D9A21B' },
-  { key: 'maintenance', color: '#B7472A' },
-] as const
+/* The product's own workspace colours stay inside the product. */
+const workspaces = ['vessel', 'marina', 'private', 'business', 'maintenance'] as const
 
 const roadmap = ['hud', 'alarms', 'night', 'floatplan', 'gpx', 'billing'] as const
 
@@ -113,13 +110,13 @@ useFadeIn('.ww-page')
 
 .ww-journey-step {
   padding-top: var(--space-6);
-  border-top: 2px solid var(--brand-wave);
+  border-top: 2px solid var(--domain);
 }
 
 .ww-journey-index {
   display: block;
   font-size: var(--type-caption);
-  color: var(--brand-wave);
+  color: var(--domain-ink);
   margin-bottom: var(--space-3);
 }
 
@@ -149,16 +146,11 @@ useFadeIn('.ww-page')
   gap: var(--space-3);
   padding: 0.625rem 1rem;
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: var(--surface-soft);
+  font-family: var(--font-text);
+  font-weight: 500;
   font-size: var(--type-body-sm);
-}
-
-.ww-workspace-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  flex-shrink: 0;
 }
 
 .ww-roadmap {

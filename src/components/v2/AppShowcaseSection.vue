@@ -7,11 +7,11 @@
           <h2 class="t-display">{{ t('v2.app.title') }}</h2>
           <p class="t-lede">{{ t('v2.app.lede') }}</p>
         </div>
-        <RouterLink to="/waterwayz" class="btn-quiet app-cta">{{ t('v2.app.cta') }}</RouterLink>
+        <RouterLink to="/waterwayz" class="link-arrow app-cta">{{ t('v2.app.cta') }}</RouterLink>
       </div>
 
       <div class="app-lead">
-        <GlassShot id="waterwayz-map" :caption="t('v2.app.feature.depth.title')" sizes="(min-width: 1100px) 1180px, 94vw" bleed />
+        <ShotFrame id="waterwayz-map" :caption="t('v2.app.feature.depth.title')" sizes="(min-width: 1100px) 1180px, 94vw" bleed />
       </div>
 
       <div class="app-body">
@@ -23,8 +23,8 @@
         </ul>
 
         <div class="app-side">
-          <GlassShot id="waterwayz-marina-card" sizes="(min-width: 1100px) 460px, 94vw" />
-          <GlassShot id="waterwayz-discover" sizes="(min-width: 1100px) 460px, 94vw" />
+          <ShotFrame id="waterwayz-marina-card" sizes="(min-width: 1100px) 460px, 94vw" />
+          <ShotFrame id="waterwayz-discover" sizes="(min-width: 1100px) 460px, 94vw" />
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import GlassShot from './GlassShot.vue'
+import ShotFrame from './ShotFrame.vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()

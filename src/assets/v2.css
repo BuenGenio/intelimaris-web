@@ -1,11 +1,11 @@
 /* ==========================================================================
-   v2 primitives — chapters, glass, type roles, the wave rule.
+   Primitives — chapters, the line, the field, panels, type roles, the button.
    Imported after main.css so these win on equal specificity.
    ========================================================================== */
 
 /* --- Chapters ------------------------------------------------------------
-   Sections alternate value so the page reads as chapters. A chapter carries
-   its own surface + text tokens, so children need no theme awareness.
+   The site is white. A slate or navy chapter is a band, not a mood; dusk is
+   the one gradient and is a large surface only.
    ------------------------------------------------------------------------ */
 
 .chapter {
@@ -13,76 +13,185 @@
   padding: var(--section-pad) 0;
   background: var(--chapter-bg, transparent);
   color: var(--text-primary);
-  isolation: isolate;
 }
 
 .chapter[data-chapter='light'] {
-  --chapter-bg: var(--grad-hero-water);
-  --text-primary: #182036;
-  --text-secondary: #2e3650;
-  --text-muted: #66708a;
-  --border-subtle: rgba(24, 35, 66, 0.1);
-  --border-medium: rgba(24, 35, 66, 0.18);
-  --surface-soft: rgba(24, 35, 66, 0.035);
-  --surface-strong: rgba(24, 35, 66, 0.07);
-  --glass-fill: rgba(255, 255, 255, 0.84);
-  --glass-fill-strong: rgba(255, 255, 255, 0.94);
-  --glass-border: rgba(24, 35, 66, 0.12);
-  --panel-halo: 0 0 0 2px rgba(255, 255, 255, 0.9);
-  --shadow-panel: 0 18px 44px rgba(24, 35, 66, 0.16);
-  --badge-safe: #1f7a3a;
-  --badge-warn: #9a5c0c;
-  --badge-concept: #8a6410;
-  --text-muted: #5d6780;
+  --chapter-bg: #ffffff;
+  --text-primary: var(--slate);
+  --text-secondary: var(--orbis-dark);
+  --text-muted: #5f6a7b;
+  --border-subtle: rgba(36, 44, 56, 0.12);
+  --border-medium: rgba(36, 44, 56, 0.22);
+  --line: var(--line-rule);
+  --surface-soft: rgba(36, 44, 56, 0.04);
+  --surface-strong: rgba(36, 44, 56, 0.08);
+  --domain: var(--maris-day);
+  --domain-ink: var(--maris-day);
+  --domain-soft: var(--maris-wash);
+  --panel-bg: #ffffff;
+  --panel-border: rgba(36, 44, 56, 0.12);
+  --shadow-panel: var(--shadow-md);
+  --mark-root: var(--slate);
+  --mark-domain: var(--maris-day);
+  --mark-cut: #ffffff;
   color-scheme: light;
 }
 
+.chapter[data-chapter='wash'] {
+  --chapter-bg: var(--orbis-wash);
+  --text-primary: var(--slate);
+  --text-secondary: var(--orbis-dark);
+  --text-muted: #5f6a7b;
+  --border-subtle: rgba(36, 44, 56, 0.12);
+  --border-medium: rgba(36, 44, 56, 0.22);
+  --line: var(--line-rule);
+  --surface-soft: rgba(36, 44, 56, 0.04);
+  --surface-strong: rgba(36, 44, 56, 0.08);
+  --domain: var(--maris-day);
+  --domain-ink: var(--maris-day);
+  --domain-soft: #ffffff;
+  --panel-bg: #ffffff;
+  --panel-border: rgba(36, 44, 56, 0.1);
+  --shadow-panel: var(--shadow-sm);
+  --mark-root: var(--slate);
+  --mark-domain: var(--maris-day);
+  --mark-cut: var(--orbis-wash);
+  color-scheme: light;
+}
+
+.chapter[data-chapter='slate'],
 .chapter[data-chapter='dark'] {
-  --chapter-bg: var(--grad-deep-water);
+  --chapter-bg: var(--slate);
   --text-primary: #ffffff;
-  --text-secondary: #b7bfcf;
-  --text-muted: #8e99af;
-  --border-subtle: rgba(255, 255, 255, 0.09);
-  --border-medium: rgba(255, 255, 255, 0.16);
-  --surface-soft: rgba(255, 255, 255, 0.04);
-  --surface-strong: rgba(255, 255, 255, 0.08);
-  --glass-fill: rgba(24, 35, 66, 0.82);
-  --glass-fill-strong: rgba(24, 35, 66, 0.92);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --panel-halo: 0 0 0 1px rgba(255, 255, 255, 0.08);
-  --shadow-panel: 0 18px 48px rgba(5, 7, 13, 0.46);
-  --badge-safe: #38b65d;
-  --badge-warn: #e38b1c;
-  --badge-concept: #d9a21b;
+  --text-secondary: var(--orbis-night);
+  --text-muted: #9aa4b4;
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-medium: rgba(255, 255, 255, 0.2);
+  --line: var(--line-rule-on-dark);
+  --surface-soft: rgba(255, 255, 255, 0.05);
+  --surface-strong: rgba(255, 255, 255, 0.1);
+  --domain: var(--maris-night);
+  --domain-ink: var(--maris-night);
+  --domain-soft: rgba(61, 142, 224, 0.14);
+  --panel-bg: #2c3542;
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --mark-root: #ffffff;
+  --mark-domain: var(--maris-night);
+  --mark-cut: var(--slate);
   color-scheme: dark;
 }
 
+.chapter[data-chapter='navy'],
 .chapter[data-chapter='black'] {
-  --chapter-bg: var(--brand-black);
+  --chapter-bg: var(--navy);
   --text-primary: #ffffff;
-  --text-secondary: #b7bfcf;
-  --text-muted: #8e99af;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --glass-fill: rgba(15, 20, 36, 0.86);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --badge-safe: #38b65d;
-  --badge-warn: #e38b1c;
-  --badge-concept: #d9a21b;
+  --text-secondary: var(--orbis-night);
+  --text-muted: #8b95a6;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.18);
+  --line: var(--line-rule-on-dark);
+  --surface-soft: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --domain: var(--maris-night);
+  --domain-ink: var(--maris-night);
+  --domain-soft: rgba(61, 142, 224, 0.12);
+  --panel-bg: #121a2b;
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --mark-root: #ffffff;
+  --mark-domain: var(--maris-night);
+  --mark-cut: var(--navy);
   color-scheme: dark;
+}
+
+/* Dusk: slate at the top, down through the deep to the day colour. Large
+   areas only, never inverted, nothing small set on it. */
+.chapter[data-chapter='dusk'] {
+  --chapter-bg: var(--surface-dusk);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.82);
+  --text-muted: rgba(255, 255, 255, 0.66);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-medium: rgba(255, 255, 255, 0.28);
+  --line: var(--line-rule-on-dark);
+  --surface-soft: rgba(255, 255, 255, 0.06);
+  --surface-strong: rgba(255, 255, 255, 0.12);
+  --domain: #ffffff;
+  --domain-ink: #ffffff;
+  --domain-soft: rgba(255, 255, 255, 0.12);
+  --panel-bg: rgba(36, 44, 56, 0.88);
+  --panel-border: rgba(255, 255, 255, 0.16);
+  --shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --mark-root: #ffffff;
+  --mark-domain: #ffffff;
+  --mark-cut: var(--slate);
+  color-scheme: dark;
+}
+
+/* --- The line ------------------------------------------------------------
+   The brand's one device. A hairline rule across a surface, or the domain
+   colour at the foot of a slate band.
+   ------------------------------------------------------------------------ */
+
+.line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--line);
+}
+
+.line--domain {
+  height: 2px;
+  background: var(--domain);
+}
+
+/* --- The field -----------------------------------------------------------
+   Slate above, the domain below, the light line between at the cut's
+   height. The surface for a card, a cover, a framed screenshot.
+   ------------------------------------------------------------------------ */
+
+.field {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--slate) 0%,
+    var(--slate) var(--field-split),
+    var(--maris-day) var(--field-split),
+    var(--maris-day) 100%
+  );
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.field::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--field-split);
+  height: 2px;
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
 }
 
 /* --- Type roles ---------------------------------------------------------- */
 
 .t-display {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: var(--type-display);
-  font-weight: 800;
+  font-weight: 700;
   line-height: var(--type-display-lh);
   letter-spacing: var(--type-display-ls);
   text-wrap: balance;
 }
 
 .t-lede {
+  font-family: var(--font-text);
   font-size: var(--type-lede);
   line-height: var(--type-lede-lh);
   color: var(--text-secondary);
@@ -92,28 +201,26 @@
 
 .t-overline {
   display: inline-block;
+  font-family: var(--font-text);
   font-size: var(--type-overline);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: var(--type-overline-ls);
   text-transform: uppercase;
-  color: var(--brand-wave-400);
-}
-
-.chapter[data-chapter='light'] .t-overline {
-  color: var(--brand-wave-ink);
+  color: var(--text-muted);
 }
 
 .t-caption {
+  font-family: var(--font-text);
   font-size: var(--type-caption);
   letter-spacing: var(--type-caption-ls);
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 400;
 }
 
-/* Every number on the site is mono and tabular. */
+/* Numbers carry their units and their age; they line up. */
 .t-telemetry,
 .t-num {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum' 1;
 }
@@ -125,182 +232,158 @@
   letter-spacing: -0.01em;
 }
 
-/* --- The wave rule -------------------------------------------------------
-   The brand's only decorative device. At most once per surface.
+/* --- Panels --------------------------------------------------------------
+   The brand is matte. A panel is a surface with a hairline, no blur, no
+   highlight, no glow.
    ------------------------------------------------------------------------ */
 
-.wave-rule {
-  display: block;
-  width: 100%;
-  max-width: 220px;
-  height: 14px;
-  border: 0;
-  margin: 0;
-  color: var(--brand-wave);
-}
-
-.wave-rule--center {
-  margin-inline: auto;
-}
-
-/* --- Glass ---------------------------------------------------------------
-   CSS tier of the ladder. The WebGL tier renders behind and this stays as
-   the readable scrim on top of it.
-   ------------------------------------------------------------------------ */
-
+.panel,
 .glass {
   position: relative;
-  background: var(--glass-fill);
-  border: 1px solid var(--glass-border);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-panel), var(--panel-halo);
+  box-shadow: none;
 }
 
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  .glass {
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
-    backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
-  }
-}
-
-/* A single specular sweep along the top edge — the "lit edge" of glass. */
 .glass::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    var(--glass-highlight) 0%,
-    transparent 38%
-  );
-  opacity: 0.6;
+  content: none;
 }
 
 .glass--strong {
-  background: var(--glass-fill-strong);
+  background: var(--panel-bg);
 }
 
-/* Gradient border — the third sanctioned gradient, used as a stroke only. */
 .glass--stroked {
-  border-color: transparent;
-  background-image: linear-gradient(var(--glass-fill), var(--glass-fill)),
-    var(--grad-hero-stroke);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  border: 1.5px solid transparent;
+  border: 1px solid var(--panel-border);
+  background-image: none;
 }
 
-/* --- Buttons -------------------------------------------------------------
-   Signal orange is the primary CTA and nothing else. One per view.
+/* --- The button ----------------------------------------------------------
+   One button on a page, in the domain colour. Everything else is a link.
    ------------------------------------------------------------------------ */
 
+.btn-domain,
 .btn-signal {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--accent-signal);
+  border-radius: var(--radius-sm);
+  background: var(--domain);
   color: #ffffff;
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
   font-size: var(--type-body-sm);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
+  transition: background 200ms var(--ease-out);
 }
 
+.btn-domain:hover,
 .btn-signal:hover {
-  background: var(--accent-signal-hover);
-  transform: translateY(-1px);
+  background: var(--maris-dark);
+  transform: none;
 }
 
+.chapter[data-chapter='dusk'] .btn-domain,
+.chapter[data-chapter='dusk'] .btn-signal {
+  background: #ffffff;
+  color: var(--slate);
+}
+
+/* A link with an arrow, in the domain colour: the quiet call to action. */
+.link-arrow,
 .btn-quiet {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-pill);
-  background: var(--surface-soft);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
+  gap: 0.375rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--domain-ink);
+  font-family: var(--font-text);
   font-size: var(--type-body-sm);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out);
+  transition: color 200ms var(--ease-out);
 }
 
+.link-arrow::after,
+.btn-quiet::after {
+  content: '→';
+  transition: transform 200ms var(--ease-out);
+}
+
+.link-arrow:hover::after,
+.btn-quiet:hover::after {
+  transform: translateX(3px);
+}
+
+.link-arrow:hover,
 .btn-quiet:hover {
-  border-color: var(--brand-wave);
-  background: var(--surface-strong);
+  color: var(--text-primary);
+  background: transparent;
+  border-color: transparent;
 }
 
-/* --- Availability badges -------------------------------------------------
-   Honesty is a copy rule: nothing unshipped is presented as live.
+/* --- Availability ----------------------------------------------------------
+   Honesty is a copy rule. A state is a word with a small dot beside it;
+   the word identifies, the colour reinforces.
    ------------------------------------------------------------------------ */
 
 .badge-status {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.25rem 0.625rem;
-  border-radius: var(--radius-pill);
+  gap: 0.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-text);
   font-size: var(--type-micro);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: var(--type-micro-ls);
   text-transform: uppercase;
-  border: 1px solid transparent;
+  color: var(--text-muted);
   white-space: nowrap;
 }
 
 .badge-status::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: currentColor;
 }
 
-.badge-status[data-state='live'] {
-  color: var(--badge-safe);
-  border-color: color-mix(in srgb, var(--badge-safe) 34%, transparent);
-  background: color-mix(in srgb, var(--badge-safe) 12%, transparent);
+.badge-status[data-state='live']::before {
+  background: var(--status-ok);
 }
 
-.badge-status[data-state='building'] {
-  color: var(--badge-warn);
-  border-color: color-mix(in srgb, var(--badge-warn) 34%, transparent);
-  background: color-mix(in srgb, var(--badge-warn) 12%, transparent);
+.badge-status[data-state='building']::before {
+  background: var(--status-warn);
 }
 
-.badge-status[data-state='planned'] {
-  color: var(--text-muted);
-  border-color: var(--border-medium);
-  background: var(--surface-soft);
+.badge-status[data-state='planned']::before {
+  background: var(--orbis-day);
 }
 
-.badge-status[data-state='concept'] {
-  color: var(--badge-concept);
-  border-color: color-mix(in srgb, var(--badge-concept) 34%, transparent);
-  background: color-mix(in srgb, var(--badge-concept) 12%, transparent);
+.badge-status[data-state='concept']::before {
+  background: var(--orbis-light);
 }
 
-/* --- Focus + motion ------------------------------------------------------ */
+/* --- Focus + motion ------------------------------------------------------
+   Calm is a design instruction: slow, and only to show something changed.
+   ------------------------------------------------------------------------ */
 
 :where(a, button, [tabindex]):focus-visible {
-  outline: 2px solid var(--brand-wave-400);
+  outline: 2px solid var(--domain);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
-}
-
-.chapter[data-chapter='light'] :where(a, button, [tabindex]):focus-visible {
-  outline-color: var(--brand-navy);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -314,11 +397,9 @@
   }
 }
 
-/* --- Layout helpers ------------------------------------------------------ */
-
-.stack-6 > * + * {
-  margin-top: var(--space-6);
-}
+/* --- Layout helpers ------------------------------------------------------
+   Everything hangs from the left edge on a single margin.
+   ------------------------------------------------------------------------ */
 
 .section-head {
   max-width: 46rem;
@@ -333,71 +414,97 @@
   margin-top: var(--space-4);
 }
 
-/* --- Navigation tone ------------------------------------------------------
-   The bar is fixed over chapters that alternate light and dark, so it takes
-   the tone of whichever chapter is under it rather than the page theme.
+/* --- Header ----------------------------------------------------------------
+   White, the wordmark at the left at 28 px, the line continuing across the
+   page as a rule, navigation in Red Hat Text, and the one button.
    ------------------------------------------------------------------------ */
 
-[data-nav-tone='dark'] .nav-container {
-  background: rgba(15, 20, 36, 0.62);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
-    0 12px 36px rgba(5, 7, 13, 0.34);
+.nav-container,
+[data-theme='light'] .nav-container,
+[data-theme='dark'] .nav-container {
+  background: var(--surface-base);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom: 0;
+  box-shadow: none;
 }
 
-[data-nav-tone='dark'] .nav-container .brand-logo {
-  background-color: #ffffff;
+.nav-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--domain);
 }
 
-[data-nav-tone='dark'] .nav-container .nav-link,
-[data-nav-tone='dark'] .nav-container .lang-code,
-[data-nav-tone='dark'] .nav-container .theme-toggle,
-[data-nav-tone='dark'] .nav-container .lang-current,
-[data-nav-tone='dark'] .nav-container .nav-drawer-toggle {
-  color: rgba(255, 255, 255, 0.82);
+.nav-content {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
-[data-nav-tone='dark'] .nav-container .nav-link:hover {
+.nav-container .nav-link,
+.nav-container .lang-code,
+.nav-container .theme-toggle,
+.nav-container .lang-current,
+.nav-container .nav-drawer-toggle {
+  font-family: var(--font-text);
+  color: var(--text-secondary);
+}
+
+.nav-container .nav-link {
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.nav-container .nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-container .nav-link::after {
+  background: var(--domain);
+  height: 1px;
+  bottom: -0.35rem;
+}
+
+.nav-container .nav-drawer-toggle-bar {
+  background: var(--text-primary);
+}
+
+.nav-container .theme-toggle,
+.nav-container .lang-current {
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+}
+
+.nav-container .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-sm);
+  background: var(--domain);
+  color: #ffffff;
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 200ms var(--ease-out);
+}
+
+.nav-container .nav-cta:hover {
+  background: var(--maris-dark);
   color: #ffffff;
 }
 
-[data-nav-tone='dark'] .nav-container .nav-drawer-toggle-bar {
-  background: rgba(255, 255, 255, 0.86);
+.nav-container .nav-cta::after {
+  content: none;
 }
 
-[data-nav-tone='light'] .nav-container {
-  background: rgba(255, 255, 255, 0.72);
-  border-bottom-color: rgba(24, 35, 66, 0.1);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.85) inset,
-    0 10px 30px rgba(24, 35, 66, 0.08);
-}
-
-[data-nav-tone='light'] .nav-container .brand-logo {
-  background-color: var(--brand-navy);
-}
-
-[data-nav-tone='light'] .nav-container .nav-link,
-[data-nav-tone='light'] .nav-container .lang-code,
-[data-nav-tone='light'] .nav-container .theme-toggle,
-[data-nav-tone='light'] .nav-container .lang-current,
-[data-nav-tone='light'] .nav-container .nav-drawer-toggle {
-  color: #2e3650;
-}
-
-[data-nav-tone='light'] .nav-container .nav-link:hover {
-  color: var(--brand-navy);
-}
-
-[data-nav-tone='light'] .nav-container .nav-drawer-toggle-bar {
-  background: #2e3650;
-}
-
-/* --- Interior content pages ----------------------------------------------
-   Card headings are labels within a page, not chapter openers, so they sit a
-   step down from the section scale.
-   ------------------------------------------------------------------------ */
+/* --- Interior content pages ---------------------------------------------- */
 
 .product-section h2,
 .product-aside h2,
@@ -406,7 +513,27 @@
 .capability-card h2,
 .page-section h2 {
   font-size: var(--type-h3);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--type-h3-ls);
   line-height: var(--type-h3-lh);
+}
+
+/* On slate the night tint clears 4.5:1 only at display sizes, so small links
+   are white and the arrow carries the domain colour. */
+.chapter[data-chapter='slate'] .link-arrow,
+.chapter[data-chapter='slate'] .btn-quiet,
+.chapter[data-chapter='slate'] .voyage-control,
+.chapter[data-chapter='dark'] .link-arrow,
+.chapter[data-chapter='dark'] .btn-quiet,
+.chapter[data-chapter='dark'] .voyage-control {
+  color: #ffffff;
+}
+
+.chapter[data-chapter='slate'] .link-arrow::after,
+.chapter[data-chapter='slate'] .btn-quiet::after,
+.chapter[data-chapter='slate'] .voyage-control::after,
+.chapter[data-chapter='slate'] .voyage-control::before,
+.chapter[data-chapter='dark'] .link-arrow::after,
+.chapter[data-chapter='dark'] .btn-quiet::after {
+  color: var(--maris-night);
 }

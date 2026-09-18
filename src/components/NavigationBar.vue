@@ -2,12 +2,7 @@
   <nav class="nav-container" aria-label="Main navigation">
     <div class="nav-content">
       <RouterLink to="/" class="nav-brand" @click="closeDrawer">
-        <span
-          class="brand-logo"
-          role="img"
-          aria-label="InteliMaris"
-          :style="{ '--logo-url': `url(${logoSrc})` }"
-        />
+        <Wordmark :size="28" tm animate />
       </RouterLink>
 
       <div class="nav-desktop-only nav-primary-bar">
@@ -106,6 +101,8 @@
             </button>
           </div>
         </div>
+
+        <RouterLink to="/contact" class="nav-cta nav-desktop-inline">{{ t('nav.contact') }}</RouterLink>
       </div>
     </div>
 
@@ -158,6 +155,7 @@
                 {{ categoryLabel(cat) }}
               </RouterLink>
               <RouterLink to="/about" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.about') }}</RouterLink>
+              <RouterLink to="/contact" class="nav-drawer-link" @click="closeDrawer">{{ t('nav.contact') }}</RouterLink>
 
               <div class="nav-drawer-divider"/>
 
@@ -247,8 +245,8 @@
 import { computed, nextTick, ref, onMounted, onUnmounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import type { ComponentPublicInstance } from 'vue'
+import Wordmark from '@/components/v2/Wordmark.vue'
 import { useTheme } from '@/composables/useTheme'
-import { useNavTone } from '@/composables/useNavTone'
 import { useI18n } from '@/composables/useI18n'
 import type { Language } from '@/i18n/translations'
 import {
@@ -257,11 +255,9 @@ import {
   type ProductCategory,
 } from '@/data/productCatalog'
 
-const logoSrc = `${import.meta.env.BASE_URL}assets/logo.svg`
-
 interface PrimaryLink {
   to: { name?: string; path?: string; hash?: string }
-  labelKey: 'nav.platform' | 'nav.marina' | 'nav.capabilities' | 'nav.waterwayz' | 'nav.contact'
+  labelKey: 'nav.platform' | 'nav.marina' | 'nav.capabilities' | 'nav.waterwayz'
 }
 
 const primaryLinks: PrimaryLink[] = [
@@ -269,14 +265,12 @@ const primaryLinks: PrimaryLink[] = [
   { to: { name: 'marinas' }, labelKey: 'nav.marina' },
   { to: { name: 'capabilities' }, labelKey: 'nav.capabilities' },
   { to: { name: 'waterwayz' }, labelKey: 'nav.waterwayz' },
-  { to: { name: 'contact' }, labelKey: 'nav.contact' },
 ]
 
 const languages: Language[] = ['en', 'es', 'el', 'uk']
 
 const { theme, setTheme } = useTheme()
 const { currentLanguage, t, setLanguage, languageData } = useI18n()
-useNavTone()
 const route = useRoute()
 
 const isLangOpen = ref(false)

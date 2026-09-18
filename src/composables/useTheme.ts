@@ -1,8 +1,10 @@
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 export type Theme = 'dark' | 'light'
 
-const theme = ref<Theme>('dark')
+/* The site is white by rule; the navy is the app's surface, kept as an
+   explicit choice rather than inherited from the OS. */
+const theme = ref<Theme>('light')
 
 export function useTheme() {
   const setTheme = (newTheme: Theme) => {
@@ -13,20 +15,8 @@ export function useTheme() {
 
   const initTheme = () => {
     const savedTheme = localStorage.getItem('intelimaris-theme') as Theme | null
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light')
-    
-    setTheme(initialTheme)
+    setTheme(savedTheme ?? 'light')
   }
-
-  onMounted(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    mediaQuery.addEventListener('change', (e) => {
-      if (!localStorage.getItem('intelimaris-theme')) {
-        setTheme(e.matches ? 'dark' : 'light')
-      }
-    })
-  })
 
   return {
     theme,
