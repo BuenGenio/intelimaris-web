@@ -1,63 +1,46 @@
 <template>
   <header class="site-header" lang="en" @keydown.esc="closeMenu(true)">
+    <svg class="glass-filter-defs" aria-hidden="true" width="0" height="0"><defs><filter id="nav-refraction" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.12" numOctaves="1" seed="7" result="surface" /><feDisplacementMap in="SourceGraphic" in2="surface" scale="3" xChannelSelector="R" yChannelSelector="G" /></filter></defs></svg>
+    <div class="nav-glass" aria-hidden="true"></div><div class="nav-refraction" aria-hidden="true"></div>
     <div class="site-nav editorial-shell">
       <RouterLink to="/" class="site-brand" aria-label="InteliMaris home">
         <Wordmark :size="27" tm />
       </RouterLink>
       <nav class="site-desktop-nav" aria-label="Main navigation">
-        <RouterLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
+        <template v-for="link in MAIN_NAVIGATION" :key="link.to"><PlatformMenu v-if="link.to === '/capabilities'" /><RouterLink v-else :to="link.to">{{ link.label }}</RouterLink></template>
       </nav>
       <div class="site-utilities">
-        <button type="button" class="site-theme" :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'" @click="setTheme(theme === 'dark' ? 'light' : 'dark')">{{ theme === 'dark' ? 'Light' : 'Dark' }}</button>
-        <label class="site-language">
-          <span class="sr-only">Language</span>
-          <select aria-label="Language" :value="currentLanguage" @change="changeLanguage">
-            <option v-for="lang in languages" :value="lang" :key="lang">{{ languageData[lang].code }}</option>
-          </select>
-        </label>
+        <RoleSwitcher @click="menuOpen = false" />
+        <SitePreferences @click="menuOpen = false" />
         <RouterLink :to="contactLink(audience)" class="site-contact">Talk to us <span aria-hidden="true">↗</span>
         </RouterLink>
         <button ref="menuButton" type="button" class="site-menu-button" :aria-expanded="menuOpen" aria-controls="site-mobile-nav" @click="menuOpen = !menuOpen">{{ menuOpen ? 'Close' : 'Menu' }}</button>
       </div>
     </div>
     <nav v-if="menuOpen" id="site-mobile-nav" class="site-mobile-nav editorial-shell" aria-label="Mobile navigation">
-      <RouterLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
+      <RouterLink v-for="link in MAIN_NAVIGATION" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
 
-      <RouterLink to="/marinas">InteliMarina / PMS</RouterLink>
+      <div class="mobile-platform-links"><p>Software &amp; marina</p><RouterLink v-for="link in PLATFORM_NAVIGATION.filter(item => item.to !== '/capabilities')" :key="link.to" :to="link.to">{{ link.label }}</RouterLink></div>
       <RouterLink :to="contactLink(audience)">Talk to us</RouterLink>
-      <button type="button" class="mobile-theme" @click="setTheme(theme === 'dark' ? 'light' : 'dark')">{{ theme === 'dark' ? 'Use light appearance' : 'Use dark appearance' }}</button>
     </nav>
-    <div class="audience-context">
-      <div class="editorial-shell">
-        <span v-if="audience">Your perspective <RouterLink :to="audienceLink(audience.id)">{{ audience.short }}</RouterLink>
-        </span>
-        <span v-else>WaterWayz™ <span aria-hidden="true">/</span> InteliMARIS <span aria-hidden="true">/</span> InteliMarina</span>
-        <button v-if="audience" type="button" @click="reset">Change role <span aria-hidden="true">↗</span>
-        </button>
-        <RouterLink v-else to="/#choose">Find your role <span aria-hidden="true">↗</span>
-        </RouterLink>
-      </div>
-    </div>
+    <div class="breadcrumb-strip"><div class="editorial-shell"><SiteBreadcrumbs /></div></div>
   </header>
 </template>
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import PlatformMenu from '@/components/PlatformMenu.vue'
+import { MAIN_NAVIGATION, PLATFORM_NAVIGATION } from '@/data/navigation'
+import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
+import SitePreferences from '@/components/SitePreferences.vue'
+import RoleSwitcher from '@/components/RoleSwitcher.vue'
 import Wordmark from '@/components/v2/Wordmark.vue'
-import { useTheme } from '@/composables/useTheme'
-import { useI18n } from '@/composables/useI18n'
 import { useAudience } from '@/composables/useAudience'
-import { audienceLink, contactLink } from '@/data/audiences'
-import type { Language } from '@/i18n/translations'
-const links = [{ to: '/#choose', label: 'For you' }, { to: '/waterwayz', label: 'WaterWayz™' }, { to: '/capabilities', label: 'The platform' }, { to: '/products', label: 'Hardware' }, { to: '/about', label: 'Our story' }]
-const { theme, setTheme } = useTheme()
-const { currentLanguage, setLanguage, languageData } = useI18n()
-const { audience, reset } = useAudience()
-const languages: Language[] = ['en', 'es', 'el', 'uk']
+import { contactLink } from '@/data/audiences'
+const { audience } = useAudience()
 const route = useRoute()
 const menuOpen = ref(false)
 const menuButton = ref<HTMLButtonElement | null>(null)
 const closeMenu = async (restoreFocus = false) => { menuOpen.value = false; if (restoreFocus) { await nextTick(); menuButton.value?.focus() } }
-function changeLanguage(event: Event) { setLanguage((event.target as HTMLSelectElement).value as Language) }
 watch(() => route.fullPath, () => closeMenu())
 </script>

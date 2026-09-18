@@ -86,7 +86,8 @@ investors remain general contact options, not fabricated product workspaces.
 - Shared breadcrumbs on all inner pages provide Home and section links, with
   the current page marked for assistive technology.
 - Per-route titles/descriptions/canonical URLs and sitemap entries are included.
-  This remains the existing client-rendered Vue app; no SSR was introduced.
+  The subsequent SEO update pre-renders the complete English page inventory at build time;
+  see `docs/seo-and-navigation.md` for the production pipeline and checks.
 
 ## Validation
 

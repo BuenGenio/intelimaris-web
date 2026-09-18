@@ -2,7 +2,7 @@
   <main class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'Talk to us' }]" />
+
       <p class="editorial-eyebrow">Let’s start with your day</p>
       <div class="guide-heading">
         <h1>{{ audience ? audience.cta + '.' : 'What brings you to the water?' }}</h1>
@@ -18,7 +18,6 @@
   </main>
 </template>
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'

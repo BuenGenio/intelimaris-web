@@ -62,10 +62,11 @@ This is an English-first content and navigation rewrite. Existing translations
 remain, with an English notice on the new guides. No product backend, emergency
 integration, drone operation or public deployment was implemented by this work.
 
-The site still uses client-side rendering. Titles, descriptions, canonical URLs
-and sitemap coverage are improved, but the PDF's recommendation to verify
-indexable server-rendered/prerendered body HTML remains separate technical work.
-Do not describe this change as a completed crawlability or Core Web Vitals audit.
+The subsequent SEO update now pre-renders the English page inventory into static
+HTML, including per-page social metadata and structured data. The build verifies
+body content, internal links, image assets, canonical URLs and exact sitemap
+coverage. See `docs/seo-and-navigation.md`. This is not a field Core Web Vitals
+measurement or a guarantee of search-engine indexing.
 
 ## Validation
 

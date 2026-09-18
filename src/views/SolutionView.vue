@@ -2,7 +2,7 @@
   <main v-if="solution" class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'The platform', to: '/capabilities' }, { label: solution.label }]" />
+
       <p class="editorial-eyebrow">{{ solution.eyebrow }}</p>
       <div class="guide-heading">
         <h1>{{ solution.headline }}</h1>
@@ -75,7 +75,6 @@ import { RouterLink } from 'vue-router'
 import { findSolution } from '@/data/solutions'
 import { contactLink } from '@/data/audiences'
 import { useAudience } from '@/composables/useAudience'
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 import LanguageNote from '@/components/audience/LanguageNote.vue'
 import EditorialShot from '@/components/audience/EditorialShot.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'

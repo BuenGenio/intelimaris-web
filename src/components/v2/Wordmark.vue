@@ -106,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch, useId } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -129,7 +129,7 @@ const LINE_AT = 0.7
 const LINE_WEIGHT = 0.4
 const MIN_LINE_PX = 24
 
-const uid = `wm${Math.random().toString(36).slice(2, 8)}`
+const uid = `wm-${useId()}`
 
 const svgRef = ref<SVGSVGElement | null>(null)
 const rootRef = ref<SVGTSpanElement | null>(null)

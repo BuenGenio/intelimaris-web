@@ -1,8 +1,7 @@
 <template>
-  <Teleport to="body">
+  <Teleport v-if="modelValue" to="#lightbox-root">
     <Transition name="lightbox">
       <div
-        v-if="modelValue"
         class="lightbox"
         role="dialog"
         aria-modal="true"
@@ -30,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, ref, watch, onBeforeUnmount } from 'vue'
 import { SHOTS, shotFull, type ShotId } from '@/data/shots'
 import { useI18n } from '@/composables/useI18n'
 
@@ -65,6 +64,10 @@ watch(
     }
   },
 )
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', onKeydown)
+  if (props.modelValue) document.body.style.overflow = ''
+})
 </script>
 
 <style scoped>

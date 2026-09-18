@@ -2,7 +2,7 @@
   <main class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'The platform', to: '/capabilities' }, { label: 'Software & connections' }]" />
+
       <p class="editorial-eyebrow">The InteliMARIS ecosystem</p>
       <div class="guide-heading">
       <h1>Connected by design.<br>Useful in your day.</h1>
@@ -48,7 +48,6 @@
 </template>
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 import EcosystemSection from '@/components/audience/EcosystemSection.vue'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'

@@ -2,7 +2,7 @@
   <main class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'The platform' }]" />
+
       <p class="editorial-eyebrow">The connected platform</p>
       <div class="guide-heading">
         <h1>One connected experience.<br>Find your starting point.</h1>
@@ -30,7 +30,6 @@
 </template>
 <script setup lang="ts">
 import SystemLinks from '@/components/audience/SystemLinks.vue'
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { RouterLink } from 'vue-router'
 import { AUDIENCES, audienceLink } from '@/data/audiences'

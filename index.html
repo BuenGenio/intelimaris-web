@@ -8,50 +8,23 @@
     <link rel="apple-touch-icon" href="/favicon-180.png">
     <meta name="theme-color" content="#242C38">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your day on the water, connected | InteliMARIS</title>
-    <meta name="description" content="InteliMARIS connects navigation, vessel monitoring and marina operations through WaterWayz. Find the guide for your role on the water or on shore.">
-    <link rel="canonical" href="https://www.intelimaris.com/">
-    <link rel="alternate" hreflang="en" href="https://www.intelimaris.com/">
-    <link rel="alternate" hreflang="es" href="https://www.intelimaris.com/">
-    <link rel="alternate" hreflang="el" href="https://www.intelimaris.com/">
-    <link rel="alternate" hreflang="uk" href="https://www.intelimaris.com/">
-    <link rel="alternate" hreflang="x-default" href="https://www.intelimaris.com/">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Your day on the water, connected | InteliMARIS">
-    <meta property="og:description" content="InteliMARIS connects navigation, vessel monitoring and marina operations through WaterWayz. Find the guide for your role on the water or on shore.">
-    <meta property="og:url" content="https://www.intelimaris.com/">
-    <meta property="og:site_name" content="InteliMaris">
-    <meta property="og:image" content="https://www.intelimaris.com/assets/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Your day on the water, connected | InteliMARIS">
-    <meta name="twitter:description" content="InteliMARIS connects navigation, vessel monitoring and marina operations through WaterWayz. Find the guide for your role on the water or on shore.">
-    <meta name="twitter:image" content="https://www.intelimaris.com/assets/og-image.png">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "InteliMARIS",
-      "legalName": "InteliMarine LLC",
-      "url": "https://www.intelimaris.com",
-      "logo": "https://www.intelimaris.com/assets/wordmark.png",
-      "description": "InteliMARIS connects navigation, vessel monitoring and marina operations through WaterWayz. Find the guide for your role on the water or on shore.",
-      "email": "info@intelimarine.com",
-      "sameAs": []
-    }
+    <!--seo:start-->
+    <title data-seo>Connected boating, navigation &amp; marina technology | InteliMARIS</title>
+    <meta data-seo name="description" content="Plan the passage, monitor your vessel and prepare the arrival with InteliMARIS.">
+    <!--seo:end-->
+    <link rel="manifest" href="/site.webmanifest">
+    <script>
+      // Apply the saved/system appearance before the first paint.
+      (() => { let saved; try { saved = localStorage.getItem('intelimaris-theme') } catch {} const mode = saved === 'light' || saved === 'dark' ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); document.documentElement.dataset.theme = mode; document.documentElement.style.colorScheme = mode; document.querySelector('meta[name="theme-color"]').content = mode === 'dark' ? '#131b25' : '#ffffff' })();
     </script>
-
-
+    <noscript><style>.fade-in { opacity:1 !important; transform:none !important; } .catalog-sidebar { display:flex !important; } .catalog-mobile-toggle, .role-switcher, .site-preferences, .site-menu-button { display:none !important; }</style></noscript>
 
     <link rel="preload" href="/assets/fonts/red-hat-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/red-hat-text-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   </head>
   <body>
     <div id="app"></div>
+    <div id="lightbox-root"></div>
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

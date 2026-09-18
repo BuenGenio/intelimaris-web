@@ -155,3 +155,5 @@ export function audienceLink(id: string) { return `/for/${id}` }
 export function contactLink(audience?: Audience, topic?: string) {
   return { path: '/contact', query: { ...(audience ? { audience: audience.id } : {}), ...(topic ? { topic } : {}) } }
 }
+
+export function isMarinaAudience(audience?: Audience) { return audience?.id === 'marina-owners' || audience?.id === 'marina-teams' }

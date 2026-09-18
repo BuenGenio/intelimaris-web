@@ -115,4 +115,17 @@ describe('audience journey', () => {
     expect(availability.text()).toContain('Place and submit a new report')
     expect(wrapper.find('button[type="submit"]').exists()).toBe(false)
   })
+  it('puts the LiDAR demo one click away from either marina role and its homepage preview', async () => {
+    for (const id of ['marina-owners', 'marina-teams']) {
+      const router = await setup(`/?audience=${id}`)
+      wrapper = mount(HomeView, { global: { plugins: [router] } })
+      expect(wrapper.get('#audience-preview .marina-demo-link').attributes('href')).toBe(`/demo/marina/bahia-mar?audience=${id}`)
+      wrapper.unmount()
+      await router.push(`/for/${id}`)
+      wrapper = mount(AudienceView, { props: { audienceId: id }, global: { plugins: [router] } })
+      expect(wrapper.get('.guide-hero .marina-demo-link').attributes('href')).toBe(`/demo/marina/bahia-mar?audience=${id}`)
+      wrapper.unmount(); wrapper = undefined
+    }
+  })
+
 })

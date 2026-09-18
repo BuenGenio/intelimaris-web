@@ -28,6 +28,7 @@
             </RouterLink>
             <RouterLink v-else to="/capabilities" class="editorial-button">Explore the platform <span aria-hidden="true">↗</span>
             </RouterLink>
+            <RouterLink v-if="isMarinaAudience(audience)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: audience!.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
           </div>
         </div>
       </div>
@@ -76,7 +77,7 @@ import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'
 import LanguageNote from '@/components/audience/LanguageNote.vue'
 import { useAudience } from '@/composables/useAudience'
-import { audienceLink } from '@/data/audiences'
+import { audienceLink, isMarinaAudience } from '@/data/audiences'
 const { audience, choose } = useAudience()
 const base = import.meta.env.BASE_URL
 async function onChoose(id: string) {

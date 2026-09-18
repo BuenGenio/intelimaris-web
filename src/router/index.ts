@@ -1,16 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { nextTick } from 'vue'
 import { AUDIENCES } from '../data/audiences'
 import { SOLUTIONS } from '../data/solutions'
 import { CAPABILITIES } from '../data/capabilities'
 
+import { applySeo } from '@/seo'
+
+export function createSiteRouter(server = false) {
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: server ? createMemoryHistory(import.meta.env.BASE_URL) : createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) return savedPosition
     if (to.path === from.path && to.hash === from.hash) return false
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' as const : 'smooth' as const
+    if (to.name === 'products' && to.hash) return { el: '#catalog-detail', behavior, top: 128 }
     if (to.hash) return { el: to.hash, behavior, top: 124 }
     return { top: 0, behavior }
   },
@@ -20,7 +24,7 @@ const router = createRouter({
       name: `solution-${solution.id}`,
       component: () => import('../views/SolutionView.vue'),
       props: { solutionId: solution.id },
-      meta: { title: solution.label, description: solution.summary },
+      meta: { solution: solution.id, title: solution.label, description: solution.summary },
     })),
     ...AUDIENCES.map(audience => ({
       path: `/for/${audience.id}`,
@@ -34,7 +38,7 @@ const router = createRouter({
       name: `capability-${feature.id}`,
       component: () => import('../views/CapabilityView.vue'),
       props: { featureId: feature.id },
-      meta: { title: feature.label, description: feature.summary },
+      meta: { capability: feature.id, title: feature.label, description: feature.summary },
     })),
     { path: '/capabilities/marina-pms', redirect: '/marinas' },
     {
@@ -68,7 +72,7 @@ const router = createRouter({
     {
       path: '/intelibilge',
       name: 'intelibilge',
-      meta: { title: 'InteliBilge — Water-ingress monitoring', description: SOLUTIONS.find(s => s.id === 'intelibilge')!.summary },
+      meta: { solution: 'intelibilge', title: 'InteliBilge — Water-ingress monitoring', description: SOLUTIONS.find(s => s.id === 'intelibilge')!.summary },
       component: () => import('../views/InteliBilgeView.vue'),
     },
     {
@@ -79,7 +83,7 @@ const router = createRouter({
     {
       path: '/marinas',
       name: 'marinas',
-      meta: { title: 'InteliMarina + Dock Pass / Marina management', description: CAPABILITIES.find(c => c.id === 'marina-pms')!.summary },
+      meta: { capability: 'marina-pms', title: 'InteliMarina + Dock Pass / Marina management', description: CAPABILITIES.find(c => c.id === 'marina-pms')!.summary },
       component: () => import('../views/MarinasView.vue'),
     },
     {
@@ -134,16 +138,8 @@ router.beforeEach(to => {
 
 router.afterEach(async (to, from, failure) => {
   if (failure) return
-  const titles: Record<string, string> = { waterwayz: 'WaterWayz — Your connected boating experience', capabilities: 'Explore the platform', software: 'Connected maritime software', contact: 'Talk to the team', about: 'Our story', products: 'Marine hardware' }
-  const title = `${String(to.meta.title || titles[String(to.name)] || 'Marine technology')} | InteliMARIS`
-  const description = String(to.meta.description || 'Navigation, monitoring, dockage and marina operations. Find the tools and workflows for your place on the water.')
-  document.title = title
-  for (const [selector, value] of [
-    ['meta[name="description"]', description], ['meta[property="og:title"]', title],
-    ['meta[property="og:description"]', description], ['meta[name="twitter:title"]', title],
-    ['meta[name="twitter:description"]', description], ['meta[property="og:url"]', `https://www.intelimaris.com${to.path}`],
-  ]) document.querySelector(selector!)?.setAttribute('content', value!)
-  document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://www.intelimaris.com${to.path}`)
+  if (server) return
+  applySeo(to)
   // Move screen-reader and keyboard users to the new page, not on preference changes.
   if (to.path !== from.path && from.matched.length && !to.hash) {
     await nextTick()
@@ -153,4 +149,5 @@ router.afterEach(async (to, from, failure) => {
   }
 })
 
-export default router
+return router
+}

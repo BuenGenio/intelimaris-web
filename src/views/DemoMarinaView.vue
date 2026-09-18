@@ -2,7 +2,7 @@
   <main class="dm-page">
     <section class="page-hero">
       <div class="container">
-        <SiteBreadcrumbs :items="[{ label: t('demo.label'), to: '/demo' }, { label: marina.name }]" />
+
         <div class="dm-title-row">
           <div>
             <div class="section-label">{{ t('demo.marina.label') }}</div>
@@ -87,7 +87,6 @@
 </template>
 
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'

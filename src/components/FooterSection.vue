@@ -16,24 +16,18 @@
         <p class="footer-sentence">Know more. Worry less.<br>Enjoy the water.</p>
       </div>
 
-      <nav class="footer-links" aria-label="Footer navigation">
+      <nav class="footer-links" aria-label="Footer navigation" lang="en">
         <div class="footer-section">
-          <h4>{{ t('footer.platform') }}</h4>
-          <RouterLink :to="{ name: 'waterwayz' }">{{ t('nav.waterwayz') }}</RouterLink>
-          <RouterLink :to="{ name: 'marinas' }">{{ t('nav.marina') }}</RouterLink>
-          <RouterLink to="/capabilities/monitoring">{{ t('nav.platform') }}</RouterLink>
-          <RouterLink to="/capabilities">Explore all capabilities</RouterLink>
-          <RouterLink to="/#choose">Find your role</RouterLink>
-          <RouterLink to="/products">{{ t('footer.platform.products') }}</RouterLink>
-          <RouterLink :to="{ name: 'software' }">{{ t('footer.platform.software') }}</RouterLink>
-          <RouterLink :to="{ name: 'demo' }">{{ t('footer.platform.demo') }}</RouterLink>
-        </div>
-
-        <div class="footer-section">
-          <h4>{{ t('footer.company') }}</h4>
-          <RouterLink to="/about">{{ t('footer.company.about') }}</RouterLink>
-          <RouterLink to="/contact">{{ t('nav.contact') }}</RouterLink>
+          <h4>Explore</h4>
+          <RouterLink v-for="link in MAIN_NAVIGATION" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
+          <RouterLink to="/contact">Talk to us</RouterLink>
           <MailLink />
+        </div>
+        <div class="footer-section">
+          <h4>Software &amp; marina</h4>
+          <RouterLink v-for="link in PLATFORM_NAVIGATION" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
+          <RouterLink to="/capabilities/monitoring">Vessel monitoring</RouterLink>
+          <RouterLink to="/capabilities/dockpass">Dock Pass</RouterLink>
         </div>
       </nav>
     </div>
@@ -49,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import { MAIN_NAVIGATION, PLATFORM_NAVIGATION } from '@/data/navigation'
 import { RouterLink } from 'vue-router'
 import { SOLUTIONS, solutionLink } from '@/data/solutions'
 import { AUDIENCES, audienceLink } from '@/data/audiences'

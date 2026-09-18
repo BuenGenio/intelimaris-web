@@ -2,7 +2,7 @@
   <main v-if="feature" class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'The platform', to: '/capabilities' }, { label: feature.label }]" />
+
       <p class="editorial-eyebrow">{{ feature.product }} / {{ feature.label }}</p>
       <div class="guide-heading">
         <h1>{{ feature.headline }}</h1>
@@ -10,6 +10,7 @@
           <p class="editorial-lede">{{ feature.summary }}</p>
           <RouterLink :to="contactLink(audience, feature.id)" class="editorial-button">Discuss {{ feature.label.toLowerCase() }} <span aria-hidden="true">↗</span>
           </RouterLink>
+          <RouterLink v-if="feature.id === 'marina-pms'" to="/demo/marina/bahia-mar" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
         </div>
       </div>
       <aside class="release-note"><strong>{{ feature.status || 'Current workflow · Availability depends on coverage and setup' }}</strong><p>{{ feature.availability }}</p><p v-if="feature.id === 'emergency-assistance'">WaterWayz™ does not replace emergency services, a marine radio or the applicable emergency number.</p></aside>
@@ -71,7 +72,6 @@
   </main>
 </template>
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'

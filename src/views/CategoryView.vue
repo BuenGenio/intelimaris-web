@@ -3,7 +3,7 @@
     <template v-if="meta">
       <section class="cv-hero">
         <div class="container">
-          <SiteBreadcrumbs :items="[{ label: t('nav.products'), to: '/products' }, { label: t('categories.title'), to: '/products/categories' }, { label: categoryLabel(meta.id) }]" />
+
 
           <div class="cv-hero-grid">
             <div>
@@ -71,7 +71,6 @@
 </template>
 
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'

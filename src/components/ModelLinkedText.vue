@@ -3,7 +3,7 @@
     <template v-for="(seg, i) in segments" :key="i">
       <RouterLink
         v-if="seg.type === 'link'"
-        :to="{ name: 'products', hash: '#' + seg.id }"
+        :to="{ name: 'product-detail', params: { id: seg.id } }"
         class="model-product-link"
       >
         {{ seg.model }}

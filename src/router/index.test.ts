@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import router from './index'
+import { createSiteRouter } from './index'
+const router = createSiteRouter(true)
 import { SOLUTIONS, solutionLink } from '../data/solutions'
 import { AUDIENCES, audienceLink } from '../data/audiences'
 import { CAPABILITIES, capabilityLink } from '../data/capabilities'

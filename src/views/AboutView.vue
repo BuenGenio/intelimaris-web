@@ -2,7 +2,7 @@
   <main class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'Our story' }]" />
+
       <p class="editorial-eyebrow">Our story</p>
       <div class="guide-heading">
         <h1>The water connects us.<br>The tools should too.</h1>
@@ -51,7 +51,7 @@
       <h2>{{ t('about.team.title') }}</h2>
       <div class="editorial-team">
         <article v-for="member in team" :key="member.slug">
-          <img v-if="member.photo" :src="member.photo" :alt="member.name" width="76" height="76" loading="lazy">
+          <img v-if="member.photo" :src="member.photo" :alt="member.name" :class="{ 'john-portrait': member.slug === 'john-x' }" width="76" height="76" loading="lazy">
           <span v-else class="team-initials" aria-hidden="true">{{ member.initials }}</span>
           <h3>{{ member.name }}</h3>
           <span class="team-role">{{ t(member.roleKey) }}</span>
@@ -63,7 +63,6 @@
   </main>
 </template>
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
@@ -74,11 +73,11 @@ const { audience } = useAudience()
 const { t } = useI18n()
 const teamBase = `${import.meta.env.BASE_URL}assets/team/`
 
-/* Photos live in public/assets/team/<slug>.jpg; a member without one renders initials. */
+/* Photos live in public/assets/team/; a member without one renders initials. */
 const team = [
   { slug: 'ron-bishop', name: 'Ron Bishop', initials: 'RB', photo: null, roleKey: 'about.team.ron.role', bioKey: 'about.team.ron.bio' },
   { slug: 'tristan-mullane', name: 'Tristan Mullane', initials: 'TM', photo: null, roleKey: 'about.team.tristan.role', bioKey: 'about.team.tristan.bio' },
-  { slug: 'john-x', name: 'John X', initials: 'JX', photo: null, roleKey: 'about.team.john.role', bioKey: 'about.team.john.bio' },
+  { slug: 'john-x', name: 'John X', initials: 'JX', photo: `${teamBase}john-x.png`, roleKey: 'about.team.john.role', bioKey: 'about.team.john.bio' },
   { slug: 'sam-skolnik', name: 'Sam Skolnik', initials: 'SS', photo: null, roleKey: 'about.team.sam.role', bioKey: 'about.team.sam.bio' },
   { slug: 'yevgen-trotsan', name: 'Yevgen Trotsan', initials: 'YT', photo: `${teamBase}yevgen-trotsan.jpg`, roleKey: 'about.team.yevgen.role', bioKey: 'about.team.yevgen.bio' },
   { slug: 'gary-stidston-broadbent', name: 'Gary Stidston-Broadbent', initials: 'GS', photo: null, roleKey: 'about.team.gary.role', bioKey: 'about.team.gary.bio' },

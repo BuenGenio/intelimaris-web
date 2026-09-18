@@ -1,7 +1,7 @@
 <template>
   <main class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
-      <SiteBreadcrumbs :items="[{ label: 'Page not found' }]" />
+
       <p class="editorial-eyebrow">Page not found</p>
       <h1>Let’s get you<br>back on course.</h1>
       <p class="editorial-lede">That page is not in this guide. Start with your role or explore the platform.</p>
@@ -13,5 +13,4 @@
   </main>
 </template>
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 import { RouterLink } from 'vue-router'</script>

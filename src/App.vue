@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app-shell">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <NavigationBar v-if="!isStandalone" />
     <div id="main-content">
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import FooterSection from './components/FooterSection.vue'
@@ -25,8 +25,10 @@ const { initLanguage } = useI18n()
 const route = useRoute()
 const isStandalone = computed(() => route.name === 'home-alt')
 
+let disposeTheme: (() => void) | undefined
+onBeforeUnmount(() => disposeTheme?.())
 onMounted(() => {
-  initTheme()
+  disposeTheme = initTheme()
   initLanguage()
 })
 </script>

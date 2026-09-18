@@ -2,7 +2,7 @@
   <main v-if="person" class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'For you', to: '/?choose=1#choose' }, { label: person.short }]" />
+
       <p class="editorial-eyebrow">For {{ person.short.toLowerCase() }}</p>
       <div class="guide-heading">
         <h1>{{ person.headline }}</h1>
@@ -10,6 +10,7 @@
           <p class="editorial-lede">{{ person.intro }}</p>
           <RouterLink :to="contactLink(person)" class="editorial-button">{{ person.cta }} <span aria-hidden="true">↗</span>
           </RouterLink>
+          <RouterLink v-if="isMarinaAudience(person)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: person.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
         </div>
       </div>
       <EditorialShot :key="person.shot" :id="person.shot" :caption="person.caption" priority />
@@ -54,11 +55,10 @@
   </main>
 </template>
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { AUDIENCES, audienceLink, findAudience, contactLink } from '@/data/audiences'
+import { AUDIENCES, audienceLink, findAudience, contactLink, isMarinaAudience } from '@/data/audiences'
 import EditorialShot from '@/components/audience/EditorialShot.vue'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'

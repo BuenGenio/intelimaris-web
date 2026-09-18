@@ -2,7 +2,7 @@
   <main class="demo-page">
     <section class="page-hero">
       <div class="container">
-        <SiteBreadcrumbs :items="[{ label: t('demo.label') }]" />
+
         <div class="section-label">{{ t('demo.label') }}</div>
         <h1>{{ t('demo.title') }}</h1>
         <p class="page-lead">{{ t('demo.lead') }}</p>
@@ -36,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'

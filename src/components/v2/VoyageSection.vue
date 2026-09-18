@@ -116,17 +116,17 @@ const sectionRef = ref<HTMLElement | null>(null)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const { progress: scrollProgress } = useScrollProgress(sectionRef)
 
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+const reducedMotion = ref(false)
 
 /* With reduced motion the passage is shown complete rather than scrubbed, and
    the pinned scroll distance collapses so nothing has to be scrolled through. */
-const scrollHeight = reducedMotion.matches ? 100 : 320
+const scrollHeight = computed(() => reducedMotion.value ? 100 : 320)
 const manual = ref<number | null>(null)
 const pinned = ref(false)
 
 const progress = computed(() => {
   if (manual.value !== null) return manual.value
-  if (reducedMotion.matches) return 1
+  if (reducedMotion.value) return 1
   /* Unpinned (narrow viewports) the passage waits at the planning stage until
      the reader steps it themselves. */
   return pinned.value ? scrollProgress.value : 0.1
@@ -175,7 +175,7 @@ const pad2 = (n: number) => String(n).padStart(2, '0')
    buttons step the story directly instead of scrolling to a position. */
 const isPinned = () => {
   const el = sectionRef.value
-  const result = !!el && !reducedMotion.matches && el.scrollHeight - window.innerHeight > 0
+  const result = !!el && !reducedMotion.value && el.scrollHeight - window.innerHeight > 0
   pinned.value = result
   return result
 }
@@ -205,7 +205,7 @@ watch(scrollProgress, () => {
 
 // --- canvas -------------------------------------------------------------
 
-const basemap = new Image()
+let basemap: HTMLImageElement | null = null
 let ctx: CanvasRenderingContext2D | null = null
 let mapReady = false
 let raf = 0
@@ -269,7 +269,7 @@ const draw = () => {
 
   ctx.fillStyle = '#242c38'
   ctx.fillRect(0, 0, w, h)
-  if (mapReady) ctx.drawImage(basemap, ox, oy, dw, dh)
+  if (mapReady && basemap) ctx.drawImage(basemap, ox, oy, dw, dh)
 
   ctx.fillStyle = 'rgba(36, 44, 56, 0.3)'
   ctx.fillRect(0, 0, w, h)
@@ -365,6 +365,8 @@ const schedule = () => {
 watch(progress, schedule)
 
 onMounted(() => {
+  basemap = new Image()
+  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   ctx = canvasRef.value?.getContext('2d') ?? null
   basemap.onload = () => {
     mapReady = true

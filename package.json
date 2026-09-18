@@ -7,10 +7,11 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "build-only": "node scripts/build.mjs && node scripts/verify-seo.mjs",
     "type-check": "vue-tsc --build",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:seo": "node scripts/verify-seo.mjs"
   },
   "dependencies": {
     "pinia": "^3.0.4",

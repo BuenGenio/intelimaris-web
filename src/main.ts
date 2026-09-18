@@ -1,11 +1,16 @@
-import { createApp } from 'vue'
+import { createApp, createSSRApp } from 'vue'
 // @ts-expect-error - vue-matomo has no bundled types
 import VueMatomo from 'vue-matomo'
 
 import App from './App.vue'
-import router from './router'
+import { createSiteRouter } from './router'
+const router = createSiteRouter()
 
-const app = createApp(App)
+// Hydrate canonical HTML. Preference/hash URLs can have intentionally different first content.
+const container = document.getElementById('app')!
+const path = window.location.pathname.replace(/\/+$/, '') || '/'
+const prerendered = container.dataset.prerenderPath === path && !window.location.search && !window.location.hash
+const app = (prerendered ? createSSRApp : createApp)(App)
 
 app.use(router)
 app.use(VueMatomo, {
@@ -14,6 +19,4 @@ app.use(VueMatomo, {
   router,
 })
 
-app.mount('#app')
-
-window._paq?.push(['trackPageView'])
+router.isReady().then(() => { app.mount('#app') })

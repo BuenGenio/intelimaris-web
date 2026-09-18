@@ -2,7 +2,7 @@
   <main class="editorial-page" lang="en">
     <section class="editorial-shell guide-hero">
       <LanguageNote />
-      <SiteBreadcrumbs :items="[{ label: 'The platform', to: '/capabilities' }, { label: 'WaterWayz™' }]" />
+
       <p class="editorial-eyebrow">WaterWayz™</p>
       <div class="guide-heading">
         <h1>Your whole boating experience.<br>Connected.</h1>
@@ -38,7 +38,6 @@
   </main>
 </template>
 <script setup lang="ts">
-import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 
 import { RouterLink } from 'vue-router'
 import EditorialShot from '@/components/audience/EditorialShot.vue'
