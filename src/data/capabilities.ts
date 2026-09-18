@@ -15,11 +15,13 @@ export interface Capability {
   related: string[]
   chart?: boolean
   status?: string
+  /** an interactive journey from the playbook that belongs on this page */
+  journey?: string
 }
 
 export const CAPABILITIES: Capability[] = [
   {
-    id: 'navigation', label: 'Navigation', product: 'WaterWayz™',
+    journey: 'water-right-now', id: 'navigation', label: 'Navigation', product: 'WaterWayz™',
     headline: 'Navigate with the bigger picture.',
     summary: 'Find your next stop, understand the water around you and keep the passage in view. Charts, vessel position and available traffic information share the same context.',
     shot: 'waterwayz-map', caption: 'The Above view: vessel, route and nearby places on the same chart.',
@@ -34,7 +36,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['route-planning', 'hazard-reporting', 'dockpass'], chart: true,
   },
   {
-    id: 'route-planning', label: 'Route planning', product: 'WaterWayz™',
+    journey: 'passage-planner', id: 'route-planning', label: 'Route planning', product: 'WaterWayz™',
     headline: 'A passage planned for your vessel.',
     summary: 'Choose the two ends of a passage and let the planner evaluate the route against your vessel’s dimensions and the available waterway information.',
     shot: 'waterwayz-route', caption: 'Review the passage, arrival time and conditions before setting off.',
@@ -49,7 +51,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['navigation', 'hazard-reporting', 'dockpass'], chart: true,
   },
   {
-    id: 'hazard-reporting', label: 'Hazards & reporting', product: 'WaterWayz™',
+    journey: 'hazard-reroute', id: 'hazard-reporting', label: 'Hazards & reporting', product: 'WaterWayz™',
     headline: 'A clearer picture of what lies ahead.', status: 'Hazard viewing · Reporting in development',
     summary: 'See reported hazards in the context of your passage, with enough detail to judge how recent and well supported the information is. Community reporting is being developed alongside the existing viewing tools.',
     shot: 'waterwayz-map', caption: 'Hazards belong in the context of the water and the passage.',
@@ -64,7 +66,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['navigation', 'route-planning'], chart: true,
   },
   {
-    id: 'monitoring', label: 'Vessel monitoring', product: 'InteliMARIS™ connected systems',
+    journey: 'aging-reading', id: 'monitoring', label: 'Vessel monitoring', product: 'InteliMARIS™ connected systems',
     headline: 'Stay connected to the vessel you care about.',
     summary: 'See what supported sensors are telling you about power, water and conditions aboard. WaterWayz™ brings the readings, available history and the people looking after the vessel into one connected experience.',
     shot: 'waterwayz-sensors', caption: 'Voltage, current, bilge level and temperature with reading freshness.',
@@ -79,7 +81,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['maintenance', 'navigation'],
   },
   {
-    id: 'marina-pms', label: 'InteliMarina / PMS', product: 'InteliMarina + Dock Pass',
+    journey: 'draw-your-water', id: 'marina-pms', label: 'InteliMarina / PMS', product: 'InteliMarina + Dock Pass',
     headline: 'Better arrivals. A clearer working day.', status: 'Core marina workflows · Advanced PMS in development',
     summary: 'InteliMarina brings berth layouts, arrivals, residents and staff together. Dock Pass connects the vessel’s request with the host’s stay record, so the office, dock team and arriving crew can work from the right information.',
     shot: 'pms-berth-layout', caption: 'A berth layout over the actual basin, connected to the day’s work.',
@@ -94,7 +96,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['dockpass', 'monitoring', 'maintenance'],
   },
   {
-    id: 'dockpass', label: 'Dockage & Dock Pass', product: 'InteliMarina + Dock Pass',
+    journey: 'berth-fit', id: 'dockpass', label: 'Dockage & Dock Pass', product: 'InteliMarina + Dock Pass',
     headline: 'Know the berth before you arrive.',
     summary: 'Find a suitable marina or private dock, request a stay and carry confirmed arrival details into the passage. Vessel requirements and approach information help make the next conversation with the host more useful.',
     shot: 'waterwayz-marina-card', caption: 'A destination’s details lead into planning and dockage.',

@@ -42,6 +42,7 @@
       </li>
       </ol>
     </section>
+    <JourneySection :id="solution.journey" />
     <section class="editorial-section section-wash">
       <div class="editorial-shell availability-grid">
       <div>
@@ -78,6 +79,7 @@ import { useAudience } from '@/composables/useAudience'
 import LanguageNote from '@/components/audience/LanguageNote.vue'
 import EditorialShot from '@/components/audience/EditorialShot.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'
+import JourneySection from '@/components/audience/JourneySection.vue'
 const props = defineProps<{ solutionId: string }>()
 const solution = computed(() => findSolution(props.solutionId))
 const { audience } = useAudience()

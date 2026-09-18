@@ -17,6 +17,8 @@ export interface Solution {
   next: string[]
   links: { label: string; to: string }[]
   cta: string
+  /** an interactive journey from the playbook that belongs on this page */
+  journey?: string
 }
 
 export const SOLUTIONS: Solution[] = [
@@ -97,7 +99,7 @@ export const SOLUTIONS: Solution[] = [
     cta: 'Discuss an intelligence use case',
   },
   {
-    id: 'geospatial', label: 'Drone & geospatial intelligence', eyebrow: 'Marine mapping / With Pilot Byte',
+    journey: 'orbit-the-scan', id: 'geospatial', label: 'Drone & geospatial intelligence', eyebrow: 'Marine mapping / With Pilot Byte',
     headline: 'See the place. Understand the approach.',
     summary: 'Aerial imagery and survey data can reveal the detail around a marina: docks, walkways, seawalls and the routes between them. InteliMARIS is developing this geospatial story in collaboration with Pilot Byte.',
     status: 'Survey demonstration · Integrations in development',

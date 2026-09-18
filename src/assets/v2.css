@@ -537,3 +537,56 @@
 .chapter[data-chapter='dark'] .btn-quiet::after {
   color: var(--maris-night);
 }
+
+/* --- Images ----------------------------------------------------------------
+   Every content image on the site takes the playbook's corners: 20 px for
+   the large editorial shots and stages, 14 px for everything smaller.
+   ------------------------------------------------------------------------ */
+
+.shot-image,
+.editorial-shot-button,
+.survey-preview,
+.survey-preview figure,
+.survey-preview img,
+.preview-map,
+.preview-map img,
+.catalog-product-image,
+.catalog-product-image img,
+.hero-photo-img,
+main figure > img,
+main picture > img {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.editorial-shot,
+.editorial-shot-button,
+.editorial-shot .shot-image,
+.survey-preview,
+.survey-preview figure,
+.survey-preview img {
+  border-radius: var(--radius-xl);
+}
+
+/* audience.css loads after this sheet, so these carry the page class. */
+.editorial-page .editorial-shot {
+  border-top: 0;
+  overflow: hidden;
+}
+
+.editorial-page .editorial-shot figcaption {
+  border-top: 1px solid var(--border-medium);
+}
+
+.editorial-team img,
+.editorial-team .team-initials,
+.team-photo {
+  border-radius: var(--radius-lg);
+}
+
+.category-card img,
+.catalog-card img,
+.product-image img,
+.product-image {
+  border-radius: var(--radius-lg);
+}

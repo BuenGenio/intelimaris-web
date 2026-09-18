@@ -28,6 +28,7 @@
         </li>
       </ol>
     </section>
+    <JourneySection :id="feature.journey" />
     <section id="availability" class="editorial-section section-wash">
       <div class="editorial-shell">
         <div class="section-intro">
@@ -81,6 +82,7 @@ import { useAudience } from '@/composables/useAudience'
 import EditorialShot from '@/components/audience/EditorialShot.vue'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'
+import JourneySection from '@/components/audience/JourneySection.vue'
 import LanguageNote from '@/components/audience/LanguageNote.vue'
 const props = defineProps<{ featureId: string }>()
 const feature = computed(() => findCapability(props.featureId))

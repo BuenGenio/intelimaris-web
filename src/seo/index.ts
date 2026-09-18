@@ -20,6 +20,7 @@ const pages: Record<string, [string, string]> = {
   demo: ['Marine survey & geospatial technology demos', 'Explore the InteliMARIS marine survey demonstration, with LiDAR point-cloud technology and clearly identified sample marina information.'],
   'demo-marina': ['Marina survey demo | Bahia Mar sample listing', 'Explore a LiDAR technology demonstration using Halifax Harbor survey data alongside a Bahia Mar sample marina listing. See the dataset and its limitations.'],
   'home-alt': ['Alternative homepage preview', 'An alternative InteliMARIS homepage design preview.'],
+  playbook: ['Interaction playbook', 'Seven interactive journeys under review before they join the site.'],
   'not-found': ['Page not found', 'Find your way back to InteliMARIS: explore the platform, choose your role or browse marine hardware.'],
 }
 export const CATEGORY_DESCRIPTIONS: Record<ProductCategory, string> = {
@@ -70,7 +71,7 @@ export function getSeo(route: RouteLocationNormalizedLoaded | RouteLocationResol
   const imageWidth = name === 'home' ? 1730 : 1200
   const imageHeight = name === 'home' ? 1035 : 630
   const imageAlt = name === 'home' ? 'InteliMARIS marina LiDAR view showing berths, vessels and waterfront structures in a coloured 3D point cloud.' : `InteliMARIS — ${ { home: 'Your day on the water. Connected.', hardware: 'Connected marine hardware.', audiences: 'Find your view on the water.', marinas: 'From approach to alongside.', waterwayz: 'Your whole boating experience.', geospatial: 'A closer look at the waterfront.', company: 'Technology for life on the water.', platform: 'One connected marine platform.' }[imageKey] }`
-  const indexable = !missing && name !== 'home-alt'
+  const indexable = !missing && name !== 'home-alt' && name !== 'playbook'
   return { title: `${title} | InteliMARIS`, description: excerpt(description), canonical, image, imageAlt, imageWidth, imageHeight, indexable, product }
 }
 export function structuredData(route: RouteLocationNormalizedLoaded | RouteLocationResolved) {

@@ -10,11 +10,11 @@ describe('page metadata', () => {
     expect(canonicalUrl('/capabilities/marina-pms')).toBe('https://intelimaris.com/marinas/')
     expect(new Set(INDEXABLE_PATHS).size).toBe(INDEXABLE_PATHS.length)
     for (const path of INDEXABLE_PATHS) expect(router.resolve(path).name).not.toBe('not-found')
-    const staticPaths = router.getRoutes().filter(route => !route.path.includes(':') && !route.redirect && route.name !== 'home-alt').map(route => route.path)
+    const staticPaths = router.getRoutes().filter(route => !route.path.includes(':') && !route.redirect && route.name !== 'home-alt' && route.name !== 'playbook').map(route => route.path)
     for (const path of staticPaths) expect(INDEXABLE_PATHS).toContain(path)
   })
   it('marks unknown products, categories, routes and design previews noindex', () => {
-    for (const path of ['/products/missing', '/products/category/missing', '/missing', '/home-alt']) {
+    for (const path of ['/products/missing', '/products/category/missing', '/missing', '/home-alt', '/playbook']) {
       expect(getSeo(router.resolve(path)).indexable).toBe(false)
       expect(renderHead(router.resolve(path))).toContain('noindex, follow')
     }

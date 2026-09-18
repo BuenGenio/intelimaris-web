@@ -125,6 +125,12 @@ const router = createRouter({
       name: 'home-alt',
       component: () => import('../views/HomeAltView.vue'),
     },
+    {
+      path: '/playbook',
+      name: 'playbook',
+      component: () => import('../views/PlaybookView.vue'),
+      meta: { title: 'Interaction playbook', description: 'Seven interactive journeys under review before they join the site.' },
+    },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('../views/NotFoundView.vue'), meta: { title: 'Page not found' } },
   ],
 })
