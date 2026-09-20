@@ -9,21 +9,21 @@
  * spam, and creates the matching Organisation / Person / Activity in
  * Threadwise so leads show up in the CRM instead of only in an inbox.
  *
- * IMPORTANT — see README.md "Threadwise has no API authentication" before
- * deploying. Threadwise v0 scopes requests only by a client-supplied
- * `X-Workspace-Id` header; it does not check any token. That means
- * CRM_BASE_URL must never be Threadwise's public internet address — it must
- * sit behind a private network / tunnel / reverse-proxy check that rejects
- * anything not carrying the CRM_SHARED_SECRET this Worker sends. Pointing
- * this Worker at an open Threadwise instance lets ANYONE on the internet
- * read and write every record in every workspace.
+ * Threadwise (live at CRM_BASE_URL, already fronted by its own Cloudflare
+ * Worker — see ~/Projects/CRM/deploy/cloudflare-front) runs in `session`
+ * auth mode with a real scoped API-key system (better-auth). This Worker
+ * authenticates as one such key — see README.md "Getting a Threadwise API
+ * key" for how to mint one scoped to exactly `records:write`, the minimum
+ * permission that can create people/organisations/activities and nothing
+ * else (no read, export, delete or settings access).
  */
 
 export interface Env {
   ALLOWED_ORIGIN: string
   CRM_BASE_URL: string
   CRM_WORKSPACE_ID: string
-  CRM_SHARED_SECRET: string
+  /** A Threadwise API key scoped to `records:write` only — see README.md. */
+  CRM_API_KEY: string
   /** Optional. Bound only if the wrangler.toml kv_namespaces block is uncommented. */
   RATE_LIMIT?: KVNamespace
 }
@@ -77,8 +77,11 @@ async function crmFetch(env: Env, path: string, body: unknown): Promise<Record<s
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      // The API key alone selects the workspace; sending X-Workspace-Id too
+      // means a key pointed at the wrong workspace fails loudly (403) rather
+      // than silently writing somewhere unexpected.
       'X-Workspace-Id': env.CRM_WORKSPACE_ID,
-      Authorization: `Bearer ${env.CRM_SHARED_SECRET}`,
+      Authorization: `Bearer ${env.CRM_API_KEY}`,
     },
     body: JSON.stringify(body),
   })

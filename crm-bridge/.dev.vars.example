@@ -1,8 +1,8 @@
 # Copy to .dev.vars for local `wrangler dev` (that file is gitignored).
-# In production these are set with `wrangler secret put <NAME>`, not committed.
+# In production this is set with `wrangler secret put CRM_API_KEY`, not committed.
 
-# Shared secret the Worker sends as `Authorization: Bearer <value>` on every
-# call to Threadwise. Threadwise's own API does not check this (see
-# README.md "Threadwise has no API authentication") — a reverse proxy in
-# front of Threadwise must reject requests that don't present it.
-CRM_SHARED_SECRET=change-me-to-a-long-random-value
+# A Threadwise API key scoped to exactly `records:write` — mint one via
+# Settings -> Identity & access -> API keys on the live instance, or
+# POST /api/api-keys while signed in. See README.md "Getting a Threadwise
+# API key". Format: tw_ + 40 characters.
+CRM_API_KEY=tw_replace-with-a-real-scoped-key

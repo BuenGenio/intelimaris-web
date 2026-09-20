@@ -2,17 +2,21 @@ name = "intelimaris-crm-bridge"
 main = "src/worker.ts"
 compatibility_date = "2026-01-01"
 
-# Non-secret configuration. Secrets (CRM_SHARED_SECRET) are set with
-# `wrangler secret put` — see README.md — never committed here.
+# Non-secret configuration. CRM_API_KEY is a secret — set with
+# `wrangler secret put`, see README.md — never committed here.
 [vars]
 ALLOWED_ORIGIN = "https://intelimaris.com"
-CRM_BASE_URL = "https://REPLACE-ME.example.com/api"
-CRM_WORKSPACE_ID = "ws_demo"
+# Threadwise, live and already fronted by its own Cloudflare Worker
+# (~/Projects/CRM/deploy/cloudflare-front). Verified reachable 2026-09-20.
+CRM_BASE_URL = "https://threadwise.anthill.org.uk/api"
+CRM_WORKSPACE_ID = "REPLACE-ME"
 
 # Optional: enables per-IP rate limiting. Create with:
 #   npx wrangler kv namespace create RATE_LIMIT
 # and paste the returned id below. Omit this whole block to run without
-# rate limiting (not recommended for a public endpoint).
+# rate limiting (Threadwise's own API keys are separately rate-limited at
+# 600 req/min, but that doesn't stop a burst of junk form spam from
+# reaching the CRM as real records).
 # [[kv_namespaces]]
 # binding = "RATE_LIMIT"
 # id = "REPLACE-ME"

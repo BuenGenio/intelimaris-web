@@ -11,43 +11,43 @@ POSTs `{ name, email, company, role, message, source, submittedAt }` to
 set, and falls back to a prefilled `mailto:` link when it isn't. Deploying
 this Worker and setting that env var is the only wiring left to do.
 
-## ⚠ Threadwise has no API authentication — read this first
+## Where Threadwise actually lives
 
-As of the version in `~/Projects/CRM`, Threadwise's REST API scopes every
-request only by a client-supplied `X-Workspace-Id` header (see
-`docs/API.md`). **There is no token, key or session check anywhere in the
-API.** Anyone who can reach `CRM_BASE_URL` can read or write any record in
-any workspace just by setting that header.
+Threadwise is live at `https://threadwise.anthill.org.uk` — verified
+reachable 2026-09-20 (`/api/health` → `200 {"ok":true,...}`). It's already
+fronted by its own Cloudflare Worker
+(`~/Projects/CRM/deploy/cloudflare-front`), which proxies to the real
+instance on a Scaleway VPS. This Worker just calls that public API like any
+other client — no separate tunnel or private network needed for this piece.
 
-That means:
+It also runs in **`session` auth mode** with a real API-key system
+(`better-auth`), confirmed by hitting `/api/auth/mode` (→ `"session"`) and an
+unauthenticated `/api/me` (→ `401 unauthenticated`, not a demo user). See
+`~/Projects/CRM/docs/AUTH.md` for the full model. That means Threadwise's
+own auth is what protects it — this Worker doesn't need to add another
+layer, just authenticate correctly.
 
-- **`CRM_BASE_URL` must never be Threadwise's public address.** Don't point
-  it at a bare `https://crm.yourdomain.com` with nothing else in front.
-- Threadwise needs to sit behind something that rejects requests which don't
-  prove they came from this Worker. This Worker always sends
-  `Authorization: Bearer <CRM_SHARED_SECRET>` for that purpose — Threadwise
-  itself ignores it, so a reverse proxy in front of Threadwise has to check
-  it. A two-line Caddy example, dropped into Threadwise's
-  `deploy/caddy/Caddyfile`:
+*(An earlier version of this bridge worked around Threadwise having no API
+authentication at all, with a hand-rolled shared-secret header and a Caddy
+config change. That's gone — Threadwise gained real auth since, and the
+workaround would now just be redundant.)*
 
-  ```caddy
-  crm.yourdomain.com {
-    @unauthorised not header Authorization "Bearer {$CRM_SHARED_SECRET}"
-    respond @unauthorised 401
-    reverse_proxy threadwise:3001
-  }
-  ```
+## Getting a Threadwise API key
 
-  (Same idea with an nginx `map`/`if`, an Fly.io/Cloudflare Access service
-  token, or simplest of all: keep Threadwise on a private network — e.g. Fly
-  6PN, a Tailscale/WireGuard tunnel — and run this Worker somewhere that can
-  reach that private network, so Threadwise is never internet-facing at all.)
-- This is a real gap in Threadwise itself, not just a deployment detail —
-  worth raising as an issue on that project if you plan to expose it to
-  anything public.
+Sign in to `https://threadwise.anthill.org.uk` with an account that has
+`settings:manage` (owner or admin), then either:
 
-Until Threadwise is reachable *only* through something that enforces this,
-**do not deploy this Worker against it.**
+- **UI**: Settings → Identity & access → API keys → create one, scope
+  **`records:write` only** — nothing else. That's the minimum permission
+  that can create people, organisations and activities; it cannot read,
+  export, delete or change settings. Copy the key now — it's shown once.
+- **API**: `POST /api/api-keys` (while signed in) with
+  `{ "name": "intelimaris-web contact form", "scopes": ["records:write"] }`.
+
+Set the returned `tw_…` key as this Worker's secret (below); set the target
+workspace's id as `CRM_WORKSPACE_ID` in `wrangler.toml`. Sending both means a
+key accidentally scoped to the wrong workspace fails loudly (`403`) instead
+of quietly writing leads somewhere unexpected.
 
 ## What it does
 
@@ -61,7 +61,10 @@ Until Threadwise is reachable *only* through something that enforces this,
    endpoint, also add
    [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/) to
    the form** (free, purpose-built, far better than a hand-rolled counter —
-   not implemented here to keep this Worker dependency-free).
+   not implemented here to keep this Worker dependency-free). This is
+   separate from — and still worth doing alongside — Threadwise's own
+   600 req/min API-key rate limit, which doesn't stop a burst of form spam
+   from landing as real CRM records.
 5. Creates the Organisation (if `company` was given), the Person linked to
    it, and an Activity (`kind: 'note'`) carrying the message — tagged
    `source:intelimaris-web` throughout so the CRM shows where the record
@@ -76,12 +79,11 @@ cd crm-bridge
 npm install
 npx wrangler login
 
-# Edit wrangler.toml: CRM_BASE_URL (the proxied, authenticated address from
-# above — not Threadwise's raw address), CRM_WORKSPACE_ID, ALLOWED_ORIGIN
-# if this ever serves a preview domain too.
+# Edit wrangler.toml: CRM_WORKSPACE_ID (from the account the key above was
+# minted in), ALLOWED_ORIGIN if this ever serves a preview domain too.
 
-npx wrangler secret put CRM_SHARED_SECRET   # long random value; same value
-                                             # the Caddy/nginx check above expects
+npx wrangler secret put CRM_API_KEY    # the tw_… key from "Getting a
+                                        # Threadwise API key" above
 
 npm run deploy
 ```
@@ -98,10 +100,15 @@ To watch it handle live traffic: `npm run tail`.
 ## Local development
 
 ```bash
-cp .dev.vars.example .dev.vars   # fill in CRM_SHARED_SECRET; gitignored
+cp .dev.vars.example .dev.vars   # fill in CRM_API_KEY; gitignored
 npm run dev
 ```
 
 `wrangler dev` reads `[vars]` from `wrangler.toml` and secrets from
 `.dev.vars`. Point a local build's `VITE_CONTACT_FORM_ENDPOINT` at the
-printed `http://localhost:8787` to test end to end.
+printed `http://localhost:8787` to test end to end. A key scoped to
+`records:write` really will create records on the **live** Threadwise
+instance when you test this way — there's no separate staging workspace
+documented, so use a workspace you don't mind seeing test leads in, and
+delete them afterwards (`DELETE` isn't in this Worker's scope, so do that
+from the Threadwise UI itself).
