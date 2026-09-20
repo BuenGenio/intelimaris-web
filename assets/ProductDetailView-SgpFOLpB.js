@@ -1,0 +1,1 @@
+import{_ as e}from"./catalog.css_vue_type_style_index_0_src_true_lang-DIMWTE3F.js";import{d as t,f as r,o as a}from"./index-WFNllwaH.js";const p=t({__name:"ProductDetailView",props:{id:{}},setup(o){return(c,i)=>(a(),r(e,{"product-id":o.id},null,8,["product-id"]))}});export{p as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./SolutionView.vue_vue_type_script_setup_true_lang-BRPltECY.js";import{d as o,f as t,o as i}from"./index-WFNllwaH.js";import"./EditorialShot-B7m1Gi4p.js";import"./JourneySection-XNr_OSE3.js";const c=o({__name:"InteliBilgeView",setup(n){return(r,a)=>(i(),t(e,{"solution-id":"intelibilge"}))}});export{c as default};

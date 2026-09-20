@@ -1,0 +1,394 @@
+[
+  {
+    "path": "/",
+    "file": "dist/index.html",
+    "title": "Your day on the water, connected | InteliMARIS",
+    "canonical": "https://intelimaris.com/",
+    "indexable": true
+  },
+  {
+    "path": "/products",
+    "file": "dist/products/index.html",
+    "title": "Marine hardware & connected vessel systems | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/",
+    "indexable": true
+  },
+  {
+    "path": "/products/categories",
+    "file": "dist/products/categories/index.html",
+    "title": "Browse marine hardware by category | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/categories/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities",
+    "file": "dist/capabilities/index.html",
+    "title": "Navigation, vessel monitoring & marina operations | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/",
+    "indexable": true
+  },
+  {
+    "path": "/waterwayz",
+    "file": "dist/waterwayz/index.html",
+    "title": "WaterWayz | Your connected boating experience | InteliMARIS",
+    "canonical": "https://intelimaris.com/waterwayz/",
+    "indexable": true
+  },
+  {
+    "path": "/software",
+    "file": "dist/software/index.html",
+    "title": "Connected maritime software & integrations | InteliMARIS",
+    "canonical": "https://intelimaris.com/software/",
+    "indexable": true
+  },
+  {
+    "path": "/about",
+    "file": "dist/about/index.html",
+    "title": "Our story | Technology for life on the water | InteliMARIS",
+    "canonical": "https://intelimaris.com/about/",
+    "indexable": true
+  },
+  {
+    "path": "/contact",
+    "file": "dist/contact/index.html",
+    "title": "Talk to the InteliMARIS team | InteliMARIS",
+    "canonical": "https://intelimaris.com/contact/",
+    "indexable": true
+  },
+  {
+    "path": "/marinas",
+    "file": "dist/marinas/index.html",
+    "title": "InteliMarina + Dock Pass / Marina management | InteliMARIS",
+    "canonical": "https://intelimaris.com/marinas/",
+    "indexable": true
+  },
+  {
+    "path": "/demo",
+    "file": "dist/demo/index.html",
+    "title": "Try WaterWayz and InteliMarina | Interactive demos | InteliMARIS",
+    "canonical": "https://intelimaris.com/demo/",
+    "indexable": true
+  },
+  {
+    "path": "/demo/marina/bahia-mar",
+    "file": "dist/demo/marina/bahia-mar/index.html",
+    "title": "Marina survey demo | Bahia Mar sample listing | InteliMARIS",
+    "canonical": "https://intelimaris.com/demo/marina/bahia-mar/",
+    "indexable": true
+  },
+  {
+    "path": "/for/captains",
+    "file": "dist/for/captains/index.html",
+    "title": "Passage planning for captains and navigators | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/captains/",
+    "indexable": true
+  },
+  {
+    "path": "/for/passengers",
+    "file": "dist/for/passengers/index.html",
+    "title": "Follow the day on the water | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/passengers/",
+    "indexable": true
+  },
+  {
+    "path": "/for/crew",
+    "file": "dist/for/crew/index.html",
+    "title": "Vessel information for the whole crew | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/crew/",
+    "indexable": true
+  },
+  {
+    "path": "/for/fleet-owners",
+    "file": "dist/for/fleet-owners/index.html",
+    "title": "Vessel monitoring and upkeep for owners | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/fleet-owners/",
+    "indexable": true
+  },
+  {
+    "path": "/for/marina-owners",
+    "file": "dist/for/marina-owners/index.html",
+    "title": "Berths, arrivals and marina operations | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/marina-owners/",
+    "indexable": true
+  },
+  {
+    "path": "/for/marina-teams",
+    "file": "dist/for/marina-teams/index.html",
+    "title": "Arrivals and berth assignments for marina teams | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/marina-teams/",
+    "indexable": true
+  },
+  {
+    "path": "/for/maintenance",
+    "file": "dist/for/maintenance/index.html",
+    "title": "Vessel service work and technician assignments | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/maintenance/",
+    "indexable": true
+  },
+  {
+    "path": "/for/private-docks",
+    "file": "dist/for/private-docks/index.html",
+    "title": "Private dock listings and arrival requests | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/private-docks/",
+    "indexable": true
+  },
+  {
+    "path": "/for/waterfront-businesses",
+    "file": "dist/for/waterfront-businesses/index.html",
+    "title": "Help boaters find your waterfront business | InteliMARIS",
+    "canonical": "https://intelimaris.com/for/waterfront-businesses/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities/navigation",
+    "file": "dist/capabilities/navigation/index.html",
+    "title": "Navigation | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/navigation/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities/route-planning",
+    "file": "dist/capabilities/route-planning/index.html",
+    "title": "Route planning | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/route-planning/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities/hazard-reporting",
+    "file": "dist/capabilities/hazard-reporting/index.html",
+    "title": "Hazards & reporting | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/hazard-reporting/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities/monitoring",
+    "file": "dist/capabilities/monitoring/index.html",
+    "title": "Vessel monitoring | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/monitoring/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities/dockpass",
+    "file": "dist/capabilities/dockpass/index.html",
+    "title": "Dockage & Dock Pass | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/dockpass/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities/emergency-assistance",
+    "file": "dist/capabilities/emergency-assistance/index.html",
+    "title": "Emergency Assistance | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/emergency-assistance/",
+    "indexable": true
+  },
+  {
+    "path": "/capabilities/maintenance",
+    "file": "dist/capabilities/maintenance/index.html",
+    "title": "Maintenance & service | InteliMARIS",
+    "canonical": "https://intelimaris.com/capabilities/maintenance/",
+    "indexable": true
+  },
+  {
+    "path": "/pwts",
+    "file": "dist/pwts/index.html",
+    "title": "PWTS | InteliMARIS",
+    "canonical": "https://intelimaris.com/pwts/",
+    "indexable": true
+  },
+  {
+    "path": "/intelibilge",
+    "file": "dist/intelibilge/index.html",
+    "title": "InteliBilge — Water-ingress monitoring | InteliMARIS",
+    "canonical": "https://intelimaris.com/intelibilge/",
+    "indexable": true
+  },
+  {
+    "path": "/intelibms",
+    "file": "dist/intelibms/index.html",
+    "title": "InteliBMS | InteliMARIS",
+    "canonical": "https://intelimaris.com/intelibms/",
+    "indexable": true
+  },
+  {
+    "path": "/intelligence",
+    "file": "dist/intelligence/index.html",
+    "title": "AI-powered intelligence | InteliMARIS",
+    "canonical": "https://intelimaris.com/intelligence/",
+    "indexable": true
+  },
+  {
+    "path": "/geospatial",
+    "file": "dist/geospatial/index.html",
+    "title": "Drone & geospatial intelligence | InteliMARIS",
+    "canonical": "https://intelimaris.com/geospatial/",
+    "indexable": true
+  },
+  {
+    "path": "/vision",
+    "file": "dist/vision/index.html",
+    "title": "InteliVision / Docking & Vision | InteliMARIS",
+    "canonical": "https://intelimaris.com/vision/",
+    "indexable": true
+  },
+  {
+    "path": "/products/category/safety",
+    "file": "dist/products/category/safety/index.html",
+    "title": "Safety marine hardware | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/category/safety/",
+    "indexable": true
+  },
+  {
+    "path": "/products/category/water",
+    "file": "dist/products/category/water/index.html",
+    "title": "Water & bilge marine hardware | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/category/water/",
+    "indexable": true
+  },
+  {
+    "path": "/products/category/environment",
+    "file": "dist/products/category/environment/index.html",
+    "title": "Environmental marine hardware | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/category/environment/",
+    "indexable": true
+  },
+  {
+    "path": "/products/category/electrical",
+    "file": "dist/products/category/electrical/index.html",
+    "title": "Electrical marine hardware | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/category/electrical/",
+    "indexable": true
+  },
+  {
+    "path": "/products/category/motion",
+    "file": "dist/products/category/motion/index.html",
+    "title": "Motion & fuel marine hardware | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/category/motion/",
+    "indexable": true
+  },
+  {
+    "path": "/products/category/control",
+    "file": "dist/products/category/control/index.html",
+    "title": "Control marine hardware | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/category/control/",
+    "indexable": true
+  },
+  {
+    "path": "/products/category/system",
+    "file": "dist/products/category/system/index.html",
+    "title": "System marine hardware | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/category/system/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im101",
+    "file": "dist/products/im101/index.html",
+    "title": "IM101 | Smoke & Carbon Monoxide Detector | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im101/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im201",
+    "file": "dist/products/im201/index.html",
+    "title": "IM201 | Precision Moisture Leak Detector (3-Pin) | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im201/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im202",
+    "file": "dist/products/im202/index.html",
+    "title": "IM202 | Rope-Style Leak Sensor | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im202/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im301",
+    "file": "dist/products/im301/index.html",
+    "title": "IM301 | Temperature & Humidity Sensor (IP64) | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im301/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im302",
+    "file": "dist/products/im302/index.html",
+    "title": "IM302 | Temperature & Humidity Sensor (Living Areas, Round) | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im302/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im401",
+    "file": "dist/products/im401/index.html",
+    "title": "IM401 | AC Shore Power Monitor | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im401/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im501",
+    "file": "dist/products/im501/index.html",
+    "title": "IM501 | DC Shunt & Battery Monitor | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im501/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im601",
+    "file": "dist/products/im601/index.html",
+    "title": "IM601 | Solid-State Water Level Sensor | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im601/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im701",
+    "file": "dist/products/im701/index.html",
+    "title": "IM701 | Vibration Sensor | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im701/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im801",
+    "file": "dist/products/im801/index.html",
+    "title": "IM801 | DC Power Monitor | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im801/",
+    "indexable": true
+  },
+  {
+    "path": "/products/im901",
+    "file": "dist/products/im901/index.html",
+    "title": "IM901 | I/O Remote AC Switch | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/im901/",
+    "indexable": true
+  },
+  {
+    "path": "/products/intelibilge",
+    "file": "dist/products/intelibilge/index.html",
+    "title": "InteliBilge™ | Water-ingress Monitoring & Pump Supervision | InteliMARIS",
+    "canonical": "https://intelimaris.com/products/intelibilge/",
+    "indexable": true
+  },
+  {
+    "path": "/press/flibs-2026",
+    "file": "dist/press/flibs-2026/index.html",
+    "title": "InteliMARIS brings WaterWayz to FLIBS 2026: one app for the passage, the vessel and the berth | InteliMARIS",
+    "canonical": "https://intelimaris.com/press/flibs-2026/",
+    "indexable": true
+  },
+  {
+    "path": "/home-alt",
+    "file": "dist/home-alt/index.html",
+    "title": "Alternative homepage preview | InteliMARIS",
+    "canonical": "https://intelimaris.com/home-alt/",
+    "indexable": false
+  },
+  {
+    "path": "/playbook",
+    "file": "dist/playbook/index.html",
+    "title": "Interaction playbook | InteliMARIS",
+    "canonical": "https://intelimaris.com/playbook/",
+    "indexable": false
+  },
+  {
+    "path": "/404",
+    "file": "dist/404.html",
+    "title": "Page not found | InteliMARIS",
+    "canonical": "https://intelimaris.com/404/",
+    "indexable": false
+  }
+]

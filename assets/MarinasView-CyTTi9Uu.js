@@ -1,0 +1,1 @@
+import{_ as a}from"./CapabilityView.vue_vue_type_script_setup_true_lang-CyZq6QqD.js";import{d as e,f as r,o}from"./index-WFNllwaH.js";import"./EditorialShot-B7m1Gi4p.js";import"./JourneySection-XNr_OSE3.js";const c=e({__name:"MarinasView",setup(t){return(m,n)=>(o(),r(a,{"feature-id":"marina-pms"}))}});export{c as default};

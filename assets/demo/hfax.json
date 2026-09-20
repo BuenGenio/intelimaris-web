@@ -1,0 +1,92 @@
+{
+ "source": "HFAX_PC.las",
+ "generator": "LP360 (GeoCue)",
+ "las_version": "1.4",
+ "point_format": 7,
+ "source_points": 220406829,
+ "crs": "WGS 84 / UTM zone 17N, ellipsoid heights (m)",
+ "centroid_wgs84": [
+  29.20581,
+  -81.01366
+ ],
+ "extent_m": [
+  784.0,
+  958.1,
+  75.4
+ ],
+ "voxel_m": 0.8,
+ "ground_grid_m": 2.0,
+ "z_clip_m": [
+  -31,
+  -2
+ ],
+ "classification_in_source": "none (all points class 0)",
+ "bands": [
+  "Ground / water surface",
+  "Low structure: docks, vessels, vehicles (0.3\u20133 m)",
+  "Mid structure: buildings, superstructure (3\u201310 m, single return)",
+  "Canopy / vegetation (multiple returns)",
+  "High structure (>10 m, single return)"
+ ],
+ "band_counts": [
+  627854,
+  199880,
+  109894,
+  228698,
+  10600
+ ],
+ "ground_level_m_ellipsoid": -27.319,
+ "full": {
+  "count": 1176926,
+  "bytes": 15300038,
+  "layout": {
+   "pos_u16x3": 7061556,
+   "rgb_u8x3": 3530778,
+   "intensity_u8": 1176926,
+   "hag_dm_u8": 1176926,
+   "band_u8": 1176926,
+   "nreturns_u8": 1176926
+  },
+  "bounds": {
+   "x": [
+    498297.704,
+    499081.675
+   ],
+   "y": [
+    230303.81100000002,
+    231261.573
+   ],
+   "z": [
+    -30.999000000000002,
+    -2.193
+   ]
+  }
+ },
+ "preview": {
+  "count": 150000,
+  "bytes": 1950000,
+  "layout": {
+   "pos_u16x3": 900000,
+   "rgb_u8x3": 450000,
+   "intensity_u8": 150000,
+   "hag_dm_u8": 150000,
+   "band_u8": 150000,
+   "nreturns_u8": 150000
+  },
+  "bounds": {
+   "x": [
+    498297.704,
+    499081.675
+   ],
+   "y": [
+    230303.81100000002,
+    231261.573
+   ],
+   "z": [
+    -30.999000000000002,
+    -2.193
+   ]
+  }
+ },
+ "built": "2026-09-14"
+}

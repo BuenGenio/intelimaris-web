@@ -1,0 +1,1 @@
+.mon-tile[data-v-86c43a44]{display:grid;gap:2px;padding:10px 12px;text-align:left;border:1px solid var(--ink-200);border-radius:var(--scr-r-sm);background:var(--ink-0);cursor:pointer}.mon-tile.is-on[data-v-86c43a44]{border-color:var(--scr-accent);background:var(--wave-50)}.mon-tile[data-tone=warn] .scr-tele-value[data-v-86c43a44]{color:var(--warn)}
