@@ -76,7 +76,7 @@ const teamBase = `${import.meta.env.BASE_URL}assets/team/`
 /* Photos live in public/assets/team/ as square portraits; a member without one renders initials. */
 const team = [
   { slug: 'ron-bishop', name: 'Ron Bishop', initials: 'RB', photo: null, roleKey: 'about.team.ron.role', bioKey: 'about.team.ron.bio' },
-  { slug: 'tristan-mullane', name: 'Tristan Mullane', initials: 'TM', photo: null, roleKey: 'about.team.tristan.role', bioKey: 'about.team.tristan.bio' },
+  { slug: 'tristan-mullane', name: 'Tristan Mullane', initials: 'TM', photo: `${teamBase}tristan-mullane.webp`, roleKey: 'about.team.tristan.role', bioKey: 'about.team.tristan.bio' },
   { slug: 'john-x', name: 'John X', initials: 'JX', photo: `${teamBase}john-x.webp`, roleKey: 'about.team.john.role', bioKey: 'about.team.john.bio' },
   { slug: 'sam-skolnik', name: 'Sam Skolnik', initials: 'SS', photo: `${teamBase}sam-skolnik.webp`, roleKey: 'about.team.sam.role', bioKey: 'about.team.sam.bio' },
   { slug: 'yevgen-trotsan', name: 'Yevgen Trotsan', initials: 'YT', photo: `${teamBase}yevgen-trotsan.webp`, roleKey: 'about.team.yevgen.role', bioKey: 'about.team.yevgen.bio' },
