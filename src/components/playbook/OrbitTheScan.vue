@@ -871,7 +871,7 @@ onBeforeUnmount(() => {
 
 .ots-stage {
   position: relative;
-  height: clamp(560px, calc(100vh - 230px), 860px);
+  height: min(clamp(560px, calc(100vh - 230px), 860px), var(--stage-cap, 80vh));
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: radial-gradient(120% 90% at 30% 15%, #16233a 0%, #0b1220 55%, #060b14 100%);
@@ -1237,7 +1237,7 @@ onBeforeUnmount(() => {
 
 /* ---- phone ---- */
 @media (max-width: 640px) {
-  .ots-stage { height: min(78vh, 720px); border-radius: 0; margin-inline: -1rem; }
+  .ots-stage { height: min(720px, var(--stage-cap, 78vh)); border-radius: 0; margin-inline: -1rem; }
   .ots-head { max-width: calc(100% - 2rem); }
   .ots-title { font-size: 2rem; }
   .ots-lede { font-size: 0.875rem; }

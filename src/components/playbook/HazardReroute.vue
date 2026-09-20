@@ -909,7 +909,7 @@ watch(pending, (p) => {
 
 .hz-stage {
   position: relative;
-  height: min(clamp(560px, 62vw, 860px), 82vh);
+  height: min(clamp(560px, 62vw, 860px), var(--stage-cap, 82vh));
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--navy);
@@ -1470,7 +1470,7 @@ watch(pending, (p) => {
   }
 
   .hz-stage {
-    height: min(78vh, 680px);
+    height: min(680px, var(--stage-cap, 78vh));
     border-radius: var(--radius-lg);
   }
 

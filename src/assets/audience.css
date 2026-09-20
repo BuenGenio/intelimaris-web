@@ -48,7 +48,7 @@ html { scroll-padding-top:calc(var(--site-header-height) + 12px); }
 .preview-demo-intro .editorial-eyebrow { margin:0; }
 .preview-demo-action { margin:0; max-width:60ch; font-size:.86rem; line-height:1.5; color:var(--text-secondary); }
 /* main.css pads every section 7rem; a journey root and the section that frames it take none of it. */
-.journey-stage > section, .journey-section--hero { padding:0; }
+.journey-stage > section, .journey-section--hero, .playbook-frame > section { padding:0; }
 .choice-footnote { display:flex; justify-content:space-between; align-items:center; gap:24px; margin-top:18px; font-size:.8rem; color:var(--text-secondary); }
 .choice-footnote p { margin:0; }
 .choice-footnote a { color:var(--domain-ink); font-weight:600; white-space:nowrap; }

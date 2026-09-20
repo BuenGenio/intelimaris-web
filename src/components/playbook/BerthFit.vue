@@ -1308,6 +1308,7 @@ onMounted(async () => {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  background: #0f1c2e;
   border: 1px solid var(--bf-line);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 40px rgba(0, 0, 0, 0.3);
 }
@@ -1325,6 +1326,8 @@ onMounted(async () => {
   display: block;
   width: 100%;
   height: auto;
+  /* the plan never runs past the viewport; the frame's water fills any spare width */
+  max-height: calc(var(--stage-cap, 80vh) - 7rem);
   font-family: var(--font-text);
 }
 

@@ -940,6 +940,7 @@ watch(tool, () => {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 10;
+  max-height: calc(var(--stage-cap, 80vh) - 9rem);
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;

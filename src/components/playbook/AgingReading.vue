@@ -353,7 +353,7 @@ const linkHint = computed(() => {
 .ar-stage {
   position: relative;
   isolation: isolate;
-  padding: var(--space-8);
+  padding: var(--space-6);
   border-radius: 28px;
   background:
     radial-gradient(60% 50% at 8% 0%, rgba(61, 142, 224, 0.28), transparent 70%),

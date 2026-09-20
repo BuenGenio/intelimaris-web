@@ -709,7 +709,7 @@ onBeforeUnmount(() => {
 .pp-stage {
   position: relative;
   width: 100%;
-  height: clamp(520px, 78vh, 820px);
+  height: min(clamp(520px, 78vh, 820px), var(--stage-cap, 80vh));
   overflow: hidden;
   border-radius: var(--radius-xl);
   background: var(--navy);
@@ -1214,7 +1214,7 @@ onBeforeUnmount(() => {
 /* ---------- phones: bottom sheet ---------- */
 @media (max-width: 760px) {
   .pp-stage {
-    height: clamp(560px, 82svh, 760px);
+    height: min(clamp(520px, 82svh, 760px), var(--stage-cap, 80vh));
     border-radius: var(--radius-lg);
   }
 
