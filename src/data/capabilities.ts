@@ -134,7 +134,7 @@ export const CAPABILITIES: Capability[] = [
     availability: 'Vessel maintenance and service-company workflows are implemented. Access depends on an active engagement and technician assignment.',
     steps: [
       { title: 'Track both clocks', body: 'Maintain reminders by calendar date and engine hours. Keep the service history attached to the vessel, even as people or service providers change.' },
-      { title: 'Engage the company', body: 'The vessel owner opens the engagement. The service company assigns its technicians, granting access to monitoring, vessel information, maintenance and the engagement conversation.' },
+      { title: 'Engage the company', body: 'Either the vessel owner or the service company can propose an engagement; the other accepts. The company then assigns technicians, giving them access to monitoring, vessel information, maintenance and the service conversation.' },
       { title: 'Work across assigned vessels', body: 'Review open orders and due reminders by vessel, system and status. Assigned technicians move work forward and record completion in the service history.' },
     ],
     available: ['Date and engine-hour reminders', 'Vessel service records and work orders', 'Company worklist and technician assignments', 'Engagement-scoped vessel access'],

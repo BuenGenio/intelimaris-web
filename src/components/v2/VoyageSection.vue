@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionRef" class="voyage chapter" data-chapter="slate" :style="{ '--voyage-scroll': `${scrollHeight}vh` }">
+  <section id="sample-voyage" ref="sectionRef" class="voyage chapter" data-chapter="slate" :style="{ '--voyage-scroll': `${scrollHeight}vh` }">
     <div class="voyage-sticky">
       <div class="container-wide voyage-head">
         <span class="t-overline">{{ t('v2.voyage.overline') }}</span>

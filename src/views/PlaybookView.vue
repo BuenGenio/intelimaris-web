@@ -5,6 +5,7 @@
         <p class="t-overline">Interaction playbook · {{ COUNT_WORDS[JOURNEYS.length] ?? JOURNEYS.length }} journeys under review</p>
         <h1 class="playbook-title">{{ current.title }}</h1>
         <p class="playbook-action">{{ current.action }}</p>
+        <JourneyDisclosure :journey="current" />
       </div>
 
       <nav class="playbook-tabs-wrap" aria-label="Journeys">
@@ -61,11 +62,11 @@
     <footer class="playbook-foot">
       <div class="container-wide playbook-foot-grid">
         <div>
-          <p class="t-overline">What it proves</p>
+          <p class="t-overline">What to look for</p>
           <p class="playbook-foot-text">{{ current.proves }}</p>
         </div>
         <div>
-          <p class="t-overline">What it stands on</p>
+          <p class="t-overline">In the product</p>
           <p class="playbook-foot-text">{{ current.backend }}</p>
         </div>
         <div class="playbook-foot-nav">
@@ -80,6 +81,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import JourneyDisclosure from '@/components/audience/JourneyDisclosure.vue'
 import { JOURNEYS } from '@/data/playbook/journeys'
 
 const route = useRoute()

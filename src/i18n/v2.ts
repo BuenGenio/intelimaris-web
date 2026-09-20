@@ -52,19 +52,19 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.voyage.overline': 'One passage, end to end',
     'v2.voyage.title': 'Scroll the trip.',
     'v2.voyage.lede':
-      'A real passage down the Intracoastal to Bahia Mar, replayed on the router’s own clock — the same data the app carries underway.',
+      'Follow a recorded sample passage down the Intracoastal to Bahia Mar. Scroll or choose a stage to explore the plan, the approach and the berth. Positions and readings in this replay are not live.',
     'v2.voyage.stage.plan.label': 'Plan',
     'v2.voyage.stage.plan.note':
-      'The planner uses her real length, beam, draft and air draft. If it does not believe the line, it refuses and says why.',
+      'Start with the vessel’s length, width, draft and height above the water. Review the recorded route before following it.',
     'v2.voyage.stage.underway.label': 'Underway',
     'v2.voyage.stage.underway.note':
-      'Charted depth reads through the water. AIS traffic, hazards and no-wake zones update as you go.',
+      'Follow the vessel along the stored route. Read the sample speed, heading, depth and time to arrival as the scene changes.',
     'v2.voyage.stage.approach.label': 'Approach',
     'v2.voyage.stage.approach.note':
-      'Bridge clearance against the tide at the moment you will actually arrive — not at the moment you asked.',
+      'Inspect the bridge clearance and the vessel’s height shown in this example. Real passage checks depend on current information and available coverage.',
     'v2.voyage.stage.berth.label': 'Berthed',
     'v2.voyage.stage.berth.note':
-      'The dockmaster assigns the berth and the approach brief comes with it: heading, mode, tie side, depth and datum.',
+      'Read the recorded berth assignment and approach details: entry direction, bow-in or stern-in, tie side and supplied depth reference.',
     'v2.voyage.prev': 'Previous stage',
     'v2.voyage.next': 'Next stage',
     'v2.voyage.progress': 'Passage progress',

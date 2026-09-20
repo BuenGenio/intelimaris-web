@@ -10,6 +10,12 @@ import { saveAudience } from '@/composables/useAudience'
 import { AUDIENCES } from '@/data/audiences'
 import { CAPABILITIES } from '@/data/capabilities'
 
+// These tests exercise audience navigation. Canvas demos have their own model
+// tests and browser checks; lazy imports must not outlive this test environment.
+vi.mock('@/components/audience/JourneyStage.vue', () => ({
+  default: { props: ['id', 'initialScreen'], template: '<div class="test-journey" :data-journey="id" :data-initial-screen="initialScreen"></div>' },
+}))
+
 let wrapper: VueWrapper | undefined
 beforeEach(() => { saveAudience(null); localStorage.clear() })
 afterEach(() => { wrapper?.unmount(); wrapper = undefined; vi.restoreAllMocks() })
@@ -47,13 +53,13 @@ describe('audience journey', () => {
     saveAudience('crew')
     const router = await setup('/?audience=passengers')
     wrapper = mount(HomeView, { global: { plugins: [router] } })
-    expect(wrapper.get('#audience-preview h2').text()).toContain('A place in the journey')
+    expect(wrapper.get('#audience-preview h2').text()).toContain('Feel part of the journey')
     await router.push('/?audience=marina-owners')
     await nextTick()
     expect(wrapper.get('#audience-preview h2').text()).toContain('The whole basin')
     router.back()
     await flushPromises()
-    expect(wrapper.get('#audience-preview h2').text()).toContain('A place in the journey')
+    expect(wrapper.get('#audience-preview h2').text()).toContain('Feel part of the journey')
   })
 
   it('supports browsing without a role, invalid input and an explicit fresh choice', async () => {
@@ -104,6 +110,16 @@ describe('audience journey', () => {
     await wrapper.setProps({ audienceId: 'marina-owners' })
     expect(wrapper.get('h1').text()).toContain('The whole basin')
     expect(wrapper.find('#try-draw-your-water').exists()).toBe(true)
+  })
+
+  it('changes the starting product screen when switching between service and business guides', async () => {
+    const router = await setup('/for/maintenance')
+    wrapper = mount(AudienceView, { props: { audienceId: 'maintenance' }, global: { plugins: [router] } })
+    expect(wrapper.get('.test-journey').attributes('data-initial-screen')).toBe('yard-work')
+    expect(wrapper.get('.guide-heading a').attributes('href')).toBe('#try-app-screens')
+    await wrapper.setProps({ audienceId: 'waterfront-businesses' })
+    expect(wrapper.get('.test-journey').attributes('data-initial-screen')).toBe('business-listing')
+    expect(wrapper.get('.guide-heading a').attributes('href')).toBe('#try-app-screens')
   })
 
   it('distinguishes hazard reading from unfinished reporting actions', async () => {

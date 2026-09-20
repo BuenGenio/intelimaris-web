@@ -2,7 +2,7 @@
   <section class="hz" :data-phone="isPhone || undefined">
     <header class="hz-head">
       <div class="hz-head-text">
-        <p class="t-overline">WaterWayz · hazards on a live passage · sample</p>
+        <p class="t-overline">WaterWayz · hazards on a sample passage</p>
         <p class="hz-lede">
           Sunrise Bay to Bahia Mar at {{ CRUISE_KN }} kn. Tap the water where you see something; say it is still there, or that it is gone.
         </p>
@@ -165,7 +165,7 @@
         <li><span class="hz-swatch hz-swatch--ghost" aria-hidden="true" />the track before</li>
         <li><span class="hz-swatch hz-swatch--track" aria-hidden="true" />the track now</li>
         <li><span class="hz-swatch hz-swatch--ring" aria-hidden="true" />a caution: dashed when reported, solid when confirmed</li>
-        <li><span class="hz-swatch hz-swatch--danger" aria-hidden="true" />live and severe</li>
+        <li><span class="hz-swatch hz-swatch--danger" aria-hidden="true" />active and severe</li>
         <li><span class="hz-swatch hz-swatch--slow" aria-hidden="true" />{{ NO_WAKE_KN }} kn inside a zone</li>
       </ul>
       <p class="t-caption hz-sample">

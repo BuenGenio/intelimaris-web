@@ -7,13 +7,13 @@
         <h1>Your day on the water, <em>connected.</em></h1>
       </div>
       <div class="hero-intro">
-        <p class="editorial-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS™ brings it together through WaterWayz™.</p>
+        <p class="editorial-lede">Plan a passage. Keep an eye on the vessel. Prepare for the next arrival. InteliMARIS™ connects the people aboard with the people on shore through WaterWayz™ and InteliMarina.</p>
         <div class="hero-copy">
           <div class="hero-actions">
             <button type="button" class="editorial-button hero-start" @click="start(audience?.id, $event.currentTarget as HTMLElement)">Start free <span aria-hidden="true">→</span></button>
-            <RouterLink to="/contact" class="hero-demo">Book a demo</RouterLink>
+            <RouterLink to="/demo" class="hero-demo">Explore the interactive demos</RouterLink>
           </div>
-          <p class="hero-tagline"><span>One app</span><span>Passage, vessel and berth</span><span>27,000 marinas</span></p>
+          <p class="hero-tagline"><span>One app</span><span>Passage, vessel and berth</span><span>People aboard and ashore</span></p>
         </div>
       </div>
       <div class="hero-chooser">
@@ -24,13 +24,12 @@
         <div class="hero-stage">
           <div class="hero-card">
             <div class="hero-card-head">
-              <p class="editorial-eyebrow">Try it here <span aria-hidden="true">·</span> {{ journey.title }}</p>
-              <p class="hero-card-action">{{ journey.action }}</p>
+              <p class="editorial-eyebrow">Try it here <span aria-hidden="true">·</span> {{ audience?.demoTitle || journey.title }}</p>
+              <p class="hero-card-action">{{ audience?.demoIntro.split("\n\n")[0] || journey.action }}</p>
             </div>
-            <JourneyStage :id="journey.id" />
+            <JourneyDisclosure :journey="journey" />
+            <JourneyStage :id="journey.id" :initial-screen="audience?.initialScreen" />
           </div>
-          <p class="hero-float hero-float-a" aria-hidden="true"><span class="hero-check">✓</span> Fits your draft</p>
-          <p class="hero-float hero-float-b" aria-hidden="true">Sounded 3 d ago</p>
         </div>
       </div>
       <div id="audience-preview" class="audience-preview">
@@ -57,9 +56,10 @@
     </section>
     <section class="editorial-section editorial-shell waterwayz-feature">
       <div class="section-intro">
-        <div><p class="editorial-eyebrow">WaterWayz™ by InteliMARIS</p><h2>Your whole boating experience. Intelligently connected.</h2></div>
+        <div><p class="editorial-eyebrow">WaterWayz™ by InteliMARIS</p><h2>The passage is part of a bigger day.</h2></div>
         <div class="waterwayz-feature-aside"><p>A passage starts before departure and carries on after you tie up. Bring the route, connected vessel information and your next stop into the same view.</p><RouterLink to="/waterwayz" class="editorial-button">Explore WaterWayz™ <span aria-hidden="true">↗</span></RouterLink></div>
       </div>
+      <JourneyDisclosure :journey="findJourney(secondJourney)!" />
       <JourneyStage :id="secondJourney" />
     </section>
     <section id="platform" class="editorial-section section-wash">
@@ -69,13 +69,13 @@
             <p class="editorial-eyebrow">{{ audience ? 'Selected for you' : 'From passage to pontoon' }}</p>
             <h2>{{ audience ? `A closer look for ${audience.short.toLowerCase()}.` : 'The detail behind a better day on the water.' }}</h2>
           </div>
-          <p>Explore the workflows, see the actual product and check what is available today.</p>
+          <p>Explore the workflows, browse sample product screens and check what is available today.</p>
         </div>
         <FeatureLinks :ids="audience?.features || ['navigation', 'monitoring', 'dockpass', 'emergency-assistance']" />
       </div>
     </section>
     <section class="editorial-section editorial-shell">
-      <div class="section-intro"><div><p class="editorial-eyebrow">Connected vessel systems</p><h2>Your vessel never stops communicating.</h2></div><p>Power, water, temperature and the systems beneath your feet. Build your view around what you want to know, then choose the hardware to support it.</p></div>
+      <div class="section-intro"><div><p class="editorial-eyebrow">Connected vessel systems</p><h2>Know what your vessel last reported.</h2></div><p>Power, water, temperature and the systems beneath your feet. Build your view around what you want to know, then choose the hardware to support it.</p></div>
       <SystemLinks :ids="['pwts', 'intelibilge', 'intelibms']" />
     </section>
     <CommunitySection />
@@ -99,6 +99,7 @@ import { PRESS, pressLink } from '@/data/press'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'
 import JourneyStage from '@/components/audience/JourneyStage.vue'
+import JourneyDisclosure from '@/components/audience/JourneyDisclosure.vue'
 import LanguageNote from '@/components/audience/LanguageNote.vue'
 import { useAudience } from '@/composables/useAudience'
 import { audienceLink, isMarinaAudience } from '@/data/audiences'

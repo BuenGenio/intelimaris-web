@@ -32,7 +32,7 @@ const router = createRouter({
       name: `audience-${audience.id}`,
       component: () => import('../views/AudienceView.vue'),
       props: { audienceId: audience.id },
-      meta: { audience: audience.id, title: audience.short, description: audience.intro },
+      meta: { audience: audience.id, title: audience.seoTitle, description: audience.seoDescription },
     })),
     ...CAPABILITIES.filter(c => c.id !== 'marina-pms').map(feature => ({
       path: `/capabilities/${feature.id}`,
@@ -138,7 +138,7 @@ const router = createRouter({
       path: '/playbook',
       name: 'playbook',
       component: () => import('../views/PlaybookView.vue'),
-      meta: { title: 'Interaction playbook', description: 'Seven interactive journeys under review before they join the site.' },
+      meta: { title: 'Interaction playbook', description: 'Explore nine interactive examples of passages, vessel readings, berths and product screens.' },
     },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('../views/NotFoundView.vue'), meta: { title: 'Page not found' } },
   ],

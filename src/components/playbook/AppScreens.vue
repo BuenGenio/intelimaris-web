@@ -2,7 +2,7 @@
   <section v-if="!total" class="as"><p class="as-loading">No screens are registered yet.</p></section>
   <section v-else class="as" :data-frame="frame">
     <div class="as-topline">
-      <p class="t-overline as-eyebrow">WaterWayz · every screen · sample data</p>
+      <p class="t-overline as-eyebrow">Product screens · sample data</p>
       <p class="as-hint t-caption">{{ group.app }} · <span class="t-num">{{ total }}</span> screens · {{ current.summary }}</p>
     </div>
 
@@ -88,7 +88,7 @@
       </div>
     </div>
 
-    <p class="as-foot t-caption">Screens are re-drawn from the app with sample data. Path in the app: <span class="t-num">{{ current.path }}</span></p>
+    <p class="as-foot t-caption">Screens are redrawn from the app with sample data and include work in development. Path in the app: <span class="t-num">{{ current.path }}</span></p>
   </section>
 </template>
 

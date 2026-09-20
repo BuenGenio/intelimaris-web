@@ -10,5 +10,6 @@ export const PLATFORM_NAVIGATION = [
   { to: '/capabilities', label: 'Platform overview', detail: 'Explore the connected capabilities' },
   { to: '/software', label: 'Software & integrations', detail: 'Applications, data and connections' },
   { to: '/marinas', label: 'InteliMarina / PMS', detail: 'Berths, arrivals and marina operations' },
+  { to: '/demo', label: 'Interactive demos', detail: 'Try passages, monitoring, berths and product screens' },
   { to: '/demo/marina/bahia-mar', label: 'LiDAR & survey demo', detail: 'Explore an interactive 3D survey' },
 ]

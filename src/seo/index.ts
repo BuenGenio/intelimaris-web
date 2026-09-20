@@ -18,7 +18,7 @@ const pages: Record<string, [string, string]> = {
   software: ['Connected maritime software & integrations', 'See how WaterWayz, marina tools and connected vessel data work together. Explore the InteliMARIS software platform and integration approach.'],
   about: ['Our story | Technology for life on the water', 'Meet the team behind InteliMARIS and WaterWayz. Discover our approach to connected boating, vessel awareness and marina operations.'],
   contact: ['Talk to the InteliMARIS team', 'Discuss navigation, connected vessel hardware or marina operations with InteliMARIS. Tell us about your vessel, marina or integration needs.'],
-  demo: ['Marine survey & geospatial technology demos', 'Explore the InteliMARIS marine survey demonstration, with LiDAR point-cloud technology and clearly identified sample marina information.'],
+  demo: ['Try WaterWayz and InteliMarina | Interactive demos', 'Explore passage planning, vessel monitoring, berth fit, marina layouts, local conditions, survey data and product screens. See what each demo shows.'],
   'demo-marina': ['Marina survey demo | Bahia Mar sample listing', 'Explore a LiDAR technology demonstration using Halifax Harbor survey data alongside a Bahia Mar sample marina listing. See the dataset and its limitations.'],
   'home-alt': ['Alternative homepage preview', 'An alternative InteliMARIS homepage design preview.'],
   playbook: ['Interaction playbook', 'Seven interactive journeys under review before they join the site.'],

@@ -3,7 +3,7 @@
        the client only; whatever surrounds the stage still pre-renders. -->
   <div class="journey-stage">
     <Suspense v-if="mounted && journey">
-      <component :is="journey.component" :key="journey.id" />
+      <component :is="journey.component" :key="`${journey.id}:${initialScreen || ''}`" v-bind="journey.id === 'app-screens' ? { initial: initialScreen } : {}" />
       <template #fallback>
         <p class="journey-loading">Loading…</p>
       </template>
@@ -16,7 +16,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { findJourney } from '@/data/playbook/journeys'
 
-const props = defineProps<{ id?: string }>()
+const props = defineProps<{ id?: string; initialScreen?: string }>()
 const journey = computed(() => findJourney(props.id))
 const mounted = ref(false)
 onMounted(() => { mounted.value = true })

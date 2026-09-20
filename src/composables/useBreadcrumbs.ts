@@ -42,8 +42,8 @@ export function getBreadcrumbs(route: RouteLocationNormalizedLoaded | RouteLocat
       capabilities: [platform], waterwayz: [platform, { label: 'WaterWayz™' }],
       software: [platform, { label: 'Software & connections' }],
       about: [{ label: 'Our story' }], contact: [{ label: 'Talk to us' }],
-      demo: [{ label: 'Technology demo' }],
-      'demo-marina': [{ label: 'Technology demo', to: '/demo' }, { label: 'Bahia Mar · Survey demo' }],
+      demo: [{ label: 'Interactive demos' }],
+      'demo-marina': [{ label: 'Interactive demos', to: '/demo' }, { label: 'Bahia Mar · Survey demo' }],
       'not-found': [{ label: 'Page not found' }],
     }
     return pages[name] || []

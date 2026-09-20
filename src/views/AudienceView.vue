@@ -8,30 +8,39 @@
         <h1>{{ person.headline }}</h1>
         <div>
           <p class="editorial-lede">{{ person.intro }}</p>
-          <RouterLink :to="contactLink(person)" class="editorial-button">{{ person.cta }} <span aria-hidden="true">↗</span>
+          <a :href="`#try-${person.journey}`" class="editorial-button">{{ person.primary }} <span aria-hidden="true">↓</span></a>
+          <RouterLink :to="contactLink(person)" class="editorial-text-link">{{ person.cta }} <span aria-hidden="true">↗</span>
           </RouterLink>
           <RouterLink v-if="isMarinaAudience(person)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: person.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
         </div>
       </div>
-      <JourneySection :id="person.journey" hero />
+      <JourneySection :id="person.journey" :title="person.demoTitle" :intro="person.demoIntro" :initial-screen="person.initialScreen" hero />
+      <nav class="related-demos" aria-label="More demos for your role">
+        <RouterLink v-for="demo in person.relatedDemos" :key="demo.to" :to="demo.to" class="editorial-text-link">{{ demo.label }} <span aria-hidden="true">↗</span></RouterLink>
+        <RouterLink to="/demo" class="editorial-text-link">Browse all demos <span aria-hidden="true">↗</span></RouterLink>
+      </nav>
     </section>
     <section class="editorial-shell editorial-section">
       <div class="section-intro">
         <div>
-          <p class="editorial-eyebrow">Your working day</p>
+          <p class="editorial-eyebrow">Your day on the water</p>
           <h2>Start with what you need to do.</h2>
         </div>
       </div>
-      <ol class="guide-steps">
+      <ol class="guide-steps" :class="{ 'guide-steps--four': person.steps.length === 4 }">
         <li v-for="(step, index) in person.steps" :key="step.title">
           <span class="editorial-index">0{{ index + 1 }}</span>
           <h3>{{ step.title }}</h3>
-          <p>{{ step.body }}</p>
+          <p v-for="paragraph in step.body.split('\n\n')" :key="paragraph">{{ paragraph }}</p>
         </li>
       </ol>
       <aside class="access-note">
         <h3>How access works</h3>
         <p>{{ person.access }}</p>
+      </aside>
+      <aside v-if="person.availability" class="access-note">
+        <h3>Available now and developing</h3>
+        <p>{{ person.availability }}</p>
       </aside>
     </section>
     <section class="editorial-section section-wash">
@@ -66,3 +75,13 @@ import LanguageNote from '@/components/audience/LanguageNote.vue'
 const props = defineProps<{ audienceId: string }>()
 const person = computed(() => findAudience(props.audienceId))
 </script>
+
+<style scoped>
+.related-demos { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin-top: var(--space-6); }
+.guide-steps--four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.guide-steps p + p { margin-top: 1rem; }
+@media (max-width: 800px) {
+  .guide-steps--four { grid-template-columns: 1fr; }
+  .guide-heading h1 { font-size: clamp(2rem, 7vw, 3rem) !important; white-space: normal !important; text-wrap: balance !important; }
+}
+</style>
