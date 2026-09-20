@@ -6,17 +6,21 @@
         <p class="hero-pill"><span class="hero-pill-dot" aria-hidden="true"></span><span>Showing at FLIBS 2026, Fort Lauderdale</span><RouterLink :to="pressLink(PRESS[0]!.id)">Read the release <span aria-hidden="true">→</span></RouterLink></p>
         <h1>Your day on the water, <em>connected.</em></h1>
       </div>
-      <div class="hero-grid">
+      <div class="hero-intro">
+        <p class="editorial-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS™ brings it together through WaterWayz™.</p>
         <div class="hero-copy">
-          <p class="editorial-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS™ brings it together through WaterWayz™.</p>
-          <p class="chooser-intro">Where do you come in?</p>
-          <AudienceChips :selected="audience?.id" @choose="onChoose" />
           <div class="hero-actions">
             <button type="button" class="editorial-button hero-start" @click="start(audience?.id, $event.currentTarget as HTMLElement)">Start free <span aria-hidden="true">→</span></button>
             <RouterLink to="/contact" class="hero-demo">Book a demo</RouterLink>
           </div>
           <p class="hero-tagline"><span>One app</span><span>Passage, vessel and berth</span><span>27,000 marinas</span></p>
         </div>
+      </div>
+      <div class="hero-chooser">
+        <p class="chooser-intro">Where do you come in?</p>
+        <AudienceChips :selected="audience?.id" @choose="onChoose" />
+      </div>
+      <div class="hero-grid">
         <div class="hero-stage">
           <div class="hero-card">
             <div class="hero-card-head">
