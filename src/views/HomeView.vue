@@ -44,8 +44,11 @@
       </div>
     </section>
     <section class="editorial-section editorial-shell waterwayz-feature">
-      <div><p class="editorial-eyebrow">WaterWayz™ by InteliMARIS</p><h2>Your whole boating experience. Intelligently connected.</h2><p class="editorial-lede">A passage starts before departure and carries on after you tie up. Bring the route, connected vessel information and your next stop into the same view.</p><RouterLink to="/waterwayz" class="editorial-button">Explore WaterWayz™ <span aria-hidden="true">↗</span></RouterLink></div>
-      <EditorialShot id="waterwayz-route" caption="The actual WaterWayz passage-planning view." />
+      <div class="section-intro">
+        <div><p class="editorial-eyebrow">WaterWayz™ by InteliMARIS</p><h2>Your whole boating experience. Intelligently connected.</h2></div>
+        <div class="waterwayz-feature-aside"><p>A passage starts before departure and carries on after you tie up. Bring the route, connected vessel information and your next stop into the same view.</p><RouterLink to="/waterwayz" class="editorial-button">Explore WaterWayz™ <span aria-hidden="true">↗</span></RouterLink></div>
+      </div>
+      <JourneyStage id="helm-view" />
     </section>
     <section id="platform" class="editorial-section section-wash">
       <div class="editorial-shell">
@@ -72,7 +75,6 @@
   </main>
 </template>
 <script setup lang="ts">
-import EditorialShot from '@/components/audience/EditorialShot.vue'
 import SystemLinks from '@/components/audience/SystemLinks.vue'
 import EcosystemSection from '@/components/audience/EcosystemSection.vue'
 import { computed, nextTick } from 'vue'

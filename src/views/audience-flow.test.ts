@@ -97,13 +97,13 @@ describe('audience journey', () => {
     expect(wrapper.get('.contact-topic').text()).toContain('InteliBMS')
   })
 
-  it('updates copy and images when navigating between guides using the same view', async () => {
+  it('updates copy and the journey when navigating between guides using the same view', async () => {
     const router = await setup('/for/captains')
     wrapper = mount(AudienceView, { props: { audienceId: 'captains' }, global: { plugins: [router] } })
-    expect(wrapper.get('picture img').attributes('src')).toContain('waterwayz-route')
+    expect(wrapper.find('#try-passage-planner').exists()).toBe(true)
     await wrapper.setProps({ audienceId: 'marina-owners' })
     expect(wrapper.get('h1').text()).toContain('The whole basin')
-    expect(wrapper.get('picture img').attributes('src')).toContain('pms-berth-layout')
+    expect(wrapper.find('#try-draw-your-water').exists()).toBe(true)
   })
 
   it('distinguishes hazard reading from unfinished reporting actions', async () => {

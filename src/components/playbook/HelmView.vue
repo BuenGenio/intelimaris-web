@@ -376,6 +376,8 @@ let raf = 0
 let last = 0
 let playing = true
 let demoSeconds = 0
+/* the loop only runs while the stage is on screen */
+let onScreen = true
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 const schedule = () => {
@@ -387,7 +389,7 @@ const frame = (t: number) => {
   raf = 0
   const dt = last ? Math.min(0.1, (t - last) / 1000) : 0
   last = t
-  if (playing && !document.hidden) {
+  if (playing && onScreen && !document.hidden) {
     const scale = reduceMotion() ? TIME_SCALE / 3 : TIME_SCALE
     demoSeconds += dt * scale
     sailed.value = Math.min(track.lengthNm, sailed.value + (sog.value * dt * scale) / 3600)
@@ -403,7 +405,7 @@ const frame = (t: number) => {
     cam.cv = fix.value.at.v
   }
   draw()
-  if (playing || pointers.size) schedule()
+  if ((playing && onScreen) || pointers.size) schedule()
 }
 
 /* ---------- drawing ---------- */
@@ -603,6 +605,7 @@ const draw = () => {
 
 /* ---------- lifecycle ---------- */
 let ro: ResizeObserver | null = null
+let io: IntersectionObserver | null = null
 const resize = () => {
   const stage = stageEl.value
   const canvas = canvasEl.value
@@ -630,6 +633,14 @@ onMounted(async () => {
   if (stripEl.value) ro.observe(stripEl.value)
   resize()
   document.addEventListener('visibilitychange', onVisibility)
+  if ('IntersectionObserver' in window && stageEl.value) {
+    io = new IntersectionObserver(([entry]) => {
+      onScreen = !!entry?.isIntersecting
+      last = 0
+      if (onScreen) schedule()
+    }, { rootMargin: '80px' })
+    io.observe(stageEl.value)
+  }
   const image = new Image()
   image.decoding = 'async'
   image.src = BASEMAP
@@ -645,6 +656,7 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   ro?.disconnect()
+  io?.disconnect()
   document.removeEventListener('visibilitychange', onVisibility)
   if (raf) cancelAnimationFrame(raf)
   window.clearTimeout(toastTimer)

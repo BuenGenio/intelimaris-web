@@ -13,7 +13,7 @@
           <RouterLink v-if="isMarinaAudience(person)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: person.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
         </div>
       </div>
-      <EditorialShot :key="person.shot" :id="person.shot" :caption="person.caption" priority />
+      <JourneySection :id="person.journey" hero />
     </section>
     <section class="editorial-shell editorial-section">
       <div class="section-intro">
@@ -59,7 +59,7 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { AUDIENCES, audienceLink, findAudience, contactLink, isMarinaAudience } from '@/data/audiences'
-import EditorialShot from '@/components/audience/EditorialShot.vue'
+import JourneySection from '@/components/audience/JourneySection.vue'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'
 import LanguageNote from '@/components/audience/LanguageNote.vue'

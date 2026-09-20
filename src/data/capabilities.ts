@@ -111,7 +111,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['route-planning', 'marina-pms', 'navigation'], chart: true,
   },
   {
-    id: 'emergency-assistance', label: 'Emergency Assistance', product: 'WaterWayz™',
+    journey: 'helm-view', id: 'emergency-assistance', label: 'Emergency Assistance', product: 'WaterWayz™',
     headline: 'When every minute matters.',
     summary: 'Clear information can help you explain where you are and which vessel needs assistance. WaterWayz brings the device’s position and vessel context into an emergency information screen.',
     status: 'Information tools available · Access-routing concepts planned',

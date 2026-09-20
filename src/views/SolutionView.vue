@@ -18,19 +18,6 @@
       </aside>
       <JourneySection v-if="solution.journey" :id="solution.journey" hero />
       <EditorialShot v-else-if="solution.shot" :key="solution.shot" :id="solution.shot" :caption="solution.caption || solution.label" priority />
-      <div v-else-if="solution.id === 'geospatial'" class="survey-preview">
-        <div>
-      <p class="editorial-eyebrow">Fly → Map → Analyze → Connect</p>
-      <h2>Explore a real survey in three dimensions.</h2>
-      <p>The demo uses a Halifax Harbor LiDAR dataset with sample Bahia Mar listing information. The source and location difference are identified in the viewer.</p>
-      <RouterLink to="/demo/marina/bahia-mar" class="editorial-button">Open the interactive survey <span aria-hidden="true">↗</span>
-      </RouterLink>
-      </div>
-        <figure>
-      <img :src="`${base}assets/voyage-basemap.webp`" alt="Satellite context of the Fort Lauderdale waterways; the linked LiDAR demonstration uses a separate Halifax Harbor dataset" width="1200" height="1200" />
-      <figcaption>Satellite context · Fort Lauderdale. The linked LiDAR survey covers Halifax Harbor.</figcaption>
-      </figure>
-      </div>
     </section>
     <section class="editorial-shell editorial-section">
       <p class="editorial-eyebrow">{{ solution.id === 'vision' ? 'The direction' : 'How it fits your day' }}</p>
@@ -83,5 +70,4 @@ import JourneySection from '@/components/audience/JourneySection.vue'
 const props = defineProps<{ solutionId: string }>()
 const solution = computed(() => findSolution(props.solutionId))
 const { audience } = useAudience()
-const base = import.meta.env.BASE_URL
 </script>
