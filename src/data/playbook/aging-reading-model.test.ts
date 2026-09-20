@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   SENSORS,
   STALE_AFTER_MS,
-  UNKNOWN_AFTER_MS,
+  SILENT_AFTER_MS,
   formatAge,
   formatValue,
   nextValue,
@@ -26,19 +26,21 @@ describe('aging-reading model', () => {
     expect(formatAge(-5)).toBe('0 s')
   })
 
-  it('turns stale at 1 min and unknown at 5 min', () => {
-    expect(stageFor(STALE_AFTER_MS - 1)).toBe('fresh')
+  it('is live, then stale at 1 min, then silent at 5 min', () => {
+    expect(stageFor(STALE_AFTER_MS - 1)).toBe('live')
     expect(stageFor(STALE_AFTER_MS)).toBe('stale')
-    expect(stageFor(UNKNOWN_AFTER_MS - 1)).toBe('stale')
-    expect(stageFor(UNKNOWN_AFTER_MS)).toBe('unknown')
+    expect(stageFor(SILENT_AFTER_MS - 1)).toBe('stale')
+    expect(stageFor(SILENT_AFTER_MS)).toBe('silent')
   })
 
   it('writes stale copy that ends with what to do, calmly', () => {
-    for (const stage of ['stale', 'unknown'] as const) {
+    for (const stage of ['stale', 'silent'] as const) {
       for (const reason of ['link', 'sensor'] as const) {
         const c = staleCopy(stage, reason, 'read', '1 min 12 s')
         expect(c.headline).toBe('Last read 1 min 12 s ago')
         expect(c.body).toMatch(/^.*Check .*\.$/)
+        /* the product never collapses Silent into "Offline", and never hides the old number */
+        expect(c.body).not.toMatch(/offline|unknown/i)
         expect(c.body).not.toMatch(/!/)
         expect(c.body).not.toMatch(BANNED)
       }

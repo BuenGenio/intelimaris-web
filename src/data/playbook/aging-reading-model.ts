@@ -5,7 +5,12 @@
 
 export type SensorKind = 'number' | 'state'
 export type AgeVerb = 'read' | 'sounded' | 'reported'
-export type Stage = 'fresh' | 'stale' | 'unknown'
+/**
+ * The product calls a reading live for ten minutes and stale after an hour, and a unit
+ * that has stopped reporting Silent. The demo keeps the words and compresses the clock
+ * so a visitor sees all three inside a minute or two.
+ */
+export type Stage = 'live' | 'stale' | 'silent'
 export type StaleReason = 'link' | 'sensor'
 
 export interface SensorDef {
@@ -35,7 +40,7 @@ export const VESSEL = {
 }
 
 export const STALE_AFTER_MS = 60_000
-export const UNKNOWN_AFTER_MS = 300_000
+export const SILENT_AFTER_MS = 300_000
 
 export const SENSORS: SensorDef[] = [
   {
@@ -106,18 +111,21 @@ export const SENSORS: SensorDef[] = [
   },
 ]
 
+/** A prediction is a claim: it carries who made it, which version, and over which window. */
 export const PREDICTION = {
   label: 'Prediction',
   text: 'Bilge pump likely to run within 2 h',
-  model: 'bilge-v3.2',
+  model: 'bilge-pump',
+  version: '0.3.2',
+  window: '03:00–09:00',
   /** how long before mount the model last ran, ms */
   computedAgoMs: 4 * 60_000 + 12_000,
 }
 
 export function stageFor(ageMs: number): Stage {
-  if (ageMs >= UNKNOWN_AFTER_MS) return 'unknown'
+  if (ageMs >= SILENT_AFTER_MS) return 'silent'
   if (ageMs >= STALE_AFTER_MS) return 'stale'
-  return 'fresh'
+  return 'live'
 }
 
 /** "12 s", "1 min 12 s", "14 min", "2 h 5 min", "3 d" — the brand's age stamp. */
@@ -163,7 +171,7 @@ export function formatValue(def: SensorDef, value: number): string {
 
 const PAST: Record<AgeVerb, string> = { read: 'read', sounded: 'sounded', reported: 'reported' }
 
-/** The stale tile's copy. Calm, and it ends with what to do. */
+/** The stale tile's copy. The number stays on the tile, old and said so; the copy ends with what to do. */
 export function staleCopy(
   stage: Stage,
   reason: StaleReason,
@@ -171,21 +179,21 @@ export function staleCopy(
   age: string,
 ): { headline: string; body: string } {
   const headline = `Last ${PAST[verb]} ${age} ago`
-  if (stage === 'unknown') {
+  if (stage === 'silent') {
     return {
       headline,
       body:
         reason === 'link'
-          ? 'Treat this reading as unknown. Check the unit’s antenna, then its power.'
-          : 'Treat this reading as unknown. Check the sensor lead, then the sensor.',
+          ? 'Silent. The number is old, not current. Check the unit’s antenna, then its power.'
+          : 'Silent. The number is old, not current. Check the sensor lead, then the sensor.',
     }
   }
   return {
     headline,
     body:
       reason === 'link'
-        ? 'The reading shown is from before that. Check the unit’s antenna.'
-        : 'The unit is reporting; this sensor is not. Check the sensor lead.',
+        ? 'Not current. The unit has not reported since. Check the unit’s antenna.'
+        : 'Not current. The unit is reporting; this sensor is not. Check the sensor lead.',
   }
 }
 

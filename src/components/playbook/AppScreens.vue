@@ -1,5 +1,6 @@
 <template>
-  <section class="as" :data-frame="frame">
+  <section v-if="!total" class="as"><p class="as-loading">No screens are registered yet.</p></section>
+  <section v-else class="as" :data-frame="frame">
     <div class="as-topline">
       <p class="t-overline as-eyebrow">WaterWayz · every screen · sample data</p>
       <p class="as-hint t-caption">{{ group.app }} · <span class="t-num">{{ total }}</span> screens · {{ current.summary }}</p>

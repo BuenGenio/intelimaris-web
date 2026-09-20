@@ -21,14 +21,14 @@ describe('berth fit', () => {
     const r = fitCheck({ loa: 65.6, beam: 15, draft: 4, airDraft: 20 }, berth('A-01'))
     expect(r.fits).toBe(false)
     expect(r.reasons.map((x) => x.dim)).toEqual(['loa'])
-    expect(r.reasons[0]!.text).toMatch(/^Too short by 2\.0 m/)
+    expect(r.reasons[0]!.text).toBe('A-01 takes 18.0 m; this vessel is 20.0 m')
   })
 
   it('compares draft with the depth at the berth', () => {
     // 7.5 ft = 2.29 m against 2.1 m at B-02
     const r = fitCheck({ loa: 50, beam: 14, draft: 7.5, airDraft: 60 }, berth('B-02'))
     expect(r.reasons.map((x) => x.dim)).toEqual(['draft'])
-    expect(r.reasons[0]!.text).toBe('2.1 m at the berth, your draft is 2.3 m')
+    expect(r.reasons[0]!.text).toBe('B-02 has 2.1 m of water at MLLW; this vessel draws 2.3 m — 0.2 m less water than it draws')
   })
 
   it('treats a stated "no limit" as no length or beam check', () => {

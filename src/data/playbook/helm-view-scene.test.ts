@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { NM_PER_CELL, PLACES } from './waterRouter'
-import { buildTrack, durationLabel, fixAt, minutesLeft, nmBetween, speedAt, trafficAt, CRUISE_KN, NO_WAKE_KN, NO_WAKE, ageLabel, onWater, snapToWater, DEBRIS, TRAFFIC } from './helm-view-scene'
+import { buildTrack, durationLabel, fixAt, minutesLeft, nextGate, nmBetween, speedAt, trafficAt, CRUISE_KN, NO_WAKE_KN, NO_WAKE, ageLabel, onWater, snapToWater, DEBRIS, TRAFFIC } from './helm-view-scene'
 
 describe('helm view scene', () => {
   const track = buildTrack()
@@ -33,6 +33,22 @@ describe('helm view scene', () => {
     expect(mins).toBeGreaterThan((track.lengthNm / CRUISE_KN) * 60)
     expect(mins).toBeLessThan((track.lengthNm / NO_WAKE_KN) * 60)
     expect(minutesLeft(track, fixAt(track, track.lengthNm))).toBe(0)
+  })
+
+  it('names the next gate on the line: the no-wake zone, then the marina approach', () => {
+    const start = nextGate(track, fixAt(track, 0))
+    expect(start.label).toBe('No wake')
+    expect(start.inside).toBe(false)
+    expect(start.nm).toBeGreaterThan(0)
+    expect(start.nm).toBeLessThan(track.lengthNm)
+    /* sail up to the zone: the gate distance runs down to zero, then we are inside it */
+    const inside = fixAt(track, start.nm + 0.01)
+    expect(nextGate(track, inside).inside).toBe(true)
+    /* past it, only the approach is left, and its distance is what remains */
+    let s = start.nm
+    while (s < track.lengthNm && nextGate(track, fixAt(track, s)).label !== 'Approach') s += 0.02
+    const last = fixAt(track, s)
+    expect(nextGate(track, last)).toEqual({ label: 'Approach', nm: last.remainingNm, inside: false })
   })
 
   it('keeps every vessel and every hazard on the water', () => {

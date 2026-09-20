@@ -5,7 +5,7 @@
         <header class="dyw-top">
           <div class="dyw-title">
             <p class="dyw-overline">Marina PMS · layout editor</p>
-            <h2 class="dyw-h">Bahia Mar · north basin <span class="dyw-sample">sample</span></h2>
+            <p class="dyw-h">Bahia Mar · north basin <span class="dyw-sample">sample</span></p>
           </div>
           <p class="dyw-hint" :key="hint">{{ hint }}</p>
         </header>
@@ -132,6 +132,13 @@
               </g>
             </g>
           </svg>
+
+          <!-- the first tap has to be obvious: say so on the water until something is drawn -->
+          <Transition name="sheet">
+            <p v-if="!layout.docks.length && !layout.berths.length && !draft.length" class="dyw-nudge" aria-hidden="true">
+              <span class="dyw-nudge-dot"></span>Tap the water to start a dock line
+            </p>
+          </Transition>
 
           <!-- the tool bar: a segmented control, thumb-reachable on a phone -->
           <div class="dyw-tools">
@@ -952,6 +959,56 @@ watch(tool, () => {
   box-shadow: inset 0 0 0 2px var(--maris-night);
 }
 
+/* every control on the editor and the board shows where the keyboard is */
+.dyw-seg-btn:focus-visible,
+.dyw-act:focus-visible,
+.dyw-step:focus-visible,
+.dyw-close:focus-visible,
+.dyw-select:focus-visible,
+.dyw-check:focus-visible,
+.dyw-row-main:focus-visible,
+.dyw-tap:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.dyw-nudge {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(24, 31, 44, 0.72);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-family: var(--font-text);
+  font-size: var(--type-body-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.dyw-nudge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3d8ee0;
+  box-shadow: 0 0 0 4px rgba(61, 142, 224, 0.28);
+  animation: dyw-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes dyw-pulse {
+  50% { box-shadow: 0 0 0 9px rgba(61, 142, 224, 0.08); }
+}
+
 .dyw[data-tool='dock'] .dyw-canvas,
 .dyw[data-tool='berth'] .dyw-canvas,
 .dyw[data-tool='mooring'] .dyw-canvas {
@@ -1512,8 +1569,8 @@ watch(tool, () => {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  padding: var(--space-6) var(--space-5);
-  background: var(--navy);
+  padding: var(--space-6) var(--space-4);
+  background: rgba(11, 18, 32, 0.55);
   border-left: 1px solid var(--dyw-line);
   min-height: 100%;
 }
@@ -1535,7 +1592,7 @@ watch(tool, () => {
 .dyw-empty {
   display: grid;
   gap: var(--space-4);
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-4) var(--space-4);
   border: 1px dashed var(--dyw-line);
   border-radius: var(--radius-lg);
 }
@@ -1851,13 +1908,19 @@ watch(tool, () => {
   .dyw-top {
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--space-5) var(--space-4) var(--space-3);
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-4) var(--space-2);
+  }
+
+  .dyw-h {
+    font-size: 1.0625rem;
   }
 
   .dyw-hint {
     text-align: left;
     max-width: none;
-    min-height: 2.8em;
+    min-height: 0;
+    font-size: var(--type-caption);
   }
 
   .dyw-canvas-wrap {
@@ -1870,6 +1933,7 @@ watch(tool, () => {
 
   .dyw-canvas {
     aspect-ratio: 1 / 1;
+    max-height: min(52svh, 420px);
   }
 
   /* the phone window is 480 units across 340 px; text scales up to stay legible */
@@ -1957,7 +2021,12 @@ watch(tool, () => {
   .dyw-board {
     border-left: 0;
     border-top: 1px solid var(--dyw-line);
-    padding: var(--space-5) var(--space-4) var(--space-6);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4) var(--space-4);
+  }
+
+  .dyw-empty {
+    padding: var(--space-3) var(--space-4);
   }
 }
 
@@ -1966,6 +2035,7 @@ watch(tool, () => {
   .dyw-count,
   .dyw-halo,
   .dyw-hull,
+  .dyw-nudge-dot,
   .dyw-entry {
     animation: none;
   }

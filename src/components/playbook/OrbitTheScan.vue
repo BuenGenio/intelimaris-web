@@ -50,8 +50,8 @@
       </div>
 
       <header class="ots-head">
-        <p class="ots-overline">LiDAR survey · {{ SCAN.place }}</p>
-        <h2 class="ots-title">Orbit the scan</h2>
+        <p class="ots-overline">LiDAR survey · point cloud · sample berths</p>
+        <p class="ots-title">{{ SCAN.place }}</p>
         <p class="ots-lede">Drag to orbit. Tap a berth to read its approach brief.</p>
       </header>
 
@@ -59,6 +59,12 @@
         <span class="t-num">{{ fmt(loadedCount) }} points</span>
         <span v-if="meta" class="t-num">{{ meta.extent_m[0]?.toFixed(0) }} × {{ meta.extent_m[1]?.toFixed(0) }} m</span>
         <span class="ots-legend"><i :style="{ background: rampCss() }" /> height 0 to {{ RAMP_MAX_M }} m</span>
+        <span class="ots-key" aria-label="Berth states today">
+          <span><i class="ots-pin-dot" data-state="free" />free</span>
+          <span><i class="ots-pin-dot" data-state="assigned" />assigned</span>
+          <span><i class="ots-pin-dot" data-state="courtesy" />courtesy</span>
+          <span><i class="ots-pin-dot" data-state="closed" />closed</span>
+        </span>
       </div>
 
       <div v-if="phase === 'loading' && !error" class="ots-load" role="progressbar" :aria-valuenow="Math.round(fraction * 100)" aria-valuemin="0" aria-valuemax="100" aria-label="Loading the scan">
@@ -962,12 +968,12 @@ onBeforeUnmount(() => {
   color: var(--ots-ink-2);
 }
 .ots-title {
-  margin: 0.4rem 0 0;
+  margin: 0.3rem 0 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   color: var(--ots-ink);
 }
 .ots-lede {
@@ -992,6 +998,9 @@ onBeforeUnmount(() => {
 }
 .ots-legend { display: inline-flex; align-items: center; gap: 0.5rem; }
 .ots-legend i { width: 72px; height: 6px; border-radius: 3px; border: 1px solid var(--ots-line); }
+.ots-key { display: inline-flex; gap: 0.7rem; margin-top: 0.15rem; }
+.ots-key span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.ots-key .ots-pin-dot { position: static; width: 7px; height: 7px; }
 
 /* ---- loading ---- */
 .ots-load {

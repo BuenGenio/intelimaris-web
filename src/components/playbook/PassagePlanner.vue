@@ -3,8 +3,8 @@
     <div class="pp-topline">
       <p class="t-overline pp-eyebrow">WaterWayz · a route for your vessel</p>
       <ul class="pp-legend" aria-label="Depth bands for this vessel">
-        <li><i class="pp-swatch pp-swatch--nogo" aria-hidden="true"></i>shallower than your draft</li>
-        <li><i class="pp-swatch pp-swatch--near" aria-hidden="true"></i>within 2 ft of it · illustrative</li>
+        <li><i class="pp-swatch pp-swatch--nogo" aria-hidden="true"></i>less water than you draw</li>
+        <li><i class="pp-swatch pp-swatch--near" aria-hidden="true"></i>inside your 2 ft margin · illustrative</li>
       </ul>
     </div>
 
@@ -90,10 +90,10 @@
 
         <div class="pp-vessel-head">
           <p class="t-overline pp-vessel-eyebrow">Your vessel</p>
-          <p class="pp-vessel-note">Sample boats</p>
+          <p class="pp-vessel-note">Sample vessels</p>
         </div>
 
-        <div class="pp-presets" role="group" aria-label="Sample boats">
+        <div class="pp-presets" role="group" aria-label="Sample vessels">
           <button
             v-for="s in SAMPLE_VESSELS"
             :key="s.id"
@@ -135,7 +135,8 @@
 
     <p class="pp-foot t-caption">
       Depth on this chart is distance from shore, shown as an illustration. In the product the route service uses charted
-      bathymetry, tides and bridge gates computed server-side against your vessel workspace. The three boats are samples.
+      bathymetry, tides and bridge gates computed server-side against your vessel workspace. The three vessels are samples;
+      a bigger margin makes the probability smaller, not the water safer.
     </p>
   </section>
 </template>
@@ -423,7 +424,7 @@ const buildTint = () => {
       if (depth < draft) {
         d[i] = 208; d[i + 1] = 52; d[i + 2] = 44; d[i + 3] = 125
       } else if (depth < draft + 2) {
-        d[i] = 224; d[i + 1] = 161; d[i + 2] = 0; d[i + 3] = 88
+        d[i] = 196; d[i + 1] = 21; d[i + 2] = 127; d[i + 3] = 82
       }
     }
   }
@@ -702,7 +703,7 @@ onBeforeUnmount(() => {
 }
 
 .pp-swatch--near {
-  background: rgba(224, 161, 0, 0.38);
+  background: rgba(196, 21, 127, 0.36);
 }
 
 /* ---------- stage ---------- */
@@ -908,6 +909,7 @@ onBeforeUnmount(() => {
 }
 
 .pp-mode-btn {
+  min-height: 36px;
   padding: 0.35rem 0.7rem;
   border: 0;
   border-radius: 999px;

@@ -2,10 +2,9 @@
   <section class="hz" :data-phone="isPhone || undefined">
     <header class="hz-head">
       <div class="hz-head-text">
-        <p class="t-overline">Journey 05 · Hazards on a live passage</p>
+        <p class="t-overline">WaterWayz · hazards on a live passage · sample</p>
         <p class="hz-lede">
-          Sunrise Bay to Bahia Mar is planned at {{ CRUISE_KN }} kn. Tap the water where you see something and
-          the passage re-plans around it. Confirm it when another vessel sees it too; clear it when it is gone.
+          Sunrise Bay to Bahia Mar at {{ CRUISE_KN }} kn. Tap the water where you see something; say it is still there, or that it is gone.
         </p>
       </div>
       <div class="hz-head-actions">
@@ -131,7 +130,7 @@
               <span class="hz-status" :data-status="h.status">{{ statusLabel(h) }}</span>
             </div>
             <p class="hz-card-meta t-num">
-              radius {{ h.radius }} cells · about {{ h.radius * METRES_PER_CELL }} m · reported {{ ago(h.reportedAt) }}
+              about {{ h.radius * METRES_PER_CELL }} m across · reported {{ ago(h.reportedAt) }}<template v-if="h.status === 'reported'"> · unverified</template>
             </p>
             <p class="hz-card-effect">{{ effectOf(h).text }}</p>
             <div v-if="h.status !== 'cleared'" class="hz-card-actions">
@@ -142,7 +141,7 @@
                 :ref="(el) => setCardButton(h.id, el as HTMLButtonElement | null)"
                 @click="confirm(h)"
               >
-                <strong>Confirm</strong><small>another vessel sees it</small>
+                <strong>Still there</strong><small>confirm it</small>
               </button>
               <button
                 type="button"
@@ -150,7 +149,7 @@
                 :ref="(el) => { if (h.status !== 'reported') setCardButton(h.id, el as HTMLButtonElement | null) }"
                 @click="clear(h)"
               >
-                <strong>Clear</strong><small>it is gone</small>
+                <strong>It's gone</strong><small>clear it</small>
               </button>
             </div>
           </li>
@@ -165,8 +164,9 @@
       <ul class="hz-legend" aria-label="Chart legend">
         <li><span class="hz-swatch hz-swatch--ghost" aria-hidden="true" />the track before</li>
         <li><span class="hz-swatch hz-swatch--track" aria-hidden="true" />the track now</li>
-        <li><span class="hz-swatch hz-swatch--ring" aria-hidden="true" />a hazard: dashed when reported, solid when confirmed</li>
-        <li><span class="hz-swatch hz-swatch--slow" aria-hidden="true" />{{ NO_WAKE_KN }} kn inside a no-wake zone</li>
+        <li><span class="hz-swatch hz-swatch--ring" aria-hidden="true" />a caution: dashed when reported, solid when confirmed</li>
+        <li><span class="hz-swatch hz-swatch--danger" aria-hidden="true" />live and severe</li>
+        <li><span class="hz-swatch hz-swatch--slow" aria-hidden="true" />{{ NO_WAKE_KN }} kn inside a zone</li>
       </ul>
       <p class="t-caption hz-sample">
         Sample passage on a Fort Lauderdale basemap. Depths and timing are illustrative; the passage is timed at
@@ -225,14 +225,14 @@ const REGION_TALL = { u0: 0.4, u1: 0.62, v0: 0.2, v1: 0.82 }
 const GLYPHS: Record<HazardKind, string> = {
   debris:
     '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 16 10 4l6 12z"/><path d="M10 9v3"/></svg>',
-  shoal:
+  shallow:
     '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 8c2-2 4-2 7 0s5 2 7 0M3 13c2-2 4-2 7 0s5 2 7 0"/></svg>',
-  'no-wake':
-    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="10" cy="10" r="7"/><path d="M5 5l10 10"/></svg>',
-  'closed-bridge':
-    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 15h16M4 15V9a6 6 0 0 1 12 0v6"/><path d="M7 7l6-4M13 7 7 3"/></svg>',
-  dredging:
-    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16h14M6 16V5h2l6 4v7"/><circle cx="14" cy="13" r="1.6"/></svg>',
+  disabled_vessel:
+    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h14l-2 3H5z"/><path d="M6 13V7h6l3 6"/><path d="M4 4l3 3M7 4 4 7"/></svg>',
+  storm:
+    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11a3.5 3.5 0 0 1 .6-6.9A4 4 0 0 1 14 5.5 3 3 0 0 1 14 11H6z"/><path d="m10 11-2 4h3l-2 4"/></svg>',
+  wildlife:
+    '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11c1-3 4-5 8-5s6 2 6 4-2 3-5 3c-2 0-3 1-4 2-1-1-4-1-5-4z"/><circle cx="12.5" cy="9" r=".8" fill="currentColor"/></svg>',
 }
 
 /* ------------------------------------------------------------------- state */
@@ -677,7 +677,7 @@ function paint(t: number): boolean {
       ctx.arc(r.px[0], r.px[1], rad, 0, Math.PI * 2)
       ctx.stroke()
     }
-    ctx.strokeStyle = RED
+    ctx.strokeStyle = typeOf(h.kind).severe ? RED : MAGENTA
     ctx.lineWidth = (h.status === 'confirmed' ? 3 : 2.25) + bump
     ctx.setLineDash(h.status === 'reported' ? [6, 5] : [])
     ctx.beginPath()
@@ -691,7 +691,7 @@ function paint(t: number): boolean {
     ctx.fill()
     ctx.fillStyle = '#ffffff'
     ctx.fillText(String(h.id), r.px[0], r.px[1] + 0.5)
-    if (h.kind === 'no-wake') {
+    if (!typeOf(h.kind).blocks) {
       ctx.font = '600 11px "Red Hat Text", sans-serif'
       ctx.fillStyle = 'rgba(255,255,255,0.95)'
       ctx.fillText(`${NO_WAKE_KN} kn`, r.px[0], r.px[1] + rad + 11)
@@ -703,7 +703,7 @@ function paint(t: number): boolean {
   /* where you tapped, while you choose a type */
   if (pending.value) {
     const [x, y] = toPx(pending.value.at)
-    ctx.strokeStyle = RED
+    ctx.strokeStyle = MAGENTA
     ctx.lineWidth = 2
     ctx.globalAlpha = 0.7
     ctx.setLineDash([4, 5])
@@ -717,7 +717,7 @@ function paint(t: number): boolean {
     ctx.beginPath()
     ctx.arc(x, y, 7, 0, Math.PI * 2)
     ctx.stroke()
-    ctx.fillStyle = RED
+    ctx.fillStyle = MAGENTA
     ctx.beginPath()
     ctx.arc(x, y, 3, 0, Math.PI * 2)
     ctx.fill()
@@ -838,10 +838,10 @@ watch(pending, (p) => {
 }
 
 .hz-lede {
-  margin: var(--space-2) 0 0;
-  max-width: 62ch;
+  margin: var(--space-1) 0 0;
+  max-width: 72ch;
   font-family: var(--font-text);
-  font-size: var(--type-body);
+  font-size: var(--type-body-sm);
   line-height: var(--type-body-lh);
   color: var(--text-secondary);
   text-wrap: pretty;
@@ -909,7 +909,7 @@ watch(pending, (p) => {
 
 .hz-stage {
   position: relative;
-  height: min(clamp(560px, 62vw, 860px), var(--stage-cap, 82vh));
+  height: min(clamp(540px, 56vw, 780px), var(--stage-cap, 82vh));
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--navy);
@@ -1428,6 +1428,13 @@ watch(pending, (p) => {
 }
 
 .hz-swatch--ring {
+  width: 14px;
+  height: 14px;
+  border: 2px dashed #c4157f;
+  border-radius: 999px;
+}
+
+.hz-swatch--danger {
   width: 14px;
   height: 14px;
   border: 2px solid var(--status-alert);

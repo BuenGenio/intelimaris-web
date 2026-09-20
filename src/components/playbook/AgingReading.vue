@@ -1,9 +1,9 @@
 <template>
   <section class="ar" aria-label="A reading that ages">
-    <p class="ar-lede">
-      Every reading carries its age, so you can tell a live number from a remembered one.
-      Watch the ages tick. Then cut the link and see what each tile does.
-    </p>
+    <div class="ar-topline">
+      <p class="t-overline ar-eyebrow">InteliMaris · monitoring · sample readings</p>
+      <p class="t-caption ar-hint">Live under 1 min · stale after 1 min · silent after 5 min, compressed for the demo</p>
+    </div>
 
     <div class="ar-stage" :data-link="linkState">
       <header class="ar-head">
@@ -49,8 +49,8 @@
               <span class="tile-num">{{ t.text }}</span>
               <span v-if="t.def.unit" class="tile-unit">{{ t.def.unit }}</span>
             </div>
-            <p v-if="t.stage === 'fresh'" class="tile-age">
-              {{ t.def.verb }} <span class="ar-num">{{ t.age }}</span> ago
+            <p v-if="t.stage === 'live'" class="tile-age">
+              {{ t.def.verb }} <span class="ar-num">{{ t.age }}</span> ago · live
             </p>
             <div v-else class="tile-stale">
               <p class="tile-stale-head">{{ t.copy.headline }}</p>
@@ -90,15 +90,15 @@
           </header>
           <div class="tile-body">
             <p class="tile-forecast">{{ PREDICTION.text }}</p>
-            <p class="tile-age">
-              model {{ PREDICTION.model }} · computed <span class="ar-num">{{ predictionAge }}</span> ago
+            <p class="tile-age ar-num">
+              {{ PREDICTION.model }} @ {{ PREDICTION.version }} · window {{ PREDICTION.window }} · <span class="ar-num">{{ predictionAge }}</span> ago
             </p>
           </div>
           <div class="tile-foot">
-            <p v-if="predictionStage !== 'fresh'" class="tile-note">
-              Built on readings from before the link dropped. Read it as a guess until the link is back.
+            <p v-if="predictionStage !== 'live'" class="tile-note">
+              Built on readings from before the link dropped. Read it as a claim about then, not now.
             </p>
-            <p v-else class="tile-note">Predictions carry their model and version, the same as a reading carries its age.</p>
+            <p v-else class="tile-note">A prediction is a claim: it carries who made it, which version, and over which window.</p>
           </div>
         </article>
       </div>
@@ -114,7 +114,7 @@
         >
           <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
           <span class="switch-text">
-            <span class="switch-label">{{ linkState === 'up' ? 'Cut the link' : 'Restore the link' }}</span>
+            <span class="switch-label">Cut the link</span>
             <span class="switch-hint">{{ linkHint }}</span>
           </span>
         </button>
@@ -125,8 +125,9 @@
     </div>
 
     <p class="ar-foot">
-      Fresh under 1 min · stale after 1 min · unknown after 5 min. Readings arrive on their own cadence,
-      so each age resets at its own moment.
+      In the product a reading is live for 10 min and stale after an hour; a unit that stops reporting is Silent, never
+      "offline". The old number stays on the tile and says so. Readings arrive on their own cadence, so each age resets
+      at its own moment.
     </p>
   </section>
 </template>
@@ -309,16 +310,16 @@ const tiles = computed(() =>
   }),
 )
 
-const anyStale = computed(() => tiles.value.some((t) => t.stage !== 'fresh'))
+const anyStale = computed(() => tiles.value.some((t) => t.stage !== 'live'))
 const settling = computed(() => now.value < settlingUntil.value)
 const downFor = computed(() => formatAge(now.value - cutAt.value))
 const predictionAge = computed(() => formatAge(now.value - predictionAt.value))
 const predictionStage = computed(() =>
-  linkState.value === 'up' ? 'fresh' : stageFor(now.value - cutAt.value),
+  linkState.value === 'up' ? 'live' : stageFor(now.value - cutAt.value),
 )
 const linkHint = computed(() => {
   if (linkState.value === 'joining') return 'The unit is re-joining LoRaWAN.'
-  if (linkState.value === 'down') return 'The unit has dropped off LoRaWAN. The ages keep climbing.'
+  if (linkState.value === 'down') return 'The unit has dropped off LoRaWAN. The ages keep climbing; switch back to restore it.'
   return 'Like the unit dropping off LoRaWAN.'
 })
 </script>
@@ -339,13 +340,19 @@ const linkHint = computed(() => {
   --ar-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
 }
 
-.ar-lede {
-  margin: 0 0 var(--space-6);
-  max-width: 58ch;
-  font-family: var(--font-text);
-  font-size: var(--type-lede);
-  line-height: var(--type-lede-lh);
-  color: var(--text-secondary);
+.ar-topline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.ar-eyebrow,
+.ar-hint {
+  margin: 0;
+  color: var(--text-muted);
 }
 
 /* --- The stage ----------------------------------------------------------- */
@@ -353,8 +360,8 @@ const linkHint = computed(() => {
 .ar-stage {
   position: relative;
   isolation: isolate;
-  padding: var(--space-6);
-  border-radius: 28px;
+  padding: var(--space-4) var(--space-4) var(--space-4);
+  border-radius: var(--radius-xl);
   background:
     radial-gradient(60% 50% at 8% 0%, rgba(61, 142, 224, 0.28), transparent 70%),
     radial-gradient(50% 45% at 100% 100%, rgba(27, 94, 158, 0.32), transparent 70%),
@@ -377,7 +384,7 @@ const linkHint = computed(() => {
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 .ar-overline {
@@ -447,17 +454,19 @@ const linkHint = computed(() => {
 .ar-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .tile {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 236px;
+  min-height: 212px;
   padding: var(--space-4) var(--space-4) var(--space-3);
   border: 1px solid var(--ar-hair);
-  border-radius: var(--radius-xl);
+  /* the tone sits on the left rule, as the product's tiles carry it */
+  border-left: 3px solid var(--ar-hair-2);
+  border-radius: var(--radius-lg);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.045));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
@@ -472,6 +481,14 @@ const linkHint = computed(() => {
 
 .tile.is-settling {
   animation: settle 720ms var(--ar-spring);
+}
+
+.tile[data-stage='stale'] {
+  border-left-color: var(--ar-warn);
+}
+
+.tile[data-stage='silent'] {
+  border-left-color: var(--ar-alert);
 }
 
 .tile-head {
@@ -508,7 +525,7 @@ const linkHint = computed(() => {
   background: var(--ar-warn);
 }
 
-.tile[data-stage='unknown'] .tile-dot {
+.tile[data-stage='silent'] .tile-dot {
   background: var(--ar-alert);
 }
 
@@ -546,12 +563,11 @@ const linkHint = computed(() => {
 }
 
 .tile[data-stage='stale'] .tile-value {
-  opacity: 0.32;
+  opacity: 0.72;
 }
 
-.tile[data-stage='unknown'] .tile-value {
-  opacity: 0.16;
-  filter: blur(1px);
+.tile[data-stage='silent'] .tile-value {
+  opacity: 0.45;
 }
 
 .tile-age {
@@ -582,7 +598,7 @@ const linkHint = computed(() => {
   color: var(--ar-warn);
 }
 
-.tile[data-stage='unknown'] .tile-stale-head {
+.tile[data-stage='silent'] .tile-stale-head {
   color: var(--ar-alert);
 }
 
@@ -627,8 +643,8 @@ const linkHint = computed(() => {
   opacity: 0.4;
 }
 
-.tile[data-stage='unknown'] .spark,
-.tile[data-stage='unknown'] .ticks {
+.tile[data-stage='silent'] .spark,
+.tile[data-stage='silent'] .ticks {
   opacity: 0.2;
 }
 
@@ -654,7 +670,7 @@ const linkHint = computed(() => {
 
 .tile-btn {
   flex-shrink: 0;
-  min-height: 32px;
+  min-height: 40px;
   padding: 0.35rem 0.7rem;
   border: 1px solid var(--ar-hair-2);
   border-radius: 999px;
@@ -687,6 +703,14 @@ const linkHint = computed(() => {
   border-color: var(--ar-ink);
 }
 
+.tile-btn:focus-visible,
+.switch:focus-visible,
+.ghost:focus-visible {
+  outline: 2px solid var(--ar-ink);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
 /* Prediction */
 
 .tile-forecast {
@@ -700,7 +724,7 @@ const linkHint = computed(() => {
 }
 
 .tile--prediction[data-stage='stale'] .tile-forecast,
-.tile--prediction[data-stage='unknown'] .tile-forecast {
+.tile--prediction[data-stage='silent'] .tile-forecast {
   opacity: 0.5;
 }
 
@@ -719,10 +743,10 @@ const linkHint = computed(() => {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-top: var(--space-6);
-  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-4);
+  padding: var(--space-2) var(--space-4);
   border: 1px solid var(--ar-hair);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   background: rgba(11, 18, 32, 0.55);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -818,7 +842,8 @@ const linkHint = computed(() => {
 }
 
 .ar-foot {
-  margin: var(--space-4) 0 0;
+  margin: var(--space-3) 0 0;
+  max-width: 88ch;
   font-family: var(--font-text);
   font-size: var(--type-caption);
   color: var(--text-muted);
@@ -889,23 +914,47 @@ const linkHint = computed(() => {
 @media (max-width: 640px) {
   .ar-stage {
     padding: var(--space-4);
-    border-radius: 22px;
+    border-radius: var(--radius-lg);
   }
 
   .ar-head {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: var(--space-3);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
   }
 
+  .ar-unit {
+    font-size: 1rem;
+  }
+
+  .ar-grid {
+    gap: var(--space-2);
+  }
+
+  /* six tiles in three rows have to share a phone screen with the switch */
   .tile {
-    min-height: 212px;
-    padding: var(--space-3);
+    min-height: 150px;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+  }
+
+  .tile-body {
+    padding: var(--space-2) 0 var(--space-1);
+  }
+
+  .tile-foot {
+    min-height: 22px;
+    padding-top: var(--space-1);
+  }
+
+  .spark,
+  .ticks {
+    height: 20px;
   }
 
   .tile-num {
-    font-size: 2.25rem;
+    font-size: 1.875rem;
   }
 
   .tile-unit {
@@ -940,19 +989,23 @@ const linkHint = computed(() => {
     position: sticky;
     bottom: var(--space-3);
     z-index: 2;
-    flex-direction: column;
-    align-items: stretch;
+    flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-2);
-    margin-top: var(--space-4);
+    margin-top: var(--space-3);
     background: rgba(11, 18, 32, 0.8);
   }
 
   .switch {
-    min-height: 52px;
+    flex: 1 1 auto;
+    min-height: 48px;
   }
 
   .ghost {
-    width: 100%;
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 0.4rem 0.8rem;
+    font-size: var(--type-caption);
   }
 }
 </style>

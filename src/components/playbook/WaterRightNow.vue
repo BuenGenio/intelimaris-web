@@ -3,11 +3,11 @@
     <div class="wrn-stage" :class="{ 'is-ready': tideState !== 'loading' }">
       <header class="wrn-top">
         <div class="wrn-heading">
-          <p class="wrn-overline">Your water, right now</p>
-          <h2 id="wrn-title" class="wrn-marina">
+          <p class="wrn-overline">WaterWayz · conditions · public feeds, live</p>
+          <p id="wrn-title" class="wrn-marina">
             {{ marina.name }}
             <span class="wrn-place">{{ marina.place }}</span>
-          </h2>
+          </p>
         </div>
         <div class="wrn-locate-wrap">
           <button type="button" class="wrn-locate" :disabled="locating" @click="locate">
@@ -50,6 +50,7 @@
         </div>
       </div>
 
+      <div class="wrn-mid">
       <!-- Hero: the tide as a large number with its unit and its age. -->
       <div class="wrn-hero">
         <div class="wrn-hero-main">
@@ -116,16 +117,6 @@
         </div>
         <figcaption class="wrn-curve-caption">Predicted, {{ marina.tide.name }}, MLLW. The dot is {{ hero.kind === 'observed' ? 'the observed level' : 'the prediction' }} now.</figcaption>
       </figure>
-
-      <!-- Today on the water -->
-      <div class="wrn-strip" aria-label="Today on the water">
-        <p class="wrn-strip-title">Today on the water</p>
-        <ul class="wrn-pills">
-          <li v-for="p in pills" :key="p.label" class="wrn-pill">
-            <span class="wrn-pill-label">{{ p.label }}</span>
-            <span class="wrn-pill-value t-num">{{ p.value }}</span>
-          </li>
-        </ul>
       </div>
 
       <!-- Cards -->
@@ -353,7 +344,8 @@ const trendLine = computed(() => {
   return `${word}${t.trend === 'slack' ? '' : rate}${next}`
 })
 
-const upcoming = computed(() => (tide.value?.data?.extremes ?? []).filter((x) => x.t > now.value).slice(0, 4))
+/* the next four turns of the tide; a phone shows the next two */
+const upcoming = computed(() => (tide.value?.data?.extremes ?? []).filter((x) => x.t > now.value).slice(0, narrow.value ? 2 : 4))
 
 /* ---------------------------------------------------------------- chart */
 
@@ -392,7 +384,7 @@ const chart = computed(() => {
   const area = `${line} L${x(pts[pts.length - 1]!.t).toFixed(1)} ${H} L${x(pts[0]!.t).toFixed(1)} ${H} Z`
   const nowV = obs && observedFresh.value ? obs.v : (levelAt(curve, now.value) ?? pts[0]!.v)
   const extremes = (tide.value?.data?.extremes ?? [])
-    .filter((e) => e.t >= t0 + 1800000 && e.t <= t1 - 1800000)
+    .filter((e) => e.t >= t0 + 3600000 && e.t <= t1 - 2700000)
     .map((e) => ({ ...e, x: x(e.t), y: y(e.v) }))
   const ticks: { t: number; x: number }[] = []
   const hourStart = Math.ceil(t0 / 3600000) * 3600000
@@ -438,24 +430,6 @@ const sun = computed(() => {
   const n = nextSunEvents(now.value, marina.value.lat, marina.value.lon)
   const nextIsSunset = n.sunset !== null && (n.sunrise === null || n.sunset < n.sunrise)
   return { nextIsSunset, nextAt: nextIsSunset ? n.sunset : n.sunrise, otherAt: nextIsSunset ? n.sunrise : n.sunset }
-})
-
-/* ----------------------------------------------------- today on the water */
-
-const pills = computed(() => {
-  const out: { label: string; value: string }[] = []
-  const t = tideInfo.value
-  if (t.trend === 'unknown') out.push({ label: 'Tide', value: tideState.value === 'loading' ? 'asking…' : 'unknown' })
-  else if (t.trend === 'slack') out.push({ label: 'Tide', value: 'slack water' })
-  else out.push({ label: 'Tide', value: `${t.trend} · ${Math.abs(t.rate ?? 0).toFixed(1)} ft/h` })
-  if (t.next) out.push({ label: `Next ${t.next.type === 'H' ? 'high' : 'low'}`, value: `${fmtTime(t.next.t, marina.value.tz)} · ${t.next.v.toFixed(1)} ft` })
-  const w = weather.value
-  if (w && w.windKmh !== null && weatherFresh.value) {
-    const kn = Math.round(kmhToKn(w.windKmh))
-    out.push({ label: 'Wind', value: kn === 0 ? 'calm' : `${kn} kn ${w.windDirDeg !== null ? compassPoint(w.windDirDeg) : ''}`.trim() })
-  } else out.push({ label: 'Wind', value: weatherState.value === 'loading' ? 'asking…' : 'unknown' })
-  if (sun.value.nextAt !== null) out.push({ label: sun.value.nextIsSunset ? 'Sunset' : 'Sunrise', value: untilLabel(sun.value.nextAt - now.value) })
-  return out
 })
 
 /* ---------------------------------------------------------- hero motion */
@@ -561,8 +535,8 @@ onBeforeUnmount(() => {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  padding: clamp(1.25rem, 1rem + 2vw, 2.75rem);
+  gap: var(--space-6);
+  padding: clamp(1.25rem, 1rem + 1.2vw, 2rem);
   border-radius: var(--radius-xl);
   background:
     radial-gradient(ellipse 60% 45% at 18% 0%, rgba(61, 142, 224, 0.28), transparent 70%),
@@ -770,10 +744,23 @@ onBeforeUnmount(() => {
 
 /* --- hero ------------------------------------------------------------ */
 
+/* the number and its curve share a row where there is room; the cards sit under them */
+.wrn-mid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1100px) {
+  .wrn-mid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: end;
+  }
+}
+
 .wrn-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: var(--space-8);
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
   align-items: end;
 }
 
@@ -790,7 +777,7 @@ onBeforeUnmount(() => {
   align-items: baseline;
   gap: 0.35em;
   margin: 0;
-  font-size: clamp(4.5rem, 3rem + 7vw, 8.5rem);
+  font-size: clamp(4rem, 2.5rem + 4vw, 6.5rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -928,7 +915,7 @@ onBeforeUnmount(() => {
 
 .wrn-curve-frame {
   position: relative;
-  height: clamp(180px, 22vw, 280px);
+  height: clamp(170px, 16vw, 240px);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--wrn-edge);
@@ -1024,59 +1011,6 @@ onBeforeUnmount(() => {
   color: var(--wrn-ink-3);
 }
 
-/* --- strip ----------------------------------------------------------- */
-
-.wrn-strip-title {
-  margin: 0 0 var(--space-3);
-  font-family: var(--font-text);
-  font-size: var(--type-overline);
-  font-weight: 500;
-  letter-spacing: var(--type-overline-ls);
-  text-transform: uppercase;
-  color: var(--wrn-ink-3);
-}
-
-.wrn-pills {
-  display: flex;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.wrn-pills::-webkit-scrollbar {
-  display: none;
-}
-
-.wrn-pill {
-  display: inline-flex;
-  flex-direction: column;
-  flex: 0 0 auto;
-  gap: 0.125rem;
-  padding: 0.625rem 1rem;
-  border-radius: 999px;
-  background: var(--wrn-glass);
-  border: 1px solid var(--wrn-edge);
-}
-
-.wrn-pill-label {
-  font-family: var(--font-text);
-  font-size: 0.6875rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--wrn-ink-3);
-}
-
-.wrn-pill-value {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--wrn-ink);
-  white-space: nowrap;
-}
-
 /* --- cards ----------------------------------------------------------- */
 
 .wrn-cards {
@@ -1086,8 +1020,8 @@ onBeforeUnmount(() => {
 }
 
 .wrn-card {
-  padding: var(--space-6);
-  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-lg);
   background: var(--wrn-glass);
   border: 1px solid var(--wrn-edge);
   -webkit-backdrop-filter: blur(18px);
@@ -1178,7 +1112,6 @@ onBeforeUnmount(() => {
 
 .wrn-hero,
 .wrn-curve,
-.wrn-strip,
 .wrn-cards {
   opacity: 0.35;
   transform: translateY(6px);
@@ -1187,7 +1120,6 @@ onBeforeUnmount(() => {
 
 .wrn-stage.is-ready .wrn-hero,
 .wrn-stage.is-ready .wrn-curve,
-.wrn-stage.is-ready .wrn-strip,
 .wrn-stage.is-ready .wrn-cards {
   opacity: 1;
   transform: none;
@@ -1195,10 +1127,6 @@ onBeforeUnmount(() => {
 
 .wrn-stage.is-ready .wrn-curve {
   transition-delay: 80ms;
-}
-
-.wrn-stage.is-ready .wrn-strip {
-  transition-delay: 140ms;
 }
 
 .wrn-stage.is-ready .wrn-cards {
@@ -1218,39 +1146,109 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 720px) {
+  /* one phone screen: the number, its highs and lows, the curve and three small cards */
   .wrn-stage {
-    gap: var(--space-6);
+    gap: var(--space-4);
     padding-bottom: 0;
   }
 
   .wrn-top {
-    flex-direction: column;
-    gap: var(--space-4);
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .wrn-marina {
+    font-size: var(--type-h3);
+  }
+
+  .wrn-place {
+    display: inline;
+    margin-left: 0.4rem;
+    font-size: var(--type-caption);
+  }
+
+  .wrn-locate {
+    padding: 0.5rem 0.75rem;
+    font-size: var(--type-caption);
   }
 
   .wrn-locate-wrap {
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
   .wrn-locate-msg {
-    text-align: left;
+    text-align: right;
   }
 
-  .wrn-hero {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-4);
+  .wrn-mid {
+    gap: var(--space-3);
   }
 
   .wrn-hero-number {
-    font-size: clamp(4.25rem, 22vw, 6rem);
+    font-size: clamp(3.25rem, 15vw, 4rem);
+  }
+
+  .wrn-hero-stamp,
+  .wrn-trend {
+    margin-top: var(--space-1);
+    font-size: var(--type-caption);
+  }
+
+  .wrn-extremes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  /* six marinas need no search box on a phone; the chips scroll */
+  .wrn-search {
+    display: none;
+  }
+
+  .wrn-extreme {
+    padding: 0.45rem 0.5rem;
+    border-radius: var(--radius-md);
+  }
+
+  .wrn-extreme dd {
+    font-size: 0.9375rem;
+  }
+
+
+  .wrn-curve-frame {
+    height: 150px;
   }
 
   .wrn-cards {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .wrn-card-number,
+  .wrn-card-number--time {
+    margin-top: var(--space-2);
+    font-size: 1.375rem;
+  }
+
+  .wrn-card-sub,
+  .wrn-card-stamp {
+    font-size: 0.6875rem;
+  }
+
+  .wrn-card--sun {
+    grid-column: auto;
+  }
+
+  .wrn-card--sun .wrn-card-stamp {
+    display: none;
+  }
+
+  .wrn-sources p {
+    font-size: 0.6875rem;
   }
 
   .wrn-card {
-    padding: var(--space-4) var(--space-6);
+    padding: var(--space-3);
   }
 
   /* One UI: the control the thumb needs sits at the bottom, as a sheet. */
@@ -1262,7 +1260,7 @@ onBeforeUnmount(() => {
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-3);
-    margin: 0 calc(-1 * clamp(1.25rem, 1rem + 2vw, 2.75rem));
+    margin: 0 calc(-1 * clamp(1.25rem, 1rem + 1.2vw, 2rem));
     padding: var(--space-3) var(--space-4) var(--space-4);
     border-top: 1px solid var(--wrn-edge);
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;

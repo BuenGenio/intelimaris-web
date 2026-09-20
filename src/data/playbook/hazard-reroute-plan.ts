@@ -20,7 +20,10 @@ import {
   type RouteResult,
 } from './waterRouter'
 
-export type HazardKind = 'debris' | 'shoal' | 'no-wake' | 'closed-bridge' | 'dredging'
+/* The kinds the product serves from its taxonomy, by their served keys; the five a
+   passage on this water can meet. Severity is a word before it is a colour: a storm
+   cell or a disabled vessel rings red, everything else rings the chart's magenta. */
+export type HazardKind = 'debris' | 'shallow' | 'disabled_vessel' | 'storm' | 'wildlife'
 export type HazardStatus = 'reported' | 'confirmed' | 'cleared'
 
 export interface HazardType {
@@ -32,6 +35,8 @@ export interface HazardType {
   radius: number
   /** true: the planner routes around it; false: it slows you but the track stays */
   blocks: boolean
+  /** live and severe: the ring is red, not magenta */
+  severe: boolean
 }
 
 export const CRUISE_KN = 8.4
@@ -42,11 +47,11 @@ export const RADIUS_MAX = 8
 export const METRES_PER_CELL = Math.round(1852 * NM_PER_CELL)
 
 export const HAZARD_TYPES: readonly HazardType[] = [
-  { kind: 'debris', label: 'Debris', meaning: 'Blocks the track. The planner goes around it.', radius: 3, blocks: true },
-  { kind: 'shoal', label: 'Shoal', meaning: 'Blocks the track. The planner goes around it.', radius: 5, blocks: true },
-  { kind: 'no-wake', label: 'No-wake zone', meaning: `Slows you to ${NO_WAKE_KN} kn inside. The track stays.`, radius: 6, blocks: false },
-  { kind: 'closed-bridge', label: 'Closed bridge', meaning: 'Blocks the track. The planner looks for another way.', radius: 4, blocks: true },
-  { kind: 'dredging', label: 'Dredging', meaning: 'Blocks the track. The planner goes around it.', radius: 6, blocks: true },
+  { kind: 'debris', label: 'Debris', meaning: 'Something is in the water here. The planner goes around it.', radius: 3, blocks: true, severe: false },
+  { kind: 'shallow', label: 'Shoaling', meaning: 'Shallow water. The planner goes around it.', radius: 5, blocks: true, severe: false },
+  { kind: 'disabled_vessel', label: 'Disabled vessel', meaning: 'An obstruction, live. The planner goes around it.', radius: 4, blocks: true, severe: true },
+  { kind: 'storm', label: 'Storm cell', meaning: 'Do not go through here. The planner goes around it.', radius: 6, blocks: true, severe: true },
+  { kind: 'wildlife', label: 'Manatee zone', meaning: `A rule applies here: ${NO_WAKE_KN} kn inside. The track stays.`, radius: 6, blocks: false, severe: false },
 ]
 
 export const typeOf = (kind: HazardKind): HazardType => HAZARD_TYPES.find((t) => t.kind === kind)!
@@ -194,8 +199,8 @@ export function pointAlong(points: readonly Point[], fraction: number): Point {
 
 /** what the keyboard button drops, in order, so the re-plan is reachable without a pointer */
 export const SAMPLE_HAZARDS: readonly { kind: HazardKind; fraction: number; radius: number }[] = [
-  { kind: 'shoal', fraction: 0.5, radius: 5 },
-  { kind: 'no-wake', fraction: 0.72, radius: 7 },
+  { kind: 'shallow', fraction: 0.5, radius: 5 },
+  { kind: 'wildlife', fraction: 0.72, radius: 7 },
   { kind: 'debris', fraction: 0.27, radius: 4 },
-  { kind: 'dredging', fraction: 0.6, radius: 6 },
+  { kind: 'disabled_vessel', fraction: 0.6, radius: 6 },
 ]

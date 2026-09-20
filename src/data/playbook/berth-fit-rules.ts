@@ -27,7 +27,11 @@ export interface FitResult {
   keelM: number
 }
 
-/** Decide whether a vessel fits a berth, and say why not in the product's words. */
+/**
+ * Decide whether a vessel fits a berth, and say why not in the product's words:
+ * "A-12 takes 18.0 m; this vessel is 19.4 m". Stated figures only, no tide credited,
+ * compared at the datum. The dockmaster decides.
+ */
 export function fitCheck(vessel: VesselDims, berth: Berth): FitResult {
   const loa = toM(vessel.loa)
   const beam = toM(vessel.beam)
@@ -39,7 +43,7 @@ export function fitCheck(vessel: VesselDims, berth: Berth): FitResult {
   if (loaSpareM !== null && loaSpareM < 0) {
     reasons.push({
       dim: 'loa',
-      text: `Too short by ${fmtM(-loaSpareM)}: ${berth.maxLoaM} m berth, you are ${fmtM(loa)}`,
+      text: `${berth.id} takes ${fmtM(berth.maxLoaM!)}; this vessel is ${fmtM(loa)}`,
     })
   }
 
@@ -47,7 +51,7 @@ export function fitCheck(vessel: VesselDims, berth: Berth): FitResult {
   if (beamSpareM !== null && beamSpareM < 0) {
     reasons.push({
       dim: 'beam',
-      text: `Too narrow by ${fmtM(-beamSpareM)}: ${berth.maxBeamM} m between piles, your beam is ${fmtM(beam)}`,
+      text: `${berth.id} takes ${fmtM(berth.maxBeamM!)} of beam; this vessel is ${fmtM(beam)} wide`,
     })
   }
 
@@ -55,26 +59,26 @@ export function fitCheck(vessel: VesselDims, berth: Berth): FitResult {
   if (keelM < 0) {
     reasons.push({
       dim: 'draft',
-      text: `${fmtM(berth.depthM)} at the berth, your draft is ${fmtM(draft)}`,
+      text: `${berth.id} has ${fmtM(berth.depthM)} of water at ${berth.datum}; this vessel draws ${fmtM(draft)} — ${fmtM(-keelM)} less water than it draws`,
     })
   } else if (keelM < KEEL_MARGIN_M) {
     reasons.push({
       dim: 'draft',
-      text: `${fmtM(berth.depthM)} at ${berth.datum} leaves ${fmtM(keelM)} under your keel; the demo asks for ${fmtM(KEEL_MARGIN_M)}`,
+      text: `${berth.id} has ${fmtM(berth.depthM)} of water at ${berth.datum}; this vessel draws ${fmtM(draft)} — ${fmtM(keelM)} under the keel, short of the ${fmtM(KEEL_MARGIN_M)} asked for`,
     })
   }
 
   if (berth.overheadM !== null && air > berth.overheadM) {
     reasons.push({
       dim: 'airDraft',
-      text: `${fmtM(berth.overheadM)} of cover overhead, your air draft is ${fmtM(air)}`,
+      text: `${berth.id} has ${fmtM(berth.overheadM)} of cover; this vessel's air draft is ${fmtM(air)}`,
     })
   }
 
   return { fits: reasons.length === 0, reasons, loaSpareM, beamSpareM, keelM }
 }
 
-const TIE_WORD = { port: 'port-to', starboard: 'starboard-to', either: 'either side' } as const
+const TIE_WORD = { port: 'port-to', starboard: 'starboard-to', either: 'either side-to' } as const
 
 /** The one-line approach brief the day board carries, e.g. "B-01 · enter 240° stern-in · starboard-to · 2.4 m MLLW". */
 export function approachBrief(berth: Berth): string {

@@ -16,7 +16,7 @@ export interface SampleVessel extends Vessel {
   name: string
 }
 
-/** Three sample boats. The sailboat's air draft is over the bridge on purpose. */
+/** Three sample vessels. The sailboat's air draft is over the bridge on purpose. */
 export const SAMPLE_VESSELS: readonly SampleVessel[] = [
   { id: 'sail', name: '34 ft sailboat', lengthFt: 34, draftFt: 5.5, airDraftFt: 52 },
   { id: 'trawler', name: '42 ft trawler', lengthFt: 42, draftFt: 4, airDraftFt: 21 },

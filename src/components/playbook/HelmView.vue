@@ -1,7 +1,7 @@
 <template>
   <section class="hv" :data-view="view" :class="{ 'hv--arrived': arrived, 'hv--sheet': !!sheet }">
     <div class="hv-topline">
-      <p class="t-overline hv-eyebrow">WaterWayz · underway</p>
+      <p class="t-overline hv-eyebrow">WaterWayz · Ride Along · sample passage</p>
       <p class="hv-hint t-caption" :key="view">{{ viewMeta.hint }}</p>
     </div>
 
@@ -20,10 +20,10 @@
 
       <!-- Vessel chip -->
       <div class="hv-chip" aria-live="off">
-        <span class="hv-chip-mark" aria-hidden="true">S</span>
+        <span class="hv-chip-mark" aria-hidden="true">{{ VESSEL.name.split(' ').pop()!.charAt(0) }}</span>
         <span class="hv-chip-name">{{ VESSEL.name }}</span>
         <span class="hv-chip-dot" :class="{ 'is-slow': slow }" aria-hidden="true"></span>
-        <span class="hv-chip-stat t-num">{{ arrived ? 'alongside' : `${sog.toFixed(1)} kn` }}</span>
+        <span class="hv-chip-stat t-num">{{ arrived ? 'Alongside' : `${sog.toFixed(1)} kn` }}</span>
       </div>
 
       <!-- View switch -->
@@ -46,9 +46,6 @@
         <button type="button" class="hv-tool" :aria-pressed="follow" aria-label="Follow my vessel" title="Follow my vessel" @click="recenter">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></svg>
         </button>
-        <button type="button" class="hv-tool" :aria-pressed="view === 'above'" aria-label="North up" title="North up" @click="setView('above')">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m12 5 3 7-3 7-3-7 3-7Z" /></svg>
-        </button>
       </div>
 
       <!-- Zoom -->
@@ -59,11 +56,11 @@
 
       <!-- Report / emergency -->
       <div class="hv-actions">
-        <button type="button" class="hv-action hv-action--sos" @click="sheet = 'emergency'">
+        <button type="button" class="hv-action hv-action--sos" @click="openSheet">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3.5" /><path d="m5.6 5.6 4 4M14.4 14.4l4 4M18.4 5.6l-4 4M9.6 14.4l-4 4" /></svg>
           Emergency
         </button>
-        <button type="button" class="hv-action" :disabled="arrived" @click="reportHazard">
+        <button type="button" class="hv-action" :disabled="arrived" aria-label="Report a hazard ahead" @click="reportHazard">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 8v8M8 12h8" /></svg>
           Hazard
         </button>
@@ -73,7 +70,7 @@
       <div ref="stripEl" class="hv-strip" :class="{ 'is-open': stripOpen }">
         <button type="button" class="hv-strip-handle" :aria-expanded="stripOpen" @click="stripOpen = !stripOpen">
           <span class="hv-grip" aria-hidden="true"></span>
-          <span class="t-num">{{ etaClock }}</span> · {{ remainingLabel }} · {{ DESTINATION.short }}
+          <span class="hv-strip-eta">ETA <span class="t-num">{{ etaClock }}</span></span> · <span class="t-num">{{ remainingLabel }}</span> · {{ DESTINATION.short }}
         </button>
         <div class="hv-cards">
           <article class="hv-card hv-card--dest" :class="{ 'is-lit': destLit }">
@@ -81,19 +78,16 @@
               <h3 class="hv-card-title">{{ DESTINATION.label }}</h3>
               <span class="hv-tag">{{ DESTINATION.kind }}</span>
             </div>
-            <p class="hv-card-line"><span class="t-num">{{ remainingLabel }}</span> · Ratings arrive with social</p>
-            <p class="hv-card-line">Approach <span class="t-num">{{ DESTINATION.approachDepthFt }} ft</span> · berth <span class="t-num">{{ DESTINATION.berth }}</span> assigned</p>
+            <p class="hv-card-line"><span class="t-num">{{ remainingLabel }}</span> · ETA <span class="t-num">{{ etaClock }}</span></p>
+            <p class="hv-card-line">Approach <span class="t-num">{{ DESTINATION.approachDepthFt }} ft</span> MLLW · berth <span class="t-num">{{ DESTINATION.berth }}</span> assigned</p>
             <div class="hv-card-actions">
               <a class="hv-icon-btn" :href="`tel:${DESTINATION.phone.replace(/\s/g, '')}`" aria-label="Call the marina">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" /></svg>
               </a>
-              <button type="button" class="hv-icon-btn" aria-label="Centre the chart on the marina" @click="lookAt(DESTINATION)">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10l8 3 3 8 7-18Z" /></svg>
-              </button>
               <button type="button" class="hv-icon-btn" :aria-pressed="saved" :aria-label="saved ? 'Saved' : 'Save this place'" @click="saved = !saved">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" /></svg>
               </button>
-              <RouterLink class="hv-btn" to="/capabilities/dockpass#try-berth-fit">Book a berth</RouterLink>
+              <button type="button" class="hv-btn" :aria-pressed="marinaView" @click="marinaView ? recenter() : openMarina()">{{ marinaView ? 'Back to the helm' : 'Marina View' }}</button>
             </div>
           </article>
 
@@ -101,11 +95,11 @@
             <p class="t-overline hv-card-ov">Route · {{ arrived ? 'arrived' : 'Sunrise Bay → Bahia Mar' }} <span class="hv-sample">sample</span></p>
             <dl class="hv-stats">
               <div><dt>ETA</dt><dd class="t-num">{{ etaClock }}</dd></div>
-              <div><dt>Time</dt><dd class="t-num">{{ durationLabel(minsLeft) }}</dd></div>
+              <div><dt>To run</dt><dd class="t-num">{{ durationLabel(minsLeft) }}</dd></div>
               <div><dt>Distance</dt><dd class="t-num">{{ fix.remainingNm.toFixed(1) }} <small>NM</small></dd></div>
-              <div><dt>Safe depth</dt><dd class="t-num">11.2 <small>ft</small></dd></div>
-              <div><dt>Wind</dt><dd class="t-num">SE 9 <small>kn</small></dd></div>
-              <div><dt>Tide</dt><dd class="t-num">+2.1 <small>ft ↑</small></dd></div>
+              <div><dt>Heading</dt><dd class="t-num">{{ headingLabel }}</dd></div>
+              <div><dt>Under keel</dt><dd class="t-num">{{ UNDER_KEEL_FT }} <small>ft</small></dd></div>
+              <div><dt>Next gate</dt><dd class="t-num hv-gate" :class="{ 'is-inside': gate.inside }">{{ gate.inside ? gate.label : `${gate.label} · ${gate.nm.toFixed(1)} NM` }}</dd></div>
             </dl>
             <div class="hv-progress" role="progressbar" aria-label="Passage progress" :aria-valuenow="Math.round(progress * 100)" aria-valuemin="0" aria-valuemax="100">
               <i :style="{ width: `${progress * 100}%` }"></i>
@@ -120,7 +114,7 @@
                 <span class="hv-today-label">{{ r.label }}</span>
                 <span class="hv-today-value t-num">{{ r.value }}<small v-if="r.unit"> {{ r.unit }}</small></span>
                 <span class="hv-today-note">{{ r.note }}</span>
-                <span class="hv-today-age">{{ ageLabel(r.ageMs + elapsedMs) }}</span>
+                <span class="hv-today-age t-num">{{ ageLabel(r.ageMs + elapsedMs) }}</span>
               </li>
             </ul>
           </article>
@@ -134,13 +128,13 @@
 
       <!-- Emergency sheet -->
       <Transition name="hv-fade">
-        <div v-if="sheet" class="hv-sheet" role="dialog" aria-modal="true" aria-labelledby="hv-sheet-title" @keydown.esc="sheet = null">
+        <div v-if="sheet" class="hv-sheet" role="dialog" aria-modal="true" aria-labelledby="hv-sheet-title" @keydown.esc="closeSheet" @click.self="closeSheet">
           <div class="hv-sheet-card">
-            <p class="t-overline hv-sheet-ov">Emergency assistance</p>
-            <h3 id="hv-sheet-title" class="hv-sheet-title">Share your position and call for help.</h3>
+            <p class="t-overline hv-sheet-ov">Emergency · two taps in WaterWayz</p>
+            <h3 id="hv-sheet-title" class="hv-sheet-title">Every vessel within range sees what it is, which way, and how far.</h3>
             <p class="hv-sheet-text">
-              In WaterWayz this sends your vessel, position and heading to the marina you are bound for, your crew and the
-              people you choose, and dials the emergency number for these waters. Nothing leaves this demonstration.
+              In WaterWayz you pick what has happened and the alert goes to every vessel within the range the operator
+              has set, each of which can say it is responding. Nothing leaves this demonstration.
             </p>
             <dl class="hv-stats hv-stats--sheet">
               <div><dt>Vessel</dt><dd>{{ VESSEL.name }} · {{ VESSEL.lengthFt }} ft</dd></div>
@@ -148,8 +142,8 @@
               <div><dt>Heading</dt><dd class="t-num">{{ Math.round(fix.headingDeg).toString().padStart(3, '0') }}°</dd></div>
             </dl>
             <div class="hv-sheet-actions">
-              <button ref="sheetClose" type="button" class="hv-btn" @click="sheet = null">Close</button>
-              <span class="t-caption hv-sheet-note">WaterWayz™ does not replace a marine radio or the emergency number.</span>
+              <button ref="sheetClose" type="button" class="hv-btn" @click="closeSheet">Close</button>
+              <span class="t-caption hv-sheet-note">Not a replacement for VHF 16 or DSC.</span>
             </div>
           </div>
         </div>
@@ -162,7 +156,6 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, shallowRef, watch } from 'vue'
-import { RouterLink } from 'vue-router'
 import { type Point } from '@/data/playbook/waterRouter'
 import {
   CONDITIONS,
@@ -180,16 +173,27 @@ import {
   fixAt,
   inNoWake,
   minutesLeft,
+  nextGate,
   speedAt,
   trafficAt,
+  type HazardMark,
   type Reading,
   type ViewMode,
 } from '@/data/playbook/helm-view-scene'
 
+/* the chart's hues, each with one owner: magenta for the route and every rule,
+   red for a live danger, ink on a disc for every symbol, wave blue for our own heading */
 const ROUTE = '#C4157F'
+const DANGER = '#D0342C'
 const TEAL = '#2FB5B0'
+const WAVE = '#4274BB'
+const INK = '#0B1220'
+const DISC = '#FFFFFF'
 const MAP_ASPECT = 16 / 9
-const BASEMAP = '/assets/playbook/basemap-1920.webp'
+/* this view rides zoomed in, so it takes the larger tile */
+const BASEMAP = '/assets/playbook/basemap-2880.webp'
+/* illustrative: charted 11.2 ft plus tide, less the 4 ft draft, at the sample fix */
+const UNDER_KEEL_FT = 9.3
 
 /* ---------- passage state ---------- */
 const track = buildTrack()
@@ -200,6 +204,8 @@ const slow = computed(() => inNoWake(fix.value.at))
 const sog = computed(() => (arrived.value ? 0 : speedAt(fix.value.at)))
 const progress = computed(() => (track.lengthNm ? fix.value.sailedNm / track.lengthNm : 0))
 const minsLeft = computed(() => minutesLeft(track, fix.value))
+const gate = computed(() => nextGate(track, fix.value))
+const headingLabel = computed(() => `${Math.round(fix.value.headingDeg).toString().padStart(3, '0')}°`)
 const now = ref(Date.now())
 const etaClock = computed(() => clockAfter(now.value, minsLeft.value))
 const remainingLabel = computed(() => (arrived.value ? 'Alongside' : `${fix.value.remainingNm.toFixed(1)} NM`))
@@ -213,11 +219,14 @@ const showTraffic = ref(true)
 const stripOpen = ref(false)
 const saved = ref(false)
 const destLit = ref(false)
+/* Marina View: the chart becomes the marina, straight down, until you come back */
+const marinaView = ref(false)
 const toast = ref('')
 const sheet = ref<'emergency' | null>(null)
 const sheetClose = ref<HTMLButtonElement | null>(null)
+let sheetOpener: HTMLElement | null = null
 const readings = shallowRef<Reading[]>([...CONDITIONS])
-const hazards = shallowRef<(Point & { label: string })[]>([...DEBRIS])
+const hazards = shallowRef<HazardMark[]>([...DEBRIS])
 
 let toastTimer = 0
 const say = (text: string) => {
@@ -229,33 +238,53 @@ const say = (text: string) => {
 const setView = (m: ViewMode) => {
   view.value = m
   follow.value = true
+  marinaView.value = false
   cam.zoom = m === 'above' ? 1.7 : 2.6
   schedule()
 }
 
 const recenter = () => {
   follow.value = true
+  if (marinaView.value) {
+    marinaView.value = false
+    cam.zoom = view.value === 'above' ? 1.7 : 2.6
+  }
   schedule()
 }
 
-const lookAt = (p: Point) => {
+/* Marina View is a mode of the chart, not another screen: straight down, framed on the basin. */
+const openMarina = () => {
   follow.value = false
-  cam.cu = p.u
-  cam.cv = p.v
+  marinaView.value = true
+  view.value = 'above'
+  cam.zoom = 4.2
+  cam.cu = DESTINATION.u
+  cam.cv = DESTINATION.v
   destLit.value = true
+  stripOpen.value = true
   window.setTimeout(() => { destLit.value = false }, 1400)
+  say(`Marina View · ${DESTINATION.short} · berth ${DESTINATION.berth} assigned`)
   schedule()
 }
 
 const reportHazard = () => {
-  /* a little ahead of the bow, on the track */
+  /* a little ahead of the bow, on the track; it shows at once as Reported, unverified */
   const ahead = fixAt(track, sailed.value + 0.08).at
-  hazards.value = [...hazards.value, { ...ahead, label: 'Reported by you · awaiting confirmation' }]
+  hazards.value = [...hazards.value, { ...ahead, label: 'You reported this', status: 'reported', severe: false }]
   readings.value = readings.value.map((r) =>
-    r.id === 'debris' ? { ...r, value: String(Number(r.value) + 1), note: 'Nearby · 1 yours', ageMs: -elapsedMs.value } : r,
+    r.id === 'hazards' ? { ...r, value: String(Number(r.value) + 1), note: '1 yours · unverified', ageMs: -elapsedMs.value } : r,
   )
-  say('Hazard reported to vessels nearby · awaiting confirmation')
+  say('Reported · unverified until another vessel says it is still there')
   schedule()
+}
+
+const openSheet = (e: Event) => {
+  sheetOpener = e.currentTarget as HTMLElement | null
+  sheet.value = 'emergency'
+}
+const closeSheet = () => {
+  sheet.value = null
+  sheetOpener?.focus()
 }
 
 const sailAgain = () => {
@@ -273,16 +302,23 @@ watch(sheet, async (open) => {
   }
 })
 
+/* on a phone the strip slides rather than resizes; re-measure once it has settled */
+watch(stripOpen, () => { window.setTimeout(resize, 400) })
+
 /* ---------- camera ---------- */
 const stageEl = ref<HTMLDivElement | null>(null)
 const canvasEl = ref<HTMLCanvasElement | null>(null)
 const stripEl = ref<HTMLDivElement | null>(null)
-const cam = reactive({ w: 0, h: 0, zoom: 1.7, cu: 0.5, cv: 0.5 })
+const cam = reactive({ w: 0, h: 0, zoom: 1.7, cu: 0.5, cv: 0.5, strip: 0 })
 const baseScale = () => Math.max(cam.w, cam.h * MAP_ASPECT)
 const mapW = () => baseScale() * cam.zoom
 const mapH = () => mapW() / MAP_ASPECT
-/* the point the camera holds, and where on the stage it sits */
-const anchor = () => (view.value === 'above' ? { x: cam.w / 2, y: cam.h / 2 } : { x: cam.w / 2, y: cam.h * 0.6 })
+/* the point the camera holds, and where on the stage it sits: centred in the water the
+   cards leave uncovered, lower down when the view is course-up so the water ahead is ahead */
+const anchor = () => {
+  const open = Math.max(cam.h * 0.4, cam.h - cam.strip)
+  return view.value === 'above' ? { x: cam.w / 2, y: open / 2 } : { x: cam.w / 2, y: open * 0.66 }
+}
 const rotation = () => (view.value === 'above' ? 0 : (-fix.value.headingDeg * Math.PI) / 180)
 
 const toScreen = (p: Point) => {
@@ -354,11 +390,7 @@ const onPointerUp = (e: PointerEvent) => {
   pointers.delete(e.pointerId)
   if (!dragging && pointers.size === 0 && view.value !== '3d') {
     const d = toScreen(DESTINATION)
-    if (Math.hypot(d.x - p.x, d.y - p.y) < 28) {
-      destLit.value = true
-      stripOpen.value = true
-      window.setTimeout(() => { destLit.value = false }, 1400)
-    }
+    if (Math.hypot(d.x - p.x, d.y - p.y) < 28) openMarina()
   }
   if (pointers.size === 0) dragging = false
   else pinchDist = 0
@@ -370,6 +402,7 @@ const onWheel = (e: WheelEvent) => {
 
 /* ---------- animation ---------- */
 let ctx: CanvasRenderingContext2D | null = null
+let hatch: CanvasPattern | null = null
 let img: HTMLImageElement | null = null
 let dpr = 1
 let raf = 0
@@ -482,15 +515,16 @@ const draw = () => {
 
   const px = (p: Point) => ({ x: p.u * mw, y: p.v * mh })
 
-  /* no-wake ring */
+  /* no-wake zone: a rule, so it wears the rule's hatch and dashed outline, never a fill alone */
   const nw = px(NO_WAKE)
+  const nwR = (NO_WAKE.radius / 479) * mw
   ctx.beginPath()
-  ctx.arc(nw.x, nw.y, (NO_WAKE.radius / 479) * mw, 0, Math.PI * 2)
-  ctx.fillStyle = 'rgba(224, 161, 0, 0.14)'
+  ctx.arc(nw.x, nw.y, nwR, 0, Math.PI * 2)
+  if (hatch) ctx.fillStyle = hatch
   ctx.fill()
-  ctx.setLineDash([6, 6])
-  ctx.strokeStyle = 'rgba(224, 161, 0, 0.9)'
-  ctx.lineWidth = 1.5
+  ctx.setLineDash([6, 5])
+  ctx.strokeStyle = 'rgba(196, 21, 127, 0.85)'
+  ctx.lineWidth = 2
   ctx.stroke()
   ctx.setLineDash([])
 
@@ -528,33 +562,44 @@ const draw = () => {
   ctx.restore()
 
   /* everything that must read upright is drawn in screen space */
-  /* traffic */
+  /* the zone's chip, at the ring's foot */
+  if (cam.zoom > 1.4) {
+    const chip = { u: NO_WAKE.u, v: NO_WAKE.v + (NO_WAKE.radius / 269) * 0.9 }
+    upright(chip, (x, y) => pill(x, y - 10, NO_WAKE.label, { small: true, accent: 'rgba(196,21,127,0.7)' }))
+  }
+
+  /* traffic: one outlined triangle each, as the chart draws an AIS target; friends carry a name */
   if (showTraffic.value) {
     for (const v of TRAFFIC) {
       const t = trafficAt(v, demoSeconds)
       upright(t.at, (x, y) => {
-        chevron(x, y, t.headingDeg, 7, v.friend ? 'rgba(47, 181, 176, 0.95)' : 'rgba(255,255,255,0.85)', 'rgba(11,18,32,0.8)')
-        if (v.friend && cam.zoom > 1.8) pill(x, y, v.name, { small: true, accent: 'rgba(47,181,176,0.7)' })
+        chevron(x, y, t.headingDeg, 7, DISC, INK)
+        if (v.friend && cam.zoom > 1.8) pill(x, y, v.name, { small: true })
       })
     }
   }
 
-  /* debris */
+  /* hazard reports: an ink glyph on the disc, ringed magenta as a caution or red when live and severe */
   for (const d of hazards.value) {
     upright(d, (x, y) => {
       if (!ctx) return
       ctx.beginPath()
       ctx.arc(x, y, 11, 0, Math.PI * 2)
-      ctx.fillStyle = 'rgba(11, 18, 32, 0.8)'
+      ctx.fillStyle = DISC
       ctx.fill()
-      ctx.strokeStyle = '#E0A100'
-      ctx.lineWidth = 2
+      ctx.strokeStyle = d.severe ? DANGER : ROUTE
+      ctx.lineWidth = 2.5
+      if (d.status === 'reported') ctx.setLineDash([3, 3])
       ctx.stroke()
-      ctx.fillStyle = '#E0A100'
-      ctx.font = '700 12px "Red Hat Text", system-ui, sans-serif'
+      ctx.setLineDash([])
+      ctx.fillStyle = INK
+      ctx.font = '700 13px "Red Hat Text", system-ui, sans-serif'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.fillText('!', x, y + 0.5)
+      if (cam.zoom > 2.2 || d.label === 'You reported this') {
+        pill(x, y, `${d.label} · ${d.status === 'reported' ? 'unverified' : 'Confirmed'}`, { small: true, accent: d.severe ? 'rgba(208,52,44,0.8)' : 'rgba(196,21,127,0.7)' })
+      }
     })
   }
 
@@ -582,14 +627,23 @@ const draw = () => {
     pill(x, y, DESTINATION.label, { above: true, accent: 'rgba(47,181,176,0.8)' })
   })
 
-  /* own vessel */
+  /* own vessel: the disc hull with its ink outline, a heading cone in wave ahead of it */
   upright(fix.value.at, (x, y) => {
     if (!ctx) return
+    if (!arrived.value) {
+      const hd = (fix.value.headingDeg * Math.PI) / 180 + rotation() - Math.PI / 2
+      ctx.beginPath()
+      ctx.moveTo(x, y)
+      ctx.arc(x, y, 44, hd - 0.42, hd + 0.42)
+      ctx.closePath()
+      ctx.fillStyle = 'rgba(66, 116, 187, 0.3)'
+      ctx.fill()
+    }
+    chevron(x, y, fix.value.headingDeg, 13, DISC, INK)
     ctx.beginPath()
-    ctx.arc(x, y, 22, 0, Math.PI * 2)
-    ctx.fillStyle = 'rgba(196, 21, 127, 0.18)'
+    ctx.arc(x, y + 2, 2.6, 0, Math.PI * 2)
+    ctx.fillStyle = WAVE
     ctx.fill()
-    chevron(x, y, fix.value.headingDeg, 13, '#ffffff', ROUTE)
     if (arrived.value) pill(x, y, 'Alongside', { above: true, accent: 'rgba(47,181,176,0.8)' })
   })
 
@@ -610,9 +664,14 @@ const resize = () => {
   const stage = stageEl.value
   const canvas = canvasEl.value
   if (!stage || !canvas) return
-  /* the zoom and report buttons sit on top of the cards, however tall they are */
-  if (stripEl.value) stage.style.setProperty('--hv-strip-h', `${Math.round(stripEl.value.getBoundingClientRect().height)}px`)
   const rect = stage.getBoundingClientRect()
+  /* the zoom and report buttons sit on top of the cards, however tall they are; the camera
+     keeps the vessel in the water above whatever part of the strip is showing */
+  if (stripEl.value) {
+    const strip = stripEl.value.getBoundingClientRect()
+    stage.style.setProperty('--hv-strip-h', `${Math.round(strip.height)}px`)
+    cam.strip = Math.max(0, Math.round(rect.bottom - strip.top))
+  }
   const w = Math.round(rect.width)
   const h = Math.round(rect.height)
   if (!w || !h) return
@@ -626,8 +685,30 @@ const resize = () => {
 
 const onVisibility = () => { last = 0; schedule() }
 
+/* the rule's 45° hatch, in the route's magenta */
+const buildHatch = () => {
+  if (!ctx) return
+  const tile = document.createElement('canvas')
+  tile.width = 10
+  tile.height = 10
+  const t = tile.getContext('2d')
+  if (!t) return
+  t.strokeStyle = 'rgba(196, 21, 127, 0.5)'
+  t.lineWidth = 1.5
+  t.beginPath()
+  t.moveTo(-2, 12)
+  t.lineTo(12, -2)
+  t.moveTo(-2, 2)
+  t.lineTo(2, -2)
+  t.moveTo(8, 12)
+  t.lineTo(12, 8)
+  t.stroke()
+  hatch = ctx.createPattern(tile, 'repeat')
+}
+
 onMounted(async () => {
   ctx = canvasEl.value?.getContext('2d') ?? null
+  buildHatch()
   ro = new ResizeObserver(resize)
   if (stageEl.value) ro.observe(stageEl.value)
   if (stripEl.value) ro.observe(stripEl.value)
@@ -806,6 +887,7 @@ onBeforeUnmount(() => {
 }
 
 .hv-view-btn {
+  min-height: 36px;
   padding: 0.4rem 0.9rem;
   border: 0;
   border-radius: 999px;
@@ -821,6 +903,17 @@ onBeforeUnmount(() => {
 .hv-view-btn[aria-pressed='true'] {
   background: #ffffff;
   color: var(--slate);
+}
+
+.hv-view-btn:focus-visible,
+.hv-tool:focus-visible,
+.hv-zoom-btn:focus-visible,
+.hv-action:focus-visible,
+.hv-icon-btn:focus-visible,
+.hv-btn:focus-visible,
+.hv-strip-handle:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 
 .hv-rail {
@@ -907,7 +1000,7 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  min-height: 38px;
+  min-height: 40px;
   padding: 0.45rem 0.95rem 0.45rem 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
@@ -940,6 +1033,14 @@ onBeforeUnmount(() => {
 
 .hv-strip-handle {
   display: none;
+}
+
+.hv-strip-eta {
+  color: var(--hv-white-70);
+}
+
+.hv-strip-eta .t-num {
+  color: #ffffff;
 }
 
 .hv-cards {
@@ -1004,8 +1105,8 @@ onBeforeUnmount(() => {
 .hv-icon-btn {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
@@ -1023,7 +1124,7 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
+  min-height: 40px;
   margin-left: auto;
   padding: 0.45rem 0.9rem;
   border: 0;
@@ -1040,6 +1141,20 @@ onBeforeUnmount(() => {
 .hv-btn--ghost {
   margin: var(--space-3) 0 0;
   background: rgba(255, 255, 255, 0.12);
+}
+
+.hv-btn[aria-pressed='true'] {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* the next gate reads as a rule: magenta while you are inside it */
+.hv-gate {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.hv-gate.is-inside {
+  color: #f08ac6;
 }
 
 .hv-card-ov {
@@ -1074,7 +1189,7 @@ onBeforeUnmount(() => {
 
 .hv-stats dd {
   margin: 0.15rem 0 0;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -1305,8 +1420,8 @@ onBeforeUnmount(() => {
   }
 
   .hv-tool {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
   }
 
   .hv-zoom {
@@ -1322,7 +1437,7 @@ onBeforeUnmount(() => {
   }
 
   .hv-action {
-    min-height: 34px;
+    min-height: 40px;
     padding: 0.35rem 0.75rem 0.35rem 0.6rem;
     font-size: 0.75rem;
   }

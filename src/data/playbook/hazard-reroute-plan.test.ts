@@ -31,12 +31,12 @@ describe('hazard-reroute plan', () => {
       expect(t.radius).toBeGreaterThanOrEqual(RADIUS_MIN)
       expect(t.radius).toBeLessThanOrEqual(RADIUS_MAX)
     }
-    expect(makeHazard(1, 'shoal', TO, 99, 0).radius).toBe(RADIUS_MAX)
+    expect(makeHazard(1, 'shallow', TO, 99, 0).radius).toBe(RADIUS_MAX)
   })
 
   it('routes around a blocking hazard dropped mid-track', () => {
     const mid = pointAlong(planned.result.points, 0.5)
-    const h = makeHazard(1, 'shoal', mid, 5, 0)
+    const h = makeHazard(1, 'shallow', mid, 5, 0)
     const p = plan([h])
     expect(p.result.ok).toBe(true)
     const ring = new Set(h.cells)
@@ -47,9 +47,9 @@ describe('hazard-reroute plan', () => {
     expect(deltaText(p, planned)).toMatch(/^\+\d\.\d NM · (\+\d+ min|same time) at 8\.4 kn$/)
   })
 
-  it('does not reroute for a no-wake zone, but costs time', () => {
+  it('does not reroute for a manatee zone, but costs time', () => {
     const mid = pointAlong(planned.result.points, 0.5)
-    const h = makeHazard(2, 'no-wake', mid, 6, 0)
+    const h = makeHazard(2, 'wildlife', mid, 6, 0)
     const p = plan([h])
     expect(p.result.ok).toBe(true)
     expect(p.result.cells).toEqual(planned.result.cells)
@@ -71,7 +71,7 @@ describe('hazard-reroute plan', () => {
   })
 
   it('refuses with the router reason when the destination is inside a ring', () => {
-    const h = makeHazard(4, 'dredging', TO, 6, 0)
+    const h = makeHazard(4, 'disabled_vessel', TO, 6, 0)
     const p = plan([h])
     expect(p.result.ok).toBe(false)
     expect(p.result.reason).toBeTruthy()

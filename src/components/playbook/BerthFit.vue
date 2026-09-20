@@ -1,12 +1,9 @@
 <template>
   <div class="bf" :class="{ 'bf--brief': !!selected, 'bf--sheet': sheetOpen }">
-    <header class="bf-head">
-      <p class="t-overline">Journey 03 · Bahia Mar, Fort Lauderdale</p>
-      <h2 class="bf-title">Which berths fit you</h2>
-      <p class="bf-lede">
-        Set your vessel and the basin answers. You only see the berths she fits, and on any date only free means free.
-      </p>
-    </header>
+    <div class="bf-topline">
+      <p class="t-overline bf-eyebrow">Marina PMS · Bahia Mar, Fort Lauderdale</p>
+      <p class="t-caption bf-hint">Set your vessel; the basin answers. Tap a lit berth for its approach brief.</p>
+    </div>
 
     <div class="bf-stage">
       <!-- Sheet stack: the vessel controls, and the approach brief over them. -->
@@ -51,7 +48,10 @@
               <div v-for="d in DIMS" :key="d.key" class="bf-dim">
                 <div class="bf-dim-head">
                   <label :for="`bf-${d.key}`" class="bf-dim-label">{{ d.label }}</label>
-                  <span class="bf-dim-m t-num">{{ fmtM(toM(vessel[d.key])) }}</span>
+                  <output class="bf-dim-val t-num" :for="`bf-${d.key}`">
+                    <span>{{ fmtNum(vessel[d.key]) }}</span><small>ft</small>
+                    <span class="bf-dim-m">{{ fmtM(toM(vessel[d.key])) }}</span>
+                  </output>
                 </div>
                 <div class="bf-dim-row">
                   <button
@@ -63,9 +63,17 @@
                   >
                     −
                   </button>
-                  <output class="bf-dim-val t-num" :for="`bf-${d.key}`">
-                    <span>{{ fmtNum(vessel[d.key]) }}</span><small>ft</small>
-                  </output>
+                  <input
+                    :id="`bf-${d.key}`"
+                    v-model.number="vessel[d.key]"
+                    type="range"
+                    class="bf-range"
+                    :min="d.min"
+                    :max="d.max"
+                    :step="d.step"
+                    :style="{ '--p': `${pct(d.key)}%` }"
+                    @input="sampleId = null"
+                  />
                   <button
                     type="button"
                     class="bf-step"
@@ -76,17 +84,6 @@
                     +
                   </button>
                 </div>
-                <input
-                  :id="`bf-${d.key}`"
-                  v-model.number="vessel[d.key]"
-                  type="range"
-                  class="bf-range"
-                  :min="d.min"
-                  :max="d.max"
-                  :step="d.step"
-                  :style="{ '--p': `${pct(d.key)}%` }"
-                  @input="sampleId = null"
-                />
               </div>
             </div>
 
@@ -366,6 +363,9 @@
           <li><i class="bf-sw bf-sw--closed" aria-hidden="true"></i>Closed</li>
         </ul>
 
+        <!-- the same eight berths as rows: the plan for the eye, the list for everyone else -->
+        <details class="bf-list-wrap" :open="listOpen">
+          <summary class="bf-list-summary">All {{ BERTHS.length }} berths as a list</summary>
         <ol class="bf-list" aria-label="Berths as a list">
           <li v-for="b in BERTHS" :key="b.id">
             <component
@@ -386,9 +386,11 @@
             </component>
           </li>
         </ol>
-
+        </details>
         <p class="t-caption bf-note">
-          Berth ids and length limits are as the product shows them for Bahia Mar. Depths, headings, hardware, this week's occupancy, the plan and the sample boats are sample data.
+          This compares stated figures only. It is not a survey, not a berth assignment, and not a guarantee of water — the
+          dockmaster decides. Berth ids and length limits are as the product shows them for Bahia Mar; depths, headings,
+          hardware, this week's occupancy, the plan and the sample vessels are sample data.
         </p>
       </div>
     </div>
@@ -645,6 +647,8 @@ const weekText = computed(() => {
 
 const ZOOMS = [1, 1.8, 2.6, 3.4]
 const zoomIdx = ref(0)
+/* the same berths as rows, folded away until asked for */
+const listOpen = ref(false)
 const zoom = computed(() => ZOOMS[zoomIdx.value]!)
 
 const setZoom = async (i: number) => {
@@ -685,27 +689,19 @@ onMounted(async () => {
   padding-bottom: var(--space-8);
 }
 
-.bf-head {
-  max-width: 68ch;
-  margin-bottom: var(--space-6);
+.bf-topline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
 }
 
-.bf-title {
-  margin-top: var(--space-2);
-  font-family: var(--font-display);
-  font-size: var(--type-h2);
-  line-height: var(--type-h2-lh);
-  letter-spacing: var(--type-h2-ls);
-  font-weight: 700;
-}
-
-.bf-lede {
-  margin: var(--space-3) 0 0;
-  font-family: var(--font-text);
-  font-size: var(--type-lede);
-  line-height: var(--type-lede-lh);
-  color: var(--text-secondary);
-  text-wrap: pretty;
+.bf-eyebrow,
+.bf-hint {
+  margin: 0;
+  color: var(--text-muted);
 }
 
 .bf-ov {
@@ -716,10 +712,10 @@ onMounted(async () => {
 
 .bf-stage {
   display: grid;
-  grid-template-columns: 340px minmax(0, 1fr);
-  gap: var(--space-6);
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: var(--space-4);
   align-items: start;
-  padding: var(--space-6);
+  padding: var(--space-4);
   border-radius: var(--radius-xl);
   background:
     radial-gradient(120% 80% at 100% 0%, rgba(61, 142, 224, 0.14), transparent 55%),
@@ -750,7 +746,7 @@ onMounted(async () => {
 }
 
 .bf-vessel {
-  padding: var(--space-6);
+  padding: var(--space-4);
   transition: opacity 240ms var(--ease-out), transform 420ms var(--bf-spring);
 }
 
@@ -767,12 +763,13 @@ onMounted(async () => {
 .bf-samples {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: var(--space-3) 0 var(--space-6);
+  gap: 0.4rem;
+  margin: var(--space-2) 0 var(--space-4);
 }
 
 .bf-chip {
-  padding: 0.5rem 0.85rem;
+  min-height: 36px;
+  padding: 0.4rem 0.8rem;
   border-radius: 999px;
   border: 1px solid var(--bf-line-2);
   background: rgba(255, 255, 255, 0.04);
@@ -799,12 +796,12 @@ onMounted(async () => {
 
 .bf-dims {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
 .bf-dim {
-  padding: var(--space-3) var(--space-4) var(--space-2);
-  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-3) var(--space-1);
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.045);
   border: 1px solid var(--bf-line);
 }
@@ -817,42 +814,46 @@ onMounted(async () => {
 }
 
 .bf-dim-label {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--bf-ink-2);
 }
 
 .bf-dim-m {
-  font-size: 0.875rem;
+  margin-left: 0.5rem;
+  font-family: var(--font-text);
+  font-size: 0.8125rem;
+  font-weight: 400;
   color: var(--bf-ink-3);
 }
 
+/* − slider + on one row: the thumb and both steps are 40 px targets */
 .bf-dim-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: var(--space-1);
+  gap: var(--space-2);
 }
 
 .bf-dim-val {
   font-family: var(--font-display);
-  font-size: 2.25rem;
+  font-size: 1.375rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
 .bf-dim-val small {
-  margin-left: 0.3rem;
+  margin-left: 0.2rem;
   font-family: var(--font-text);
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--bf-ink-3);
 }
 
 .bf-step {
-  width: 44px;
-  height: 44px;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 0;
   background: rgba(255, 255, 255, 0.09);
@@ -879,8 +880,10 @@ onMounted(async () => {
 .bf-range {
   -webkit-appearance: none;
   appearance: none;
+  flex: 1 1 auto;
+  min-width: 0;
   width: 100%;
-  height: 34px;
+  height: 40px;
   margin: 0;
   background: transparent;
   cursor: pointer;
@@ -894,9 +897,9 @@ onMounted(async () => {
 
 .bf-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 28px;
-  height: 28px;
-  margin-top: -11px;
+  width: 24px;
+  height: 24px;
+  margin-top: -9px;
   border-radius: 50%;
   background: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -920,8 +923,8 @@ onMounted(async () => {
 }
 
 .bf-range::-moz-range-thumb {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: 0;
   border-radius: 50%;
   background: #ffffff;
@@ -935,7 +938,7 @@ onMounted(async () => {
 }
 
 .bf-summary {
-  margin: var(--space-6) 0 0;
+  margin: var(--space-3) 0 0;
   font-size: 0.9375rem;
   color: var(--bf-ink-2);
 }
@@ -959,7 +962,7 @@ onMounted(async () => {
 /* ---- the brief ----------------------------------------------------------- */
 
 .bf-brief {
-  padding: var(--space-6);
+  padding: var(--space-4);
   outline: none;
   z-index: 2;
 }
@@ -1326,8 +1329,9 @@ onMounted(async () => {
   display: block;
   width: 100%;
   height: auto;
-  /* the plan never runs past the viewport; the frame's water fills any spare width */
-  max-height: calc(var(--stage-cap, 80vh) - 7rem);
+  /* the plan never runs past the viewport, and leaves room for the toolbar and the key
+     above and below it; the frame's water fills any spare width */
+  max-height: min(calc(var(--stage-cap, 80vh) - 15rem), 580px);
   font-family: var(--font-text);
 }
 
@@ -1650,11 +1654,51 @@ onMounted(async () => {
   border-color: rgba(208, 52, 44, 0.55);
 }
 
+.bf-list-wrap {
+  margin: var(--space-3) 0 0;
+}
+
+.bf-list-summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--bf-ink-2);
+  cursor: pointer;
+  list-style: none;
+}
+
+.bf-list-summary::-webkit-details-marker {
+  display: none;
+}
+
+.bf-list-summary::before {
+  content: '';
+  width: 0.45em;
+  height: 0.45em;
+  margin-right: 0.6rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 200ms var(--ease-out);
+}
+
+.bf-list-wrap[open] .bf-list-summary::before {
+  transform: rotate(45deg);
+}
+
+.bf-list-summary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .bf-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
-  margin: var(--space-6) 0 0;
+  margin: var(--space-2) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -1831,11 +1875,24 @@ button.bf-row:hover {
   }
 
   .bf-dim-val {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .bf-main {
     order: 1;
+  }
+
+  /* the plan's own labels carry the states; the key and the note wait under the list */
+  .bf-legend {
+    display: none;
+  }
+
+  .bf-note {
+    display: none;
+  }
+
+  .bf-list-wrap[open] + .bf-note {
+    display: block;
   }
 
   .bf-toolbar {
@@ -1850,8 +1907,8 @@ button.bf-row:hover {
   }
 
   .bf-plan-wrap {
-    height: 62vh;
-    max-height: 560px;
+    height: min(52svh, 440px);
+    max-height: 440px;
     overflow: auto;
     overscroll-behavior: contain;
     touch-action: pan-x pan-y pinch-zoom;

@@ -17,12 +17,13 @@ export const TIME_SCALE = 24
 
 export type ViewMode = 'helm' | 'above' | '3d'
 export const VIEW_MODES: readonly { id: ViewMode; label: string; hint: string }[] = [
-  { id: 'above', label: 'Above', hint: 'North up. The whole passage in view.' },
-  { id: 'helm', label: 'Helm', hint: 'Course up. The water ahead is ahead.' },
-  { id: '3d', label: '3D', hint: 'Tilted, ahead of the bow.' },
+  { id: 'above', label: 'Above', hint: 'Straight down, north up — the chart as a plan.' },
+  { id: 'helm', label: 'Helm', hint: 'The view from the helm — heading up, the water ahead is ahead.' },
+  { id: '3d', label: '3D', hint: 'The chart at an angle — buildings and depth stand up.' },
 ]
 
-export const VESSEL = { name: 'SV Meridian', lengthFt: 42, draftFt: 4, airDraftFt: 21 } as const
+/* A 42 ft trawler: the same hull the passage planner offers, so the two journeys agree. */
+export const VESSEL = { name: 'MV Meridian', lengthFt: 42, draftFt: 4, airDraftFt: 21 } as const
 
 export const DESTINATION = {
   ...PLACES.bahiaMar,
@@ -48,11 +49,11 @@ export interface Reading {
 
 /** The "Today on the water" strip: each number with its unit and its age. */
 export const CONDITIONS: readonly Reading[] = [
-  { id: 'tide', label: 'Tide', value: '2.1', unit: 'ft', note: 'Rising · ↑ 0.3 ft/hr', ageMs: 6 * 60_000 },
+  { id: 'tide', label: 'Tide', value: '2.1', unit: 'ft MLLW', note: 'Rising ↑ 0.3 ft/hr', ageMs: 6 * 60_000 },
   { id: 'wind', label: 'Wind', value: 'SE 9', unit: 'kn', note: 'Gusts 14 kn', ageMs: 4 * 60_000 },
-  { id: 'debris', label: 'Debris alerts', value: '2', note: 'Nearby', ageMs: 18 * 60_000 },
+  { id: 'hazards', label: 'Hazards', value: '2', note: 'Near your line', ageMs: 18 * 60_000 },
   { id: 'traffic', label: 'Vessels nearby', value: '6', note: '2 friends', ageMs: 20_000 },
-  { id: 'nowake', label: 'No-wake zones', value: '1', note: 'On route', ageMs: 0 },
+  { id: 'nowake', label: 'No-wake zones', value: '1', note: 'On the line', ageMs: 0 },
 ]
 
 /** Other vessels moving on the water, each a fraction along a short line. */
@@ -108,10 +109,17 @@ export function snapToWater(p: Point, maxRing = 40): Point {
   return p
 }
 
-/** Debris the strip counts, sitting just off the track. */
-export const DEBRIS: readonly (Point & { label: string })[] = [
-  { ...snapToWater({ u: 0.462, v: 0.46 }), label: 'Floating debris · reported 18 min ago' },
-  { ...snapToWater({ u: 0.585, v: 0.66 }), label: 'Submerged log · confirmed' },
+/** A hazard report as the chart draws it: a caution rings magenta, a live severe one rings red. */
+export interface HazardMark extends Point {
+  label: string
+  status: 'reported' | 'confirmed'
+  severe: boolean
+}
+
+/** The hazards the strip counts, sitting just off the track. */
+export const DEBRIS: readonly HazardMark[] = [
+  { ...snapToWater({ u: 0.462, v: 0.46 }), label: 'Floating debris', status: 'reported', severe: false },
+  { ...snapToWater({ u: 0.585, v: 0.66 }), label: 'Submerged log', status: 'confirmed', severe: true },
 ]
 
 export interface Track {
@@ -185,6 +193,25 @@ export function minutesLeft(track: Track, fix: Fix): number {
     mins += (d / speedAt(fixAt(track, s).at)) * 60
   }
   return mins
+}
+
+export interface Gate {
+  /** what comes next on the line */
+  label: string
+  /** distance to it in nautical miles; 0 while inside it */
+  nm: number
+  /** true while the vessel is inside a slow zone */
+  inside: boolean
+}
+
+/** The next thing on the line that changes the passage: the no-wake zone, then the marina approach. */
+export function nextGate(track: Track, fix: Fix): Gate {
+  if (inNoWake(fix.at)) return { label: `No wake · ${NO_WAKE_KN} kn`, nm: 0, inside: true }
+  const step = 0.02
+  for (let s = fix.sailedNm; s < track.lengthNm; s += step) {
+    if (inNoWake(fixAt(track, s).at)) return { label: 'No wake', nm: Math.max(0, s - fix.sailedNm), inside: false }
+  }
+  return { label: 'Approach', nm: fix.remainingNm, inside: false }
 }
 
 /** "2:41 PM" for now plus some minutes, in the viewer's clock. */
