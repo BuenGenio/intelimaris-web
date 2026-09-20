@@ -2,7 +2,7 @@
   <main class="playbook">
     <header class="playbook-head">
       <div class="container-wide">
-        <p class="t-overline">Interaction playbook · seven journeys under review</p>
+        <p class="t-overline">Interaction playbook · eight journeys under review</p>
         <h1 class="playbook-title">{{ current.title }}</h1>
         <p class="playbook-action">{{ current.action }}</p>
       </div>

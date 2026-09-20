@@ -5,7 +5,7 @@
 
       <p class="editorial-eyebrow">Our story</p>
       <div class="guide-heading">
-        <h1>The water connects us.<br>The tools should too.</h1>
+        <h1>The water connects us. The tools should too.</h1>
         <p class="editorial-lede">A passage touches more than the helm. It involves crew, guests, dock teams, service companies and the places that welcome a vessel. InteliMARIS™ brings those working lives into a connected ecosystem, with WaterWayz™ as the boater-facing experience.</p>
       </div>
       <p class="identity-note">InteliMarine LLC does business as InteliMARIS. It is the company behind WaterWayz™, the connected vessel systems and the developing marina and geospatial capabilities.</p>

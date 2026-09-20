@@ -5,7 +5,7 @@
       <div class="entry-heading">
         <div>
           <p class="editorial-eyebrow">InteliMARIS™ / One connected boating experience</p>
-          <h1>Your day on the water. <br>Connected.</h1>
+          <h1>Your day on the water. Connected.</h1>
         </div>
         <p class="editorial-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS brings it together through WaterWayz™.</p>
       </div>
@@ -65,7 +65,7 @@
     </section>
     <EcosystemSection />
     <section class="editorial-section editorial-shell">
-      <div class="section-intro"><div><p class="editorial-eyebrow">Beyond the passage</p><h2>More detail.<br>More useful context.</h2></div><p>Explore a real survey demonstration and the capabilities we are developing around connected information. Each guide explains what is available and what comes next.</p></div>
+      <div class="section-intro"><div><p class="editorial-eyebrow">Beyond the passage</p><h2>More detail. More useful context.</h2></div><p>Explore a real survey demonstration and the capabilities we are developing around connected information. Each guide explains what is available and what comes next.</p></div>
       <SystemLinks :ids="['geospatial', 'intelligence', 'vision']" />
     </section>
     <GuideClosing :audience="audience" />

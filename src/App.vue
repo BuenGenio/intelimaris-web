@@ -17,8 +17,10 @@ import FooterSection from './components/FooterSection.vue'
 import { useAudienceRouteSync } from './composables/useAudience'
 import { useTheme } from './composables/useTheme'
 import { useI18n } from './composables/useI18n'
+import { useFitHeadings } from './composables/useFitHeadings'
 
 useAudienceRouteSync()
+useFitHeadings()
 const { initTheme } = useTheme()
 const { initLanguage } = useI18n()
 

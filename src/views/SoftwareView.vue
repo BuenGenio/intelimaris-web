@@ -5,7 +5,7 @@
 
       <p class="editorial-eyebrow">The InteliMARIS ecosystem</p>
       <div class="guide-heading">
-      <h1>Connected by design.<br>Useful in your day.</h1>
+      <h1>Connected by design. Useful in your day.</h1>
       <div>
       <p class="editorial-lede">Sensors capture what is happening. The radio network carries the data. Software adds structure and context. WaterWayz™ brings the useful information to the people who need it.</p>
       <RouterLink to="/waterwayz" class="editorial-button">Explore WaterWayz™ <span aria-hidden="true">↗</span>
@@ -18,7 +18,7 @@
       <div class="section-intro">
       <div>
       <p class="editorial-eyebrow">The experience</p>
-      <h2>One vessel.<br>Different responsibilities.</h2>
+      <h2>One vessel. Different responsibilities.</h2>
       </div>
       <p>Captains plan the passage. Crew see the vessel context. Marina teams organize arrivals. Assigned technicians work through service engagements. Information follows the access each person has been given.</p>
       </div>

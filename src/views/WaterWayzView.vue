@@ -5,14 +5,14 @@
 
       <p class="editorial-eyebrow">WaterWayz™</p>
       <div class="guide-heading">
-        <h1>Your whole boating experience.<br>Connected.</h1>
+        <h1>Your whole boating experience. Connected.</h1>
         <div>
           <p class="editorial-lede">Navigate, monitor, discover and connect. WaterWayz™ brings the passage, supported vessel readings and arrival coordination together, with reporting and further assistance workflows in development.</p>
           <RouterLink to="/for/captains" class="editorial-button">Start at the helm <span aria-hidden="true">↗</span>
           </RouterLink>
         </div>
       </div>
-      <EditorialShot id="waterwayz-route" caption="Plan the route with the vessel and destination in view." priority />
+      <JourneySection id="helm-view" hero />
       <p class="chart-disclaimer">WaterWayz™ is not a certified navigation system. Always cross-check official charts and local notices.</p>
     </section>
     <section class="editorial-section section-wash">
@@ -22,7 +22,7 @@
         <FeatureLinks :ids="['route-planning', 'navigation', 'monitoring', 'hazard-reporting', 'dockpass', 'emergency-assistance']" />
       </div>
     </section>
-    <section class="editorial-shell editorial-section"><div class="section-intro"><div><p class="editorial-eyebrow">InteliMarina + Dock Pass</p><h2>Know the berth<br>before you arrive.</h2></div><p>Find the marina, check the vessel requirements and request a stay. Once the host confirms and assigns a berth, keep the arrival information with the journey.</p></div><RouterLink to="/marinas" class="editorial-button">Discover InteliMarina <span aria-hidden="true">↗</span></RouterLink></section>
+    <section class="editorial-shell editorial-section"><div class="section-intro"><div><p class="editorial-eyebrow">InteliMarina + Dock Pass</p><h2>Know the berth before you arrive.</h2></div><p>Find the marina, check the vessel requirements and request a stay. Once the host confirms and assigns a berth, keep the arrival information with the journey.</p></div><RouterLink to="/marinas" class="editorial-button">Discover InteliMarina <span aria-hidden="true">↗</span></RouterLink></section>
     <VoyageSection />
     <section class="editorial-shell editorial-section role-directory">
       <div>
@@ -40,7 +40,7 @@
 <script setup lang="ts">
 
 import { RouterLink } from 'vue-router'
-import EditorialShot from '@/components/audience/EditorialShot.vue'
+import JourneySection from '@/components/audience/JourneySection.vue'
 import VoyageSection from '@/components/v2/VoyageSection.vue'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'

@@ -78,6 +78,15 @@ export const JOURNEYS: Journey[] = [
     backend: 'Places and events services: 27,000 marinas, conditions with timestamps; public NOAA and NWS feeds for the demo.',
     component: defineAsyncComponent(() => import('@/components/playbook/WaterRightNow.vue')),
   },
+  {
+    id: 'helm-view',
+    index: 8,
+    title: 'Underway at the helm',
+    action: 'Take the helm on a live passage: switch between Helm, Above and 3D, watch the ETA run down, report a hazard, and open the marina you are bound for.',
+    proves: 'The passage, the vessel, the water around you and the arrival share one screen; the view underway is the plan, kept honest.',
+    backend: 'Vessel position and the route service; places and conditions with their ages; hazard reports and traffic from vessels nearby.',
+    component: defineAsyncComponent(() => import('@/components/playbook/HelmView.vue')),
+  },
 ]
 
 export const findJourney = (id: string | undefined): Journey | undefined =>

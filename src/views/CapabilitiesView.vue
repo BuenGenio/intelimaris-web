@@ -5,7 +5,7 @@
 
       <p class="editorial-eyebrow">The connected platform</p>
       <div class="guide-heading">
-        <h1>One connected experience.<br>Find your starting point.</h1>
+        <h1>One connected experience. Find your starting point.</h1>
         <p class="editorial-lede">Navigate with context, stay connected to the vessel and make the next arrival easier. Explore WaterWayz™ workflows, InteliMARIS connected systems and the capabilities in development.</p>
       </div>
       <RouterLink to="/#choose" class="editorial-text-link">Find your role <span aria-hidden="true">→</span>

@@ -4,7 +4,7 @@
       <div class="section-intro">
         <div>
       <p class="editorial-eyebrow">How it connects</p>
-      <h2>One ecosystem.<br>A clear role for every part.</h2>
+      <h2>One ecosystem. A clear role for every part.</h2>
       </div>
         <p>InteliMARIS™ is the company and marine brand. WaterWayz™ is the experience that brings the journey, vessel and people together.</p>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <header class="site-header" lang="en" @keydown.esc="closeMenu(true)">
+  <header class="site-header" :class="{ 'is-hidden': hidden }" lang="en" @keydown.esc="closeMenu(true)" @focusin="hidden = false">
     <svg class="glass-filter-defs" aria-hidden="true" width="0" height="0"><defs><filter id="nav-refraction" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.12" numOctaves="1" seed="7" result="surface" /><feDisplacementMap in="SourceGraphic" in2="surface" scale="3" xChannelSelector="R" yChannelSelector="G" /></filter></defs></svg>
     <div class="nav-glass" aria-hidden="true"></div><div class="nav-refraction" aria-hidden="true"></div>
     <div class="site-nav editorial-shell">
@@ -27,7 +27,7 @@
   </header>
 </template>
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue'
+import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import PlatformMenu from '@/components/PlatformMenu.vue'
 import { MAIN_NAVIGATION, PLATFORM_NAVIGATION } from '@/data/navigation'
@@ -42,5 +42,21 @@ const route = useRoute()
 const menuOpen = ref(false)
 const menuButton = ref<HTMLButtonElement | null>(null)
 const closeMenu = async (restoreFocus = false) => { menuOpen.value = false; if (restoreFocus) { await nextTick(); menuButton.value?.focus() } }
-watch(() => route.fullPath, () => closeMenu())
+watch(() => route.fullPath, () => { closeMenu(); hidden.value = false; graceUntil = performance.now() + 900 })
+
+/* The header rolls away as the page scrolls down and returns on the first
+   scroll back up, so it stops taxing the viewport while people read. */
+const hidden = ref(false)
+let lastY = 0
+let graceUntil = 0
+const onScroll = () => {
+  const y = window.scrollY
+  const delta = y - lastY
+  lastY = y
+  if (menuOpen.value || y < 96 || performance.now() < graceUntil) { hidden.value = false; lastY = y; return }
+  if (delta > 6) hidden.value = true
+  else if (delta < -6) hidden.value = false
+}
+onMounted(() => { lastY = window.scrollY; window.addEventListener('scroll', onScroll, { passive: true }) })
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 </script>

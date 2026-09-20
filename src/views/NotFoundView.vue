@@ -3,7 +3,7 @@
     <section class="editorial-shell guide-hero">
 
       <p class="editorial-eyebrow">Page not found</p>
-      <h1>Let’s get you<br>back on course.</h1>
+      <h1>Let’s get you back on course.</h1>
       <p class="editorial-lede">That page is not in this guide. Start with your role or explore the platform.</p>
       <div class="editorial-actions">
         <RouterLink to="/" class="editorial-button">Find your role →</RouterLink>
