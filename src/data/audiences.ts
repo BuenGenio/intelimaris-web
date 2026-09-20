@@ -11,6 +11,8 @@ export interface Audience {
   intro: string
   shot: ShotId
   caption: string
+  /** the playbook journey this audience tries first; see data/playbook/journeys.ts */
+  journey: string
   features: string[]
   steps: { title: string; body: string }[]
   access: string
@@ -23,6 +25,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Plan the passage. Take the helm.', headline: 'Your vessel. Your passage. The detail that matters.',
     intro: 'Build a passage around your vessel’s dimensions, inspect the route and arrive with the berth details in hand. WaterWayz™ brings the decisions before departure and the view underway together.',
     shot: 'waterwayz-route', caption: 'A passage, its conditions and the destination in one view.',
+    journey: 'passage-planner',
     features: ['route-planning', 'navigation', 'hazard-reporting', 'dockpass', 'emergency-assistance'],
     steps: [
       { title: 'Start with your vessel', body: 'Keep length, beam, draft and air draft in the vessel workspace. Choose a departure and destination; you can plan from somewhere other than your current position.' },
@@ -37,6 +40,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Understand the trip you’re joining.', headline: 'A place in the journey. A clearer view of the day.',
     intro: 'Get familiar with the destination, understand the passage and ask the captain about shared access. You do not need to own a vessel to find your way around WaterWayz™.',
     shot: 'waterwayz-marina-card', caption: 'Explore the destination before you step aboard.',
+    journey: 'water-right-now',
     features: ['navigation', 'dockpass', 'emergency-assistance'],
     steps: [
       { title: 'Explore where you are going', body: 'Browse the map and marina information to get to know the destination and the services around it.' },
@@ -51,6 +55,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Stay connected to the vessel and team.', headline: 'One vessel. A crew on the same page.',
     intro: 'Join the vessel workspace for its map, systems, crew and conversations. See the information relevant to your work, with access set by the people responsible for the vessel.',
     shot: 'waterwayz-map', caption: 'The same vessel and operating picture for the people aboard.',
+    journey: 'aging-reading',
     features: ['navigation', 'monitoring', 'emergency-assistance', 'maintenance'],
     steps: [
       { title: 'Join the right vessel', body: 'Accept an invitation from the owner or administrator. Each vessel has its own workspace, so information and membership stay with that vessel.' },
@@ -65,6 +70,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Organize vessels, people and upkeep.', headline: 'A home for every vessel. Control across your account.',
     intro: 'Bring your vessels under one account while keeping each vessel’s crew, systems, passages and service history in its own workspace.',
     shot: 'waterwayz-sensors', caption: 'Vessel monitoring with the age of each reading visible.',
+    journey: 'aging-reading',
     features: ['monitoring', 'maintenance', 'route-planning', 'dockpass'],
     steps: [
       { title: 'Give each vessel its own workspace', body: 'A vessel workspace represents one vessel. Add further vessels to the same account and invite the people who need access to each.' },
@@ -79,6 +85,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Run the basin and welcome arrivals.', headline: 'The whole basin. One working day.',
     intro: 'Connect your berth layout, arriving vessels, residents and staff. InteliMarina brings the office and the pontoon into the same operating picture, while Dock Pass keeps arrival requests and stays connected.',
     shot: 'pms-berth-layout', caption: 'Your real basin, with berth dimensions and availability.',
+    journey: 'draw-your-water',
     features: ['marina-pms', 'dockpass', 'monitoring'],
     steps: [
       { title: 'Make the marina yours', body: 'Claim the marina, maintain its profile and draw the berth layout over satellite imagery. Keep dimensions and approach details with each berth.' },
@@ -93,6 +100,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Handle arrivals, berths and the handover.', headline: 'From the front desk to the end of the dock.',
     intro: 'Find the next arrival, see the assigned berth and keep the team informed. Work from the marina’s shared day board with the access appropriate to your role.',
     shot: 'pms-dashboard', caption: 'Today’s arrivals, waiting requests and on-duty team.',
+    journey: 'berth-fit',
     features: ['marina-pms', 'dockpass'],
     steps: [
       { title: 'Start with today', body: 'Use the dashboard to see arrivals, departures, occupancy and requests needing attention. Check the roster before calling for help on the dock.' },
@@ -107,6 +115,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Organize service across the vessels you help.', headline: 'Know what is due. Bring the right person aboard.',
     intro: 'Bring the company’s worklist, technician assignments and each vessel’s service record together. Access follows the engagement between the vessel owner and the service company.',
     shot: 'waterwayz-sensors', caption: 'System readings provide context for a vessel’s service work.',
+    journey: 'aging-reading',
     features: ['maintenance', 'monitoring'],
     steps: [
       { title: 'Set up the service company', body: 'Create a maintenance workspace for your company profile, team and worklist. The company serves vessels through engagements; it does not own their workspaces.' },
@@ -121,6 +130,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Put your dock on the map.', headline: 'Your dock. Clear details. Better arrivals.',
     intro: 'Draw the dock, describe the berth and manage incoming requests. Private dock owners get tools suited to hosting, without needing to run a commercial marina.',
     shot: 'pms-dock-editor', caption: 'Draw dock lines and berths over the place you know.',
+    journey: 'draw-your-water',
     features: ['dockpass', 'navigation'],
     steps: [
       { title: 'Describe the place', body: 'Create a private dock workspace and draw its layout. Add vessel limits and approach notes so visitors can judge whether the berth fits their needs.' },
@@ -135,6 +145,7 @@ export const AUDIENCES: Audience[] = [
     intent: 'Help nearby vessels find you.', headline: 'Be part of the passage. Become the destination.',
     intro: 'For restaurants, fuel docks, chandleries and other businesses on the water: maintain the information vessels see when they find your place on the map.',
     shot: 'waterwayz-discover', caption: 'The map connects destinations with the vessels nearby.',
+    journey: 'water-right-now',
     features: ['navigation', 'dockpass'],
     steps: [
       { title: 'Claim the right place', body: 'Create a business workspace and claim the existing place. Listing edits open after the claim is approved.' },

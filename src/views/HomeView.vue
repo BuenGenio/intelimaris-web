@@ -11,24 +11,29 @@
       </div>
       <h2 class="chooser-heading">Where do you come in?</h2>
       <p class="chooser-intro">Choose your role. We’ll start with what matters to you.</p>
-      <div class="entry-grid">
+      <div class="entry-stack">
         <AudienceChooser :selected="audience?.id" @choose="onChoose" />
         <div id="audience-preview" class="audience-preview">
-          <div class="preview-map">
-            <img :src="`${base}assets/voyage-basemap.webp`" alt="Satellite chart of the Fort Lauderdale Intracoastal and its marina basins" fetchpriority="high" width="1200" height="1200">
-            <span class="map-caption">FORT LAUDERDALE / INTRACOASTAL</span>
-          </div>
           <div class="preview-copy">
             <div aria-live="polite" aria-atomic="true">
               <p class="editorial-eyebrow">{{ audience ? `For ${audience.short.toLowerCase()}` : 'One connected platform' }}</p>
               <h2>{{ audience ? audience.headline : 'Navigate. Monitor. Arrive.' }}</h2>
               <p>{{ audience ? audience.intro : 'WaterWayz™ connects the journey with vessel information and the people on shore. Choose your role to find your starting point.' }}</p>
             </div>
-            <RouterLink v-if="audience" :to="audienceLink(audience.id)" class="editorial-button">Explore your guide <span aria-hidden="true">↗</span>
-            </RouterLink>
-            <RouterLink v-else to="/capabilities" class="editorial-button">Explore the platform <span aria-hidden="true">↗</span>
-            </RouterLink>
-            <RouterLink v-if="isMarinaAudience(audience)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: audience!.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
+            <div class="preview-actions">
+              <RouterLink v-if="audience" :to="audienceLink(audience.id)" class="editorial-button">Explore your guide <span aria-hidden="true">↗</span>
+              </RouterLink>
+              <RouterLink v-else to="/capabilities" class="editorial-button">Explore the platform <span aria-hidden="true">↗</span>
+              </RouterLink>
+              <RouterLink v-if="isMarinaAudience(audience)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: audience!.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
+            </div>
+          </div>
+          <div class="preview-demo">
+            <div class="preview-demo-intro">
+              <p class="editorial-eyebrow">Try it here <span aria-hidden="true">·</span> {{ journey.title }}</p>
+              <p class="preview-demo-action">{{ journey.action }}</p>
+            </div>
+            <JourneyStage :id="journey.id" />
           </div>
         </div>
       </div>
@@ -70,16 +75,19 @@
 import EditorialShot from '@/components/audience/EditorialShot.vue'
 import SystemLinks from '@/components/audience/SystemLinks.vue'
 import EcosystemSection from '@/components/audience/EcosystemSection.vue'
-import { nextTick } from 'vue'
+import { computed, nextTick } from 'vue'
 import { RouterLink } from 'vue-router'
 import AudienceChooser from '@/components/audience/AudienceChooser.vue'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'
+import JourneyStage from '@/components/audience/JourneyStage.vue'
 import LanguageNote from '@/components/audience/LanguageNote.vue'
 import { useAudience } from '@/composables/useAudience'
 import { audienceLink, isMarinaAudience } from '@/data/audiences'
+import { findJourney, JOURNEYS } from '@/data/playbook/journeys'
 const { audience, choose } = useAudience()
-const base = import.meta.env.BASE_URL
+/* Each role tries the journey that speaks to it; before a choice, the passage planner leads. */
+const journey = computed(() => findJourney(audience.value?.journey) ?? JOURNEYS[0]!)
 async function onChoose(id: string) {
   await choose(id)
   if (window.matchMedia('(max-width: 800px)').matches) {

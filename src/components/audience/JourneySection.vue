@@ -12,30 +12,19 @@
         </div>
         <p>{{ journey.action }}</p>
       </div>
-      <!-- The journeys drive canvases, timers and live feeds, so they mount on
-           the client only; the heading above still pre-renders. -->
-      <div class="journey-stage">
-        <Suspense v-if="mounted">
-          <component :is="journey.component" :key="journey.id" />
-          <template #fallback>
-            <p class="journey-loading">Loading…</p>
-          </template>
-        </Suspense>
-        <p v-else class="journey-loading">Loading…</p>
-      </div>
+      <JourneyStage :id="journey.id" class="journey-section-stage" />
       <p class="journey-proves">{{ journey.proves }}</p>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed } from 'vue'
+import JourneyStage from '@/components/audience/JourneyStage.vue'
 import { findJourney } from '@/data/playbook/journeys'
 
 const props = defineProps<{ id?: string; hero?: boolean }>()
 const journey = computed(() => findJourney(props.id))
-const mounted = ref(false)
-onMounted(() => { mounted.value = true })
 </script>
 
 <style scoped>
@@ -60,18 +49,12 @@ onMounted(() => { mounted.value = true })
   color: var(--text-secondary);
 }
 
-.journey-stage {
+.journey-section-stage {
   margin-top: var(--space-6);
 }
 
-.journey-section--hero .journey-stage {
+.journey-section--hero .journey-section-stage {
   margin-top: var(--space-2);
-}
-
-.journey-loading {
-  padding: var(--space-12) 0;
-  font-family: var(--font-text);
-  color: var(--text-muted);
 }
 
 .journey-proves {
