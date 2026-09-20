@@ -12,8 +12,9 @@
       <div class="site-utilities">
         <RoleSwitcher @click="menuOpen = false" />
         <SitePreferences @click="menuOpen = false" />
-        <RouterLink :to="contactLink(audience)" class="site-contact">Talk to us <span aria-hidden="true">↗</span>
-        </RouterLink>
+        <a :href="loginLink()" class="site-login" rel="noopener">Log in</a>
+        <RouterLink :to="contactLink(audience)" class="site-book">Book a call</RouterLink>
+        <button type="button" class="site-contact site-start" @click="start(audience?.id, $event.currentTarget as HTMLElement)">Start free <span aria-hidden="true">→</span></button>
         <button ref="menuButton" type="button" class="site-menu-button" :aria-expanded="menuOpen" aria-controls="site-mobile-nav" @click="menuOpen = !menuOpen">{{ menuOpen ? 'Close' : 'Menu' }}</button>
       </div>
     </div>
@@ -21,7 +22,11 @@
       <RouterLink v-for="link in MAIN_NAVIGATION" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
 
       <div class="mobile-platform-links"><p>Software &amp; marina</p><RouterLink v-for="link in PLATFORM_NAVIGATION.filter(item => item.to !== '/capabilities')" :key="link.to" :to="link.to">{{ link.label }}</RouterLink></div>
-      <RouterLink :to="contactLink(audience)">Talk to us</RouterLink>
+      <div class="mobile-account">
+        <button type="button" class="site-contact site-start" @click="closeMenu(); start(audience?.id)">Start free <span aria-hidden="true">→</span></button>
+        <RouterLink :to="contactLink(audience)" class="site-book">Book a call</RouterLink>
+        <a :href="loginLink()" class="site-book" rel="noopener">Log in</a>
+      </div>
     </nav>
     <div class="breadcrumb-strip"><div class="editorial-shell"><SiteBreadcrumbs /></div></div>
   </header>
@@ -37,7 +42,10 @@ import RoleSwitcher from '@/components/RoleSwitcher.vue'
 import Wordmark from '@/components/v2/Wordmark.vue'
 import { useAudience } from '@/composables/useAudience'
 import { contactLink } from '@/data/audiences'
+import { loginLink } from '@/data/app'
+import { useOnboarding } from '@/composables/useOnboarding'
 const { audience } = useAudience()
+const { start } = useOnboarding()
 const route = useRoute()
 const menuOpen = ref(false)
 const menuButton = ref<HTMLButtonElement | null>(null)

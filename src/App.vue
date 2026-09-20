@@ -6,14 +6,16 @@
       <router-view />
     </div>
     <FooterSection v-if="!isStandalone" />
+    <OnboardingModal v-if="mounted" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onBeforeUnmount } from 'vue'
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import FooterSection from './components/FooterSection.vue'
+import OnboardingModal from './components/onboarding/OnboardingModal.vue'
 import { useAudienceRouteSync } from './composables/useAudience'
 import { useTheme } from './composables/useTheme'
 import { useI18n } from './composables/useI18n'
@@ -27,9 +29,12 @@ const { initLanguage } = useI18n()
 const route = useRoute()
 const isStandalone = computed(() => route.name === 'home-alt')
 
+/* The onboarding dialog teleports to body, so it waits for the client. */
+const mounted = ref(false)
 let disposeTheme: (() => void) | undefined
 onBeforeUnmount(() => disposeTheme?.())
 onMounted(() => {
+  mounted.value = true
   disposeTheme = initTheme()
   initLanguage()
 })
@@ -39,6 +44,7 @@ onMounted(() => {
 @import './assets/main.css';
 @import './assets/v2.css';
 @import './assets/audience.css';
+@import './assets/screens.css';
 
 .skip-link {
   position: absolute;

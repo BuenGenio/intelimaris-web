@@ -2,13 +2,21 @@
   <main class="playbook">
     <header class="playbook-head">
       <div class="container-wide">
-        <p class="t-overline">Interaction playbook · eight journeys under review</p>
+        <p class="t-overline">Interaction playbook · {{ COUNT_WORDS[JOURNEYS.length] ?? JOURNEYS.length }} journeys under review</p>
         <h1 class="playbook-title">{{ current.title }}</h1>
         <p class="playbook-action">{{ current.action }}</p>
       </div>
 
       <nav class="playbook-tabs-wrap" aria-label="Journeys">
         <div class="container-wide">
+          <!-- Phones get the native picker; a strip of nine tabs does not fit a thumb. -->
+          <label class="playbook-select">
+            <span class="sr-only">Journey</span>
+            <select :value="current.id" @change="select(($event.target as HTMLSelectElement).value)">
+              <option v-for="j in JOURNEYS" :key="j.id" :value="j.id">{{ String(j.index).padStart(2, '0') }} · {{ j.title }}</option>
+            </select>
+            <span class="playbook-select-face" aria-hidden="true"><span class="t-num">{{ String(current.index).padStart(2, '0') }}</span><strong>{{ current.title }}</strong><span class="playbook-select-caret">⌄</span></span>
+          </label>
           <div ref="tablist" class="playbook-tabs" role="tablist" @keydown="onKeydown">
             <button
               v-for="j in JOURNEYS"
@@ -80,7 +88,10 @@ const tablist = ref<HTMLElement | null>(null)
 const mounted = ref(false)
 
 const fromHash = (hash: string) => JOURNEYS.find((j) => `#${j.id}` === hash)
-const current = computed(() => fromHash(route.hash) ?? JOURNEYS[0]!)
+/* Underway at the helm opens the playbook. */
+const DEFAULT = JOURNEYS.find((j) => j.id === 'helm-view') ?? JOURNEYS[0]!
+const COUNT_WORDS: Record<number, string> = { 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten', 11: 'eleven', 12: 'twelve' }
+const current = computed(() => fromHash(route.hash) ?? DEFAULT)
 const index = computed(() => JOURNEYS.findIndex((j) => j.id === current.value.id))
 const prev = computed(() => JOURNEYS[index.value - 1])
 const next = computed(() => JOURNEYS[index.value + 1])
@@ -107,7 +118,7 @@ watch(current, async () => {
 
 onMounted(() => {
   mounted.value = true
-  if (!fromHash(route.hash)) void select(JOURNEYS[0]!.id)
+  if (!fromHash(route.hash)) void select(DEFAULT.id)
 })
 </script>
 
@@ -240,9 +251,61 @@ onMounted(() => {
   content: '←';
 }
 
+.playbook-select {
+  display: none;
+  position: relative;
+}
+
+.playbook-select select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.playbook-select-face {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  background: var(--surface-page);
+  font-family: var(--font-text);
+  pointer-events: none;
+}
+
+.playbook-select-face strong {
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playbook-select-face .t-num {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.playbook-select-caret {
+  color: var(--text-muted);
+}
+
 @media (max-width: 900px) {
   .playbook-foot-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .playbook-select {
+    display: block;
+    padding: 8px 0;
+  }
+
+  .playbook-tabs {
+    display: none;
   }
 
   .playbook-tabs-wrap {

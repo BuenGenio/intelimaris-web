@@ -31,7 +31,7 @@ describe('audience journey', () => {
     wrapper = mount(HomeView, { global: { plugins: [router] } })
     expect(wrapper.findAll('button[aria-pressed="true"]')).toHaveLength(0)
     for (const audience of AUDIENCES) {
-      const button = wrapper.findAll('.audience-choice').find(b => b.text().includes(audience.label))!
+      const button = wrapper.findAll('.audience-chip').find(b => b.text() === audience.label.split(' / ')[0])!
       await button.trigger('click')
       await flushPromises()
       expect(router.currentRoute.value.query.audience).toBe(audience.id)
@@ -71,7 +71,7 @@ describe('audience journey', () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked') })
     const router = await setup()
     wrapper = mount(HomeView, { global: { plugins: [router] } })
-    await wrapper.get('.audience-choice').trigger('click')
+    await wrapper.get('.audience-chip').trigger('click')
     await flushPromises()
     expect(wrapper.get('#audience-preview a').attributes('href')).toBe('/for/captains')
   })
