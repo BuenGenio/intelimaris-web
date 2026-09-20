@@ -21,6 +21,7 @@
           <h4>Explore</h4>
           <RouterLink v-for="link in MAIN_NAVIGATION" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
           <RouterLink to="/contact">Talk to us</RouterLink>
+          <RouterLink :to="pressLink(PRESS[0]!.id)">Press</RouterLink>
           <MailLink />
         </div>
         <div class="footer-section">
@@ -47,6 +48,7 @@ import { MAIN_NAVIGATION, PLATFORM_NAVIGATION } from '@/data/navigation'
 import { RouterLink } from 'vue-router'
 import { SOLUTIONS, solutionLink } from '@/data/solutions'
 import { AUDIENCES, audienceLink } from '@/data/audiences'
+import { PRESS, pressLink } from '@/data/press'
 import Wordmark from '@/components/v2/Wordmark.vue'
 import MailLink from '@/components/MailLink.vue'
 import { useI18n } from '@/composables/useI18n'

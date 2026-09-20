@@ -26,6 +26,7 @@ export function getBreadcrumbs(route: RouteLocationNormalizedLoaded | RouteLocat
     if (feature) return [platform, { label: feature.label }]
     const solution = findSolution(route.meta.solution)
     if (solution) return [platform, { label: solution.label }]
+    if (route.meta.press) return [{ label: 'Our story', to: '/about' }, { label: 'Press' }]
     const name = String(route.name)
     if (name === 'product-detail') {
       const product = typeof route.params.id === 'string' ? findProduct(route.params.id) : undefined
