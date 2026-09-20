@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { PLACES } from './waterRouter'
-import { buildTrack, durationLabel, fixAt, minutesLeft, nmBetween, speedAt, trafficAt, CRUISE_KN, NO_WAKE_KN, NO_WAKE, ageLabel } from './helm-view-scene'
+import { NM_PER_CELL, PLACES } from './waterRouter'
+import { buildTrack, durationLabel, fixAt, minutesLeft, nmBetween, speedAt, trafficAt, CRUISE_KN, NO_WAKE_KN, NO_WAKE, ageLabel, onWater, snapToWater, DEBRIS, TRAFFIC } from './helm-view-scene'
 
 describe('helm view scene', () => {
   const track = buildTrack()
@@ -35,13 +35,35 @@ describe('helm view scene', () => {
     expect(minutesLeft(track, fixAt(track, track.lengthNm))).toBe(0)
   })
 
-  it('moves traffic out and back along its line', () => {
-    const v = { id: 'x', name: 'x', friend: false, from: { u: 0, v: 0 }, to: { u: 0.1, v: 0 }, periodS: 100, phase: 0 }
-    expect(trafficAt(v, 0).at.u).toBeCloseTo(0)
-    expect(trafficAt(v, 50).at.u).toBeCloseTo(0.1)
-    expect(trafficAt(v, 100).at.u).toBeCloseTo(0)
-    expect(trafficAt(v, 25).headingDeg).toBeCloseTo(90)
-    expect(trafficAt(v, 75).headingDeg).toBeCloseTo(270)
+  it('keeps every vessel and every hazard on the water', () => {
+    /* a smoothed corner or a bridge may sit a hair off the mask; roaming over land is a cell or more */
+    const strays = (p: { u: number; v: number }) => nmBetween(p, snapToWater(p)) / NM_PER_CELL
+    for (const d of DEBRIS) expect(onWater(d)).toBe(true)
+    for (const v of TRAFFIC) {
+      for (let t = 0; t < v.periodS; t += v.periodS / 40) expect(strays(trafficAt(v, t).at)).toBeLessThan(2.5)
+    }
+    /* the own track ducks under the Las Olas bridge, a couple of cells of land by design */
+    for (let s = 0; s <= track.lengthNm; s += track.lengthNm / 60) expect(strays(fixAt(track, s).at)).toBeLessThan(2.5)
+  })
+
+  it('snaps a point ashore to the nearest water and leaves one afloat alone', () => {
+    const afloat = PLACES.sunriseBay
+    expect(snapToWater(afloat)).toBe(afloat)
+    const ashore = { u: 0.05, v: 0.05 }
+    const snapped = snapToWater(ashore, 400)
+    expect(onWater(snapped)).toBe(true)
+  })
+
+  it('moves traffic out along its track and back, turning round at the far end', () => {
+    const v = TRAFFIC[0]!
+    const start = trafficAt(v, (0 - v.phase) * v.periodS).at
+    const far = trafficAt(v, (0.5 - v.phase) * v.periodS).at
+    const back = trafficAt(v, (1 - v.phase) * v.periodS).at
+    expect(nmBetween(start, back)).toBeLessThan(0.01)
+    expect(nmBetween(start, far)).toBeGreaterThan(0.2)
+    const outHeading = trafficAt(v, (0.25 - v.phase) * v.periodS).headingDeg
+    const backHeading = trafficAt(v, (0.75 - v.phase) * v.periodS).headingDeg
+    expect(Math.abs(((outHeading - backHeading + 360) % 360) - 180)).toBeLessThan(60)
   })
 
   it('labels durations and ages in plain words', () => {

@@ -24,6 +24,8 @@ export interface RouteOptions {
   draftFt?: number
   /** vessel air draft in feet; bridge cells lower than this are refused */
   airDraftFt?: number
+  /** what a land cell costs to cross (a bridge); Infinity keeps the track on the water */
+  landCost?: number
 }
 
 export interface RouteResult {
@@ -115,6 +117,7 @@ export function route(options: RouteOptions): RouteResult {
   const blocked = new Set(options.blocked ?? [])
   const draft = options.draftFt ?? 0
   const airDraft = options.airDraftFt ?? 0
+  const landCost = options.landCost ?? 55
   const shore = distanceToShore()
 
   const fail = (reason: string): RouteResult => ({
@@ -219,7 +222,8 @@ export function route(options: RouteOptions): RouteResult {
         /* hug the channel centre */
         cost = step + Math.max(0, 8 - shore[nb]! / 2) * 0.9
       } else {
-        cost = step + 55
+        if (landCost === Infinity) continue
+        cost = step + landCost
       }
       const ng = g[cur]! + cost
       if (ng < g[nb]!) {

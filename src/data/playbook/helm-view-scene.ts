@@ -6,7 +6,7 @@
  *
  * Everything is illustrative and says so on the surface where it is shown.
  */
-import { GRID_H, GRID_W, NM_PER_CELL, PLACES, route, type Point } from './waterRouter'
+import { GRID_H, GRID_W, NM_PER_CELL, PLACES, isWater, pointOf, route, type Point } from './waterRouter'
 import { smoothTrack } from './passage-planner-vessels'
 
 export const CRUISE_KN = 8.4
@@ -76,10 +76,42 @@ export const TRAFFIC: readonly Traffic[] = [
   { id: 't6', name: 'Wanderer', friend: false, from: { u: 0.49, v: 0.33 }, to: { u: 0.5, v: 0.5 }, periodS: 200, phase: 0.5 },
 ]
 
+/** Is this point on the water mask? */
+export const onWater = (p: Point): boolean => {
+  const x = Math.round(p.u * (GRID_W - 1))
+  const y = Math.round(p.v * (GRID_H - 1))
+  return x >= 0 && y >= 0 && x < GRID_W && y < GRID_H && isWater(x, y)
+}
+
+/** The nearest water cell to a point, searched in growing rings; the point itself when it is afloat. */
+export function snapToWater(p: Point, maxRing = 40): Point {
+  if (onWater(p)) return p
+  const cx = Math.round(p.u * (GRID_W - 1))
+  const cy = Math.round(p.v * (GRID_H - 1))
+  for (let r = 1; r <= maxRing; r++) {
+    let best: Point | null = null
+    let bestD = Infinity
+    for (let dx = -r; dx <= r; dx++) {
+      for (const dy of dx === -r || dx === r ? Array.from({ length: 2 * r + 1 }, (_, i) => i - r) : [-r, r]) {
+        const x = cx + dx
+        const y = cy + dy
+        if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H || !isWater(x, y)) continue
+        const d = dx * dx + dy * dy
+        if (d < bestD) {
+          bestD = d
+          best = pointOf(y * GRID_W + x)
+        }
+      }
+    }
+    if (best) return best
+  }
+  return p
+}
+
 /** Debris the strip counts, sitting just off the track. */
 export const DEBRIS: readonly (Point & { label: string })[] = [
-  { u: 0.462, v: 0.46, label: 'Floating debris · reported 18 min ago' },
-  { u: 0.585, v: 0.66, label: 'Submerged log · confirmed' },
+  { ...snapToWater({ u: 0.462, v: 0.46 }), label: 'Floating debris · reported 18 min ago' },
+  { ...snapToWater({ u: 0.585, v: 0.66 }), label: 'Submerged log · confirmed' },
 ]
 
 export interface Track {
@@ -94,14 +126,19 @@ export interface Track {
 export const nmBetween = (a: Point, b: Point): number =>
   Math.hypot((a.u - b.u) * (GRID_W - 1), (a.v - b.v) * (GRID_H - 1)) * NM_PER_CELL
 
-/** The passage the vessel sails: Sunrise Bay to Bahia Mar for this vessel. */
-export function buildTrack(): Track {
-  const r = route({ from: PLACES.sunriseBay, to: PLACES.bahiaMar, draftFt: VESSEL.draftFt, airDraftFt: VESSEL.airDraftFt })
-  const points = r.ok ? smoothTrack(r.points) : [PLACES.sunriseBay, PLACES.bahiaMar]
+/** A track along the water between two points, or the straight line when the router finds none. */
+export function trackBetween(from: Point, to: Point, vessel: { draftFt?: number; airDraftFt?: number; landCost?: number } = {}): Track {
+  const a = snapToWater(from)
+  const b = snapToWater(to)
+  const r = route({ from: a, to: b, draftFt: vessel.draftFt, airDraftFt: vessel.airDraftFt, landCost: vessel.landCost })
+  const points = r.ok && r.points.length > 1 ? smoothTrack(r.points) : [a, b]
   const cum = [0]
   for (let i = 1; i < points.length; i++) cum.push(cum[i - 1]! + nmBetween(points[i - 1]!, points[i]!))
   return { points, cum, lengthNm: cum[cum.length - 1]!, ok: r.ok }
 }
+
+/** The passage the vessel sails: Sunrise Bay to Bahia Mar for this vessel. */
+export const buildTrack = (): Track => trackBetween(PLACES.sunriseBay, PLACES.bahiaMar, VESSEL)
 
 export interface Fix {
   at: Point
@@ -162,18 +199,27 @@ export function durationLabel(minutes: number): string {
   return `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')} min`
 }
 
-/** Where a traffic vessel is at demo time `t` seconds, and which way it points. */
+const trafficTracks = new Map<string, Track>()
+/** The water-only line a traffic vessel works, routed once and kept. */
+export const trafficTrack = (v: Traffic): Track => {
+  let t = trafficTracks.get(v.id)
+  if (!t) {
+    /* land is all but forbidden to other vessels: dear enough that a corner is never cut,
+       possible only where the mask leaves no water way at all (the bridge, a thin gap) */
+    t = trackBetween(v.from, v.to, { landCost: 400 })
+    trafficTracks.set(v.id, t)
+  }
+  return t
+}
+
+/** Where a traffic vessel is at demo time `t` seconds, and which way it points: out along its track, then back. */
 export function trafficAt(v: Traffic, t: number): { at: Point; headingDeg: number } {
+  const track = trafficTrack(v)
   const cycle = ((t / v.periodS + v.phase) % 1 + 1) % 1
-  /* out and back */
-  const k = cycle < 0.5 ? cycle * 2 : 2 - cycle * 2
   const out = cycle < 0.5
-  const a = out ? v.from : v.to
-  const b = out ? v.to : v.from
-  const at = { u: v.from.u + (v.to.u - v.from.u) * k, v: v.from.v + (v.to.v - v.from.v) * k }
-  const dx = (b.u - a.u) * (GRID_W - 1)
-  const dy = (b.v - a.v) * (GRID_H - 1)
-  return { at, headingDeg: ((Math.atan2(dx, -dy) * 180) / Math.PI + 360) % 360 }
+  const k = out ? cycle * 2 : 2 - cycle * 2
+  const fix = fixAt(track, k * track.lengthNm)
+  return { at: fix.at, headingDeg: out ? fix.headingDeg : (fix.headingDeg + 180) % 360 }
 }
 
 /** "just now", "3 min ago", "2 h ago". */
