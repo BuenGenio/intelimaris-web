@@ -1,3 +1,36 @@
 import type { ScreenGroup } from './types'
-/* Filled in by the screen pass; empty groups are skipped by the registry. */
-export const MARINA: ScreenGroup = { id: 'marina', label: 'marina', kind: 'platform', app: 'WaterWayz', frame: 'phone', slug: 'marina', doors: [{ id: 'home', label: 'Home' }], screens: [] }
+
+/** The marina office on the desktop: the basin, the boards and the paper behind them. */
+export const MARINA: ScreenGroup = {
+  id: 'marina', label: 'Marina: the basin', kind: 'marina', app: 'WaterWayz Marina', frame: 'desktop', slug: 'bahia-mar',
+  doors: [
+    { id: 'dashboard', label: 'Today' }, { id: 'bookings', label: 'Bookings' }, { id: 'berths', label: 'Berths' }, { id: 'crm', label: 'Customers' }, { id: 'finance', label: 'Finance' },
+    { id: 'sales', label: 'Rates' }, { id: 'operations', label: 'Operations' }, { id: 'comms', label: 'Messages' }, { id: 'reports', label: 'Reports' }, { id: 'settings', label: 'Settings' },
+  ],
+  screens: [
+    { id: 'marina-dashboard', label: 'Today', path: '/w/bahia-mar/dashboard', door: 'dashboard', summary: 'How is the basin and what needs me: the tiles, the requests waiting, the live map, incidents and the week.', load: () => import('@/components/screens/marina/Dashboard.vue') },
+    { id: 'marina-pms', label: 'PMS map', path: '/w/bahia-mar/pms', door: 'berths', summary: 'The basin drawn berth by berth with a legend, one berth opened beside it, and every PMS destination with an honest status.', load: () => import('@/components/screens/marina/Pms.vue') },
+    { id: 'marina-arrivals', label: 'Arrivals', path: '/w/bahia-mar/arrivals', door: 'bookings', summary: 'The day board: arriving, without a berth, alongside and departing, each row with its arrival brief and the controls the service permits.', load: () => import('@/components/screens/marina/Arrivals.vue') },
+    { id: 'marina-short-stay', label: 'Short stay', path: '/w/bahia-mar/short-stay', door: 'bookings', summary: 'Transient nights sold against the rate card: requests waiting on a yes, confirmed stays and what has cleared.', load: () => import('@/components/screens/marina/ShortStay.vue') },
+    { id: 'marina-late', label: 'Expected late', path: '/w/bahia-mar/late', door: 'bookings', summary: 'Vessels past their ETA and not yet alongside, with the last word from each and the berth still held.', load: () => import('@/components/screens/marina/ExpectedLate.vue') },
+    { id: 'marina-unpaid', label: 'Unpaid arrivals', path: '/w/bahia-mar/unpaid', door: 'bookings', summary: 'Arriving today with money outstanding: deposits due at the desk and prior balances.', load: () => import('@/components/screens/marina/UnpaidArrivals.vue') },
+    { id: 'marina-enquiries', label: 'Enquiries', path: '/w/bahia-mar/enquiries', door: 'bookings', summary: 'Requests captured from any channel before they are priced; nothing here holds a berth.', load: () => import('@/components/screens/marina/Enquiries.vue') },
+    { id: 'marina-quotes', label: 'Quotations', path: '/w/bahia-mar/quotes', door: 'bookings', summary: 'Priced offers that expire, with their terms recorded and whether they were taken.', load: () => import('@/components/screens/marina/Quotations.vue') },
+    { id: 'marina-residents', label: 'Residents', path: '/w/bahia-mar/residents', door: 'bookings', summary: 'Who lives on which berth for how long, their absences, and whether the berth may be let while they are away.', load: () => import('@/components/screens/marina/Residents.vue') },
+    { id: 'marina-agreements', label: 'Agreements', path: '/w/bahia-mar/agreements', door: 'bookings', summary: 'The signed paper behind a resident, kept as a chain: in force, superseded, draft, and the renewal form.', load: () => import('@/components/screens/marina/ResidentAgreements.vue') },
+    { id: 'marina-renewals', label: 'Renewals', path: '/w/bahia-mar/renewals', door: 'bookings', summary: 'Terms coming due, renewals proposed, accepted and declined, each with its uplift.', load: () => import('@/components/screens/marina/Renewals.vue') },
+    { id: 'marina-layout', label: 'Layout', path: '/w/bahia-mar/layout', door: 'berths', summary: 'The berth map drawn by the office: dock lines, berths, facilities and hazards, with a berth mid-draw.', load: () => import('@/components/screens/marina/BerthLayout.vue') },
+    { id: 'marina-berth-detail', label: 'Berth C-14', path: '/w/bahia-mar/berths/c-14', door: 'berths', summary: 'One berth: dimensions, services, how a vessel gets in, and who is in it today.', load: () => import('@/components/screens/marina/BerthDetail.vue') },
+    { id: 'marina-berth-scan', label: 'LiDAR layout', path: '/w/bahia-mar/berths/scan', door: 'berths', summary: 'Pontoons picked out of a public point cloud and proposed as berths for the office to correct.', load: () => import('@/components/screens/marina/BerthScan.vue') },
+    { id: 'marina-calendar', label: 'Occupancy calendar', path: '/w/bahia-mar/calendar', door: 'berths', summary: 'Forward occupancy by berth and date on one dock, two weeks at a time.', load: () => import('@/components/screens/marina/OccupancyCalendar.vue') },
+    { id: 'marina-board', label: 'Reservation board', path: '/w/bahia-mar/board', door: 'berths', summary: 'Assign across berth and time in one grid, with the stays still without a berth beside it and refusals named.', load: () => import('@/components/screens/marina/ReservationBoard.vue') },
+    { id: 'marina-waitlist', label: 'Waiting list', path: '/w/bahia-mar/waitlist', door: 'berths', summary: 'The fit-matched queue for a resident berth, with offers that expire.', load: () => import('@/components/screens/marina/WaitingList.vue') },
+    { id: 'marina-movements', label: 'Movements', path: '/w/bahia-mar/movements', door: 'berths', summary: 'Planned moves for the day against the moves actually recorded at the dock.', load: () => import('@/components/screens/marina/Movements.vue') },
+    { id: 'marina-walk-in', label: 'Walk-in', path: '/w/bahia-mar/walk-in', door: 'bookings', summary: 'Someone on the VHF asking for room tonight: will she fit, which berths take her, and what it costs.', load: () => import('@/components/screens/marina/WalkIn.vue') },
+    { id: 'marina-storm-prep', label: 'Storm prep', path: '/w/bahia-mar/storm-prep', door: 'operations', summary: 'Weather is coming: the exposed set, where each vessel can go, and the plan in order with one undo.', load: () => import('@/components/screens/marina/StormPrep.vue') },
+    { id: 'marina-claim', label: 'Claim', path: '/w/bahia-mar/claim', door: 'settings', summary: 'Find the marina in the directory and file the claim with the evidence a reviewer reads.', load: () => import('@/components/screens/marina/Claim.vue') },
+    { id: 'marina-claim-status', label: 'Claim status', path: '/w/bahia-mar/claim/status', door: 'settings', summary: 'Where the claim got to, what the office can do now, and every claim ever filed.', load: () => import('@/components/screens/marina/ClaimStatus.vue') },
+    { id: 'marina-picker', label: 'Marina picker', path: '/w/bahia-mar/claim?mode=map', door: 'settings', summary: 'The picker on the map: basins in view, one picked, and the way to drop a pin where the directory has nothing.', load: () => import('@/components/screens/marina/MarinaPicker.vue') },
+    { id: 'marina-events', label: 'Events', path: '/w/bahia-mar/events', door: 'comms', summary: 'What the marina hosts or closes, posted where every vessel nearby reads it, with the posting form.', load: () => import('@/components/screens/marina/Events.vue') },
+  ],
+}

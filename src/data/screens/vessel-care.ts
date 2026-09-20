@@ -1,3 +1,34 @@
 import type { ScreenGroup } from './types'
-/* Filled in by the screen pass; empty groups are skipped by the registry. */
-export const VESSEL_CARE: ScreenGroup = { id: 'vessel-care', label: 'vessel-care', kind: 'platform', app: 'WaterWayz', frame: 'phone', slug: 'vessel-care', doors: [{ id: 'home', label: 'Home' }], screens: [] }
+
+/** The vessel's own rooms: what she is, what her sensors say, who is aboard, where she ties up. */
+export const VESSEL_CARE: ScreenGroup = {
+  id: 'vessel-care', label: 'Aboard: the vessel', kind: 'vessel', app: 'WaterWayz', frame: 'phone', slug: 'wanderer',
+  doors: [
+    { id: 'overview', label: 'Overview' }, { id: 'map', label: 'Map' }, { id: 'sensors', label: 'Sensors' }, { id: 'crew', label: 'Crew' }, { id: 'dockpass', label: 'Dockpass' },
+    { id: 'vessel', label: 'Vessel' }, { id: 'maintenance', label: 'Maintenance' }, { id: 'chat', label: 'Chat' }, { id: 'settings', label: 'Settings' },
+  ],
+  screens: [
+    { id: 'vessel-care-overview', label: 'Overview', path: '/w/wanderer/overview', door: 'overview', summary: 'The vessel at a glance: status, depth, the next bridge, IDS at the berth and what needs attention.', load: () => import('@/components/screens/vessel-care/Overview.vue') },
+    { id: 'vessel-care-vessel', label: 'Vessel profile', path: '/w/wanderer/vessel', door: 'vessel', summary: 'Her identity and figures, the resolved envelope with provenance, and the MMSI claim.', load: () => import('@/components/screens/vessel-care/Vessel.vue') },
+    { id: 'vessel-care-monitoring', label: 'Monitoring', path: '/w/wanderer/monitoring', door: 'sensors', summary: 'Live readings grouped by system, each with its age, a drill-down chart and the model predictions.', load: () => import('@/components/screens/vessel-care/Monitoring.vue') },
+    { id: 'vessel-care-sensor-catalog', label: 'Sensor catalogue', path: '/w/wanderer/sensors/catalog', door: 'sensors', summary: 'Every system a unit can watch, the channels it reports, and where to buy it.', load: () => import('@/components/screens/vessel-care/SensorCatalog.vue') },
+    { id: 'vessel-care-sensor-claim', label: 'Claim a unit', path: '/w/wanderer/sensors/claim', door: 'sensors', summary: 'Type the eight-character code from the box and the unit starts reporting to this vessel.', load: () => import('@/components/screens/vessel-care/SensorClaim.vue') },
+    { id: 'vessel-care-sensor-layout', label: 'Unit locations', path: '/w/wanderer/sensors/layout', door: 'sensors', summary: 'Which zone on board each unit sits in; unassigned stays unassigned rather than guessed.', load: () => import('@/components/screens/vessel-care/SensorLayout.vue') },
+    { id: 'vessel-care-unit-detail', label: 'Unit detail', path: '/w/wanderer/sensors/pwts-01', door: 'sensors', summary: 'One unit: its channels, its history, every frame the bridge heard from it, and its lifecycle.', load: () => import('@/components/screens/vessel-care/UnitDetail.vue') },
+    { id: 'vessel-care-ids', label: 'IDS', path: '/w/wanderer/ids', door: 'vessel', summary: 'The docking panel: approach angle, lateral offset and wind on the beam, with a plain verdict.', load: () => import('@/components/screens/vessel-care/Ids.vue') },
+    { id: 'vessel-care-crew', label: 'Crew', path: '/w/wanderer/crew', door: 'crew', summary: 'Everyone aboard and their roles, the invite code, join requests and open invites.', load: () => import('@/components/screens/vessel-care/Crew.vue') },
+    { id: 'vessel-care-crew-channel', label: 'Crew channels', path: '/w/wanderer/crew/channels', door: 'chat', summary: 'The crew channel as a radio log: newest at the bottom, one composer, Enter sends.', load: () => import('@/components/screens/vessel-care/CrewChannel.vue') },
+    { id: 'vessel-care-logbook', label: 'Logbook', path: '/w/wanderer/logbook', door: 'vessel', summary: 'Engine hours, the season so far and a timeline that says whether each entry was logged, a passage or a sensor.', load: () => import('@/components/screens/vessel-care/Logbook.vue') },
+    { id: 'vessel-care-maintenance', label: 'Maintenance', path: '/w/wanderer/maintenance', door: 'maintenance', summary: 'What is due, the open work orders, the service history and the yard that serves her.', load: () => import('@/components/screens/vessel-care/Maintenance.vue') },
+    { id: 'vessel-care-install', label: 'Installer: today', path: '/w/wanderer/install', door: 'sensors', summary: 'The installer flow opens on today’s jobs, one card each, with the offline queue in view.', load: () => import('@/components/screens/vessel-care/Install.vue') },
+    { id: 'vessel-care-install-step', label: 'Installer: bind the unit', path: '/w/wanderer/install/bind', door: 'sensors', summary: 'Step three of the fit: the claim code from the label, what is already bound, and how a refusal reads.', load: () => import('@/components/screens/vessel-care/InstallStep.vue') },
+    { id: 'vessel-care-dockpass', label: 'Dockpass', path: '/w/wanderer/dockpass', door: 'dockpass', summary: 'Your stays, booked, requested and past, with the next one’s arrival brief.', load: () => import('@/components/screens/vessel-care/Dockpass.vue') },
+    { id: 'vessel-care-dockpass-search', label: 'Find a berth', path: '/w/wanderer/dockpass/search', door: 'dockpass', summary: 'Marinas and private docks near you for the nights chosen, each with the service’s own verdict.', load: () => import('@/components/screens/vessel-care/DockpassSearch.vue') },
+    { id: 'vessel-care-listing-detail', label: 'Listing', path: '/w/wanderer/listings/bahia-mar-c-14', door: 'dockpass', summary: 'One listing as the host sees it: rate, max length, booking mode and every stay asked of it.', load: () => import('@/components/screens/vessel-care/ListingDetail.vue') },
+    { id: 'vessel-care-new-booking', label: 'Book a berth', path: '/w/wanderer/dockpass/new', door: 'dockpass', summary: 'The booking step: the marina’s rate bands, the dates, a note to the host, one action.', load: () => import('@/components/screens/vessel-care/NewBooking.vue') },
+    { id: 'vessel-care-booking-detail', label: 'Booking', path: '/w/wanderer/dockpass/bk-2041', door: 'dockpass', summary: 'One stay: its berth once assigned, the quote, arrival prep from the host, and the berth history.', load: () => import('@/components/screens/vessel-care/BookingDetail.vue') },
+    { id: 'vessel-care-settings-general', label: 'Settings: general', path: '/w/wanderer/settings/general', door: 'settings', summary: 'The workspace name, the pointer to the account and to the vessel profile, the bound units.', load: () => import('@/components/screens/vessel-care/SettingsGeneral.vue') },
+    { id: 'vessel-care-settings-people', label: 'Settings: people', path: '/w/wanderer/settings/people', door: 'settings', summary: 'The members panel: invite code, each person’s role as a grant, and what each role can do.', load: () => import('@/components/screens/vessel-care/SettingsPeople.vue') },
+    { id: 'vessel-care-settings-advanced', label: 'Settings: advanced', path: '/w/wanderer/settings/advanced', door: 'settings', summary: 'Transfer ownership, leave the workspace, or delete it after typing its name.', load: () => import('@/components/screens/vessel-care/SettingsAdvanced.vue') },
+  ],
+}

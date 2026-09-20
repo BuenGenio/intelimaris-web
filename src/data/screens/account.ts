@@ -1,3 +1,36 @@
 import type { ScreenGroup } from './types'
-/* Filled in by the screen pass; empty groups are skipped by the registry. */
-export const ACCOUNT: ScreenGroup = { id: 'account', label: 'account', kind: 'platform', app: 'WaterWayz', frame: 'phone', slug: 'account', doors: [{ id: 'home', label: 'Home' }], screens: [] }
+
+/** The account: the front door, the profile journey, Home, Explore and everything under /account. */
+export const ACCOUNT: ScreenGroup = {
+  id: 'account', label: 'Your account', kind: 'account', app: 'WaterWayz', frame: 'phone', slug: 'sam',
+  doors: [
+    { id: 'home', label: 'Home' }, { id: 'explore', label: 'Explore' }, { id: 'notifications', label: 'Notifications' }, { id: 'account', label: 'Account' },
+  ],
+  screens: [
+    { id: 'account-landing', label: 'Welcome', path: '/welcome', door: 'home', summary: 'The front door: create an account, sign in with WaterWAYZ ID, or open the demo.', load: () => import('@/components/screens/account/Landing.vue') },
+    { id: 'account-sign-up', label: 'Sign up', path: '/sign-up', door: 'home', summary: 'Create your account on WaterWAYZ ID by email, with the phone tab pending and the demo door beneath.', load: () => import('@/components/screens/account/SignUp.vue') },
+    { id: 'account-verify', label: 'Confirm your email', path: '/verify', door: 'home', summary: 'The half-verified waiting room: check again once the confirmation link is opened, or go back to WaterWAYZ ID.', load: () => import('@/components/screens/account/Verify.vue') },
+    { id: 'account-onboarding-terms', label: 'The ground rules', path: '/onboarding/terms', door: 'home', summary: 'The acceptance checkpoint: the non-certification statement, the documents and a box that is never pre-ticked.', load: () => import('@/components/screens/account/OnboardingTerms.vue') },
+    { id: 'account-onboarding-home-port', label: 'Home port', path: '/onboarding/home-port', door: 'home', summary: 'Pick the marina you keep the vessel at; the chart centres there and the units badge flips feet and metres.', load: () => import('@/components/screens/account/OnboardingHomePort.vue') },
+    { id: 'account-onboarding-crew-card', label: 'Your crew card', path: '/onboarding/crew-card', door: 'home', summary: 'A name, a photo and how you sail; the card and the completeness ring build as you tap.', load: () => import('@/components/screens/account/OnboardingCrewCard.vue') },
+    { id: 'account-get-started', label: 'Get started', path: '/get-started', door: 'home', summary: 'The first-sign-in fork: find your vessel, join with a code, create a marina, dock, business or yard, or look around.', load: () => import('@/components/screens/account/GetStarted.vue') },
+    { id: 'account-create-workspace-type', label: 'New workspace · type', path: '/create-workspace', door: 'home', summary: 'The workspace-type picker, each door in its kind’s colour with its audience.', load: () => import('@/components/screens/account/CreateWorkspaceType.vue') },
+    { id: 'account-create-workspace-form', label: 'New workspace · vessel', path: '/create-workspace?type=vessel', door: 'home', summary: 'The vessel details step: the registry hit, the model picked and every figure still yours to change.', load: () => import('@/components/screens/account/CreateWorkspaceForm.vue') },
+    { id: 'account-accept-invite', label: 'Accept invite', path: '/invite/:token', door: 'home', summary: 'The invite link’s landing, with its signed-out, joining, joined, refused and unreachable endings.', load: () => import('@/components/screens/account/AcceptInvite.vue') },
+    { id: 'account-home', label: 'Home', path: '/home', door: 'home', summary: 'Your logbook, what needs you across every workspace, and the workspaces themselves.', load: () => import('@/components/screens/account/Home.vue') },
+    { id: 'account-explore', label: 'Explore', path: '/explore', door: 'explore', summary: 'Look around without a workspace: the public map, what a workspace adds, and the one way out.', load: () => import('@/components/screens/account/Explore.vue') },
+    { id: 'account-notifications', label: 'Notifications', path: '/notifications', door: 'notifications', summary: 'The inbox: one row per channel, each saying whether it was sent, queued, failed or skipped.', load: () => import('@/components/screens/account/Notifications.vue') },
+    { id: 'account-profile', label: 'Profile', path: '/account/profile', door: 'account', summary: 'Your photo, your vessel photos and a short video, your name and headline, and the sign-in email.', load: () => import('@/components/screens/account/AccountProfile.vue') },
+    { id: 'account-experience', label: 'On the water', path: '/account/experience', door: 'account', summary: 'How you sail, since when, the languages you speak and the certificates you hold.', load: () => import('@/components/screens/account/AccountExperience.vue') },
+    { id: 'account-safety', label: 'Emergency contact', path: '/account/safety', door: 'account', summary: 'Who to call about you, and exactly who gets to read it.', load: () => import('@/components/screens/account/AccountSafety.vue') },
+    { id: 'account-privacy', label: 'Privacy', path: '/account/privacy', door: 'account', summary: 'Who can see your card, whether your email and phone are on it, and what never is.', load: () => import('@/components/screens/account/AccountPrivacy.vue') },
+    { id: 'account-notification-settings', label: 'Notification settings', path: '/account/notifications', door: 'account', summary: 'The email and push switches, your devices, and how each category reaches you.', load: () => import('@/components/screens/account/AccountNotificationSettings.vue') },
+    { id: 'account-preferences', label: 'Preferences', path: '/account/preferences', door: 'account', summary: 'Units with a live preview, language, time zone and clock, the colour table and the 3D map.', load: () => import('@/components/screens/account/AccountPreferences.vue') },
+    { id: 'account-security', label: 'Sign-in and security', path: '/account/security', door: 'account', summary: 'The identity behind the session, and the account console that holds password, two-factor and passkeys.', load: () => import('@/components/screens/account/AccountSecurity.vue') },
+    { id: 'account-workspaces', label: 'Workspaces', path: '/account/workspaces', door: 'account', summary: 'Every membership with its type, role and account; open or leave, and the pending ones.', load: () => import('@/components/screens/account/AccountWorkspaces.vue') },
+    { id: 'account-accounts', label: 'Accounts', path: '/account/accounts', door: 'account', summary: 'The accounts you belong to, what each holds and subscribes to, and starting a new one.', load: () => import('@/components/screens/account/AccountAccounts.vue') },
+    { id: 'account-billing', label: 'Billing', path: '/account/billing', door: 'account', summary: 'Subscriptions per account, the payment method the provider holds, and recent invoices.', load: () => import('@/components/screens/account/AccountBilling.vue') },
+    { id: 'account-invoices', label: 'Invoices', path: '/account/billing/invoices', door: 'account', summary: 'Every invoice, newest first, with period, account, amount and status.', load: () => import('@/components/screens/account/AccountInvoices.vue') },
+    { id: 'account-legal', label: 'About & legal', path: '/account/legal', door: 'account', summary: 'Where the map data comes from, the licences it carries, the documents you accepted and this build.', load: () => import('@/components/screens/account/AccountLegal.vue') },
+  ],
+}

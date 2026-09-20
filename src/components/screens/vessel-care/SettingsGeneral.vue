@@ -1,0 +1,42 @@
+<template>
+  <div class="scr">
+    <div class="scr-head">
+      <div>
+        <h1 class="scr-h1">Workspace settings</h1>
+        <p class="scr-sub">Wanderer · Vessel</p>
+      </div>
+      <span class="scr-pill scr-pill--bare">Owner</span>
+    </div>
+    <div class="scr-tabs scr-tabs--line" style="margin-bottom: 14px"><span class="scr-tab is-on">General</span><span class="scr-tab">People</span><span class="scr-tab">Advanced</span></div>
+
+    <div class="scr-card">
+      <div class="scr-row scr-row--between">
+        <div><h2 class="scr-card-title">Vessel details</h2><p class="scr-sub scr-small">What this workspace is. Different types ask for different things.</p></div>
+        <button class="scr-btn scr-btn--primary scr-btn--sm">Save changes</button>
+      </div>
+      <div class="scr-divider"></div>
+      <p class="scr-small scr-muted" style="margin-bottom: 10px">Account: <a href="#">Sam Miller</a> · Cruiser plan · what this workspace may use is the account's subscription.</p>
+      <label class="scr-field"><span class="scr-label">Workspace name</span><input class="scr-input" value="Wanderer" readonly /></label>
+      <div class="scr-card" style="margin-top: 12px; background: var(--ink-50)">
+        <p class="scr-small scr-muted">Her name, rig, figures and MMSI live on the vessel profile, in your units, with the source of every resolved value.</p>
+        <button class="scr-btn scr-btn--sm" style="margin-top: 8px">Edit the vessel</button>
+      </div>
+    </div>
+
+    <div class="scr-section scr-card">
+      <h2 class="scr-card-title">Sensor units</h2>
+      <p class="scr-small scr-muted" style="margin-bottom: 8px">Claim a unit with the code printed on its box and its readings land on Monitoring — including everything it recorded while offline.</p>
+      <div class="scr-row scr-row--between"><span class="scr-small">4 units bound · 3 reporting</span><button class="scr-btn scr-btn--sm">Claim a unit</button></div>
+    </div>
+
+    <div class="scr-section scr-card">
+      <h2 class="scr-card-title">Units and formats</h2>
+      <p class="scr-small scr-muted" style="margin-bottom: 4px">Length in feet, depth in feet, temperature in °F. Speed and distance stay knots and NM for everyone.</p>
+      <div class="scr-kv"><span>Units</span><span class="scr-strong">US</span></div>
+      <div class="scr-kv"><span>Time</span><span class="scr-strong">12-hour · America/New_York</span></div>
+      <p class="scr-micro scr-muted" style="margin-top: 6px">These are yours, set on the account; every workspace shows them the same way.</p>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts"></script>
