@@ -13,6 +13,6 @@ defineProps<{ logo: { name: string; light: string; dark: string }; size: number 
 .partner-logo { display: inline-flex; align-items: center; line-height: 0; }
 .partner-logo img { display: block; width: var(--partner-size); height: var(--partner-size); }
 .partner-logo-dark { display: none !important; }
-:global([data-theme='dark']) .partner-logo-light { display: none !important; }
-:global([data-theme='dark']) .partner-logo-dark { display: block !important; }
+[data-theme='dark'] .partner-logo-light { display: none !important; }
+[data-theme='dark'] .partner-logo-dark { display: block !important; }
 </style>
