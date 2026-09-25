@@ -4,7 +4,8 @@
     <div class="nav-glass" aria-hidden="true"></div><div class="nav-refraction" aria-hidden="true"></div>
     <div class="site-nav editorial-shell">
       <RouterLink to="/" class="site-brand" aria-label="InteliMaris home">
-        <Wordmark :size="27" tm />
+        <PartnerLogo v-if="logo" :logo="logo" :size="40" />
+        <Wordmark v-else :size="27" tm />
       </RouterLink>
       <nav class="site-desktop-nav" aria-label="Main navigation">
         <template v-for="link in MAIN_NAVIGATION" :key="link.to"><PlatformMenu v-if="link.to === '/capabilities'" /><RouterLink v-else :to="link.to">{{ link.label }}</RouterLink></template>
@@ -40,12 +41,15 @@ import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 import SitePreferences from '@/components/SitePreferences.vue'
 import RoleSwitcher from '@/components/RoleSwitcher.vue'
 import Wordmark from '@/components/v2/Wordmark.vue'
+import PartnerLogo from '@/components/PartnerLogo.vue'
+import { useLogo } from '@/composables/useLogo'
 import { useAudience } from '@/composables/useAudience'
 import { contactLink } from '@/data/audiences'
 import { loginLink } from '@/data/app'
 import { useOnboarding } from '@/composables/useOnboarding'
 const { audience } = useAudience()
 const { start } = useOnboarding()
+const { logo } = useLogo()
 const route = useRoute()
 const menuOpen = ref(false)
 const menuButton = ref<HTMLButtonElement | null>(null)
