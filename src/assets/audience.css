@@ -130,7 +130,6 @@ html { scroll-padding-top:calc(var(--site-header-height) + 12px); }
  .entry-heading { gap:32px; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); }
  .audience-chooser { gap:18px; }
  .site-desktop-nav { gap:18px; }
- .site-login, .site-book { display:none; }
  .preview-copy { padding:22px 24px; }
  .preview-demo { padding:20px 24px 24px; }
  .guide-heading { gap:40px; }
@@ -286,15 +285,16 @@ html { scroll-padding-top:calc(var(--site-header-height) + 12px); }
 .role-options-grid button { width:100%; min-height:42px; display:flex; align-items:center; justify-content:space-between; gap:8px; border:0; border-top:1px solid var(--border-subtle); padding:10px 4px; font:500 .78rem var(--font-text); color:var(--text-primary); text-align:left; background:transparent; cursor:pointer; }
 .role-options-grid button:hover, .role-options-grid button[aria-pressed='true'] { background:var(--domain-soft); color:var(--domain-ink); }
 .role-clear { display:flex; align-items:center; justify-content:space-between; width:100%; border:0; border-top:1px solid var(--border-medium); background:transparent; color:var(--domain-ink); font:500 .78rem var(--font-text); padding:18px 0 0; margin-top:16px; cursor:pointer; }
-@media(max-width:1250px) and (min-width:801px) { .site-nav { gap:16px; } .site-desktop-nav { gap:16px; } .site-utilities { gap:7px; } .site-contact { padding:10px 12px; gap:10px; } }
-@media(max-width:950px) and (min-width:801px) { .role-trigger > span { display:none; } .role-trigger { padding:8px; } }
+@media(max-width:1360px) and (min-width:801px) { .site-nav { gap:16px; } .site-desktop-nav { gap:16px; } .site-utilities { gap:7px; } .site-contact { padding:10px 12px; gap:10px; } }
+@media(max-width:1200px) { .site-login, .site-book { display:none; } }
+@media(max-width:1300px) and (min-width:801px) { .role-trigger > span { display:none; } .role-trigger { padding:8px; } }
 @media(max-width:560px) { :root { --site-header-height:104px; } .role-trigger > span { display:none; } .role-trigger { border:0; padding:8px; min-height:40px; } .role-popover { position:fixed; top:70px; left:18px; right:18px; width:auto; max-width:none; padding:20px; max-height:calc(100dvh - 88px); } .role-options-grid { gap:12px; } .role-options-grid button { font-size:.75rem; min-height:48px; } }
 @media(prefers-reduced-transparency:reduce) { .nav-glass { background:var(--surface-page); backdrop-filter:none; -webkit-backdrop-filter:none; } .nav-refraction { display:none; } .breadcrumb-strip { background:var(--surface-raised); } }
 
 
 .marina-demo-link { display:flex; width:fit-content; font-size:.86rem; }
-@media(min-width:951px) { .site-desktop-nav { gap:18px; } .site-desktop-nav a { white-space:nowrap; } }
-@media(max-width:950px) {
+@media(min-width:1001px) { .site-desktop-nav { gap:18px; } .site-desktop-nav a { white-space:nowrap; } }
+@media(max-width:1000px) {
  .site-desktop-nav { display:none; }
  .site-nav .site-contact { display:none; }
  .site-menu-button { display:block; }

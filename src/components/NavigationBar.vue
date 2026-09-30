@@ -4,7 +4,7 @@
     <div class="nav-glass" aria-hidden="true"></div><div class="nav-refraction" aria-hidden="true"></div>
     <div class="site-nav editorial-shell">
       <RouterLink to="/" class="site-brand" aria-label="InteliMaris home">
-        <PartnerLogo v-if="logo" :logo="logo" :size="40" />
+        <PartnerLogo v-if="logo" :logo="logo" />
         <Wordmark v-else :size="27" tm />
       </RouterLink>
       <nav class="site-desktop-nav" aria-label="Main navigation">
