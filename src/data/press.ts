@@ -34,13 +34,13 @@ export const PRESS: PressRelease[] = [
     id: 'flibs-2026',
     date: '2026-10-01',
     place: 'FORT LAUDERDALE, Fla.',
-    title: 'InteliMARIS brings WaterWayz to FLIBS 2026: one app for the passage, the vessel and the berth',
+    title: 'InteliMARIS brings InteliWaterwayz to FLIBS 2026: one app for the passage, the vessel and the berth',
     standfirst: 'Fort Lauderdale International Boat Show · October 28 – November 1 · [booth number]',
     summary:
-      'InteliMARIS will show WaterWayz, its boating app, at the 2026 Fort Lauderdale International Boat Show, alongside the vessel sensors and the marina console that share one platform with it.',
+      'InteliMARIS will show InteliWaterwayz, its boating app, at the 2026 Fort Lauderdale International Boat Show, alongside the vessel sensors and the marina console that share one platform with it.',
     intro: [
-      'InteliMARIS™ will show WaterWayz™, its boating app, at the 2026 Fort Lauderdale International Boat Show, October 28 through November 1, at [booth number].',
-      'WaterWayz plans a passage for the vessel it is on — its real length, draft and air draft, not a form — and refuses to draw a route it does not believe. It shows charted depth through the water, live vessel traffic, hazards other boaters have reported, and 27,000 marinas with their approach depth. A berth can be requested from the same screen.',
+      'InteliMARIS™ will show InteliWaterwayz™, its boating app, at the 2026 Fort Lauderdale International Boat Show, October 28 through November 1, at [booth number].',
+      'InteliWaterwayz plans a passage for the vessel it is on — its real length, draft and air draft, not a form — and refuses to draw a route it does not believe. It shows charted depth through the water, live vessel traffic, hazards other boaters have reported, and 27,000 marinas with their approach depth. A berth can be requested from the same screen.',
     ],
     sections: [
       {
@@ -53,7 +53,7 @@ export const PRESS: PressRelease[] = [
       },
       {
         lead: 'Emergency Assistance.',
-        text: 'Last year, during a medical emergency aboard a vessel in a large Florida marina, 911 had the marina’s address and responders still struggled to find the right boat. InteliMARIS will show the Emergency Assistance concept it is developing in response: a way for a boater to pass on vessel identity, precise position and marina access details when they call for help. WaterWayz does not dispatch emergency services, and it does not replace 911, VHF Channel 16, the U.S. Coast Guard or any other emergency service.',
+        text: 'Last year, during a medical emergency aboard a vessel in a large Florida marina, 911 had the marina’s address and responders still struggled to find the right boat. InteliMARIS will show the Emergency Assistance concept it is developing in response: a way for a boater to pass on vessel identity, precise position and marina access details when they call for help. InteliWaterwayz does not dispatch emergency services, and it does not replace 911, VHF Channel 16, the U.S. Coast Guard or any other emergency service.',
       },
       {
         lead: 'Mapping the marina.',
@@ -67,12 +67,12 @@ export const PRESS: PressRelease[] = [
     },
     cta: {
       lead: 'Try it before the show.',
-      text: 'The WaterWayz passage planner, the berth-fit tool and an orbitable LiDAR survey are live on this site.',
+      text: 'The InteliWaterwayz passage planner, the berth-fit tool and an orbitable LiDAR survey are live on this site.',
       href: '/capabilities/route-planning',
       label: 'Plan a route for your own draft',
     },
     availability:
-      'WaterWayz is [available on iOS and Android / in pilot with marinas in Florida]; the marina console is [in use at X marinas / entering pilots in early 2027]. Emergency Assistance is a concept under development and has no release date.',
+      'InteliWaterwayz is [available on iOS and Android / in pilot with marinas in Florida]; the marina console is [in use at X marinas / entering pilots in early 2027]. Emergency Assistance is a concept under development and has no release date.',
     boilerplate: [
       {
         heading: 'About InteliMARIS',

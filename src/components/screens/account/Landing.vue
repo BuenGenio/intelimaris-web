@@ -1,7 +1,7 @@
 <template>
   <div class="scr lnd">
     <div class="scr-row scr-row--between">
-      <span class="scr-ov">WaterWayz</span>
+      <span class="scr-ov">InteliWaterwayz</span>
       <button type="button" class="scr-btn scr-btn--sm scr-btn--ghost">Day · Dusk · Night</button>
     </div>
 
@@ -17,9 +17,9 @@
 
     <div class="scr-stack scr-stack--tight lnd-doors">
       <button type="button" class="scr-btn scr-btn--primary scr-btn--block">Create an account</button>
-      <button type="button" class="scr-btn scr-btn--block">Sign in with WaterWAYZ ID</button>
+      <button type="button" class="scr-btn scr-btn--block">Sign in with InteliWaterwayz ID</button>
       <button type="button" class="scr-btn scr-btn--block">Demo sign in</button>
-      <p class="scr-micro scr-muted lnd-note">WaterWayz is not a certified navigation system. Always cross-check official charts.</p>
+      <p class="scr-micro scr-muted lnd-note">InteliWaterwayz is not a certified navigation system. Always cross-check official charts.</p>
       <a class="scr-small lnd-note">Have an 8-character invite code? Sign in first, then join.</a>
     </div>
   </div>

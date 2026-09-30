@@ -91,7 +91,7 @@ export const JOURNEYS: Journey[] = [
     id: 'app-screens',
     index: 9,
     title: 'Every screen of the app',
-    action: 'Pick any screen of WaterWayz, the marina console, the yard, a waterfront business or the operator console and see it as the people who use it do, with sample data.',
+    action: 'Pick any screen of InteliWaterwayz, the marina console, the yard, a waterfront business or the operator console and see it as the people who use it do, with sample data.',
     proves: 'One product from the helm to the marina office: the same vessel, berth and person on every screen.',
     backend: 'The workspace catalog: one app, one shell, and the surfaces each kind of workspace has, served by the platform’s services.',
     component: defineAsyncComponent(() => import('@/components/playbook/AppScreens.vue')),

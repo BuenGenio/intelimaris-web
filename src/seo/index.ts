@@ -8,15 +8,15 @@ import { getBreadcrumbs } from '@/composables/useBreadcrumbs'
 import { translations } from '@/i18n/translations'
 
 export const SITE_URL = 'https://intelimaris.com'
-const HOME_DESCRIPTION = 'Plan the passage, monitor your vessel and prepare the arrival. Explore WaterWayz navigation, connected marine hardware and InteliMarina operations.'
+const HOME_DESCRIPTION = 'Plan the passage, monitor your vessel and prepare the arrival. Explore InteliWaterwayz navigation, connected marine hardware and InteliMarina operations.'
 const pages: Record<string, [string, string]> = {
   home: ['Connected boating, navigation & marina technology', HOME_DESCRIPTION],
   products: ['Marine hardware & connected vessel systems', 'Explore InteliMARIS sensors, controls and connected systems. Compare hardware specifications for PWTS, InteliBilge and InteliBMS installations.'],
   'product-categories': ['Browse marine hardware by category', 'Find marine safety, water, environmental, electrical, motion and control hardware. Explore specifications and compatible InteliMARIS systems.'],
   capabilities: ['Navigation, vessel monitoring & marina operations', 'Explore the InteliMARIS platform: navigation, route planning, hazard awareness, vessel monitoring, dockage and marina management.'],
-  waterwayz: ['WaterWayz | Your connected boating experience', 'Plan passages, explore navigation and vessel readings, and coordinate your next arrival. Discover WaterWayz, the connected boating experience by InteliMARIS.'],
-  software: ['Connected maritime software & integrations', 'See how WaterWayz, marina tools and connected vessel data work together. Explore the InteliMARIS software platform and integration approach.'],
-  about: ['Our story | Technology for life on the water', 'Meet the team behind InteliMARIS and WaterWayz. Discover our approach to connected boating, vessel awareness and marina operations.'],
+  waterwayz: ['InteliWaterwayz | Your connected boating experience', 'Plan passages, explore navigation and vessel readings, and coordinate your next arrival. Discover InteliWaterwayz, the connected boating experience by InteliMARIS.'],
+  software: ['Connected maritime software & integrations', 'See how InteliWaterwayz, marina tools and connected vessel data work together. Explore the InteliMARIS software platform and integration approach.'],
+  about: ['Our story | Technology for life on the water', 'Meet the team behind InteliMARIS and InteliWaterwayz. Discover our approach to connected boating, vessel awareness and marina operations.'],
   contact: ['Talk to the InteliMARIS team', 'Discuss navigation, connected vessel hardware or marina operations with InteliMARIS. Tell us about your vessel, marina or integration needs.'],
   demo: ['Marine survey & geospatial technology demos', 'Explore the InteliMARIS marine survey demonstration, with LiDAR point-cloud technology and clearly identified sample marina information.'],
   'demo-marina': ['Marina survey demo | Bahia Mar sample listing', 'Explore a LiDAR technology demonstration using Halifax Harbor survey data alongside a Bahia Mar sample marina listing. See the dataset and its limitations.'],

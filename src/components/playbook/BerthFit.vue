@@ -631,7 +631,7 @@ const weekText = computed(() => {
   const tryNext = nextFree >= 0 ? `Try ${days[nextFree]!.short}, the next free day.` : 'No free day this week; pick another lit berth.'
   switch (s) {
     case 'free':
-      return `Free on ${today}. You book the marina, not the berth; the dockmaster assigns it and this approach brief lands in WaterWayz.`
+      return `Free on ${today}. You book the marina, not the berth; the dockmaster assigns it and this approach brief lands in InteliWaterwayz.`
     case 'assigned':
       return `Assigned to another vessel on ${today}. ${tryNext}`
     case 'resident':

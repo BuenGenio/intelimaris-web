@@ -27,7 +27,7 @@
           <!-- 2 · phone -->
           <section v-else-if="step === 1" class="ob-step">
             <h2 :id="titleId">Where should we text your link?</h2>
-            <p class="ob-sub">WaterWayz™ sends one text to confirm the number, then asks for your name and email. Nothing is stored on this site.</p>
+            <p class="ob-sub">InteliWaterwayz™ sends one text to confirm the number, then asks for your name and email. Nothing is stored on this site.</p>
             <form class="ob-phone" @submit.prevent="next">
               <label class="ob-dial">
                 <span class="sr-only">Country code</span>
@@ -46,8 +46,8 @@
 
           <!-- 3 · hand off -->
           <section v-else class="ob-step">
-            <h2 :id="titleId">Continue in WaterWayz™</h2>
-            <p class="ob-sub">Here is what we will pass along. WaterWayz confirms the number by text and takes it from there.</p>
+            <h2 :id="titleId">Continue in InteliWaterwayz™</h2>
+            <p class="ob-sub">Here is what we will pass along. InteliWaterwayz confirms the number by text and takes it from there.</p>
             <dl class="ob-summary">
               <div><dt>Role</dt><dd>{{ chosen?.label }}</dd></div>
               <div><dt>Mobile</dt><dd class="t-num">{{ dial }} {{ formatLocal(dial, local) }}</dd></div>
@@ -58,7 +58,7 @@
           <div class="ob-actions">
             <button v-if="step > 0" type="button" class="ob-back" @click="step--">← Back</button>
             <span v-else></span>
-            <a v-if="step === 2" :href="handoff" class="ob-next ob-go" @click="close">Open WaterWayz <span aria-hidden="true">→</span></a>
+            <a v-if="step === 2" :href="handoff" class="ob-next ob-go" @click="close">Open InteliWaterwayz <span aria-hidden="true">→</span></a>
             <button v-else type="button" class="ob-next" :disabled="step === 0 && !role" :aria-label="step === 0 ? 'Next: your mobile number' : 'Next: review'" @click="next">→</button>
           </div>
         </div>
@@ -75,7 +75,7 @@ import { DIAL_CODES, formatLocal, signUpLink, toE164 } from '@/data/app'
 import { useOnboarding } from '@/composables/useOnboarding'
 import RoleIcon from './RoleIcon.vue'
 
-const STEPS = ['Your role', 'Your mobile', 'Continue in WaterWayz'] as const
+const STEPS = ['Your role', 'Your mobile', 'Continue in InteliWaterwayz'] as const
 const { open, presetRole, close } = useOnboarding()
 const titleId = 'onboarding-title'
 const dialog = ref<HTMLElement | null>(null)

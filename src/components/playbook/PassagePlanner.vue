@@ -1,7 +1,7 @@
 <template>
   <section class="pp">
     <div class="pp-topline">
-      <p class="t-overline pp-eyebrow">WaterWayz · a route for your vessel</p>
+      <p class="t-overline pp-eyebrow">InteliWaterwayz · a route for your vessel</p>
       <ul class="pp-legend" aria-label="Depth bands for this vessel">
         <li><i class="pp-swatch pp-swatch--nogo" aria-hidden="true"></i>less water than you draw</li>
         <li><i class="pp-swatch pp-swatch--near" aria-hidden="true"></i>inside your 2 ft margin · illustrative</li>

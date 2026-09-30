@@ -1,14 +1,14 @@
 <template>
   <div class="scr">
     <div class="scr-row scr-row--between" style="margin-bottom: 14px">
-      <span class="scr-ov">WaterWayz</span>
+      <span class="scr-ov">InteliWaterwayz</span>
       <button type="button" class="scr-btn scr-btn--sm scr-btn--ghost">Day · Dusk · Night</button>
     </div>
 
     <div class="scr-card scr-stack">
       <div>
         <h1 class="scr-h2">Confirm your email</h1>
-        <p class="scr-sub scr-small">WaterWAYZ ID sent a confirmation link to sam@example.com. Open it, and you are in.</p>
+        <p class="scr-sub scr-small">InteliWaterwayz ID sent a confirmation link to sam@example.com. Open it, and you are in.</p>
       </div>
 
       <div class="scr-alert" data-tone="warn">
@@ -19,9 +19,9 @@
       <p class="scr-small scr-muted">The link can be opened anywhere — your phone is fine. This page will not notice by itself, so come back and check once you have.</p>
 
       <button type="button" class="scr-btn scr-btn--primary scr-btn--block">I've confirmed it — check again</button>
-      <button type="button" class="scr-btn scr-btn--block">Open WaterWAYZ ID</button>
+      <button type="button" class="scr-btn scr-btn--block">Open InteliWaterwayz ID</button>
 
-      <p class="scr-micro scr-muted">No email after a few minutes? Check the spam folder, then open WaterWAYZ ID — it can send it again, and it is also where you fix an address you mistyped.</p>
+      <p class="scr-micro scr-muted">No email after a few minutes? Check the spam folder, then open InteliWaterwayz ID — it can send it again, and it is also where you fix an address you mistyped.</p>
 
       <div class="scr-divider"></div>
       <div class="scr-dl">

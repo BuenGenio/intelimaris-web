@@ -3,7 +3,7 @@
     <div class="wrn-stage" :class="{ 'is-ready': tideState !== 'loading' }">
       <header class="wrn-top">
         <div class="wrn-heading">
-          <p class="wrn-overline">WaterWayz · conditions · public feeds, live</p>
+          <p class="wrn-overline">InteliWaterwayz · conditions · public feeds, live</p>
           <p id="wrn-title" class="wrn-marina">
             {{ marina.name }}
             <span class="wrn-place">{{ marina.place }}</span>

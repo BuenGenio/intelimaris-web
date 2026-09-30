@@ -91,7 +91,7 @@ const tiles = [
   { label: 'On duty', value: '5', context: 'clocked on now', tone: 'safe' },
 ]
 const waiting = [
-  { name: 'Wanderer · Sam Miller', line: '14–17 Oct · 3 nights · 42 ft Sabre · draft 4.6 ft · via WaterWayz' },
+  { name: 'Wanderer · Sam Miller', line: '14–17 Oct · 3 nights · 42 ft Sabre · draft 4.6 ft · via InteliWaterwayz' },
   { name: 'Blue Heron', line: '15–16 Oct · 1 night · 38 ft · no berth can be held yet · via VHF' },
   { name: 'Halcyon', line: '18–25 Oct · 7 nights · 48 ft · via marina site' },
 ]

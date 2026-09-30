@@ -17,7 +17,7 @@
       <div class="scr-stack scr-stack--tight" style="padding: 12px 14px">
         <div><h2 class="scr-h3">The map</h2><p class="scr-small scr-muted">Public marina, business and hazard layers. Every datum carries its source.</p></div>
         <button type="button" class="scr-btn scr-btn--primary scr-btn--block"><ScrIcon name="map" /> Open the map</button>
-        <p class="scr-micro scr-muted">Not for navigation. WaterWayz is an aid, not a certified chart.</p>
+        <p class="scr-micro scr-muted">Not for navigation. InteliWaterwayz is an aid, not a certified chart.</p>
       </div>
     </div>
 

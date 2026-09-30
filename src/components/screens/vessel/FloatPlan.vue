@@ -42,7 +42,7 @@
     </section>
 
     <div class="scr-bar"><button type="button" class="scr-btn scr-btn--primary scr-btn--block" disabled title="No delivery lane exists yet — a float plan that silently failed is worse than none.">Share float plan</button></div>
-    <p class="scr-micro scr-muted fp-foot">Not for navigation. WaterWayz is an aid, not a certified chart.</p>
+    <p class="scr-micro scr-muted fp-foot">Not for navigation. InteliWaterwayz is an aid, not a certified chart.</p>
   </div>
 </template>
 

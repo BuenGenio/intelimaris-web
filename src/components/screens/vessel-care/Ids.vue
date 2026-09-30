@@ -47,7 +47,7 @@
       <button class="scr-btn scr-btn--primary scr-btn--block" disabled>Start guidance</button>
       <button class="scr-btn">Pick a berth on the map</button>
     </div>
-    <p class="scr-micro scr-muted" style="margin-top: 10px; text-align: center">Not for navigation. WaterWayz is an aid, not a certified chart.</p>
+    <p class="scr-micro scr-muted" style="margin-top: 10px; text-align: center">Not for navigation. InteliWaterwayz is an aid, not a certified chart.</p>
   </div>
 </template>
 

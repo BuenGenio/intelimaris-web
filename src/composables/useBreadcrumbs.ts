@@ -39,7 +39,7 @@ export function getBreadcrumbs(route: RouteLocationNormalizedLoaded | RouteLocat
     }
     const pages: Record<string, BreadcrumbItem[]> = {
       home: [], products: [hardware], 'product-categories': [hardware, categories],
-      capabilities: [platform], waterwayz: [platform, { label: 'WaterWayz™' }],
+      capabilities: [platform], waterwayz: [platform, { label: 'InteliWaterwayz™' }],
       software: [platform, { label: 'Software & connections' }],
       about: [{ label: 'Our story' }], contact: [{ label: 'Talk to us' }],
       demo: [{ label: 'Technology demo' }],

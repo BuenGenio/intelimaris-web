@@ -7,7 +7,7 @@
         <h1>Your day on the water, <em>connected.</em></h1>
       </div>
       <div class="hero-intro">
-        <p class="editorial-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS™ brings it together through WaterWayz™.</p>
+        <p class="editorial-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS™ brings it together through InteliWaterwayz™.</p>
         <div class="hero-copy">
           <div class="hero-actions">
             <button type="button" class="editorial-button hero-start" @click="start(audience?.id, $event.currentTarget as HTMLElement)">Start free <span aria-hidden="true">→</span></button>
@@ -38,7 +38,7 @@
           <div aria-live="polite" aria-atomic="true">
             <p class="editorial-eyebrow">{{ audience ? `For ${audience.short.toLowerCase()}` : 'One connected platform' }}</p>
             <h2>{{ audience ? audience.headline : 'Navigate. Monitor. Arrive.' }}</h2>
-            <p>{{ audience ? audience.intro : 'WaterWayz™ connects the journey with vessel information and the people on shore. Choose your role above to find your starting point.' }}</p>
+            <p>{{ audience ? audience.intro : 'InteliWaterwayz™ connects the journey with vessel information and the people on shore. Choose your role above to find your starting point.' }}</p>
           </div>
           <div class="preview-actions">
             <RouterLink v-if="audience" :to="audienceLink(audience.id)" class="editorial-button">Explore your guide <span aria-hidden="true">↗</span>
@@ -57,8 +57,8 @@
     </section>
     <section class="editorial-section editorial-shell waterwayz-feature">
       <div class="section-intro">
-        <div><p class="editorial-eyebrow">WaterWayz™ by InteliMARIS</p><h2>Your whole boating experience. Intelligently connected.</h2></div>
-        <div class="waterwayz-feature-aside"><p>A passage starts before departure and carries on after you tie up. Bring the route, connected vessel information and your next stop into the same view.</p><RouterLink to="/waterwayz" class="editorial-button">Explore WaterWayz™ <span aria-hidden="true">↗</span></RouterLink></div>
+        <div><p class="editorial-eyebrow">InteliWaterwayz™ by InteliMARIS</p><h2>Your whole boating experience. Intelligently connected.</h2></div>
+        <div class="waterwayz-feature-aside"><p>A passage starts before departure and carries on after you tie up. Bring the route, connected vessel information and your next stop into the same view.</p><RouterLink to="/waterwayz" class="editorial-button">Explore InteliWaterwayz™ <span aria-hidden="true">↗</span></RouterLink></div>
       </div>
       <JourneyStage :id="secondJourney" />
     </section>
@@ -107,7 +107,7 @@ const { audience, choose } = useAudience()
 const { start } = useOnboarding()
 /* Each role tries the journey that speaks to it; before a choice, Underway at the helm leads. */
 const journey = computed(() => findJourney(audience.value?.journey) ?? findJourney('helm-view') ?? JOURNEYS[0]!)
-/* The WaterWayz section shows every screen of the app; when the hero is not already at the helm, it rides along there instead. */
+/* The InteliWaterwayz section shows every screen of the app; when the hero is not already at the helm, it rides along there instead. */
 const secondJourney = computed(() => (journey.value.id === 'helm-view' ? 'app-screens' : 'helm-view'))
 async function onChoose(id: string) {
   await choose(id)

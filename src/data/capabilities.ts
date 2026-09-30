@@ -21,7 +21,7 @@ export interface Capability {
 
 export const CAPABILITIES: Capability[] = [
   {
-    journey: 'water-right-now', id: 'navigation', label: 'Navigation', product: 'WaterWayz™',
+    journey: 'water-right-now', id: 'navigation', label: 'Navigation', product: 'InteliWaterwayz™',
     headline: 'Navigate with the bigger picture.',
     summary: 'Find your next stop, understand the water around you and keep the passage in view. Charts, vessel position and available traffic information share the same context.',
     shot: 'waterwayz-map', caption: 'The Above view: vessel, route and nearby places on the same chart.',
@@ -36,7 +36,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['route-planning', 'hazard-reporting', 'dockpass'], chart: true,
   },
   {
-    journey: 'passage-planner', id: 'route-planning', label: 'Route planning', product: 'WaterWayz™',
+    journey: 'passage-planner', id: 'route-planning', label: 'Route planning', product: 'InteliWaterwayz™',
     headline: 'A passage planned for your vessel.',
     summary: 'Choose the two ends of a passage and let the planner evaluate the route against your vessel’s dimensions and the available waterway information.',
     shot: 'waterwayz-route', caption: 'Review the passage, arrival time and conditions before setting off.',
@@ -51,7 +51,7 @@ export const CAPABILITIES: Capability[] = [
     related: ['navigation', 'hazard-reporting', 'dockpass'], chart: true,
   },
   {
-    journey: 'hazard-reroute', id: 'hazard-reporting', label: 'Hazards & reporting', product: 'WaterWayz™',
+    journey: 'hazard-reroute', id: 'hazard-reporting', label: 'Hazards & reporting', product: 'InteliWaterwayz™',
     headline: 'A clearer picture of what lies ahead.', status: 'Hazard viewing · Reporting in development',
     summary: 'See reported hazards in the context of your passage, with enough detail to judge how recent and well supported the information is. Community reporting is being developed alongside the existing viewing tools.',
     shot: 'waterwayz-map', caption: 'Hazards belong in the context of the water and the passage.',
@@ -68,7 +68,7 @@ export const CAPABILITIES: Capability[] = [
   {
     journey: 'aging-reading', id: 'monitoring', label: 'Vessel monitoring', product: 'InteliMARIS™ connected systems',
     headline: 'Stay connected to the vessel you care about.',
-    summary: 'See what supported sensors are telling you about power, water and conditions aboard. WaterWayz™ brings the readings, available history and the people looking after the vessel into one connected experience.',
+    summary: 'See what supported sensors are telling you about power, water and conditions aboard. InteliWaterwayz™ brings the readings, available history and the people looking after the vessel into one connected experience.',
     shot: 'waterwayz-sensors', caption: 'Voltage, current, bilge level and temperature with reading freshness.',
     availability: 'Vessel sensor and monitoring surfaces are implemented. Readings require compatible hardware and connectivity; the fleet overview currently contains sample data.',
     steps: [
@@ -111,15 +111,15 @@ export const CAPABILITIES: Capability[] = [
     related: ['route-planning', 'marina-pms', 'navigation'], chart: true,
   },
   {
-    journey: 'helm-view', id: 'emergency-assistance', label: 'Emergency Assistance', product: 'WaterWayz™',
+    journey: 'helm-view', id: 'emergency-assistance', label: 'Emergency Assistance', product: 'InteliWaterwayz™',
     headline: 'When every minute matters.',
-    summary: 'Clear information can help you explain where you are and which vessel needs assistance. WaterWayz brings the device’s position and vessel context into an emergency information screen.',
+    summary: 'Clear information can help you explain where you are and which vessel needs assistance. InteliWaterwayz brings the device’s position and vessel context into an emergency information screen.',
     status: 'Information tools available · Access-routing concepts planned',
-    shot: 'waterwayz-marina-card', caption: 'Marina context in WaterWayz. This is a destination view, not the emergency screen.',
+    shot: 'waterwayz-marina-card', caption: 'Marina context in InteliWaterwayz. This is a destination view, not the emergency screen.',
     availability: 'The current emergency screen shows device coordinates, position age, a copy control, vessel-name context and communication references. It does not dispatch responders or broadcast an alert to nearby vessels.',
     steps: [
       { title: 'Make the position clear', body: 'Read the device position in the formats shown, with its age visible. The screen distinguishes a current fix from a last-known position; it cannot supply a position the device does not have.' },
-      { title: 'Put the vessel in context', body: 'The current screen brings the vessel name together with information for communicating a request for help. WaterWayz is an assistance and information tool; established emergency communication channels remain essential.' },
+      { title: 'Put the vessel in context', body: 'The current screen brings the vessel name together with information for communicating a request for help. InteliWaterwayz is an assistance and information tool; established emergency communication channels remain essential.' },
       { title: 'Close the last-mile gap', body: 'A marina address may not explain how to reach a particular vessel. We are exploring a richer information pack with vessel identity, dock and slip, contacts and landside access guidance. Shareable access-to-vessel routes are a proposed integration.' },
     ],
     available: ['Device position with visible freshness', 'Copyable coordinates and vessel-name context', 'Emergency communication reference information'],

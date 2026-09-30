@@ -9,7 +9,7 @@
             <span class="t-caption">{{ t('footer.family.sea') }}</span>
           </li>
           <li>
-            <RouterLink to="/waterwayz" class="footer-mark"><Wordmark root="Water" domain="Wayz" product :size="22" tm /></RouterLink>
+            <RouterLink to="/waterwayz" class="footer-mark"><Wordmark root="Inteli" domain="Waterwayz" product :size="22" tm /></RouterLink>
             <span class="t-caption">{{ t('footer.family.waterwayz') }}</span>
           </li>
         </ul>
@@ -38,7 +38,7 @@
     <div class="container-wide footer-bottom">
       <hr class="line" />
       <p class="t-caption">{{ t('footer.copyright') }}</p>
-      <p class="t-caption" lang="en">InteliMarine LLC d/b/a InteliMARIS™. WaterWayz™ is the connected boating experience.</p>
+      <p class="t-caption" lang="en">InteliMarine LLC d/b/a InteliMARIS™. InteliWaterwayz™ is the connected boating experience.</p>
     </div>
   </footer>
 </template>

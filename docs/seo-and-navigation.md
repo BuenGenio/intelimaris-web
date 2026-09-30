@@ -49,7 +49,7 @@ IDs remain stable between server and client.
   BreadcrumbList, Product and catalog ItemList structured data where relevant.
   No invented prices, reviews, availability, certifications or social handles.
 - A route-generated XML sitemap and robots.txt; no guessed modification dates.
-- Static redirects for legacy WaterWayz and marina-PMS URLs. Unknown pages and
+- Static redirects for legacy InteliWaterwayz and marina-PMS URLs. Unknown pages and
   the alternate design preview are noindex. The GitHub Pages workflow preserves
   generated pages and 404.html instead of replacing the latter with the homepage.
 - Existing favicon sizes, an Apple touch icon and a browser-display web manifest.

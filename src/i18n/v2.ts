@@ -20,12 +20,12 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Planned',
     'availability.concept': 'Design concept',
     'v2.disclaimer.charts':
-      'WaterWayz supports what you can see from the helm. It does not replace official charts, and it is not approved as a navigation system.',
+      'InteliWaterwayz supports what you can see from the helm. It does not replace official charts, and it is not approved as a navigation system.',
 
     'v2.hero.eyebrow': 'Navigation · Sensors · Dockage · Marina operations',
     'v2.hero.title': 'We see what is happening on the water, and tell you before it matters.',
-    'v2.hero.lede': 'WaterWayz plans passages your vessel can make. The sensors watch her systems and say how old every reading is. Marinas run the basin from the pontoon. One platform, one sign-in.',
-    'v2.hero.primary': 'Explore WaterWayz',
+    'v2.hero.lede': 'InteliWaterwayz plans passages your vessel can make. The sensors watch her systems and say how old every reading is. Marinas run the basin from the pontoon. One platform, one sign-in.',
+    'v2.hero.primary': 'Explore InteliWaterwayz',
     'v2.hero.secondary': 'For marina operators',
     'v2.hero.shotCaption': 'Route, depth, wind, tide and a berth — on one screen.',
     'v2.hero.fact.marinas.label': 'Marinas charted',
@@ -69,7 +69,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.voyage.next': 'Next stage',
     'v2.voyage.progress': 'Passage progress',
 
-    'v2.app.overline': 'WaterWayz',
+    'v2.app.overline': 'InteliWaterwayz',
     'v2.app.title': 'Passages your vessel can make.',
     'v2.app.lede':
       'Everything is a workspace — a vessel, a marina, a private dock — inside one account, on web, iOS and Android.',
@@ -91,7 +91,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.app.feature.cameras.title': 'Helm, Above, 3D',
     'v2.app.feature.cameras.body':
       'Three cameras over one map — standard, satellite, nautical and seamark layers, with an offline bundle you can carry.',
-    'v2.app.cta': 'See WaterWayz',
+    'v2.app.cta': 'See InteliWaterwayz',
 
     'v2.pms.overline': 'Marina PMS',
     'v2.pms.title': 'Run the basin from the pontoon.',
@@ -231,12 +231,12 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Previsto',
     'availability.concept': 'Concepto de diseño',
     'v2.disclaimer.charts':
-      'WaterWayz apoya lo que ves desde el timón. No sustituye a las cartas oficiales y no está aprobado como sistema de navegación.',
+      'InteliWaterwayz apoya lo que ves desde el timón. No sustituye a las cartas oficiales y no está aprobado como sistema de navegación.',
 
     'v2.hero.eyebrow': 'Navegación · Sensores · Amarre · Operación de marinas',
     'v2.hero.title': 'Vemos lo que pasa en el agua, y te lo decimos antes de que importe.',
-    'v2.hero.lede': 'WaterWayz planifica travesías que tu barco puede hacer. Los sensores vigilan sus sistemas y dicen la antigüedad de cada lectura. Las marinas gestionan la dársena desde el pantalán. Una plataforma, un único acceso.',
-    'v2.hero.primary': 'Descubre WaterWayz',
+    'v2.hero.lede': 'InteliWaterwayz planifica travesías que tu barco puede hacer. Los sensores vigilan sus sistemas y dicen la antigüedad de cada lectura. Las marinas gestionan la dársena desde el pantalán. Una plataforma, un único acceso.',
+    'v2.hero.primary': 'Descubre InteliWaterwayz',
     'v2.hero.secondary': 'Para marinas',
     'v2.hero.shotCaption': 'Ruta, sonda, viento, marea y amarre — en una sola pantalla.',
     'v2.hero.fact.marinas.label': 'Marinas cartografiadas',
@@ -280,7 +280,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.voyage.next': 'Etapa siguiente',
     'v2.voyage.progress': 'Progreso de la travesía',
 
-    'v2.app.overline': 'WaterWayz',
+    'v2.app.overline': 'InteliWaterwayz',
     'v2.app.title': 'Travesías que tu barco puede hacer.',
     'v2.app.lede':
       'Todo es un espacio de trabajo — un barco, una marina, un pantalán privado — dentro de una sola cuenta, en web, iOS y Android.',
@@ -302,7 +302,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.app.feature.cameras.title': 'Timón, Cenital, 3D',
     'v2.app.feature.cameras.body':
       'Tres cámaras sobre un mismo mapa — capas estándar, satélite, náutica y de balizamiento, con un paquete offline que puedes llevarte.',
-    'v2.app.cta': 'Ver WaterWayz',
+    'v2.app.cta': 'Ver InteliWaterwayz',
 
     'v2.pms.overline': 'Marina PMS',
     'v2.pms.title': 'Gestiona la dársena desde el pantalán.',
@@ -442,12 +442,12 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Σχεδιασμένο',
     'availability.concept': 'Σχεδιαστική ιδέα',
     'v2.disclaimer.charts':
-      'Το WaterWayz υποστηρίζει ό,τι βλέπεις από το πηδάλιο. Δεν αντικαθιστά τους επίσημους χάρτες και δεν είναι εγκεκριμένο ως σύστημα ναυσιπλοΐας.',
+      'Το InteliWaterwayz υποστηρίζει ό,τι βλέπεις από το πηδάλιο. Δεν αντικαθιστά τους επίσημους χάρτες και δεν είναι εγκεκριμένο ως σύστημα ναυσιπλοΐας.',
 
     'v2.hero.eyebrow': 'Ναυσιπλοΐα · Αισθητήρες · Ελλιμενισμός · Λειτουργία μαρίνας',
     'v2.hero.title': 'Βλέπουμε τι συμβαίνει στο νερό, και σου το λέμε πριν μετρήσει.',
-    'v2.hero.lede': 'Το WaterWayz σχεδιάζει πλόες που το σκάφος σου μπορεί να κάνει. Οι αισθητήρες παρακολουθούν τα συστήματά του και λένε πόσο παλιά είναι κάθε ένδειξη. Οι μαρίνες διαχειρίζονται τον λιμενίσκο από την προβλήτα. Μία πλατφόρμα, μία σύνδεση.',
-    'v2.hero.primary': 'Δες το WaterWayz',
+    'v2.hero.lede': 'Το InteliWaterwayz σχεδιάζει πλόες που το σκάφος σου μπορεί να κάνει. Οι αισθητήρες παρακολουθούν τα συστήματά του και λένε πόσο παλιά είναι κάθε ένδειξη. Οι μαρίνες διαχειρίζονται τον λιμενίσκο από την προβλήτα. Μία πλατφόρμα, μία σύνδεση.',
+    'v2.hero.primary': 'Δες το InteliWaterwayz',
     'v2.hero.secondary': 'Για μαρίνες',
     'v2.hero.shotCaption': 'Πορεία, βάθος, άνεμος, παλίρροια και θέση — σε μία οθόνη.',
     'v2.hero.fact.marinas.label': 'Χαρτογραφημένες μαρίνες',
@@ -491,7 +491,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.voyage.next': 'Επόμενο στάδιο',
     'v2.voyage.progress': 'Πρόοδος πλου',
 
-    'v2.app.overline': 'WaterWayz',
+    'v2.app.overline': 'InteliWaterwayz',
     'v2.app.title': 'Πλόες που το σκάφος σου μπορεί να κάνει.',
     'v2.app.lede':
       'Τα πάντα είναι χώρος εργασίας — ένα σκάφος, μια μαρίνα, μια ιδιωτική προβλήτα — μέσα σε έναν λογαριασμό, σε web, iOS και Android.',
@@ -513,7 +513,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.app.feature.cameras.title': 'Πηδάλιο, Από ψηλά, 3D',
     'v2.app.feature.cameras.body':
       'Τρεις κάμερες πάνω σε έναν χάρτη — στρώσεις στάνταρ, δορυφορική, ναυτική και σημαντήρων, με πακέτο εκτός σύνδεσης που το παίρνεις μαζί σου.',
-    'v2.app.cta': 'Δες το WaterWayz',
+    'v2.app.cta': 'Δες το InteliWaterwayz',
 
     'v2.pms.overline': 'Marina PMS',
     'v2.pms.title': 'Διαχειρίσου τον λιμενίσκο από την προβλήτα.',
@@ -653,12 +653,12 @@ export const v2Translations: Record<Language, Translations> = {
     'availability.planned': 'Заплановано',
     'availability.concept': 'Концепт дизайну',
     'v2.disclaimer.charts':
-      'WaterWayz допомагає бачити те, що видно зі штурвала. Він не замінює офіційні карти й не схвалений як навігаційна система.',
+      'InteliWaterwayz допомагає бачити те, що видно зі штурвала. Він не замінює офіційні карти й не схвалений як навігаційна система.',
 
     'v2.hero.eyebrow': 'Навігація · Сенсори · Швартування · Робота марини',
     'v2.hero.title': 'Ми бачимо, що відбувається на воді, і кажемо вам до того, як це матиме значення.',
-    'v2.hero.lede': 'WaterWayz прокладає переходи, які ваше судно здатне пройти. Сенсори стежать за його системами й кажуть, скільки кожному показанню. Марини керують акваторією з пірса. Одна платформа, один вхід.',
-    'v2.hero.primary': 'Огляд WaterWayz',
+    'v2.hero.lede': 'InteliWaterwayz прокладає переходи, які ваше судно здатне пройти. Сенсори стежать за його системами й кажуть, скільки кожному показанню. Марини керують акваторією з пірса. Одна платформа, один вхід.',
+    'v2.hero.primary': 'Огляд InteliWaterwayz',
     'v2.hero.secondary': 'Для марин',
     'v2.hero.shotCaption': 'Маршрут, глибина, вітер, приплив і місце — на одному екрані.',
     'v2.hero.fact.marinas.label': 'Марин на картах',
@@ -702,7 +702,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.voyage.next': 'Наступний етап',
     'v2.voyage.progress': 'Хід переходу',
 
-    'v2.app.overline': 'WaterWayz',
+    'v2.app.overline': 'InteliWaterwayz',
     'v2.app.title': 'Переходи, які ваше судно здатне пройти.',
     'v2.app.lede':
       'Усе є робочим простором — судно, марина, приватний пірс — в одному акаунті, у вебі, на iOS та Android.',
@@ -724,7 +724,7 @@ export const v2Translations: Record<Language, Translations> = {
     'v2.app.feature.cameras.title': 'Штурвал, Згори, 3D',
     'v2.app.feature.cameras.body':
       'Три камери над однією картою — стандартний, супутниковий, морський шари й буї, з офлайн-пакетом, який можна взяти з собою.',
-    'v2.app.cta': 'Переглянути WaterWayz',
+    'v2.app.cta': 'Переглянути InteliWaterwayz',
 
     'v2.pms.overline': 'Marina PMS',
     'v2.pms.title': 'Керуйте акваторією з пірса.',

@@ -1,5 +1,5 @@
 /**
- * Where the site hands people to the WaterWayz app. The site collects a role
+ * Where the site hands people to the InteliWaterwayz app. The site collects a role
  * and a phone number; the app sends the text message, confirms the number and
  * takes the name and email, so nothing personal is stored here.
  *

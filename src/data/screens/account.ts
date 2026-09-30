@@ -2,14 +2,14 @@ import type { ScreenGroup } from './types'
 
 /** The account: the front door, the profile journey, Home, Explore and everything under /account. */
 export const ACCOUNT: ScreenGroup = {
-  id: 'account', label: 'Your account', kind: 'account', app: 'WaterWayz', frame: 'phone', slug: 'sam',
+  id: 'account', label: 'Your account', kind: 'account', app: 'InteliWaterwayz', frame: 'phone', slug: 'sam',
   doors: [
     { id: 'home', label: 'Home' }, { id: 'explore', label: 'Explore' }, { id: 'notifications', label: 'Notifications' }, { id: 'account', label: 'Account' },
   ],
   screens: [
-    { id: 'account-landing', label: 'Welcome', path: '/welcome', door: 'home', summary: 'The front door: create an account, sign in with WaterWAYZ ID, or open the demo.', load: () => import('@/components/screens/account/Landing.vue') },
-    { id: 'account-sign-up', label: 'Sign up', path: '/sign-up', door: 'home', summary: 'Create your account on WaterWAYZ ID by email, with the phone tab pending and the demo door beneath.', load: () => import('@/components/screens/account/SignUp.vue') },
-    { id: 'account-verify', label: 'Confirm your email', path: '/verify', door: 'home', summary: 'The half-verified waiting room: check again once the confirmation link is opened, or go back to WaterWAYZ ID.', load: () => import('@/components/screens/account/Verify.vue') },
+    { id: 'account-landing', label: 'Welcome', path: '/welcome', door: 'home', summary: 'The front door: create an account, sign in with InteliWaterwayz ID, or open the demo.', load: () => import('@/components/screens/account/Landing.vue') },
+    { id: 'account-sign-up', label: 'Sign up', path: '/sign-up', door: 'home', summary: 'Create your account on InteliWaterwayz ID by email, with the phone tab pending and the demo door beneath.', load: () => import('@/components/screens/account/SignUp.vue') },
+    { id: 'account-verify', label: 'Confirm your email', path: '/verify', door: 'home', summary: 'The half-verified waiting room: check again once the confirmation link is opened, or go back to InteliWaterwayz ID.', load: () => import('@/components/screens/account/Verify.vue') },
     { id: 'account-onboarding-terms', label: 'The ground rules', path: '/onboarding/terms', door: 'home', summary: 'The acceptance checkpoint: the non-certification statement, the documents and a box that is never pre-ticked.', load: () => import('@/components/screens/account/OnboardingTerms.vue') },
     { id: 'account-onboarding-home-port', label: 'Home port', path: '/onboarding/home-port', door: 'home', summary: 'Pick the marina you keep the vessel at; the chart centres there and the units badge flips feet and metres.', load: () => import('@/components/screens/account/OnboardingHomePort.vue') },
     { id: 'account-onboarding-crew-card', label: 'Your crew card', path: '/onboarding/crew-card', door: 'home', summary: 'A name, a photo and how you sail; the card and the completeness ring build as you tap.', load: () => import('@/components/screens/account/OnboardingCrewCard.vue') },

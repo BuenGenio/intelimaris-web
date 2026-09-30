@@ -2,7 +2,7 @@ import type { ScreenGroup } from './types'
 
 /** The vessel's own rooms: what she is, what her sensors say, who is aboard, where she ties up. */
 export const VESSEL_CARE: ScreenGroup = {
-  id: 'vessel-care', label: 'Aboard: the vessel', kind: 'vessel', app: 'WaterWayz', frame: 'phone', slug: 'wanderer',
+  id: 'vessel-care', label: 'Aboard: the vessel', kind: 'vessel', app: 'InteliWaterwayz', frame: 'phone', slug: 'wanderer',
   doors: [
     { id: 'overview', label: 'Overview' }, { id: 'map', label: 'Map' }, { id: 'sensors', label: 'Sensors' }, { id: 'crew', label: 'Crew' }, { id: 'dockpass', label: 'Dockpass' },
     { id: 'vessel', label: 'Vessel' }, { id: 'maintenance', label: 'Maintenance' }, { id: 'chat', label: 'Chat' }, { id: 'settings', label: 'Settings' },

@@ -12,7 +12,7 @@
       <span class="onb-ring"><b class="scr-num">10%</b><i>complete</i></span>
       <div>
         <h1 class="scr-h2">The ground rules</h1>
-        <p class="scr-sub scr-small">What you are agreeing to, and the one thing WaterWayz is not.</p>
+        <p class="scr-sub scr-small">What you are agreeing to, and the one thing InteliWaterwayz is not.</p>
         <p class="scr-micro scr-muted">Nothing on this step changes your profile — the ring starts moving on the next one.</p>
       </div>
     </div>
@@ -21,7 +21,7 @@
       <div class="scr-alert" data-tone="warn">
         <ScrIcon name="alert" />
         <div>
-          <strong>WaterWayz is not a certified navigation system.</strong>
+          <strong>InteliWaterwayz is not a certified navigation system.</strong>
           <span class="scr-small">It plans against your draft, and it will tell you what it knows about the water ahead. It does not replace official charts, a working depth sounder, or your judgement. Always navigate with official charts.</span>
         </div>
       </div>
@@ -32,7 +32,7 @@
       </ul>
       <label class="scr-row onb-consent" @click="accepted = !accepted">
         <span class="scr-check" :class="{ 'is-on': accepted }"><ScrIcon v-if="accepted" name="check" /></span>
-        <span class="scr-small">I accept the terms of service and the privacy policy, and I understand WaterWayz is not a certified navigation system.</span>
+        <span class="scr-small">I accept the terms of service and the privacy policy, and I understand InteliWaterwayz is not a certified navigation system.</span>
       </label>
       <p v-if="!accepted" class="scr-micro scr-muted">Tick the box to continue.</p>
     </div>

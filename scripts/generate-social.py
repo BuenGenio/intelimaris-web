@@ -13,7 +13,7 @@ cards = {
     'hardware': ('CONNECTED SYSTEMS', ['Marine hardware.', 'Made for your vessel.']),
     'audiences': ('YOUR PERSPECTIVE', ['Find your view', 'on the water.']),
     'marinas': ('INTELIMARINA + DOCK PASS', ['From approach', 'to alongside.']),
-    'waterwayz': ('WATERWAYZ', ['Your whole boating', 'experience. Connected.']),
+    'waterwayz': ('INTELIWATERWAYZ', ['Your whole boating', 'experience. Connected.']),
     'geospatial': ('SURVEY & GEOSPATIAL', ['A closer look', 'at the waterfront.']),
     'company': ('THE PEOPLE BEHIND THE PLATFORM', ['Technology for', 'life on the water.']),
     'platform': ('THE INTELIMARIS PLATFORM', ['Navigate. Monitor.', 'Arrive.']),

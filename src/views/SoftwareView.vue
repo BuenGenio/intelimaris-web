@@ -7,8 +7,8 @@
       <div class="guide-heading">
       <h1>Connected by design. Useful in your day.</h1>
       <div>
-      <p class="editorial-lede">Sensors capture what is happening. The radio network carries the data. Software adds structure and context. WaterWayz™ brings the useful information to the people who need it.</p>
-      <RouterLink to="/waterwayz" class="editorial-button">Explore WaterWayz™ <span aria-hidden="true">↗</span>
+      <p class="editorial-lede">Sensors capture what is happening. The radio network carries the data. Software adds structure and context. InteliWaterwayz™ brings the useful information to the people who need it.</p>
+      <RouterLink to="/waterwayz" class="editorial-button">Explore InteliWaterwayz™ <span aria-hidden="true">↗</span>
       </RouterLink>
       </div>
       </div>

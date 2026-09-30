@@ -45,7 +45,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      meta: { title: 'Your day on the water, connected', description: 'InteliMARIS connects navigation, vessel monitoring and marina operations through WaterWayz. Find the guide for your role on the water or on shore.' },
+      meta: { title: 'Your day on the water, connected', description: 'InteliMARIS connects navigation, vessel monitoring and marina operations through InteliWaterwayz. Find the guide for your role on the water or on shore.' },
       component: HomeView,
     },
     {
@@ -100,7 +100,7 @@ const router = createRouter({
     {
       path: '/waterwayz',
       name: 'waterwayz',
-      component: () => import('../views/WaterWayzView.vue'),
+      component: () => import('../views/InteliWaterwayzView.vue'),
     },
     {
       path: '/inteliwaterwayz',

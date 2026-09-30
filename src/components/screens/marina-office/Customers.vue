@@ -13,7 +13,7 @@
 
     <div v-if="adding" class="scr-card" style="margin-bottom: 14px">
       <p class="scr-card-title">New customer</p>
-      <p class="scr-sub scr-small" style="margin-bottom: 10px">A name is all this needs — no WaterWayz account, no email, nothing else you would have to ask for across a busy fuel dock.</p>
+      <p class="scr-sub scr-small" style="margin-bottom: 10px">A name is all this needs — no InteliWaterwayz account, no email, nothing else you would have to ask for across a busy fuel dock.</p>
       <div class="scr-grid-2">
         <div class="scr-field"><span class="scr-label">Name</span><input class="scr-input" value="" placeholder="However it was given — a person or a company" /></div>
         <div class="scr-field"><span class="scr-label">Phone</span><input class="scr-input" value="" placeholder="If one was given" /></div>

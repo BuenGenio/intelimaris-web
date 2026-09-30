@@ -28,7 +28,7 @@
 
     <section class="scr-section">
       <div class="scr-row scr-row--between"><p class="scr-ov">Export</p><button type="button" class="scr-btn scr-btn--ghost scr-btn--sm">Plan a passage</button></div>
-      <p class="scr-small scr-muted gx-desc">The passages you have planned, each as .gpx. Exported routes carry your waypoints exactly as you drew them — WaterWayz does not add or move a point.</p>
+      <p class="scr-small scr-muted gx-desc">The passages you have planned, each as .gpx. Exported routes carry your waypoints exactly as you drew them — InteliWaterwayz does not add or move a point.</p>
       <div class="scr-list">
         <div v-for="p in PASSAGES" :key="p[0]" class="scr-item scr-item--plain">
           <span><span class="scr-item-title">{{ p[0] }}</span><span class="scr-item-sub scr-num">{{ p[1] }}</span></span>

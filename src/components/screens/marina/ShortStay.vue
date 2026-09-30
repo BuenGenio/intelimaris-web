@@ -32,8 +32,8 @@ const groups = [
   {
     title: 'Waiting on you', description: 'Nobody gets a berth until someone here says yes, or no.', competing: '2 requests ask for the same nights; whichever you confirm takes them.',
     rows: [
-      { name: 'Wanderer · Sam Miller', pill: 'Requested', tone: 'warn', quote: '$294.00', line: '14–17 Oct · 3 nights · 42 ft Sabre · draft 4.6 ft · via WaterWayz', actions: ['Confirm', 'Decline'] },
-      { name: 'Kestrel', pill: 'Requested', tone: 'warn', quote: '$168.00', line: '14–16 Oct · 2 nights · 31 ft · no berth can be held yet · via WaterWayz', actions: ['Confirm', 'Decline'] },
+      { name: 'Wanderer · Sam Miller', pill: 'Requested', tone: 'warn', quote: '$294.00', line: '14–17 Oct · 3 nights · 42 ft Sabre · draft 4.6 ft · via InteliWaterwayz', actions: ['Confirm', 'Decline'] },
+      { name: 'Kestrel', pill: 'Requested', tone: 'warn', quote: '$168.00', line: '14–16 Oct · 2 nights · 31 ft · no berth can be held yet · via InteliWaterwayz', actions: ['Confirm', 'Decline'] },
       { name: 'Meridian', pill: 'Requested', tone: 'warn', quote: '$1,140.00', line: '22–26 Oct · 4 nights · 62 ft · via marina site', actions: ['Confirm', 'Decline'] },
     ],
   },
@@ -42,8 +42,8 @@ const groups = [
     rows: [
       { name: 'Blue Heron', pill: 'Confirmed', tone: 'info', quote: '$92.00', line: '14–15 Oct · 1 night · B-7 · enter 180° bow-in · port-to · 6.9 ft MLLW · via VHF', actions: ['Arrived', 'Move berth', 'Release', 'Cancel'] },
       { name: 'Sea Change', pill: 'Confirmed', tone: 'info', quote: '$780.00', line: '14–20 Oct · 6 nights · no berth assigned yet · via marina site', actions: ['Arrived', 'Assign a berth', 'Cancel'] },
-      { name: 'Halcyon', pill: 'Alongside', tone: 'safe', quote: '$372.00', line: '11–14 Oct · 3 nights · A-3 · enter 090° bow-in · port-to · 8.2 ft MLLW · via WaterWayz', actions: ['Departed', 'Move berth'] },
-      { name: 'Andiamo', pill: 'Confirmed', tone: 'info', quote: '$1,960.00', line: '21–28 Oct · 7 nights · C-2 · enter 240° stern-in · starboard-to · 7.5 ft MLLW · via WaterWayz', actions: ['Move berth', 'Release', 'Cancel'] },
+      { name: 'Halcyon', pill: 'Alongside', tone: 'safe', quote: '$372.00', line: '11–14 Oct · 3 nights · A-3 · enter 090° bow-in · port-to · 8.2 ft MLLW · via InteliWaterwayz', actions: ['Departed', 'Move berth'] },
+      { name: 'Andiamo', pill: 'Confirmed', tone: 'info', quote: '$1,960.00', line: '21–28 Oct · 7 nights · C-2 · enter 240° stern-in · starboard-to · 7.5 ft MLLW · via InteliWaterwayz', actions: ['Move berth', 'Release', 'Cancel'] },
     ],
   },
   {

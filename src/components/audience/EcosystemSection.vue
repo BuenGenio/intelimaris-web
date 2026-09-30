@@ -6,9 +6,9 @@
       <p class="editorial-eyebrow">How it connects</p>
       <h2>One ecosystem. A clear role for every part.</h2>
       </div>
-        <p>InteliMARIS™ is the company and marine brand. WaterWayz™ is the experience that brings the journey, vessel and people together.</p>
+        <p>InteliMARIS™ is the company and marine brand. InteliWaterwayz™ is the experience that brings the journey, vessel and people together.</p>
       </div>
-      <ol class="ecosystem-flow" aria-label="From vessel data to the WaterWayz experience">
+      <ol class="ecosystem-flow" aria-label="From vessel data to the InteliWaterwayz experience">
         <li>
       <span class="editorial-index">01 / ABOARD</span>
       <h3>Connected systems</h3>
@@ -29,9 +29,9 @@
       </li>
         <li>
       <span class="editorial-index">04 / YOUR VIEW</span>
-      <h3>WaterWayz™</h3>
+      <h3>InteliWaterwayz™</h3>
       <p>Plan the passage, view connected systems and coordinate the arrival. InteliMarina + Dock Pass connect the marina side of the journey.</p>
-      <RouterLink to="/waterwayz">Explore WaterWayz →</RouterLink>
+      <RouterLink to="/waterwayz">Explore InteliWaterwayz →</RouterLink>
       </li>
       </ol>
       <p class="ecosystem-context">Underway · At anchor · At your home marina · At a transient marina</p>

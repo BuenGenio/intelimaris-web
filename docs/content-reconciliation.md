@@ -10,12 +10,12 @@ production availability, certification, trademark registration or a release date
 **Your day on the water. Connected.**
 
 Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS
-brings it together through WaterWayz. Choose your role to start with the work
+brings it together through InteliWaterwayz. Choose your role to start with the work
 that matters to you.
 
 The homepage keeps the user's audience-first requirement. A concise promise
 precedes the nine-role chooser; role selection changes the preview, relevant
-capabilities and contact intent. A large real WaterWayz view follows it. The
+capabilities and contact intent. A large real InteliWaterwayz view follows it. The
 homepage then introduces connected systems and explains the ecosystem without
 turning into a hardware specification sheet.
 
@@ -25,18 +25,18 @@ turning into a hardware specification sheet.
 | --- | --- |
 | Audience journeys | Keep all nine code-backed guides, public deep links, optional remembered preference and contextual contact. Choosing an audience never grants product permissions. |
 | Consumer promise | Use the PDF's connected-boating idea, direct benefits and specific CTAs. Keep detailed workflows on their dedicated pages. |
-| Brand architecture | InteliMARIS is the public marine brand of InteliMarine LLC; WaterWayz is the boater-facing experience. PWTS, InteliBilge and InteliBMS are connected-system families. |
+| Brand architecture | InteliMARIS is the public marine brand of InteliMarine LLC; InteliWaterwayz is the boater-facing experience. PWTS, InteliBilge and InteliBMS are connected-system families. |
 | Radio and software | MX MariWavz is specifically the radio network. The technology Stack is software/data infrastructure; developing AI belongs there. Gateway, uplink and compatibility still matter. |
-| WaterWayz | More prominent on the homepage and in navigation. Navigation, passage planning, monitoring, discovery and arrival workflows connect through the product guides. |
+| InteliWaterwayz | More prominent on the homepage and in navigation. Navigation, passage planning, monitoring, discovery and arrival workflows connect through the product guides. |
 | InteliMarina + Dock Pass | Pair the consumer arrival story with real marina/PMS workflows. Existing dashboard, layout, arrivals and staff functionality is retained; finance, planning boards and other gaps stay explicit. No universal live inventory, instant booking or payment promise. |
 | Emergency Assistance | Dedicated capability page. The implementation supports device coordinates, age, copy control, vessel name and communication references. Rich vessel information packs, landside access routes and responder integrations are proposed rather than presented as operational. No dispatch claim. |
 | PWTS / InteliBMS | Add dedicated system overviews linking to the existing hardware catalog and monitoring workflow. Treat battery estimates, model predictions and measurements distinctly. |
 | InteliBilge | Replace cloud-AI pump-control and guaranteed flood-prevention language with local hardware/firmware configuration plus connected awareness. Detailed catalog pages remain reachable. |
 | Developing intelligence | Explain Monitor → Analyze → Detect → Assess → Inform. The current monitoring view supports prediction provenance; broad anomaly detection, maintenance intelligence and contextual recommendations still require validation. |
-| Drone / geospatial | Add a dedicated Pilot Byte collaboration overview with a link to the real survey demo. Preserve the fact that the demo uses Halifax Harbor LiDAR alongside Bahia Mar sample listing information. WaterWayz layers, occupancy surveys, access routing and deployable-drone workflows are developing concepts. |
+| Drone / geospatial | Add a dedicated Pilot Byte collaboration overview with a link to the real survey demo. Preserve the fact that the demo uses Halifax Harbor LiDAR alongside Bahia Mar sample listing information. InteliWaterwayz layers, occupancy surveys, access routing and deployable-drone workflows are developing concepts. |
 | InteliVision | Add a small, clearly labeled Coming soon / Concept guide. No autonomous docking, availability or delivery-date promise. |
 | Product credibility | Keep actual product screenshots, real team biographies and survey provenance. Do not invent signed pilots, testimonials, certifications, patents, range validation or safety guarantees. |
-| Trademarks | Normalize WaterWayz and MX MariWavz naming; retain the repository's existing ™ convention. Do not change InteliMARIS to ® solely on the basis of the PDF. |
+| Trademarks | Normalize InteliWaterwayz and MX MariWavz naming; retain the repository's existing ™ convention. Do not change InteliMARIS to ® solely on the basis of the PDF. |
 | Breadcrumbs and discovery | Shared accessible breadcrumbs remain on inner pages. New pages have route metadata, sitemap entries and relevant cross-links. |
 
 ## Source checks beyond the first audience audit

@@ -50,7 +50,7 @@
             <a href="https://intelimaris.com">intelimaris.com</a>
           </p>
         </section>
-        <p class="press-marks">InteliMARIS™ and WaterWayz™ are trademarks of InteliMarine LLC.</p>
+        <p class="press-marks">InteliMARIS™ and InteliWaterwayz™ are trademarks of InteliMarine LLC.</p>
       </footer>
     </article>
 

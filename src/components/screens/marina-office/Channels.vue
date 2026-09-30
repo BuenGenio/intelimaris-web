@@ -58,7 +58,7 @@ const channels = [
 ]
 const rules = [
   { channel: 'Direct', note: 'Phone, VHF and the office', sells: 'Every band', commission: '0%', instant: 'Dockmaster decides', status: 'Open', tone: 'safe' },
-  { channel: 'DockPass', note: 'WaterWayz marketplace', sells: 'Transient bands', commission: '8%', instant: 'Up to 50 ft', status: 'Open', tone: 'safe' },
+  { channel: 'DockPass', note: 'InteliWaterwayz marketplace', sells: 'Transient bands', commission: '8%', instant: 'Up to 50 ft', status: 'Open', tone: 'safe' },
   { channel: 'Walk-in', note: 'Fuel dock and the T-head', sells: 'Transient bands', commission: '0%', instant: 'Yes', status: 'Open', tone: 'safe' },
   { channel: 'Agents', note: 'Yacht management and brokers', sells: '50 ft and up', commission: '10%', instant: 'No', status: 'Open', tone: 'safe' },
   { channel: 'Boat show block', note: 'Show organiser allocation', sells: 'Boat show week', commission: '0%', instant: 'No', status: 'Closes 20 Oct', tone: 'warn' },

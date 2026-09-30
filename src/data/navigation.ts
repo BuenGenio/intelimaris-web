@@ -1,7 +1,7 @@
 /** Shared by desktop, mobile and footer navigation. */
 export const MAIN_NAVIGATION = [
   { to: '/#choose', label: 'For you' },
-  { to: '/waterwayz', label: 'WaterWayz™' },
+  { to: '/waterwayz', label: 'InteliWaterwayz™' },
   { to: '/capabilities', label: 'Platform & software' },
   { to: '/products', label: 'Hardware' },
   { to: '/about', label: 'Our story' },

@@ -395,7 +395,7 @@ export const productCatalog: CatalogEntry[] = [
     name: 'Water-ingress Monitoring & Pump Supervision',
     category: 'system',
     overview:
-      'A system approach to water-level sensing and bilge-pump supervision. Local hardware and firmware provide the configured protection; WaterWayz™ adds supported connected readings and history. Pump behavior, alarms and installation scope must be confirmed for the vessel. Advanced ingress analysis is in development.',
+      'A system approach to water-level sensing and bilge-pump supervision. Local hardware and firmware provide the configured protection; InteliWaterwayz™ adds supported connected readings and history. Pump behavior, alarms and installation scope must be confirmed for the vessel. Advanced ingress analysis is in development.',
     features: [
       'Solid-state sensing – no moving parts',
       'Multi-level detection (normal, pump-on, high water)',
@@ -431,7 +431,7 @@ export const productCatalog: CatalogEntry[] = [
       'IM601 sensor with pre-installed 5-year lithium battery, mounting hardware',
       'InteliMaris self-priming bilge pump with hose barbs, mounting bracket',
       'MX MariWavz™ radio network gateway (one per vessel)',
-      'WaterWayz™ access: confirm deployment arrangements',
+      'InteliWaterwayz™ access: confirm deployment arrangements',
       'Confirm software access and service terms with the supplied system',
     ],
     applications:

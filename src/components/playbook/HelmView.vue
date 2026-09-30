@@ -1,7 +1,7 @@
 <template>
   <section class="hv" :data-view="view" :class="{ 'hv--arrived': arrived, 'hv--sheet': !!sheet }">
     <div class="hv-topline">
-      <p class="t-overline hv-eyebrow">WaterWayz · Ride Along · sample passage</p>
+      <p class="t-overline hv-eyebrow">InteliWaterwayz · Ride Along · sample passage</p>
       <p class="hv-hint t-caption" :key="view">{{ viewMeta.hint }}</p>
     </div>
 
@@ -130,10 +130,10 @@
       <Transition name="hv-fade">
         <div v-if="sheet" class="hv-sheet" role="dialog" aria-modal="true" aria-labelledby="hv-sheet-title" @keydown.esc="closeSheet" @click.self="closeSheet">
           <div class="hv-sheet-card">
-            <p class="t-overline hv-sheet-ov">Emergency · two taps in WaterWayz</p>
+            <p class="t-overline hv-sheet-ov">Emergency · two taps in InteliWaterwayz</p>
             <h3 id="hv-sheet-title" class="hv-sheet-title">Every vessel within range sees what it is, which way, and how far.</h3>
             <p class="hv-sheet-text">
-              In WaterWayz you pick what has happened and the alert goes to every vessel within the range the operator
+              In InteliWaterwayz you pick what has happened and the alert goes to every vessel within the range the operator
               has set, each of which can say it is responding. Nothing leaves this demonstration.
             </p>
             <dl class="hv-stats hv-stats--sheet">

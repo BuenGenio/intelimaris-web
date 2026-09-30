@@ -2,7 +2,7 @@
   <section class="hz" :data-phone="isPhone || undefined">
     <header class="hz-head">
       <div class="hz-head-text">
-        <p class="t-overline">WaterWayz · hazards on a live passage · sample</p>
+        <p class="t-overline">InteliWaterwayz · hazards on a live passage · sample</p>
         <p class="hz-lede">
           Sunrise Bay to Bahia Mar at {{ CRUISE_KN }} kn. Tap the water where you see something; say it is still there, or that it is gone.
         </p>

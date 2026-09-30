@@ -3,7 +3,7 @@
     <div class="scr-head">
       <div>
         <h1 class="scr-h1">Welcome, Sam.</h1>
-        <p class="scr-sub">One tap to your chart. Workspaces are how WaterWayz is organized — one per vessel, marina, dock or business.</p>
+        <p class="scr-sub">One tap to your chart. Workspaces are how InteliWaterwayz is organized — one per vessel, marina, dock or business.</p>
       </div>
     </div>
 

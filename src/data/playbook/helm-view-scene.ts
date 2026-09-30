@@ -1,5 +1,5 @@
 /**
- * Scene and arithmetic for the "Underway at the helm" journey: the WaterWayz
+ * Scene and arithmetic for the "Underway at the helm" journey: the InteliWaterwayz
  * main screen as a working demo. The component owns state and drawing; this
  * module owns the passage, where the vessel is along it, and the numbers the
  * cards show, so they can be tested on their own.

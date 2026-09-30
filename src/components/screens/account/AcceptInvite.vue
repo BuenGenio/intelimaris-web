@@ -1,7 +1,7 @@
 <template>
   <div class="scr">
     <div class="scr-row scr-row--between" style="margin-bottom: 14px">
-      <span class="scr-ov">WaterWayz</span>
+      <span class="scr-ov">InteliWaterwayz</span>
       <button type="button" class="scr-btn scr-btn--sm scr-btn--ghost">Day · Dusk · Night</button>
     </div>
 

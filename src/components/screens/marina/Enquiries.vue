@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import ScrIcon from '@/components/screens/kit/ScrIcon.vue'
 const rows = [
-  { who: 'Sam Miller · Wanderer, 42 ft', channel: 'WaterWayz', icon: 'message', tone: 'accent', ask: 'Three nights from 14 Oct, 50 A power, near the fuel dock if possible', age: '2 h ago' },
+  { who: 'Sam Miller · Wanderer, 42 ft', channel: 'InteliWaterwayz', icon: 'message', tone: 'accent', ask: 'Three nights from 14 Oct, 50 A power, near the fuel dock if possible', age: '2 h ago' },
   { who: 'Priya Natarajan · Meridian, 62 ft', channel: 'Email', icon: 'message', tone: undefined, ask: 'Monthly rate for November through March; two crew aboard', age: '5 h ago' },
   { who: 'Unnamed caller · about 45 ft', channel: 'Phone', icon: 'phone', tone: 'warn', ask: 'Room tonight? Will call back on 71', age: '40 min ago' },
   { who: 'Charter Yachts of FLL', channel: 'Walk-up', icon: 'users', tone: undefined, ask: 'Block of 6 berths for the show week, 21–25 Oct', age: 'yesterday' },

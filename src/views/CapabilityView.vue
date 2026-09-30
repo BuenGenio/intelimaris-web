@@ -13,10 +13,10 @@
           <RouterLink v-if="feature.id === 'marina-pms'" to="/demo/marina/bahia-mar" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
         </div>
       </div>
-      <aside class="release-note"><strong>{{ feature.status || 'Current workflow · Availability depends on coverage and setup' }}</strong><p>{{ feature.availability }}</p><p v-if="feature.id === 'emergency-assistance'">WaterWayz™ does not replace emergency services, a marine radio or the applicable emergency number.</p></aside>
+      <aside class="release-note"><strong>{{ feature.status || 'Current workflow · Availability depends on coverage and setup' }}</strong><p>{{ feature.availability }}</p><p v-if="feature.id === 'emergency-assistance'">InteliWaterwayz™ does not replace emergency services, a marine radio or the applicable emergency number.</p></aside>
       <JourneySection v-if="feature.journey" :id="feature.journey" hero />
       <EditorialShot v-else :key="feature.shot" :id="feature.shot" :caption="feature.caption" priority />
-      <p v-if="feature.chart" class="chart-disclaimer">WaterWayz™ is not a certified navigation system. Chart data supports situational awareness. Always cross-check official charts and local notices.</p>
+      <p v-if="feature.chart" class="chart-disclaimer">InteliWaterwayz™ is not a certified navigation system. Chart data supports situational awareness. Always cross-check official charts and local notices.</p>
     </section>
     <section class="editorial-shell editorial-section">
       <p class="editorial-eyebrow">How it works</p>

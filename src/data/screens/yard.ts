@@ -2,7 +2,7 @@ import type { ScreenGroup } from './types'
 
 /** The yard: a maintenance company serving vessels through engagements (DEV-457). */
 export const YARD: ScreenGroup = {
-  id: 'yard', label: 'Yard: maintenance', kind: 'maintenance', app: 'WaterWayz Yard', frame: 'desktop', slug: 'lauderdale-marine',
+  id: 'yard', label: 'Yard: maintenance', kind: 'maintenance', app: 'InteliWaterwayz Yard', frame: 'desktop', slug: 'lauderdale-marine',
   doors: [
     { id: 'dashboard', label: 'Dashboard' }, { id: 'work', label: 'Work' }, { id: 'technicians', label: 'Technicians' }, { id: 'chat', label: 'Chat' }, { id: 'settings', label: 'Settings' },
   ],

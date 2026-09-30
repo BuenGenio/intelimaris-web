@@ -1,7 +1,7 @@
 <template>
   <div class="scr">
     <div class="scr-row scr-row--between" style="margin-bottom: 14px">
-      <span class="scr-ov">WaterWayz</span>
+      <span class="scr-ov">InteliWaterwayz</span>
       <button type="button" class="scr-btn scr-btn--sm scr-btn--ghost">Day · Dusk · Night</button>
     </div>
 
@@ -16,9 +16,9 @@
         <button type="button" class="scr-tab" role="tab" aria-selected="false" disabled>Phone number <span class="scr-pill scr-pill--bare scr-micro">Pending</span></button>
       </div>
 
-      <p class="scr-small scr-muted">Creating your account happens on WaterWAYZ ID, our identity service. You will pick an email and a password there — this app never sees either — and it will send you a link to confirm the address. Come back here and you carry on where you left off.</p>
+      <p class="scr-small scr-muted">Creating your account happens on InteliWaterwayz ID, our identity service. You will pick an email and a password there — this app never sees either — and it will send you a link to confirm the address. Come back here and you carry on where you left off.</p>
       <button type="button" class="scr-btn scr-btn--primary scr-btn--block">Create your account</button>
-      <p class="scr-micro scr-muted">The ground rules — and the one thing WaterWayz is not — are the first thing we ask you about when you get back.</p>
+      <p class="scr-micro scr-muted">The ground rules — and the one thing InteliWaterwayz is not — are the first thing we ask you about when you get back.</p>
 
       <div class="scr-card scr-stack scr-stack--tight" style="background: var(--ink-50)">
         <p class="scr-strong scr-small">Or open the demo account</p>

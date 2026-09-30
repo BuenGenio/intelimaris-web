@@ -23,7 +23,7 @@ export const AUDIENCES: Audience[] = [
   {
     id: 'captains', group: 'aboard', label: 'Captain / navigator', short: 'Captains & navigators',
     intent: 'Plan the passage. Take the helm.', headline: 'Your vessel. Your passage. The detail that matters.',
-    intro: 'Build a passage around your vessel’s dimensions, inspect the route and arrive with the berth details in hand. WaterWayz™ brings the decisions before departure and the view underway together.',
+    intro: 'Build a passage around your vessel’s dimensions, inspect the route and arrive with the berth details in hand. InteliWaterwayz™ brings the decisions before departure and the view underway together.',
     shot: 'waterwayz-route', caption: 'A passage, its conditions and the destination in one view.',
     journey: 'passage-planner',
     features: ['route-planning', 'navigation', 'hazard-reporting', 'dockpass', 'emergency-assistance'],
@@ -38,7 +38,7 @@ export const AUDIENCES: Audience[] = [
   {
     id: 'passengers', group: 'aboard', label: 'Passenger / guest', short: 'Passengers & guests',
     intent: 'Understand the trip you’re joining.', headline: 'A place in the journey. A clearer view of the day.',
-    intro: 'Get familiar with the destination, understand the passage and ask the captain about shared access. You do not need to own a vessel to find your way around WaterWayz™.',
+    intro: 'Get familiar with the destination, understand the passage and ask the captain about shared access. You do not need to own a vessel to find your way around InteliWaterwayz™.',
     shot: 'waterwayz-marina-card', caption: 'Explore the destination before you step aboard.',
     journey: 'water-right-now',
     features: ['navigation', 'dockpass', 'emergency-assistance'],

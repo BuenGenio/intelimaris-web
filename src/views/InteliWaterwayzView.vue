@@ -3,17 +3,17 @@
     <section class="editorial-shell guide-hero">
       <LanguageNote />
 
-      <p class="editorial-eyebrow">WaterWayz™</p>
+      <p class="editorial-eyebrow">InteliWaterwayz™</p>
       <div class="guide-heading">
         <h1>Your whole boating experience. Connected.</h1>
         <div>
-          <p class="editorial-lede">Navigate, monitor, discover and connect. WaterWayz™ brings the passage, supported vessel readings and arrival coordination together, with reporting and further assistance workflows in development.</p>
+          <p class="editorial-lede">Navigate, monitor, discover and connect. InteliWaterwayz™ brings the passage, supported vessel readings and arrival coordination together, with reporting and further assistance workflows in development.</p>
           <RouterLink to="/for/captains" class="editorial-button">Start at the helm <span aria-hidden="true">↗</span>
           </RouterLink>
         </div>
       </div>
       <JourneySection id="helm-view" hero />
-      <p class="chart-disclaimer">WaterWayz™ is not a certified navigation system. Always cross-check official charts and local notices.</p>
+      <p class="chart-disclaimer">InteliWaterwayz™ is not a certified navigation system. Always cross-check official charts and local notices.</p>
     </section>
     <section class="editorial-section section-wash">
       <div class="editorial-shell">
@@ -29,7 +29,7 @@
         <p class="editorial-eyebrow">Find your view</p>
         <h2>There is more than one way aboard.</h2>
       </div>
-      <nav aria-label="WaterWayz™ audience guides">
+      <nav aria-label="InteliWaterwayz™ audience guides">
         <RouterLink v-for="person in AUDIENCES.filter(a => a.group === 'aboard')" :key="person.id" :to="audienceLink(person.id)">{{ person.label }} <span aria-hidden="true">↗</span>
         </RouterLink>
       </nav>

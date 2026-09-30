@@ -2,7 +2,7 @@ import type { ScreenGroup } from './types'
 
 /** A waterfront business: the claimed listing, its lanes and the people behind it (DEV-193/198/461/462). */
 export const BUSINESS: ScreenGroup = {
-  id: 'business', label: 'Waterfront business', kind: 'business', app: 'WaterWayz Business', frame: 'desktop', slug: 'coconuts',
+  id: 'business', label: 'Waterfront business', kind: 'business', app: 'InteliWaterwayz Business', frame: 'desktop', slug: 'coconuts',
   doors: [
     { id: 'overview', label: 'Overview' }, { id: 'listing', label: 'Listing' }, { id: 'berths', label: 'Berths' }, { id: 'reports', label: 'Reports' }, { id: 'settings', label: 'Settings' },
   ],

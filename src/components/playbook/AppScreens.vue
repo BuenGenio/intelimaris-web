@@ -2,7 +2,7 @@
   <section v-if="!total" class="as"><p class="as-loading">No screens are registered yet.</p></section>
   <section v-else class="as" :data-frame="frame">
     <div class="as-topline">
-      <p class="t-overline as-eyebrow">WaterWayz · every screen · sample data</p>
+      <p class="t-overline as-eyebrow">InteliWaterwayz · every screen · sample data</p>
       <p class="as-hint t-caption">{{ group.app }} · <span class="t-num">{{ total }}</span> screens · {{ current.summary }}</p>
     </div>
 
@@ -65,7 +65,7 @@
           <div class="as-browser"><span class="as-lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="as-url"><ScrIcon name="lock" /><span class="t-num">{{ url }}</span></span></div>
           <div class="as-shell">
             <div class="as-shell-top">
-              <span class="as-shell-mark">WaterWayz<sup>™</sup></span>
+              <span class="as-shell-mark">InteliWaterwayz<sup>™</sup></span>
               <span class="as-shell-ws"><span class="as-kind" :data-kind="group.kind"></span>{{ workspaceName }} <span aria-hidden="true">⌄</span></span>
               <span class="scr-spacer"></span>
               <span class="as-shell-online"><span class="scr-dot" data-tone="safe"></span>Online</span>

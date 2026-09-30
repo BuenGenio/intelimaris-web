@@ -28,7 +28,7 @@ export interface ScreenGroup {
   label: string
   kind: ScreenKind
   /** the app that hosts these screens */
-  app: 'WaterWayz' | 'WaterWayz Marina' | 'WaterWayz Yard' | 'WaterWayz Business' | 'Operator console'
+  app: 'InteliWaterwayz' | 'InteliWaterwayz Marina' | 'InteliWaterwayz Yard' | 'InteliWaterwayz Business' | 'Operator console'
   frame: 'phone' | 'desktop'
   /** the shell's top-level doors for this kind */
   doors: ScreenDoor[]

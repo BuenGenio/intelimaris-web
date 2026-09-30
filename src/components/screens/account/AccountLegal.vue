@@ -38,11 +38,11 @@
     <div class="scr-section scr-card scr-stack scr-stack--tight">
       <h2 class="scr-h3">This build</h2>
       <div class="scr-dl">
-        <dt>App</dt><dd class="scr-num">WaterWayz 2.14.0 (build 3120)</dd>
+        <dt>App</dt><dd class="scr-num">InteliWaterwayz 2.14.0 (build 3120)</dd>
         <dt>Basemap</dt><dd class="scr-num">fll-basemap 2026-09-02</dd>
         <dt>Charts</dt><dd class="scr-num">NOAA ENC, updated 11 Sep 2026</dd>
       </div>
-      <p class="scr-micro scr-muted">WaterWayz is not a certified navigation system. Always navigate with official charts.</p>
+      <p class="scr-micro scr-muted">InteliWaterwayz is not a certified navigation system. Always navigate with official charts.</p>
     </div>
   </div>
 </template>

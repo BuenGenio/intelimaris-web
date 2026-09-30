@@ -32,7 +32,7 @@ export const SOLUTIONS: Solution[] = [
     steps: [
       { title: 'Choose what matters aboard', body: 'Build coverage around battery and shore power, leaks and bilge levels, temperature, humidity and other supported systems. PWTS is the foundation for vessel awareness, rather than a single sensor.' },
       { title: 'Connect the vessel', body: 'Compatible devices communicate through the MX MariWavz™ radio network and gateway infrastructure. The radio carries the data; the InteliMARIS technology Stack organizes it for the application.' },
-      { title: 'See the information in WaterWayz™', body: 'Review connected readings, their age and available history. Share the relevant view with your crew or assigned service technician, so a reading can lead to an informed decision.' },
+      { title: 'See the information in InteliWaterwayz™', body: 'Review connected readings, their age and available history. Share the relevant view with your crew or assigned service technician, so a reading can lead to an informed decision.' },
     ],
     currentTitle: 'Plan your coverage',
     current: ['Battery and DC electrical monitoring', 'Shore power presence and water ingress', 'Temperature, humidity and compatible safety sensors', 'Switching hardware with installation-specific controls'],
@@ -44,7 +44,7 @@ export const SOLUTIONS: Solution[] = [
   {
     id: 'intelibilge', label: 'InteliBilge', eyebrow: 'InteliMARIS™ connected systems',
     headline: 'Local protection first. Connected awareness second.',
-    summary: 'Water-ingress monitoring and bilge-pump supervision, with the vessel’s local protection at the center. WaterWayz™ adds visibility into supported readings and history when connected.',
+    summary: 'Water-ingress monitoring and bilge-pump supervision, with the vessel’s local protection at the center. InteliWaterwayz™ adds visibility into supported readings and history when connected.',
     status: 'System configuration · Confirm installation scope',
     statusDetail: 'Select and validate the sensor, pump, controller and alarms for the vessel. Cloud connectivity and developing analytics must not be treated as the local pump controller or a guarantee against flooding.',
     shot: 'waterwayz-sensors', caption: 'Connected bilge readings alongside the other systems aboard.',
@@ -69,7 +69,7 @@ export const SOLUTIONS: Solution[] = [
     shot: 'waterwayz-sensors', caption: 'Electrical values belong alongside the vessel’s other systems and their data freshness.',
     steps: [
       { title: 'Measure the bank', body: 'Choose the monitor and shunt for your battery system. Voltage, current and other supported channels provide the foundation; estimates such as state of charge depend on setup and calibration.' },
-      { title: 'Read the history', body: 'Use WaterWayz™ to view the connected readings and available history. A measurement, an estimate and a model prediction should always be distinguishable.' },
+      { title: 'Read the history', body: 'Use InteliWaterwayz™ to view the connected readings and available history. A measurement, an estimate and a model prediction should always be distinguishable.' },
       { title: 'Make service more informed', body: 'Share relevant monitoring access with an assigned technician. Check the installation when readings are missing, stale or unexpected.' },
     ],
     currentTitle: 'Build from measured data',
@@ -89,7 +89,7 @@ export const SOLUTIONS: Solution[] = [
     steps: [
       { title: 'Monitor and analyze', body: 'Receive supported vessel data and examine it alongside available history. Event correlation and trend analysis belong in the software and data infrastructure.' },
       { title: 'Detect and assess', body: 'Develop methods for identifying unusual patterns, then add vessel state, location and environmental context where reliable data is available.' },
-      { title: 'Inform the right person', body: 'Present useful information through WaterWayz™ to an authorized user. Keep the source, age and uncertainty visible, so a prediction is never mistaken for a measurement.' },
+      { title: 'Inform the right person', body: 'Present useful information through InteliWaterwayz™ to an authorized user. Keep the source, age and uncertainty visible, so a prediction is never mistaken for a measurement.' },
     ],
     currentTitle: 'The foundation in the product',
     current: ['Connected readings and channel history', 'Visible freshness and missing-data states', 'A monitoring view for predictions with model identity, version and time'],
@@ -103,11 +103,11 @@ export const SOLUTIONS: Solution[] = [
     headline: 'See the place. Understand the approach.',
     summary: 'Aerial imagery and survey data can reveal the detail around a marina: docks, walkways, seawalls and the routes between them. InteliMARIS is developing this geospatial story in collaboration with Pilot Byte.',
     status: 'Survey demonstration · Integrations in development',
-    statusDetail: 'Explore a real LiDAR dataset in the existing technology demo. Automated marina surveys, live occupancy and WaterWayz™ survey-layer integrations are developing concepts, rather than operational services demonstrated by that viewer.',
+    statusDetail: 'Explore a real LiDAR dataset in the existing technology demo. Automated marina surveys, live occupancy and InteliWaterwayz™ survey-layer integrations are developing concepts, rather than operational services demonstrated by that viewer.',
     steps: [
       { title: 'Fly and capture', body: 'Scope appropriate aerial imagery, geo-coded video, photogrammetry or LiDAR for the location and task. Capture methods, permissions and deliverables depend on the survey.' },
       { title: 'Map and analyze', body: 'Turn the available data into views of the environment. Inspect structure, height and access context; confirm the dataset’s origin, date and limits before applying it to a site.' },
-      { title: 'Connect the useful detail', body: 'The proposed next step is to bring suitable layers into WaterWayz™ for marina layouts, approach context and landside access planning. These integrations remain in development.' },
+      { title: 'Connect the useful detail', body: 'The proposed next step is to bring suitable layers into InteliWaterwayz™ for marina layouts, approach context and landside access planning. These integrations remain in development.' },
     ],
     currentTitle: 'What you can explore here',
     current: ['An interactive viewer using real aerial LiDAR survey data', 'Height, intensity and derived structure views', 'A sample marina page that explains the source and limits of its demonstration data'],

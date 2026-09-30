@@ -44,10 +44,10 @@ const columns: { title: string; description: string; empty: string; rows: Row[] 
   {
     title: 'Arriving', description: 'Check-in is this day and she is not alongside yet.', empty: 'No arrivals on this day.',
     rows: [
-      { name: 'Wanderer · Sam Miller', pill: 'Confirmed', tone: 'info', dates: 'Today – 17 Oct · 3 nights', brief: 'C-14 · enter 240° stern-in · starboard-to · 7.5 ft MLLW', source: 'via WaterWayz', actions: [{ label: 'Arrived', kind: 'primary' }, { label: 'Move berth' }, { label: 'Release', kind: 'ghost' }] },
+      { name: 'Wanderer · Sam Miller', pill: 'Confirmed', tone: 'info', dates: 'Today – 17 Oct · 3 nights', brief: 'C-14 · enter 240° stern-in · starboard-to · 7.5 ft MLLW', source: 'via InteliWaterwayz', actions: [{ label: 'Arrived', kind: 'primary' }, { label: 'Move berth' }, { label: 'Release', kind: 'ghost' }] },
       { name: 'Blue Heron', pill: 'Confirmed', tone: 'info', dates: 'Today – 15 Oct · 1 night', brief: 'B-7 · enter 180° bow-in · port-to · 6.9 ft MLLW', source: 'via VHF', actions: [{ label: 'Arrived', kind: 'primary' }, { label: 'Move berth' }] },
       { name: 'Sea Change', pill: 'Confirmed', tone: 'info', dates: 'Today – 20 Oct · 6 nights', note: 'no berth assigned yet', source: 'via marina site', actions: [{ label: 'Arrived', kind: 'primary' }, { label: 'Assign a berth' }] },
-      { name: 'Kestrel', pill: 'Requested', tone: 'warn', dates: 'Today – 16 Oct · 2 nights', note: 'no berth can be held yet', source: 'via WaterWayz', actions: [{ label: 'Confirm', kind: 'primary' }, { label: 'Decline' }] },
+      { name: 'Kestrel', pill: 'Requested', tone: 'warn', dates: 'Today – 16 Oct · 2 nights', note: 'no berth can be held yet', source: 'via InteliWaterwayz', actions: [{ label: 'Confirm', kind: 'primary' }, { label: 'Decline' }] },
     ],
   },
   {
@@ -60,14 +60,14 @@ const columns: { title: string; description: string; empty: string; rows: Row[] 
   {
     title: 'Alongside', description: 'Arrived, not departed, whatever the dates say.', empty: 'Nobody is alongside.',
     rows: [
-      { name: 'Halcyon', pill: 'Alongside', tone: 'safe', dates: '11–14 Oct · 3 nights · arrived 11 Oct 15:20', brief: 'A-3 · enter 090° bow-in · port-to · 8.2 ft MLLW', source: 'via WaterWayz', actions: [{ label: 'Departed' }, { label: 'Move berth' }] },
+      { name: 'Halcyon', pill: 'Alongside', tone: 'safe', dates: '11–14 Oct · 3 nights · arrived 11 Oct 15:20', brief: 'A-3 · enter 090° bow-in · port-to · 8.2 ft MLLW', source: 'via InteliWaterwayz', actions: [{ label: 'Departed' }, { label: 'Move berth' }] },
       { name: 'Tidewater', pill: 'Alongside', tone: 'safe', dates: '9–12 Oct · overstaying 2 nights', brief: 'D-2 · enter 270° stern-in · starboard-to · 9.0 ft MLLW', source: 'via VHF', actions: [{ label: 'Departed' }] },
     ],
   },
   {
     title: 'Departing', description: 'Check-out is this day, or she is past it and still here.', empty: 'No departures on this day.',
     rows: [
-      { name: 'Halcyon', pill: 'Alongside', tone: 'safe', dates: '11–14 Oct · out today', brief: 'A-3', source: 'via WaterWayz', actions: [{ label: 'Departed' }] },
+      { name: 'Halcyon', pill: 'Alongside', tone: 'safe', dates: '11–14 Oct · out today', brief: 'A-3', source: 'via InteliWaterwayz', actions: [{ label: 'Departed' }] },
       { name: 'Tidewater', pill: 'Alongside', tone: 'safe', dates: '9–12 Oct · 2 nights past check-out', brief: 'D-2', source: 'via VHF', actions: [{ label: 'Departed' }] },
     ],
   },

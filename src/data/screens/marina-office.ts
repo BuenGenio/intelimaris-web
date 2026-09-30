@@ -1,7 +1,7 @@
 import type { ScreenGroup } from './types'
 
 export const MARINA_OFFICE: ScreenGroup = {
-  id: 'marina-office', label: 'Marina: the office', kind: 'marina', app: 'WaterWayz Marina', frame: 'desktop', slug: 'bahia-mar',
+  id: 'marina-office', label: 'Marina: the office', kind: 'marina', app: 'InteliWaterwayz Marina', frame: 'desktop', slug: 'bahia-mar',
   doors: [
     { id: 'dashboard', label: 'Today' }, { id: 'bookings', label: 'Bookings' }, { id: 'berths', label: 'Berths' }, { id: 'crm', label: 'Customers' }, { id: 'finance', label: 'Finance' },
     { id: 'sales', label: 'Rates' }, { id: 'operations', label: 'Operations' }, { id: 'comms', label: 'Messages' }, { id: 'reports', label: 'Reports' }, { id: 'settings', label: 'Settings' },
