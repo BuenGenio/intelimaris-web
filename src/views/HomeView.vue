@@ -3,7 +3,6 @@
     <section id="choose" class="editorial-shell home-hero">
       <LanguageNote />
       <div class="hero-head">
-        <p class="hero-pill"><span class="hero-pill-dot" aria-hidden="true"></span><span>Showing at FLIBS 2026, Fort Lauderdale</span><RouterLink :to="pressLink(PRESS[0]!.id)">Read the release <span aria-hidden="true">→</span></RouterLink></p>
         <h1>Your day on the water, <em>connected.</em></h1>
       </div>
       <div class="hero-intro">
@@ -95,7 +94,6 @@ import { RouterLink } from 'vue-router'
 import AudienceChips from '@/components/audience/AudienceChips.vue'
 import CommunitySection from '@/components/audience/CommunitySection.vue'
 import { useOnboarding } from '@/composables/useOnboarding'
-import { PRESS, pressLink } from '@/data/press'
 import FeatureLinks from '@/components/audience/FeatureLinks.vue'
 import GuideClosing from '@/components/audience/GuideClosing.vue'
 import JourneyStage from '@/components/audience/JourneyStage.vue'
