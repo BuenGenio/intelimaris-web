@@ -4,7 +4,6 @@ import { nextTick } from 'vue'
 import { AUDIENCES } from '../data/audiences'
 import { SOLUTIONS } from '../data/solutions'
 import { CAPABILITIES } from '../data/capabilities'
-import { PRESS } from '../data/press'
 
 import { applySeo } from '@/seo'
 
@@ -126,14 +125,6 @@ const router = createRouter({
       name: 'home-alt',
       component: () => import('../views/HomeAltView.vue'),
     },
-    { path: '/press', redirect: `/press/${PRESS[0]!.id}` },
-    ...PRESS.map(release => ({
-      path: `/press/${release.id}`,
-      name: `press-${release.id}`,
-      component: () => import('../views/PressReleaseView.vue'),
-      props: { releaseId: release.id },
-      meta: { press: release.id, title: release.title, description: release.summary },
-    })),
     {
       path: '/playbook',
       name: 'playbook',

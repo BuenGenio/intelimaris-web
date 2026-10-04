@@ -1,6 +1,5 @@
 import type { RouteLocationNormalizedLoaded, RouteLocationResolved } from 'vue-router'
 import { AUDIENCES } from '@/data/audiences'
-import { PRESS } from '@/data/press'
 import { CAPABILITIES } from '@/data/capabilities'
 import { SOLUTIONS } from '@/data/solutions'
 import { CATEGORY_ORDER, findProduct, productCatalog, type ProductCategory } from '@/data/productCatalog'
@@ -33,7 +32,7 @@ export const CATEGORY_DESCRIPTIONS: Record<ProductCategory, string> = {
   control: 'Remote I/O and switching hardware. Review electrical limits, connectivity and installation-specific controls.',
   system: 'Connected vessel systems combining sensors, monitoring and controls. Explore supplied components and installation requirements.',
 }
-export const REDIRECTS: Record<string, string> = { '/inteliwaterwayz': '/waterwayz', '/capabilities/marina-pms': '/marinas', '/press': `/press/${PRESS[0]!.id}` }
+export const REDIRECTS: Record<string, string> = { '/inteliwaterwayz': '/waterwayz', '/capabilities/marina-pms': '/marinas' }
 export const INDEXABLE_PATHS = [
   '/', '/products', '/products/categories', '/capabilities', '/waterwayz', '/software', '/about', '/contact', '/marinas', '/demo', '/demo/marina/bahia-mar',
   ...AUDIENCES.map(a => `/for/${a.id}`),
@@ -41,7 +40,6 @@ export const INDEXABLE_PATHS = [
   ...SOLUTIONS.map(s => `/${s.id}`),
   ...CATEGORY_ORDER.map(category => `/products/category/${category}`),
   ...productCatalog.map(product => `/products/${product.id}`),
-  ...PRESS.map(release => `/press/${release.id}`),
 ]
 
 /** Directory URLs match the static host's redirect behavior; preferences never create duplicates. */
@@ -99,13 +97,6 @@ export function structuredData(route: RouteLocationNormalizedLoaded | RouteLocat
   if (route.name === 'products' || route.name === 'product-category') {
     const entries = route.name === 'product-category' ? productCatalog.filter(p => p.category === route.params.category) : productCatalog
     page.mainEntity = { '@type': 'ItemList', itemListElement: entries.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: `${p.model} ${p.name}`, url: canonicalUrl(`/products/${p.id}`) })) }
-  }
-  const release = route.meta.press ? PRESS.find(r => r.id === route.meta.press) : undefined
-  if (release) {
-    const id = `${seo.canonical}#article`
-    page['@type'] = 'WebPage'
-    page.mainEntity = { '@id': id }
-    graph.push({ '@type': 'NewsArticle', '@id': id, headline: release.title, description: release.summary, datePublished: release.date, dateModified: release.date, inLanguage: 'en', url: seo.canonical, author: { '@id': orgId }, publisher: { '@id': orgId }, isPartOf: { '@id': websiteId }, articleSection: 'Press' })
   }
   graph.push(page)
   return { '@context': 'https://schema.org', '@graph': graph }
