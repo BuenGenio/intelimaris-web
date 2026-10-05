@@ -106,6 +106,16 @@ const router = createRouter({
       redirect: { name: 'waterwayz' },
     },
     {
+      path: '/api',
+      name: 'api',
+      component: () => import('../views/ApiView.vue'),
+    },
+    {
+      path: '/mcp',
+      name: 'mcp',
+      component: () => import('../views/McpView.vue'),
+    },
+    {
       path: '/software',
       name: 'software',
       component: () => import('../views/SoftwareView.vue'),

@@ -40,6 +40,8 @@ export function getBreadcrumbs(route: RouteLocationNormalizedLoaded | RouteLocat
       home: [], products: [hardware], 'product-categories': [hardware, categories],
       capabilities: [platform], waterwayz: [platform, { label: 'InteliWaterwayz™' }],
       software: [platform, { label: 'Software & connections' }],
+      mcp: [platform, { label: 'AI assistants (MCP)' }],
+      api: [platform, { label: 'Public API' }],
       about: [{ label: 'Our story' }], contact: [{ label: 'Talk to us' }],
       demo: [{ label: 'Technology demo' }],
       'demo-marina': [{ label: 'Technology demo', to: '/demo' }, { label: 'Bahia Mar · Survey demo' }],

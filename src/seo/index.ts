@@ -15,6 +15,8 @@ const pages: Record<string, [string, string]> = {
   capabilities: ['Navigation, vessel monitoring & marina operations', 'Explore the InteliMARIS platform: navigation, route planning, hazard awareness, vessel monitoring, dockage and marina management.'],
   waterwayz: ['InteliWaterwayz | Your connected boating experience', 'Plan passages, explore navigation and vessel readings, and coordinate your next arrival. Discover InteliWaterwayz, the connected boating experience by InteliMARIS.'],
   software: ['Connected maritime software & integrations', 'See how InteliWaterwayz, marina tools and connected vessel data work together. Explore the InteliMARIS software platform and integration approach.'],
+  api: ['Public API explorer | Try it without code', 'Try the InteliMaris public API without writing code: will your vessel fit, where to stay, what is reported or moving nearby, and how the app shows it.'],
+  mcp: ['AI assistants & the InteliMaris MCP server', 'Connect an AI assistant to InteliMaris over MCP: plan passages, check whether a vessel fits, find berths, and read hazards, events, float plans and live traffic.'],
   about: ['Our story | Technology for life on the water', 'Meet the team behind InteliMARIS and InteliWaterwayz. Discover our approach to connected boating, vessel awareness and marina operations.'],
   contact: ['Talk to the InteliMARIS team', 'Discuss navigation, connected vessel hardware or marina operations with InteliMARIS. Tell us about your vessel, marina or integration needs.'],
   demo: ['Marine survey & geospatial technology demos', 'Explore the InteliMARIS marine survey demonstration, with LiDAR point-cloud technology and clearly identified sample marina information.'],
@@ -34,7 +36,7 @@ export const CATEGORY_DESCRIPTIONS: Record<ProductCategory, string> = {
 }
 export const REDIRECTS: Record<string, string> = { '/inteliwaterwayz': '/waterwayz', '/capabilities/marina-pms': '/marinas' }
 export const INDEXABLE_PATHS = [
-  '/', '/products', '/products/categories', '/capabilities', '/waterwayz', '/software', '/about', '/contact', '/marinas', '/demo', '/demo/marina/bahia-mar',
+  '/', '/products', '/products/categories', '/capabilities', '/waterwayz', '/software', '/api', '/mcp', '/about', '/contact', '/marinas', '/demo', '/demo/marina/bahia-mar',
   ...AUDIENCES.map(a => `/for/${a.id}`),
   ...CAPABILITIES.filter(c => c.id !== 'marina-pms').map(c => `/capabilities/${c.id}`),
   ...SOLUTIONS.map(s => `/${s.id}`),
