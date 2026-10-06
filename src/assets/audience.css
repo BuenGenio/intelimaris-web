@@ -379,3 +379,31 @@ html { scroll-padding-top:calc(var(--site-header-height) + 12px); }
  .hero-pill { flex-wrap:wrap; }
 }
 @media (prefers-reduced-motion:reduce) { .hero-float, .hero-pill-dot { animation:none; } }
+
+/* --- Editorial serif headlines and the photo hero (front page, API page) ---
+   Headlines in the light serif; reading text and controls stay in Red Hat.
+   App mockups (.scr) keep the app's own type. */
+.serif-headings :is(h1, h2):not(.scr *, .scr-h1, .scr-h2) { font-family:var(--font-serif); font-weight:400; letter-spacing:-0.015em; }
+.serif-headings h2:not(.scr *, .scr-h2) { font-size:clamp(2rem,3.6vw,3.4rem); line-height:1.1; }
+
+.photo-hero { position:relative; display:flex; align-items:center; min-height:clamp(480px,66vh,660px); padding:0; overflow:hidden; background:#0b1220; color:#fff; }
+.photo-hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:var(--photo-position, 50% 50%); }
+.photo-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg, rgba(7,13,24,.82) 0%, rgba(7,13,24,.6) 36%, rgba(7,13,24,.08) 68%), linear-gradient(0deg, rgba(7,13,24,.45) 0%, transparent 38%); }
+.photo-hero-copy { position:relative; z-index:1; padding:72px 0; }
+.photo-hero-eyebrow { margin:0 0 16px; font-size:.74rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.78); }
+.photo-hero-copy h1 { max-width:12ch; margin:0; color:#fff; font-size:clamp(2.7rem,5.2vw,4.75rem); line-height:1.04; text-wrap:balance; }
+.photo-hero-copy h1 em { font-style:italic; color:#fff; }
+.photo-hero-lede { max-width:44ch; margin:24px 0 30px; font-size:clamp(1.05rem,1.4vw,1.22rem); line-height:1.6; color:rgba(255,255,255,.88); }
+.photo-hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:14px 26px; }
+.photo-hero-start { display:inline-block; padding:15px 30px; border:0; border-radius:4px; background:#f2f3f5; color:#0b1220; font:700 1rem var(--font-text); text-decoration:none; cursor:pointer; }
+.photo-hero-start:hover { background:#fff; color:#0b1220; }
+.photo-hero-link { color:#fff; font-weight:600; text-decoration:underline; text-underline-offset:4px; }
+.photo-hero-link:hover { color:#fff; }
+.photo-hero-tags { display:flex; flex-wrap:wrap; gap:8px; margin:34px 0 0; }
+.photo-hero-tags span { padding:5px 12px; border:1px solid rgba(255,255,255,.35); border-radius:var(--radius-pill); font-size:.8rem; color:rgba(255,255,255,.9); }
+@media (max-width:700px) {
+ .photo-hero { align-items:flex-end; min-height:560px; }
+ .photo-hero-img { object-position:var(--photo-position-narrow, var(--photo-position, 50% 50%)); }
+ .photo-hero::after { background:linear-gradient(0deg, rgba(7,13,24,.9) 0%, rgba(7,13,24,.72) 55%, rgba(7,13,24,.5) 100%); }
+ .photo-hero-copy { padding:48px 0 84px; }
+}

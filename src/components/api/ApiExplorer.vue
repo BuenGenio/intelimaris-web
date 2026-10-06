@@ -154,25 +154,27 @@ async function copy() {
 </script>
 
 <style scoped>
-.apx-questions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
-.apx-question { display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; border: 1px solid var(--border-medium); border-radius: var(--radius-pill); background: var(--surface-page); color: var(--text-primary); font: 600 .9rem var(--font-text); cursor: pointer; }
+/* The questions as outline cards, icon on top, like the front page's. */
+.apx-questions { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; margin-bottom: 36px; }
+.apx-question { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; padding: 18px 10px 16px; border: 2px solid var(--border-subtle); border-radius: 18px; background: var(--surface-page); color: var(--text-primary); font: 600 .88rem/1.3 var(--font-text); text-align: center; cursor: pointer; transition: border-color .2s; }
 .apx-question:hover { border-color: var(--domain); }
-.apx-question[aria-selected='true'] { background: var(--domain); border-color: var(--domain); color: #fff; }
-.apx-question-icon { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--domain-soft); color: var(--domain-ink); }
-.apx-question[aria-selected='true'] .apx-question-icon { background: rgba(255, 255, 255, .18); color: #fff; }
-.apx-question-icon :deep(svg) { width: 16px; height: 16px; }
+.apx-question[aria-selected='true'] { border-color: var(--domain); background: var(--domain-soft); color: var(--domain-ink); }
+.apx-question-icon { display: grid; place-items: center; width: 40px; height: 40px; color: var(--maris-deep); }
+[data-theme='dark'] .apx-question-icon { color: var(--maris-night); }
+.apx-question[aria-selected='true'] .apx-question-icon { color: var(--domain-ink); }
+.apx-question-icon :deep(svg) { width: 28px; height: 28px; }
 
 .apx-panel { display: grid; grid-template-columns: minmax(250px, 300px) 360px minmax(0, 1fr); gap: 32px; align-items: start; }
 /* The site pads every <section>; these three are columns, not page sections. */
 .apx-inputs, .apx-app, .apx-api { padding: 0; }
 .apx-label { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--domain-ink); margin: 0 0 14px; }
 
-.apx-inputs h3 { font-size: 1.45rem; margin-bottom: 8px; }
+.apx-inputs h3 { font: 400 1.7rem/1.15 var(--font-serif); letter-spacing: -0.01em; margin-bottom: 8px; }
 .apx-plain { margin: 0 0 22px; font-size: .92rem; color: var(--text-secondary); }
 .apx-field { margin-bottom: 18px; }
-.apx-field-label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font-size: .82rem; font-weight: 600; color: var(--text-primary); }
+.apx-field-label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font-size: .82rem; font-weight: 700; color: var(--text-primary); }
 .apx-range-label output { font-variant-numeric: tabular-nums; color: var(--domain-ink); }
-.apx-select { width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); background: var(--surface-page); color: var(--text-primary); font: 500 .9rem var(--font-text); }
+.apx-select { width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid var(--border-medium); border-radius: 4px; background: var(--surface-page); color: var(--text-primary); font: 500 .9rem var(--font-text); }
 .apx-range { width: 100%; accent-color: var(--domain); }
 .apx-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .apx-chip { padding: 7px 12px; border: 1px solid var(--border-medium); border-radius: var(--radius-pill); background: transparent; color: var(--text-primary); font: 500 .8rem var(--font-text); cursor: pointer; }
@@ -220,13 +222,14 @@ async function copy() {
 .apx-answer :deep(.json-view) { max-height: 620px; }
 
 @media (max-width: 1240px) {
+  .apx-questions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .apx-panel { grid-template-columns: minmax(0, 1fr) 360px; }
   .apx-api { grid-column: 1 / -1; }
 }
 @media (max-width: 760px) {
   .apx-panel { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   /* One row you can swipe, rather than seven stacked pills. */
-  .apx-questions { flex-wrap: nowrap; overflow-x: auto; margin: 0 -18px 20px; padding: 2px 18px 8px; scrollbar-width: none; }
-  .apx-question { flex-shrink: 0; padding: 8px 14px 8px 8px; font-size: .84rem; }
+  .apx-questions { display: flex; overflow-x: auto; margin: 0 -18px 20px; padding: 2px 18px 8px; scrollbar-width: none; }
+  .apx-question { flex: 0 0 132px; padding: 14px 8px 12px; font-size: .82rem; }
 }
 </style>
