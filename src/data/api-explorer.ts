@@ -528,6 +528,25 @@ const ROUTES: Record<string, { label: string; from: string; to: string; nm: numb
     bridges: [{ name: '17th Street bridge', at: 0.4, opens: [0, 30] }, { name: 'Las Olas bridge', at: 1.6, opens: [15, 45] }],
     track: 'M240 226 C 230 180 205 150 200 110 S 205 50 200 14',
   },
+  /* The same three, the other way. */
+  'bahia-sunrise': {
+    label: 'Bahia Mar → Sunrise Marina', from: MARINA_SLUG, to: 'sunrise-marina-wfxq2gf', nm: 2.6,
+    shallowest: { name: 'Sunrise Bay channel', depth: 2.4, at: 2.3 },
+    bridges: [{ name: 'Las Olas bridge', at: 0.7, opens: [15, 45] }],
+    track: 'M196 226 C 200 210 220 190 205 150 C 190 110 205 70 200 20',
+  },
+  'pier66-bahia': {
+    label: 'Pier 66 Marina → Bahia Mar', from: 'pier-66-marina-w1gg7u6', to: MARINA_SLUG, nm: 1.1,
+    shallowest: { name: 'Pier 66 approach', depth: 2.8, at: 0.1 },
+    bridges: [],
+    track: 'M230 200 C 215 140 200 90 196 30',
+  },
+  'sunrise-lauderdale': {
+    label: 'Sunrise Marina → Lauderdale Marina', from: 'sunrise-marina-wfxq2gf', to: 'lauderdale-marina-n1ykikj', nm: 3.4,
+    shallowest: { name: 'Sunrise Bay channel', depth: 2.4, at: 0.3 },
+    bridges: [{ name: 'Las Olas bridge', at: 1.8, opens: [15, 45] }, { name: '17th Street bridge', at: 3.0, opens: [0, 30] }],
+    track: 'M200 14 C 205 50 195 70 200 110 C 205 150 230 180 240 226',
+  },
 }
 
 /** A sample semi-diurnal tide, in metres above MLLW. */
@@ -614,6 +633,25 @@ export const fmtClock = (minutes: number) => `${String(Math.floor(minutes / 60))
 export const ROUTE_TRACK = (id: string) => (ROUTES[id] ?? ROUTES['sunrise-bahia']!).track
 
 export const API_QUERIES: ApiQuery[] = [willSheFit, whereToStay, planPassage, hazardsNear, eventsNear, liveTraffic, marinasNear]
+
+/** The sample routes as from/to pairs, for the front page's passage bar. */
+export const PASSAGE_ROUTES = Object.entries(ROUTES).map(([id, r]) => {
+  const [from, to] = r.label.split(' → ')
+  return { id, from: from!, to: to! }
+})
+export interface SamplePassage {
+  passage: {
+    departs_at: string
+    arrives_at: string
+    distance_m: number
+    duration_min: number
+    clear_prob_at_margin: number
+    waits: { near: string; minutes: number; to: string }[]
+    pinch_points: { name: string }[]
+  }
+}
+/** The passage the explorer would plan, for the same inputs. */
+export const samplePassage = (v: Values, now: Date) => planPassage.respond(v, now) as SamplePassage
 
 /** The request as a URL and as a curl command anyone can paste into a terminal. */
 export function requestUrl(req: ApiRequest): string {

@@ -2,7 +2,9 @@
 :root { --site-header-height:114px; --stage-cap:max(380px, calc(100svh - var(--site-header-height) - 9rem)); }
 html { scroll-padding-top:calc(var(--site-header-height) + 12px); }
 #main-content > main { padding-top:var(--site-header-height); }
-#app h1, #app h2 { hyphens:none; word-break:normal; text-wrap:nowrap; }
+#app h1, #app h2 { hyphens:none; word-break:normal; }
+/* One line per heading (useFitHeadings); data-no-fit opts a heading out of both halves of the rule. */
+#app h1:not([data-no-fit]), #app h2:not([data-no-fit]) { text-wrap:nowrap; }
 .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 .editorial-shell { width:min(1440px, calc(100% - 96px)); margin-inline:auto; }
 .editorial-page { padding-top:112px; background:var(--surface-page); color:var(--text-primary); }

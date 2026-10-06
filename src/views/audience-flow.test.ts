@@ -10,6 +10,12 @@ import { saveAudience } from '@/composables/useAudience'
 import { AUDIENCES } from '@/data/audiences'
 import { CAPABILITIES } from '@/data/capabilities'
 
+// These tests cover audience selection and journey identity, not lazy demo internals.
+// Isolate the demos so their imports cannot outlive an unmounted test environment.
+vi.mock('@/components/audience/JourneyStage.vue', () => ({
+  default: { props: ['id'], template: `<div :id="'try-' + id" />` },
+}))
+
 let wrapper: VueWrapper | undefined
 beforeEach(() => { saveAudience(null); localStorage.clear() })
 afterEach(() => { wrapper?.unmount(); wrapper = undefined; vi.restoreAllMocks() })
