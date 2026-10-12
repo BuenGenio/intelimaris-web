@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
+import { OUR_STORY_ENABLED } from '../data/navigation'
 import HomeView from '../views/HomeView.vue'
 import { nextTick } from 'vue'
 import { AUDIENCES } from '../data/audiences'
@@ -75,11 +76,8 @@ const router = createRouter({
       meta: { solution: 'intelibilge', title: 'InteliBilge — Water-ingress monitoring', description: SOLUTIONS.find(s => s.id === 'intelibilge')!.summary },
       component: () => import('../views/InteliBilgeView.vue'),
     },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
-    },
+    /* Off while OUR_STORY_ENABLED is false: /about falls through to not-found. */
+    ...(OUR_STORY_ENABLED ? [{ path: '/about', name: 'about', component: () => import('../views/AboutView.vue') }] : []),
     {
       path: '/marinas',
       name: 'marinas',

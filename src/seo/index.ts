@@ -1,3 +1,4 @@
+import { OUR_STORY_ENABLED } from '@/data/navigation'
 import type { RouteLocationNormalizedLoaded, RouteLocationResolved } from 'vue-router'
 import { AUDIENCES } from '@/data/audiences'
 import { CAPABILITIES } from '@/data/capabilities'
@@ -36,7 +37,7 @@ export const CATEGORY_DESCRIPTIONS: Record<ProductCategory, string> = {
 }
 export const REDIRECTS: Record<string, string> = { '/inteliwaterwayz': '/waterwayz', '/capabilities/marina-pms': '/marinas' }
 export const INDEXABLE_PATHS = [
-  '/', '/products', '/products/categories', '/capabilities', '/waterwayz', '/software', '/api', '/mcp', '/about', '/contact', '/marinas', '/demo', '/demo/marina/bahia-mar',
+  '/', '/products', '/products/categories', '/capabilities', '/waterwayz', '/software', '/api', '/mcp', ...(OUR_STORY_ENABLED ? ['/about'] : []), '/contact', '/marinas', '/demo', '/demo/marina/bahia-mar',
   ...AUDIENCES.map(a => `/for/${a.id}`),
   ...CAPABILITIES.filter(c => c.id !== 'marina-pms').map(c => `/capabilities/${c.id}`),
   ...SOLUTIONS.map(s => `/${s.id}`),

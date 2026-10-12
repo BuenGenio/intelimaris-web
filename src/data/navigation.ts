@@ -1,10 +1,14 @@
+/** "Our story" (/about) is taken down for now. Set to true to bring back its
+    route, its menu entry and its sitemap entry; AboutView.vue is kept as it is. */
+export const OUR_STORY_ENABLED = false
+
 /** Shared by desktop, mobile and footer navigation. */
 export const MAIN_NAVIGATION = [
   { to: '/#choose', label: 'For you' },
   { to: '/waterwayz', label: 'InteliWaterwayz™' },
   { to: '/capabilities', label: 'Platform & software' },
   { to: '/products', label: 'Hardware' },
-  { to: '/about', label: 'Our story' },
+  ...(OUR_STORY_ENABLED ? [{ to: '/about', label: 'Our story' }] : []),
 ]
 export const PLATFORM_NAVIGATION = [
   { to: '/capabilities', label: 'Platform overview', detail: 'Explore the connected capabilities' },

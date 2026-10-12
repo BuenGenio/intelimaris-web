@@ -1,3 +1,4 @@
+import { OUR_STORY_ENABLED } from '../data/navigation'
 import { describe, it, expect } from 'vitest'
 import { createSiteRouter } from './index'
 const router = createSiteRouter(true)
@@ -24,10 +25,14 @@ describe('router', () => {
     expect(intelibilge!.path).toBe('/intelibilge')
   })
 
-  it('defines the about route', () => {
+  it('serves the about route only while Our story is enabled', () => {
     const about = router.getRoutes().find(r => r.name === 'about')
-    expect(about).toBeDefined()
-    expect(about!.path).toBe('/about')
+    if (OUR_STORY_ENABLED) {
+      expect(about!.path).toBe('/about')
+    } else {
+      expect(about).toBeUndefined()
+      expect(router.resolve('/about').name).toBe('not-found')
+    }
   })
 
   it('defines the product-categories route', () => {
