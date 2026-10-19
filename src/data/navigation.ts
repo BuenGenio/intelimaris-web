@@ -6,12 +6,14 @@ export const OUR_STORY_ENABLED = false
 export const MAIN_NAVIGATION = [
   { to: '/#choose', label: 'For you' },
   { to: '/waterwayz', label: 'InteliWaterwayz™' },
+  { to: '/fleet-management', label: 'Fleet management' },
   { to: '/capabilities', label: 'Platform & software' },
   { to: '/products', label: 'Hardware' },
   ...(OUR_STORY_ENABLED ? [{ to: '/about', label: 'Our story' }] : []),
 ]
 export const PLATFORM_NAVIGATION = [
   { to: '/capabilities', label: 'Platform overview', detail: 'Explore the connected capabilities' },
+  { to: '/demo/fleet', label: 'Fleet operations demo', detail: 'Positions, paths, speeds and report freshness' },
   { to: '/software', label: 'Software & integrations', detail: 'Applications, data and connections' },
   { to: '/api', label: 'Public API', detail: 'Try it without writing code' },
   { to: '/mcp', label: 'AI assistants (MCP)', detail: 'Ask the platform in plain words' },

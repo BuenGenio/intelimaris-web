@@ -4,14 +4,17 @@
       <div class="container">
 
         <div class="section-label">{{ t('demo.label') }}</div>
-        <h1>{{ t('demo.title') }}</h1>
-        <p class="page-lead">{{ t('demo.lead') }}</p>
+        <h1>Fleet operations &amp; marine survey demos</h1>
+        <p class="page-lead">Explore the fleet operations desk with simulated vessel reports, then inspect marine survey and LiDAR demonstrations.</p>
       </div>
     </section>
 
     <section class="demo-cards">
       <div class="container">
         <div class="demo-grid">
+          <article class="demo-card fade-in">
+            <span class="demo-index">Fleet operations</span><h2>Every vessel. One operating picture.</h2><p>Explore a six-vessel operation: select vessels, follow paths, filter company, rental, freight, logistics and safety work, and inspect speed, status and report age. Fictional vessels and simulated reports.</p><RouterLink to="/demo/fleet" class="demo-cta">Take the fleet operations desk →</RouterLink>
+          </article>
           <article class="demo-card fade-in">
             <span class="demo-index">01</span>
             <h2>{{ t('demo.card.lidar.title') }}</h2>

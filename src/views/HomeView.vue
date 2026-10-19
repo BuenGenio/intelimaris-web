@@ -2,7 +2,7 @@
   <main class="editorial-page home-audience serif-headings" lang="en">
     <div class="editorial-shell"><LanguageNote /></div>
     <HomePlanBar />
-    <p class="home-news"><span class="editorial-shell"><b>New</b> Try the public API without writing code, or ask the platform in plain words. <RouterLink to="/api">Take a look</RouterLink></span></p>
+    <p class="home-news"><span class="editorial-shell"><b>New</b> Fleet operations for companies, rental, freight, logistics and safety teams. <RouterLink to="/fleet-management">Explore fleet management</RouterLink></span></p>
 
     <PhotoHero
       :src="`${base}assets/hero-dusk-1600.webp`"
@@ -14,7 +14,7 @@
     >
       <!-- The one heading allowed to wrap: a photo hero wants a two-line headline (useFitHeadings opt-out). -->
       <h1 data-no-fit>Your day on the water, <em>connected.</em></h1>
-      <p class="photo-hero-lede">Plan the passage. Keep an eye on the vessel. Prepare the arrival. InteliMARIS™ brings it together through InteliWaterwayz™.</p>
+      <p class="photo-hero-lede">Plan the passage. Follow the fleet. Prepare the arrival. InteliMARIS™ brings it together through InteliWaterwayz™.</p>
       <div class="photo-hero-actions">
         <button type="button" class="photo-hero-start" @click="start(audience?.id, $event.currentTarget as HTMLElement)">Start free</button>
         <RouterLink to="/contact" class="photo-hero-link">Book a demo</RouterLink>
@@ -42,6 +42,7 @@
             </RouterLink>
             <RouterLink v-else to="/capabilities" class="editorial-button">Explore the platform <span aria-hidden="true">↗</span>
             </RouterLink>
+            <RouterLink v-if="audience?.id === 'fleet-management' || audience?.id === 'fleet-owners'" to="/demo/fleet" class="editorial-text-link fleet-demo-link">Explore the fleet operations demo <span aria-hidden="true">↗</span></RouterLink>
             <RouterLink v-if="isMarinaAudience(audience)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: audience!.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
           </div>
         </div>
@@ -53,6 +54,10 @@
       </div>
     </section>
 
+    <section class="editorial-shell editorial-section home-fleet">
+      <div class="section-intro"><div><p class="editorial-eyebrow">Fleet management</p><h2>Every vessel. One operating picture.</h2></div><div><p>Bring positions, reported paths, speeds and status together for company, rental, freight, logistics and safety operations. Try the desk with clearly simulated reports.</p><RouterLink to="/demo/fleet" class="editorial-button">Open the fleet demo <span aria-hidden="true">↗</span></RouterLink></div></div>
+      <JourneyStage id="fleet-operations" />
+    </section>
     <HomeRoleTable />
 
     <section class="editorial-section editorial-shell waterwayz-feature">

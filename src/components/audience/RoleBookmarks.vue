@@ -2,7 +2,7 @@
   <section class="role-showcase" aria-label="Explore the product by role">
     <div class="showcase-heading">
       <p class="editorial-eyebrow">Your place in the picture</p>
-      <p>Six perspectives. One connected day.</p>
+      <p>Your responsibilities. One connected day.</p>
     </div>
     <div class="bookmark-stack">
       <article v-for="(card, index) in cards" :key="card.id" class="bookmark"
@@ -48,7 +48,7 @@ const props = defineProps<{ selected?: string }>()
 // Group all nine marketing audiences into six bookmarks without inventing access roles.
 const cards: { id: string; label: string; product: string; title: string; description: string; shot: ShotId; caption: string; roles: string[]; color: string }[] = [
   { id: 'passage', label: 'Captains & guests', product: 'InteliWaterwayz™ · Passage', title: 'See the journey ahead.', description: 'Plan around your vessel, explore the destination and bring the people aboard into the picture.', shot: 'waterwayz-route', caption: 'Passage planning, conditions and your next stop.', roles: ['captains', 'passengers'], color: '#93c7ea' },
-  { id: 'vessel', label: 'Owners & crew', product: 'InteliMARIS™ · Vessel', title: 'Stay close to every system.', description: 'Keep vessel readings, crew access and upkeep together in a workspace for each vessel.', shot: 'waterwayz-sensors', caption: 'Systems aboard, with the age of each reading visible.', roles: ['fleet-owners', 'crew'], color: '#a5d3c6' },
+  { id: 'vessel', label: 'Owners & crew', product: 'InteliMARIS™ · Vessel', title: 'Stay close to every system.', description: 'Keep vessel readings, crew access and upkeep together in a workspace for each vessel.', shot: 'waterwayz-sensors', caption: 'Systems aboard, with the age of each reading visible.', roles: ['fleet-owners', 'crew', 'fleet-management'], color: '#a5d3c6' },
   { id: 'marina', label: 'Marina teams', product: 'InteliMarina · Operations', title: 'Bring the basin together.', description: 'Connect berth layouts, arriving vessels and the people working from office to pontoon.', shot: 'pms-berth-layout', caption: 'A basin layout with berth dimensions and availability.', roles: ['marina-owners', 'marina-teams'], color: '#c6c3ee' },
   { id: 'service', label: 'Service & technicians', product: 'InteliMARIS™ · Service', title: 'Know what needs attention.', description: 'Connect service work, technician assignments and vessel history. System readings add context to the job.', shot: 'waterwayz-sensors', caption: 'Vessel monitoring context; technician access follows an active assignment.', roles: ['maintenance'], color: '#ead0a6' },
   { id: 'dock', label: 'Private dock hosts', product: 'Dock Pass · Hosting', title: 'Make room for the next arrival.', description: 'Describe your dock, manage requests and keep upcoming stays in view, with clear details for visiting vessels.', shot: 'dock-host-dashboard', caption: 'Dock listings, waiting requests and upcoming stays.', roles: ['private-docks'], color: '#b8d3df' },

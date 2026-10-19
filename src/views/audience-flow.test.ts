@@ -95,6 +95,17 @@ describe('audience journey', () => {
     expect(send).not.toHaveBeenCalled()
   })
 
+  it('carries fleet operations into its guide, demo and contact enquiry', async () => {
+    const router = await setup('/?audience=fleet-management')
+    wrapper = mount(HomeView, { global: { plugins: [router] } })
+    expect(wrapper.get('#audience-preview .fleet-demo-link').attributes('href')).toBe('/demo/fleet')
+    wrapper.unmount()
+    await router.push('/contact?audience=fleet-management&topic=fleet-management')
+    wrapper = mount(ContactView, { global: { plugins: [router] } })
+    expect((wrapper.get('select[aria-label="Your role"]').element as HTMLSelectElement).value).toBe('fleet-management')
+    expect(wrapper.get('.contact-topic').text()).toContain('Fleet management')
+  })
+
   it('prefills a product-family enquiry without losing the audience context', async () => {
     const router = await setup('/contact?audience=fleet-owners&topic=intelibms')
     wrapper = mount(ContactView, { global: { plugins: [router] } })

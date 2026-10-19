@@ -37,6 +37,7 @@ import { capabilityLink, findCapability } from '@/data/capabilities'
 const PERSPECTIVES = [
   { id: 'passage', label: 'Captains & guests', roles: ['captains', 'passengers'], color: '#93c7ea' },
   { id: 'vessel', label: 'Owners & crew', roles: ['fleet-owners', 'crew'], color: '#a5d3c6' },
+  { id: 'fleet', label: 'Fleet operations', roles: ['fleet-management'], color: 'var(--maris-tint)' },
   { id: 'marina', label: 'Marina teams', roles: ['marina-owners', 'marina-teams'], color: '#c6c3ee' },
   { id: 'service', label: 'Service & technicians', roles: ['maintenance'], color: '#ead0a6' },
   { id: 'dock', label: 'Private dock hosts', roles: ['private-docks'], color: '#b8d3df' },
@@ -45,7 +46,7 @@ const PERSPECTIVES = [
 const COLUMNS = PERSPECTIVES.map(p => ({ ...p, features: new Set(AUDIENCES.filter(a => p.roles.includes(a.id)).flatMap(a => a.features)) }))
 
 const GROUPS = [
-  { title: 'On the water', icon: 'compass', rows: ['navigation', 'route-planning', 'hazard-reporting', 'emergency-assistance'] },
+  { title: 'On the water', icon: 'compass', rows: ['fleet-management', 'navigation', 'route-planning', 'hazard-reporting', 'emergency-assistance'] },
   { title: 'Aboard', icon: 'vessel', rows: ['monitoring', 'maintenance'] },
   { title: 'Alongside', icon: 'anchor', rows: ['dockpass', 'marina-pms'] },
 ]

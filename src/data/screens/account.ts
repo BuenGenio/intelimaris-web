@@ -4,7 +4,7 @@ import type { ScreenGroup } from './types'
 export const ACCOUNT: ScreenGroup = {
   id: 'account', label: 'Your account', kind: 'account', app: 'InteliWaterwayz', frame: 'phone', slug: 'sam',
   doors: [
-    { id: 'home', label: 'Home' }, { id: 'explore', label: 'Explore' }, { id: 'notifications', label: 'Notifications' }, { id: 'account', label: 'Account' },
+    { id: 'home', label: 'Home' }, { id: 'fleet', label: 'Fleet' }, { id: 'explore', label: 'Explore' }, { id: 'notifications', label: 'Notifications' }, { id: 'account', label: 'Account' },
   ],
   screens: [
     { id: 'account-landing', label: 'Welcome', path: '/welcome', door: 'home', summary: 'The front door: create an account, sign in with InteliWaterwayz ID, or open the demo.', load: () => import('@/components/screens/account/Landing.vue') },
@@ -18,6 +18,7 @@ export const ACCOUNT: ScreenGroup = {
     { id: 'account-create-workspace-form', label: 'New workspace · vessel', path: '/create-workspace?type=vessel', door: 'home', summary: 'The vessel details step: the registry hit, the model picked and every figure still yours to change.', load: () => import('@/components/screens/account/CreateWorkspaceForm.vue') },
     { id: 'account-accept-invite', label: 'Accept invite', path: '/invite/:token', door: 'home', summary: 'The invite link’s landing, with its signed-out, joining, joined, refused and unreachable endings.', load: () => import('@/components/screens/account/AcceptInvite.vue') },
     { id: 'account-home', label: 'Home', path: '/home', door: 'home', summary: 'Your logbook, what needs you across every workspace, and the workspaces themselves.', load: () => import('@/components/screens/account/Home.vue') },
+    { id: 'account-fleet', label: 'Fleet operations', path: '/fleet', door: 'fleet', frame: 'desktop', summary: 'An account fleet map with simulated vessel positions, reported paths, speed, status and report freshness across company, rental, freight, logistics and safety work.', load: () => import('@/components/fleet/FleetOperations.vue') },
     { id: 'account-explore', label: 'Explore', path: '/explore', door: 'explore', summary: 'Look around without a workspace: the public map, what a workspace adds, and the one way out.', load: () => import('@/components/screens/account/Explore.vue') },
     { id: 'account-notifications', label: 'Notifications', path: '/notifications', door: 'notifications', summary: 'The inbox: one row per channel, each saying whether it was sent, queued, failed or skipped.', load: () => import('@/components/screens/account/Notifications.vue') },
     { id: 'account-profile', label: 'Profile', path: '/account/profile', door: 'account', summary: 'Your photo, your vessel photos and a short video, your name and headline, and the sign-in email.', load: () => import('@/components/screens/account/AccountProfile.vue') },
