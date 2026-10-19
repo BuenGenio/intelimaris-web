@@ -8,7 +8,7 @@
     </header>
     <div class="fleet-metrics" aria-label="Whole fleet summary">
       <div><strong>{{ DEMO_FLEET.length.toString().padStart(2, '0') }}</strong><span>Vessels in fleet</span></div>
-      <div><strong>{{ allRows.filter(v => v.fix.status === 'Underway' || v.fix.status === 'Attention').length.toString().padStart(2, '0') }}</strong><span>Underway</span></div>
+      <div><strong>{{ allRows.filter(v => v.fix.status !== 'Stale' && v.fix.speedKn >= .5).length.toString().padStart(2, '0') }}</strong><span>Underway</span></div>
       <div><strong>{{ allRows.filter(v => v.fix.status === 'Alongside').length.toString().padStart(2, '0') }}</strong><span>Alongside</span></div>
       <div class="fleet-metric-attention"><strong>02</strong><span>Need attention · 1 stale</span></div>
     </div>
@@ -39,7 +39,7 @@
         <div class="fleet-map-heading"><span>Fort Lauderdale, FL</span><small>North ↑ · Satellite</small></div>
         <div class="fleet-zoom"><button type="button" aria-label="Zoom in on fleet map" :disabled="zoom >= 2" @click="zoom = Math.min(2, zoom + .25)">+</button><button type="button" aria-label="Zoom out on fleet map" :disabled="zoom <= 1" @click="zoom = Math.max(1, zoom - .25)">−</button></div>
         <div class="fleet-map-key"><span>━━ Reported path</span><span>┄┄ Example onward route</span></div>
-        <p class="fleet-map-source">Illustrative tracks · Fort Lauderdale reference imagery · Not for navigation</p>
+        <p class="fleet-map-source">Imagery Esri, Maxar · Illustrative tracks · Not for navigation</p>
       </div>
       <aside class="fleet-roster" aria-label="Vessels in this view">
         <div class="fleet-roster-head"><h3>Fleet register</h3><span>{{ playing ? 'Playing' : 'Paused' }}</span></div>
