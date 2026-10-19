@@ -10,6 +10,7 @@
           <p class="editorial-lede">{{ feature.summary }}</p>
           <RouterLink :to="contactLink(audience, feature.id)" class="editorial-button">Discuss {{ feature.label.toLowerCase() }} <span aria-hidden="true">↗</span>
           </RouterLink>
+          <RouterLink v-if="feature.id === 'fleet-management'" to="/demo/fleet" class="editorial-text-link fleet-demo-link">Explore the fleet operations demo <span aria-hidden="true">↗</span></RouterLink>
           <RouterLink v-if="feature.id === 'marina-pms'" to="/demo/marina/bahia-mar" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
         </div>
       </div>

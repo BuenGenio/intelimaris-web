@@ -92,6 +92,8 @@ describe('router', () => {
   it('defines the technology demo routes', () => {
     const demo = router.getRoutes().find(r => r.name === 'demo')
     const marina = router.getRoutes().find(r => r.name === 'demo-marina')
+    expect(router.resolve('/fleet-management').name).toBe('fleet-management')
+    expect(router.resolve('/demo/fleet').name).toBe('demo-fleet')
     expect(demo?.path).toBe('/demo')
     expect(marina?.path).toBe('/demo/marina/bahia-mar')
   })

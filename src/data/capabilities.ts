@@ -21,6 +21,22 @@ export interface Capability {
 
 export const CAPABILITIES: Capability[] = [
   {
+    id: 'fleet-management', journey: 'fleet-operations', label: 'Fleet management', product: 'InteliMARIS Fleet operations',
+    headline: 'Your operation, vessel by vessel.',
+    summary: 'An operations map for company, rental, freight, logistics and safety fleets. See vessel status, position, reported path, speed and the freshness behind every report.',
+    shot: 'waterwayz-map', caption: 'Interactive fleet demonstration with simulated vessel reports.',
+    status: 'Interactive demonstration · Live data requires connected vessels',
+    availability: 'Explore a working fleet-map demonstration with selection, filters, reported paths and stale-report handling. Its data is simulated. Live fleet coverage requires authorized vessel workspaces, position sources and connectivity.',
+    steps: [
+      { title: 'See every authorized vessel', body: 'Bring your account’s vessel workspaces into one map while retaining the people and permissions for each vessel.' },
+      { title: 'Read the movement', body: 'Inspect speed over ground, course, operating status and reported paths. Use operation and attention filters to focus the desk.' },
+      { title: 'Know when the picture is old', body: 'Read report age alongside each fix. A missing update keeps the last reported position and historical speed visible instead of inventing current movement.' },
+    ],
+    available: ['Interactive public fleet demonstration', 'Vessel selection, search and operation filters', 'Illustrative paths, speeds and operating statuses', 'Visible report age and stale-position handling'],
+    pending: ['Confirm your region, position-source coverage and update cadence.', 'Live access follows vessel-workspace permissions.', 'Rental bookings, cargo dispatch and emergency-service dispatch are separate workflows, not provided by this demonstration.'],
+    related: ['monitoring', 'route-planning', 'maintenance'],
+  },
+  {
     journey: 'water-right-now', id: 'navigation', label: 'Navigation', product: 'InteliWaterwayz™',
     headline: 'Navigate with the bigger picture.',
     summary: 'Find your next stop, understand the water around you and keep the passage in view. Charts, vessel position and available traffic information share the same context.',
@@ -70,14 +86,14 @@ export const CAPABILITIES: Capability[] = [
     headline: 'Stay connected to the vessel you care about.',
     summary: 'See what supported sensors are telling you about power, water and conditions aboard. InteliWaterwayz™ brings the readings, available history and the people looking after the vessel into one connected experience.',
     shot: 'waterwayz-sensors', caption: 'Voltage, current, bilge level and temperature with reading freshness.',
-    availability: 'Vessel sensor and monitoring surfaces are implemented. Readings require compatible hardware and connectivity; the fleet overview currently contains sample data.',
+    availability: 'Vessel sensor and monitoring surfaces are implemented. Readings require compatible hardware and connectivity. The public fleet operations demonstration uses simulated vessel reports.',
     steps: [
       { title: 'Connect the right sensors', body: 'Choose compatible hardware for the systems you want to monitor. The MX MariWavz™ radio network links compatible devices and gateways; a suitable uplink carries data onward. Confirm the installation’s radio compatibility and coverage.' },
       { title: 'Read value and freshness together', body: 'A stale reading should not look current. Review the age of the data and investigate missing or delayed readings before relying on a value.' },
       { title: 'Bring service into the picture', body: 'Use monitoring alongside maintenance reminders and service records. Assigned technicians can inspect the vessel through their service engagement.' },
     ],
     available: ['Vessel sensor inventory, readings and available channel history', 'Reading freshness and connection context', 'Monitoring access for assigned service technicians', 'Hardware catalog for installation planning'],
-    pending: ['The consolidated fleet dashboard and its predictions use sample data today. Discuss deployment-specific monitoring requirements with the team.'],
+    pending: ['Explore the fleet operations demonstration, then discuss the position sources and monitoring coverage required for your fleet.'],
     related: ['maintenance', 'navigation'],
   },
   {

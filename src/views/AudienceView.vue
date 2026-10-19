@@ -10,6 +10,7 @@
           <p class="editorial-lede">{{ person.intro }}</p>
           <RouterLink :to="contactLink(person)" class="editorial-button">{{ person.cta }} <span aria-hidden="true">↗</span>
           </RouterLink>
+          <RouterLink v-if="person.id === 'fleet-management' || person.id === 'fleet-owners'" to="/demo/fleet" class="editorial-text-link fleet-demo-link">Explore the fleet operations demo <span aria-hidden="true">↗</span></RouterLink>
           <RouterLink v-if="isMarinaAudience(person)" :to="{ path: '/demo/marina/bahia-mar', query: { audience: person.id } }" class="editorial-text-link marina-demo-link">Explore the LiDAR marina demo <span aria-hidden="true">↗</span></RouterLink>
         </div>
       </div>

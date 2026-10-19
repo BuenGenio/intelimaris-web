@@ -16,6 +16,13 @@ export interface Journey {
 
 export const JOURNEYS: Journey[] = [
   {
+    id: 'fleet-operations', index: 10, title: 'Take the fleet operations desk',
+    action: 'Select a vessel, filter the operation and inspect reported paths, speed and status. Watch a stale fix keep its last position.',
+    proves: 'An operating picture needs both movement and report freshness. This demonstration uses fictional vessels and simulated reports.',
+    backend: 'Live fleet visibility depends on authorized vessel workspaces, position sources and connectivity. This public demo sends no operational actions.',
+    component: defineAsyncComponent(() => import('@/components/fleet/FleetOperations.vue')),
+  },
+  {
     id: 'passage-planner',
     index: 1,
     title: 'Plan your own passage',

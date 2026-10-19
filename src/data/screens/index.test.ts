@@ -24,6 +24,11 @@ describe('screen registry', () => {
       expect(mod.default, s.id).toBeTruthy()
     }
   }, 60_000)
+  it('offers fleet operations in the account gallery with a desktop frame', () => {
+    expect(findScreen('account-fleet')?.path).toBe('/fleet')
+    expect(findScreen('account-fleet')?.frame).toBe('desktop')
+    expect(groupOf('account-fleet')?.id).toBe('account')
+  })
   it('finds screens and their groups', () => {
     const first = ALL_SCREENS[0]
     if (!first) return

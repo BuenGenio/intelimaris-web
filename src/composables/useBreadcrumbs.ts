@@ -43,6 +43,8 @@ export function getBreadcrumbs(route: RouteLocationNormalizedLoaded | RouteLocat
       mcp: [platform, { label: 'AI assistants (MCP)' }],
       api: [platform, { label: 'Public API' }],
       about: [{ label: 'Our story' }], contact: [{ label: 'Talk to us' }],
+      'fleet-management': [platform, { label: 'Fleet management' }],
+      'demo-fleet': [{ label: 'Fleet management', to: '/fleet-management' }, { label: 'Operations demo' }],
       demo: [{ label: 'Technology demo' }],
       'demo-marina': [{ label: 'Technology demo', to: '/demo' }, { label: 'Bahia Mar · Survey demo' }],
       'not-found': [{ label: 'Page not found' }],

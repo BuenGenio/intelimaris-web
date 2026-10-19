@@ -20,6 +20,8 @@ const router = createRouter({
     return { top: 0, behavior }
   },
   routes: [
+    { path: '/fleet-management', name: 'fleet-management', component: () => import('../views/FleetView.vue') },
+    { path: '/demo/fleet', name: 'demo-fleet', component: () => import('../views/FleetView.vue'), props: { demo: true } },
     ...SOLUTIONS.filter(solution => solution.id !== 'intelibilge').map(solution => ({
       path: `/${solution.id}`,
       name: `solution-${solution.id}`,
@@ -45,7 +47,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      meta: { title: 'Your day on the water, connected', description: 'InteliMARIS connects navigation, vessel monitoring and marina operations through InteliWaterwayz. Find the guide for your role on the water or on shore.' },
+      meta: { title: 'Your day on the water, connected', description: 'InteliMARIS connects navigation, vessel monitoring, fleet management and marina operations. Find the guide for your role on the water or on shore.' },
       component: HomeView,
     },
     {

@@ -20,7 +20,9 @@ const pages: Record<string, [string, string]> = {
   mcp: ['AI assistants & the InteliMaris MCP server', 'Connect an AI assistant to InteliMaris over MCP: plan passages, check whether a vessel fits, find berths, and read hazards, events, float plans and live traffic.'],
   about: ['Our story | Technology for life on the water', 'Meet the team behind InteliMARIS and InteliWaterwayz. Discover our approach to connected boating, vessel awareness and marina operations.'],
   contact: ['Talk to the InteliMARIS team', 'Discuss navigation, connected vessel hardware or marina operations with InteliMARIS. Tell us about your vessel, marina or integration needs.'],
-  demo: ['Marine survey & geospatial technology demos', 'Explore the InteliMARIS marine survey demonstration, with LiDAR point-cloud technology and clearly identified sample marina information.'],
+  'fleet-management': ['Fleet management | Vessel operations headquarters', 'Fleet visibility for company, rental, freight, logistics and safety teams. Explore vessel positions, paths, speed, status and report freshness on one operations map.'],
+  'demo-fleet': ['Fleet operations demo | Explore the vessel map', 'Try the InteliMARIS fleet operations dashboard: select fictional vessels, filter operations, follow simulated paths and inspect speed, status and stale reports.'],
+  demo: ['Fleet operations & marine survey demos', 'Explore fleet operations with simulated vessel positions, paths and speeds, alongside marine survey and LiDAR technology demonstrations.'],
   'demo-marina': ['Marina survey demo | Bahia Mar sample listing', 'Explore a LiDAR technology demonstration using Halifax Harbor survey data alongside a Bahia Mar sample marina listing. See the dataset and its limitations.'],
   'home-alt': ['Alternative homepage preview', 'An alternative InteliMARIS homepage design preview.'],
   playbook: ['Interaction playbook', 'Seven interactive journeys under review before they join the site.'],
@@ -37,7 +39,7 @@ export const CATEGORY_DESCRIPTIONS: Record<ProductCategory, string> = {
 }
 export const REDIRECTS: Record<string, string> = { '/inteliwaterwayz': '/waterwayz', '/capabilities/marina-pms': '/marinas' }
 export const INDEXABLE_PATHS = [
-  '/', '/products', '/products/categories', '/capabilities', '/waterwayz', '/software', '/api', '/mcp', ...(OUR_STORY_ENABLED ? ['/about'] : []), '/contact', '/marinas', '/demo', '/demo/marina/bahia-mar',
+  '/', '/products', '/products/categories', '/capabilities', '/waterwayz', '/software', '/api', '/mcp', ...(OUR_STORY_ENABLED ? ['/about'] : []), '/contact', '/marinas', '/demo', '/demo/marina/bahia-mar', '/fleet-management', '/demo/fleet',
   ...AUDIENCES.map(a => `/for/${a.id}`),
   ...CAPABILITIES.filter(c => c.id !== 'marina-pms').map(c => `/capabilities/${c.id}`),
   ...SOLUTIONS.map(s => `/${s.id}`),
