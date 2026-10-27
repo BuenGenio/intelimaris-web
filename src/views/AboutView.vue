@@ -24,7 +24,7 @@
           <li>
             <span class="editorial-index">02</span>
             <h3>The vessel</h3>
-            <p>PWTS, InteliBilge and InteliBMS bring compatible vessel systems into the ecosystem. The MX MariWavz™ radio network links devices and gateways; software presents the useful information in InteliWaterwayz™.</p>
+            <p>PWTS, InteliBilge and InteliBMS bring compatible vessel systems into the ecosystem. A wireless radio network links devices and gateways; software presents the useful information in InteliWaterwayz™.</p>
             <RouterLink to="/capabilities/monitoring" class="editorial-text-link">Explore monitoring →</RouterLink>
           </li>
           <li>

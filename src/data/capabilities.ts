@@ -88,7 +88,7 @@ export const CAPABILITIES: Capability[] = [
     shot: 'waterwayz-sensors', caption: 'Voltage, current, bilge level and temperature with reading freshness.',
     availability: 'Vessel sensor and monitoring surfaces are implemented. Readings require compatible hardware and connectivity. The public fleet operations demonstration uses simulated vessel reports.',
     steps: [
-      { title: 'Connect the right sensors', body: 'Choose compatible hardware for the systems you want to monitor. The MX MariWavz™ radio network links compatible devices and gateways; a suitable uplink carries data onward. Confirm the installation’s radio compatibility and coverage.' },
+      { title: 'Connect the right sensors', body: 'Choose compatible hardware for the systems you want to monitor. A wireless radio network links compatible devices and gateways; a suitable uplink carries data onward. Confirm the installation’s radio compatibility and coverage.' },
       { title: 'Read value and freshness together', body: 'A stale reading should not look current. Review the age of the data and investigate missing or delayed readings before relying on a value.' },
       { title: 'Bring service into the picture', body: 'Use monitoring alongside maintenance reminders and service records. Assigned technicians can inspect the vessel through their service engagement.' },
     ],

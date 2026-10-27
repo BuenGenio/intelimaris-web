@@ -31,7 +31,7 @@ export const SOLUTIONS: Solution[] = [
     shot: 'waterwayz-sensors', caption: 'A product view of vessel readings, with the age of each value visible.',
     steps: [
       { title: 'Choose what matters aboard', body: 'Build coverage around battery and shore power, leaks and bilge levels, temperature, humidity and other supported systems. PWTS is the foundation for vessel awareness, rather than a single sensor.' },
-      { title: 'Connect the vessel', body: 'Compatible devices communicate through the MX MariWavz™ radio network and gateway infrastructure. The radio carries the data; the InteliMARIS technology Stack organizes it for the application.' },
+      { title: 'Connect the vessel', body: 'Compatible devices communicate through a wireless radio network and gateway infrastructure. The radio carries the data; the InteliMARIS technology Stack organizes it for the application.' },
       { title: 'See the information in InteliWaterwayz™', body: 'Review connected readings, their age and available history. Share the relevant view with your crew or assigned service technician, so a reading can lead to an informed decision.' },
     ],
     currentTitle: 'Plan your coverage',
