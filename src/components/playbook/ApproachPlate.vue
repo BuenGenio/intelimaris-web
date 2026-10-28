@@ -21,7 +21,7 @@
           ref="sceneHost"
           class="ap-scene"
           role="img"
-          aria-label="Tilted 3D Gaussian splat survey of Bahia Mar marina. Use the view controls below to rotate or zoom."
+          aria-label="3D survey of Bahia Mar marina. Drag to rotate and tilt, Shift-drag or right-drag to pan, and use two-finger scrolling to zoom. View controls are also available below."
         ></div>
         <div v-if="state.status !== 'ready'" class="ap-loading" role="status" aria-live="polite">
           <p>{{ state.message }}</p>
@@ -36,7 +36,10 @@
           <div class="ap-compass" aria-hidden="true" :style="{ transform: `rotate(${compassAngle}deg)` }">
             <span>N</span><svg viewBox="0 0 24 32"><path d="M12 0 21 26 12 21 3 26Z" fill="currentColor" /></svg>
           </div>
-          <p class="ap-drag-hint">Drag to look around · zoom out for the full marina</p>
+          <p class="ap-drag-hint">
+            <span class="ap-mouse-hint">Drag to rotate &amp; tilt · Shift-drag or right-drag to pan · two-finger scroll to zoom</span>
+            <span class="ap-touch-hint">Drag to look around · use + / − to zoom</span>
+          </p>
         </template>
       </div>
       <div class="ap-controls">
@@ -78,6 +81,7 @@
     <p class="ap-caption">
       Bahia Mar Resort and Yachting Center · surveyed 9 September 2026 by InteliMaris Field Operations.
       1.97 million measured LiDAR returns rendered as Gaussian splats.
+      Dock letters are approximate references from the marina's published chart.
       Sample for arrival familiarisation; not for navigation.
       <span v-if="reducedMotion">Automatic motion is off to match your motion preference.</span>
     </p>
@@ -95,10 +99,11 @@ const state = ref<ApproachPlateState>({ status: 'loading', message: 'Preparing t
 const paused = ref(false)
 const angle = ref<number>(APPROACH_PLATE_VIEW.angle)
 const zoom = ref<number>(APPROACH_PLATE_VIEW.zoom)
+const elevation = ref<number>(APPROACH_PLATE_VIEW.elevation)
 const reducedMotion = ref(false)
 const compassAngle = computed(() => {
   const azimuth = ((angle.value + 90) * Math.PI) / 180
-  return (Math.atan2(Math.sin(azimuth), Math.cos(azimuth) * Math.sin((50 * Math.PI) / 180)) * 180) / Math.PI
+  return (Math.atan2(Math.sin(azimuth), Math.cos(azimuth) * Math.sin((elevation.value * Math.PI) / 180)) * 180) / Math.PI
 })
 let scene: ApproachPlateScene | null = null
 let observer: IntersectionObserver | null = null
@@ -113,6 +118,7 @@ async function start() {
   state.value = { status: 'loading', message: 'Loading the Bahia Mar 3D survey…', progress: 0 }
   angle.value = APPROACH_PLATE_VIEW.angle
   zoom.value = APPROACH_PLATE_VIEW.zoom
+  elevation.value = APPROACH_PLATE_VIEW.elevation
   paused.value = reducedMotion.value
   try {
     const { ApproachPlateScene } = await import('./approach-plate-scene')
@@ -121,6 +127,8 @@ async function start() {
       reducedMotion: reducedMotion.value,
       onState: (next) => { if (!disposed && current === attempt) state.value = next },
       onAngle: (next) => { if (!disposed && current === attempt) angle.value = next },
+      onZoom: (next) => { if (!disposed && current === attempt) zoom.value = next },
+      onElevation: (next) => { if (!disposed && current === attempt) elevation.value = next },
       onInspect: () => { paused.value = true },
     })
   } catch (error) {
@@ -149,6 +157,7 @@ function changeZoom(delta: number) {
 function reset() {
   angle.value = APPROACH_PLATE_VIEW.angle
   zoom.value = APPROACH_PLATE_VIEW.zoom
+  elevation.value = APPROACH_PLATE_VIEW.elevation
   scene?.reset()
 }
 
@@ -197,6 +206,9 @@ onBeforeUnmount(() => {
 .ap-scene { position: absolute; inset: 0; touch-action: pan-y; cursor: grab; }
 .ap-scene:active { cursor: grabbing; }
 .ap-scene :deep(canvas) { display: block; width: 100%; height: 100%; touch-action: pan-y; }
+.ap-scene :deep(.ap-dock-labels) { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.ap-scene :deep(.ap-dock-label) { position: absolute; top: 0; left: 0; display: grid; place-items: center; min-width: 24px; height: 24px; padding: 0 7px; border: 1px solid rgba(255, 255, 255, .85); border-radius: 7px; background: rgba(11, 24, 38, .85); color: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, .35); font: 700 .72rem var(--font-text); line-height: 1; white-space: nowrap; }
+.ap-scene :deep(.ap-dock-label[hidden]), .ap-scene :deep(.ap-dock-labels[hidden]) { display: none; }
 .ap-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 32px; text-align: center; color: #e7eff6; background: #10283b; }
 .ap-loading p { max-width: 42ch; margin: 0; line-height: 1.5; }
 .ap-loading progress { width: min(240px, 80%); height: 5px; accent-color: #82a6ca; border: 0; border-radius: 9px; overflow: hidden; }
@@ -208,7 +220,12 @@ onBeforeUnmount(() => {
 .ap-compass { position: absolute; right: 22px; top: 22px; display: flex; flex-direction: column; align-items: center; color: #fff; transform-origin: 50% 70%; pointer-events: none; filter: drop-shadow(0 2px 4px #10283b); }
 .ap-compass span { font: 600 .7rem var(--font-text); }
 .ap-compass svg { width: 20px; height: 30px; margin-top: 3px; }
-.ap-drag-hint { position: absolute; left: 20px; bottom: 15px; margin: 0; color: #c9d9e6; font-size: .7rem; pointer-events: none; text-shadow: 0 1px 4px #07111a; }
+.ap-drag-hint { position: absolute; left: 20px; right: 20px; bottom: 15px; margin: 0; color: #c9d9e6; font-size: .7rem; pointer-events: none; text-shadow: 0 1px 4px #07111a; }
+.ap-touch-hint { display: none; }
+@media (pointer: coarse) {
+  .ap-mouse-hint { display: none; }
+  .ap-touch-hint { display: inline; }
+}
 .ap-controls { display: flex; align-items: center; justify-content: space-between; gap: 20px 28px; flex-wrap: wrap; padding: 16px 20px; color: #d7e3ed; background: #0e2031; border-top: 1px solid #2b4256; }
 .ap-playback, .ap-zoom { display: flex; align-items: center; gap: 8px; }
 .ap-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid #465b6d; border-radius: 999px; padding: 9px 13px; min-height: 38px; font: 500 .75rem var(--font-text); color: #e7eff6; background: transparent; cursor: pointer; line-height: 1.2; white-space: nowrap; }

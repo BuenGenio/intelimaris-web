@@ -1,13 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { mount, flushPromises, type VueWrapper } from '@vue/test-utils'
 import { createMemoryHistory, createRouter } from 'vue-router'
-import { nextTick } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import HomeView from './HomeView.vue'
 import JourneyStage from '@/components/audience/JourneyStage.vue'
 import AudienceView from './AudienceView.vue'
 import CapabilityView from './CapabilityView.vue'
 import ContactView from './ContactView.vue'
-import { saveAudience } from '@/composables/useAudience'
+import { saveAudience, useAudienceRouteSync } from '@/composables/useAudience'
 import { AUDIENCES } from '@/data/audiences'
 import { CAPABILITIES } from '@/data/capabilities'
 
@@ -19,6 +19,13 @@ vi.mock('@/components/audience/JourneyStage.vue', () => ({
     template: '<div class="journey-stage-stub" :data-journey-id="id" />',
   },
 }))
+
+const SyncedHome = defineComponent({
+  setup() {
+    useAudienceRouteSync()
+    return () => h(HomeView)
+  },
+})
 
 let wrapper: VueWrapper | undefined
 beforeEach(() => { saveAudience(null); localStorage.clear() })
@@ -39,7 +46,8 @@ describe('audience journey', () => {
   it('lets every audience select a tailored guide, with one selection at a time', async () => {
     const router = await setup()
     wrapper = mount(HomeView, { global: { plugins: [router] } })
-    expect(wrapper.findAll('button[aria-pressed="true"]')).toHaveLength(0)
+    expect(wrapper.findAll('button[aria-pressed="true"]')).toHaveLength(1)
+    expect(wrapper.get('.audience-chip[aria-pressed="true"]').text()).toBe('Captain')
     expect(wrapper.findComponent(JourneyStage).props('id')).toBe('approach-plate')
     expect(wrapper.findAll('.hero-float')).toHaveLength(0)
     for (const audience of AUDIENCES) {
@@ -57,10 +65,29 @@ describe('audience journey', () => {
     }
   })
 
+  it('makes the fresh homepage default shareable without losing its query parameters or hash', async () => {
+    const router = await setup('/?utm_source=preview#choose')
+    wrapper = mount(SyncedHome, { global: { plugins: [router] } })
+    await flushPromises()
+    expect(router.currentRoute.value.query).toEqual({ utm_source: 'preview', audience: 'captains' })
+    expect(router.currentRoute.value.hash).toBe('#choose')
+    expect(wrapper.get('.audience-chip[aria-pressed="true"]').text()).toBe('Captain')
+  })
+
+  it('restores an explicitly remembered role instead of replacing it with the homepage default', async () => {
+    localStorage.setItem('intelimaris-audience', 'crew')
+    const router = await setup()
+    wrapper = mount(SyncedHome, { global: { plugins: [router] } })
+    await flushPromises()
+    expect(router.currentRoute.value.query.audience).toBe('crew')
+    expect(wrapper.get('.audience-chip[aria-pressed="true"]').text()).toBe('Crew member')
+    expect(wrapper.findComponent(JourneyStage).props('id')).toBe('aging-reading')
+  })
+
   it('gives a shared URL precedence over a remembered preference and responds to history', async () => {
     saveAudience('crew')
     const router = await setup('/?audience=passengers')
-    wrapper = mount(HomeView, { global: { plugins: [router] } })
+    wrapper = mount(SyncedHome, { global: { plugins: [router] } })
     expect(wrapper.get('#audience-preview h2').text()).toContain('A place in the journey')
     await router.push('/?audience=marina-owners')
     await nextTick()
@@ -72,11 +99,13 @@ describe('audience journey', () => {
 
   it('supports browsing without a role, invalid input and an explicit fresh choice', async () => {
     const router = await setup('/?audience=not-a-real-role')
-    wrapper = mount(HomeView, { global: { plugins: [router] } })
+    wrapper = mount(SyncedHome, { global: { plugins: [router] } })
     expect(wrapper.get('#audience-preview a').attributes('href')).toBe('/capabilities')
+    expect(router.currentRoute.value.query.audience).toBe('not-a-real-role')
     saveAudience('crew')
     await router.push('/?choose=1')
-    await nextTick()
+    await flushPromises()
+    expect(router.currentRoute.value.query).toEqual({ choose: '1' })
     expect(wrapper.findAll('button[aria-pressed="true"]')).toHaveLength(0)
     expect(wrapper.findAll('.feature-link')).toHaveLength(4)
   })

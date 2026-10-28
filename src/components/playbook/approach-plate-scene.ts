@@ -1,6 +1,7 @@
 import { SparkRenderer, SplatMesh } from '@sparkjsdev/spark'
 import * as THREE from 'three'
 import { APPROACH_PLATE_VIEW } from '@/data/playbook/approach-plate-view'
+import { BAHIA_MAR_DOCK_LABELS } from '@/data/playbook/bahia-mar-docks'
 
 export interface ApproachPlateState {
   status: 'loading' | 'ready' | 'failed'
@@ -11,6 +12,8 @@ export interface ApproachPlateState {
 interface SceneOptions {
   onState: (state: ApproachPlateState) => void
   onAngle: (angle: number) => void
+  onZoom: (zoom: number) => void
+  onElevation: (elevation: number) => void
   onInspect: () => void
   reducedMotion: boolean
 }
@@ -20,7 +23,6 @@ interface SceneOptions {
 const MODEL_URL = `${import.meta.env.BASE_URL}assets/demo/bahia-mar-approach.spz`
 const MODEL_BYTES = 19_260_339
 const TARGET = new THREE.Vector3(27, 27, 0)
-const ELEVATION = THREE.MathUtils.degToRad(50)
 const INITIAL_AZIMUTH = Math.PI / 2
 const FRAME_OCCUPANCY = 1.1
 const SURVEY_CORNERS = [-171.794, 225.797].flatMap((x) =>
@@ -34,6 +36,8 @@ export class ApproachPlateScene {
   private readonly scene = new THREE.Scene()
   private readonly camera = new THREE.PerspectiveCamera(44, 1, 0.5, 5000)
   private readonly spark: SparkRenderer
+  private readonly dockLabelsLayer: HTMLDivElement
+  private readonly dockLabels: { element: HTMLSpanElement; position: THREE.Vector3 }[]
   private mesh: SplatMesh | null = null
   private readonly abort = new AbortController()
   private readonly resizeObserver: ResizeObserver
@@ -53,7 +57,20 @@ export class ApproachPlateScene {
   private angle: number = APPROACH_PLATE_VIEW.angle
   private sweepPhase = Math.acos(1 - APPROACH_PLATE_VIEW.angle / 90)
   private zoom: number = APPROACH_PLATE_VIEW.zoom
-  private pointer: { id: number; x: number; angle: number } | null = null
+  private elevation: number = APPROACH_PLATE_VIEW.elevation
+  private readonly pan = new THREE.Vector3()
+  private pointer: {
+    id: number
+    x: number
+    y: number
+    angle: number
+    elevation: number
+    pan: THREE.Vector3
+    right: THREE.Vector3
+    up: THREE.Vector3
+    unitsPerPixel: number
+    mode: 'orbit' | 'pan'
+  } | null = null
 
   constructor(private readonly container: HTMLElement, private readonly options: SceneOptions) {
     this.held = options.reducedMotion
@@ -66,7 +83,23 @@ export class ApproachPlateScene {
     this.renderer.domElement.addEventListener('pointermove', this.onPointerMove)
     this.renderer.domElement.addEventListener('pointerup', this.onPointerUp)
     this.renderer.domElement.addEventListener('pointercancel', this.onPointerUp)
+    this.renderer.domElement.addEventListener('lostpointercapture', this.onPointerUp)
+    this.renderer.domElement.addEventListener('contextmenu', this.onContextMenu)
+    this.renderer.domElement.addEventListener('wheel', this.onWheel, { passive: false })
     this.container.append(this.renderer.domElement)
+    this.dockLabelsLayer = document.createElement('div')
+    this.dockLabelsLayer.className = 'ap-dock-labels'
+    this.dockLabelsLayer.setAttribute('aria-hidden', 'true')
+    this.dockLabelsLayer.hidden = true
+    this.dockLabels = BAHIA_MAR_DOCK_LABELS.map((dock) => {
+      const element = document.createElement('span')
+      element.className = 'ap-dock-label'
+      element.textContent = dock.label
+      element.dataset.dockLabel = dock.label
+      this.dockLabelsLayer.append(element)
+      return { element, position: new THREE.Vector3(...dock.position) }
+    })
+    this.container.append(this.dockLabelsLayer)
     this.scene.background = new THREE.Color('#10283b')
     this.spark = new SparkRenderer({
       renderer: this.renderer,
@@ -136,6 +169,8 @@ export class ApproachPlateScene {
       this.scene.add(mesh)
       this.ready = true
       this.viewDirty = true
+      this.dockLabelsLayer.hidden = false
+      this.projectDockLabels()
       clearTimeout(this.loadTimeout)
       this.options.onState({ status: 'ready', message: 'Bahia Mar 3D survey ready', progress: 100 })
       this.requestFrame()
@@ -167,16 +202,24 @@ export class ApproachPlateScene {
   }
 
   setZoom(zoom: number) {
+    this.pauseForInspection()
     this.zoom = THREE.MathUtils.clamp(zoom, 0.5, 2)
+    this.options.onZoom(this.zoom)
     this.updateCamera()
     this.requestFrame()
   }
 
   reset() {
+    this.pauseForInspection()
     this.angle = APPROACH_PLATE_VIEW.angle
     this.sweepPhase = Math.acos(1 - APPROACH_PLATE_VIEW.angle / 90)
     this.zoom = APPROACH_PLATE_VIEW.zoom
+    this.elevation = APPROACH_PLATE_VIEW.elevation
+    this.pan.set(0, 0, 0)
+    this.pointer = null
     this.reportAngle()
+    this.options.onZoom(this.zoom)
+    this.options.onElevation(this.elevation)
     this.updateCamera()
     this.requestFrame()
   }
@@ -199,10 +242,11 @@ export class ApproachPlateScene {
     const vertical = THREE.MathUtils.degToRad(this.camera.fov / 2)
     const horizontal = Math.atan(Math.tan(vertical) * this.camera.aspect)
     const azimuth = INITIAL_AZIMUTH + THREE.MathUtils.degToRad(this.angle)
+    const elevation = THREE.MathUtils.degToRad(this.elevation)
     const outward = new THREE.Vector3(
-      Math.sin(azimuth) * Math.cos(ELEVATION),
-      Math.sin(ELEVATION),
-      Math.cos(azimuth) * Math.cos(ELEVATION),
+      Math.sin(azimuth) * Math.cos(elevation),
+      Math.sin(elevation),
+      Math.cos(azimuth) * Math.cos(elevation),
     )
     const right = new THREE.Vector3(Math.cos(azimuth), 0, -Math.sin(azimuth))
     const up = new THREE.Vector3().crossVectors(outward, right)
@@ -218,14 +262,32 @@ export class ApproachPlateScene {
     }))
     const fit = Math.max(horizontalFit, verticalFit)
     const distance = fit / this.zoom
-    const orbit = distance * Math.cos(ELEVATION)
+    const orbit = distance * Math.cos(elevation)
+    const target = TARGET.clone().add(this.pan)
     this.camera.position.set(
-      TARGET.x + Math.sin(azimuth) * orbit,
-      TARGET.y + Math.sin(ELEVATION) * distance,
-      TARGET.z + Math.cos(azimuth) * orbit,
+      target.x + Math.sin(azimuth) * orbit,
+      target.y + Math.sin(elevation) * distance,
+      target.z + Math.cos(azimuth) * orbit,
     )
-    this.camera.lookAt(TARGET)
+    this.camera.lookAt(target)
     this.camera.updateMatrixWorld()
+    this.projectDockLabels()
+  }
+
+  private projectDockLabels() {
+    if (!this.ready) return
+    const width = this.container.clientWidth
+    const height = this.container.clientHeight
+    for (const dock of this.dockLabels) {
+      const cameraPosition = dock.position.clone().applyMatrix4(this.camera.matrixWorldInverse)
+      const point = dock.position.clone().project(this.camera)
+      const visible = cameraPosition.z < 0 && point.z >= -1 && point.z <= 1
+        && point.x >= -1 && point.x <= 1 && point.y >= -1 && point.y <= 1
+      dock.element.hidden = !visible
+      if (visible) {
+        dock.element.style.transform = `translate3d(${(point.x * 0.5 + 0.5) * width}px, ${(0.5 - point.y * 0.5) * height}px, 0) translate(-50%, -50%)`
+      }
+    }
   }
 
   private reportAngle() {
@@ -293,17 +355,54 @@ export class ApproachPlateScene {
   }
 
   private onPointerDown = (event: PointerEvent) => {
-    if (!this.ready || event.button !== 0) return
-    this.pointer = { id: event.pointerId, x: event.clientX, angle: this.angle }
+    if (!this.ready || this.pointer || (event.button !== 0 && event.button !== 2)) return
+    // The same right/up vectors and perspective scale drive both axes of pan,
+    // so the model follows the pointer consistently at every tilt and zoom.
+    const distance = this.camera.position.distanceTo(TARGET.clone().add(this.pan))
+    const unitsPerPixel = (2 * distance * Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2)))
+      / Math.max(this.container.clientHeight, 1)
+    this.pointer = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      angle: this.angle,
+      elevation: this.elevation,
+      pan: this.pan.clone(),
+      right: new THREE.Vector3().setFromMatrixColumn(this.camera.matrixWorld, 0),
+      up: new THREE.Vector3().setFromMatrixColumn(this.camera.matrixWorld, 1),
+      unitsPerPixel,
+      mode: event.button === 2 || event.shiftKey ? 'pan' : 'orbit',
+    }
     this.renderer.domElement.setPointerCapture(event.pointerId)
-    this.held = true
-    this.options.onInspect()
+    if (event.pointerType === 'mouse') event.preventDefault()
+    this.pauseForInspection()
   }
 
   private onPointerMove = (event: PointerEvent) => {
     if (!this.pointer || event.pointerId !== this.pointer.id) return
-    const delta = ((event.clientX - this.pointer.x) / Math.max(this.container.clientWidth, 1)) * 180
-    this.inspect(this.pointer.angle + delta)
+    const dx = event.clientX - this.pointer.x
+    const dy = event.clientY - this.pointer.y
+    if (this.pointer.mode === 'pan') {
+      this.pan.copy(this.pointer.pan)
+        .addScaledVector(this.pointer.right, -dx * this.pointer.unitsPerPixel)
+        .addScaledVector(this.pointer.up, dy * this.pointer.unitsPerPixel)
+    } else {
+      this.angle = THREE.MathUtils.clamp(
+        this.pointer.angle + (dx / Math.max(this.container.clientWidth, 1)) * 180,
+        0,
+        180,
+      )
+      this.elevation = THREE.MathUtils.clamp(
+        this.pointer.elevation + (dy / Math.max(this.container.clientHeight, 1)) * 90,
+        15,
+        85,
+      )
+      this.sweepPhase = Math.acos(1 - this.angle / 90)
+      this.reportAngle()
+      this.options.onElevation(this.elevation)
+    }
+    this.updateCamera()
+    this.requestFrame()
   }
 
   private onPointerUp = (event: PointerEvent) => {
@@ -314,9 +413,27 @@ export class ApproachPlateScene {
     }
   }
 
+  private onContextMenu = (event: MouseEvent) => {
+    event.preventDefault()
+  }
+
+  private onWheel = (event: WheelEvent) => {
+    if (!this.ready || this.disposed || this.failed || event.deltaY === 0) return
+    event.preventDefault()
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? this.container.clientHeight : 1
+    const delta = THREE.MathUtils.clamp(event.deltaY * unit, -300, 300)
+    this.setZoom(this.zoom * Math.exp(-delta * 0.002))
+  }
+
+  private pauseForInspection() {
+    this.held = true
+    this.options.onInspect()
+  }
+
   private fail(message: string) {
     if (this.disposed || this.failed) return
     this.failed = true
+    this.dockLabelsLayer.hidden = true
     clearTimeout(this.loadTimeout)
     this.abort.abort()
     cancelAnimationFrame(this.frame)
@@ -339,7 +456,11 @@ export class ApproachPlateScene {
     canvas.removeEventListener('pointermove', this.onPointerMove)
     canvas.removeEventListener('pointerup', this.onPointerUp)
     canvas.removeEventListener('pointercancel', this.onPointerUp)
+    canvas.removeEventListener('lostpointercapture', this.onPointerUp)
+    canvas.removeEventListener('contextmenu', this.onContextMenu)
+    canvas.removeEventListener('wheel', this.onWheel)
     canvas.remove()
+    this.dockLabelsLayer.remove()
 
     // Spark's depth readback and SPZ decoding must settle before their GPU data
     // is released. Updates are serialized and every promise has a handler.

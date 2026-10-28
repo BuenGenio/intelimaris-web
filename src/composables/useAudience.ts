@@ -2,6 +2,7 @@ import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { findAudience } from '@/data/audiences'
 const KEY = 'intelimaris-audience'
+const DEFAULT_AUDIENCE = 'captains'
 function readPreference(): string | null {
   try { return findAudience(localStorage.getItem(KEY))?.id ?? null } catch { return null }
 }
@@ -18,7 +19,11 @@ export function useAudience() {
   const router = useRouter()
   const audience = computed(() => {
     if (route.query.choose === '1') return undefined
-    return findAudience(route.meta.audience) ?? findAudience(route.query.audience) ?? findAudience(preferred.value)
+    const selected = findAudience(route.meta.audience) ?? findAudience(route.query.audience) ?? findAudience(preferred.value)
+    if (selected) return selected
+    // The homepage has a useful first role during pre-rendering as well as in the browser.
+    if (route.path === '/' && route.query.audience === undefined) return findAudience(DEFAULT_AUDIENCE)
+    return undefined
   })
   const choose = (id: string) => {
     if (!findAudience(id)) return
@@ -42,16 +47,21 @@ export function useAudience() {
   }
   return { audience, choose, reset, switchAudience }
 }
-/** Install once: a direct audience URL also remembers the choice. */
+/** Install once: remember direct audience URLs and make the homepage selection shareable. */
 export function useAudienceRouteSync() {
   const route = useRoute()
+  const router = useRouter()
   let stop: (() => void) | undefined
   onBeforeUnmount(() => stop?.())
   onMounted(() => {
     preferred.value = readPreference()
-    stop = watch(() => [route.meta.audience, route.query.audience], ([page, query]) => {
+    stop = watch(() => [route.path, route.meta.audience, route.query.audience, route.query.choose], ([path, page, query, browse]) => {
       const value = findAudience(page) ?? findAudience(query)
       if (value) saveAudience(value.id)
+      if (path === '/' && query === undefined && browse !== '1') {
+        const id = findAudience(preferred.value)?.id ?? DEFAULT_AUDIENCE
+        void router.replace({ path: '/', query: { ...route.query, audience: id }, hash: route.hash })
+      }
     }, { immediate: true })
   })
 }

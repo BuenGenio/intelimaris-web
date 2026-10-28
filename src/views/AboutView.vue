@@ -1,11 +1,24 @@
 <template>
   <main class="editorial-page" lang="en">
-    <section class="editorial-shell guide-hero">
+    <section id="our-team" class="editorial-shell guide-hero" aria-labelledby="team-title">
       <LanguageNote />
-
+      <p class="editorial-eyebrow">The people behind the platform</p>
+      <h1 id="team-title">{{ t('about.team.title') }}</h1>
+      <p class="editorial-lede">{{ t('about.team.intro') }}</p>
+      <div class="editorial-team">
+        <article v-for="member in team" :key="member.slug">
+          <img v-if="member.photo" :src="member.photo" :alt="member.name" width="900" height="900" loading="lazy">
+          <span v-else class="team-initials" aria-hidden="true">{{ member.initials }}</span>
+          <h2 class="team-name">{{ member.name }}</h2>
+          <span class="team-role">{{ t(member.roleKey) }}</span>
+          <p>{{ t(member.bioKey) }}</p>
+        </article>
+      </div>
+    </section>
+    <section id="our-story" class="editorial-shell editorial-section" aria-labelledby="story-title">
       <p class="editorial-eyebrow">Our story</p>
       <div class="guide-heading">
-        <h1>The water connects us. The tools should too.</h1>
+        <h2 id="story-title">The water connects us. The tools should too.</h2>
         <p class="editorial-lede">A passage touches more than the helm. It involves crew, guests, dock teams, service companies and the places that welcome a vessel. InteliMARIS™ brings those working lives into a connected ecosystem, with WaterWayz™ as the boater-facing experience.</p>
       </div>
       <p class="identity-note">InteliMarine LLC does business as InteliMARIS. It is the company behind WaterWayz™, the connected vessel systems and the developing marina and geospatial capabilities.</p>
@@ -46,19 +59,6 @@
       </div>
       <RouterLink to="/#choose" class="editorial-button">Find your place on the water ↗</RouterLink>
     </section>
-    <section class="editorial-shell editorial-section">
-      <p class="editorial-eyebrow">The people behind the platform</p>
-      <h2>{{ t('about.team.title') }}</h2>
-      <div class="editorial-team">
-        <article v-for="member in team" :key="member.slug">
-          <img v-if="member.photo" :src="member.photo" :alt="member.name" width="900" height="900" loading="lazy">
-          <span v-else class="team-initials" aria-hidden="true">{{ member.initials }}</span>
-          <h3>{{ member.name }}</h3>
-          <span class="team-role">{{ t(member.roleKey) }}</span>
-          <p>{{ t(member.bioKey) }}</p>
-        </article>
-      </div>
-    </section>
     <GuideClosing :audience="audience" />
   </main>
 </template>
@@ -83,3 +83,12 @@ const team = [
 ] as const
 
 </script>
+
+<style scoped>
+.editorial-team .team-name {
+  font-size: 1.3rem;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+  margin: 0 0 14px;
+}
+</style>
