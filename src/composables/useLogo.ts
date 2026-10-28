@@ -1,10 +1,10 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-/* ?logo=panam swaps the InteliMaris mark for a partner's for the rest of the
-   visit; ?logo=default puts ours back. */
+/* ?logo=panam shows the round mark alone for the rest of the visit;
+   ?logo=default returns to the InteliWaterwayz lockup. */
 export const PARTNER_LOGOS = {
-  panam: { name: 'PanAm', light: 'assets/logo-panam-light.svg', dark: 'assets/logo-panam-dark.svg', favicon: 'assets/favicon-panam.svg' },
+  panam: { name: 'PanAm', light: 'assets/logo-panam-light.svg', dark: 'assets/logo-panam-dark.svg', favicon: 'favicon.svg?v=roundmark-20261028' },
 } as const
 export type PartnerLogoId = keyof typeof PARTNER_LOGOS
 
