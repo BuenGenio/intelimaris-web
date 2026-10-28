@@ -19,6 +19,10 @@
         <clipPath :id="`${uid}-dot`">
           <rect x="0" y="0" :width="width" :height="dotClipBottom" />
         </clipPath>
+        <mask v-if="transparent && showLine" :id="`${uid}-cut`" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" mask-type="luminance" x="0" y="0" :width="width" :height="height">
+          <rect x="0" y="0" :width="width" :height="height" fill="#ffffff" />
+          <rect class="wm-cut" :x="rootBox.x" :y="cutY" :width="rootBox.width" :height="cutHeight" fill="#000000" />
+        </mask>
       </defs>
 
       <!-- The line draws in first, then gives way to the cut. -->
@@ -34,18 +38,24 @@
 
       <text
         class="wm-text"
+        :mask="transparent && showLine ? `url(#${uid}-cut)` : undefined"
         :x="0"
         :y="baseline"
         :font-size="size"
         font-weight="700"
         :letter-spacing="`${tracking}em`"
       >
-        <tspan ref="rootRef" class="wm-root" :fill="rootColour">{{ rootHead }}<tspan ref="lastRef">{{ rootTail }}</tspan></tspan><tspan class="wm-domain" :fill="domainColour">{{ domain }}</tspan>
+        <tspan ref="rootRef" class="wm-root" :fill="rootColour">{{ rootHead }}<tspan ref="lastRef">{{ rootTail }}</tspan></tspan><tspan class="wm-domain" :fill="domainColour" :dx="symbolAdvance || undefined">{{ domain }}</tspan>
       </text>
 
-      <!-- The cut: scored through the root only, in the surface colour. -->
+      <template v-if="roundMark">
+        <image class="wm-symbol-light" :href="`${base}assets/logo-panam-light.svg`" :x="rootBox.x + rootBox.width + symbolGap" :y="symbolY" :width="symbolSize" :height="symbolSize" aria-hidden="true" />
+        <image class="wm-symbol-dark" :href="`${base}assets/logo-panam-dark.svg`" :x="rootBox.x + rootBox.width + symbolGap" :y="symbolY" :width="symbolSize" :height="symbolSize" aria-hidden="true" />
+      </template>
+
+      <!-- Transparent marks use the mask; other marks match their surface. -->
       <rect
-        v-if="showLine"
+        v-if="showLine && !transparent"
         class="wm-cut"
         :x="rootBox.x"
         :y="cutY"
@@ -116,9 +126,11 @@ const props = withDefaults(
     tm?: boolean
     animate?: boolean
     product?: boolean
+    transparent?: boolean
+    roundMark?: boolean
     endorse?: 'none' | 'left' | 'beneath'
   }>(),
-  { root: 'Inteli', domain: 'maris', size: 28, tm: false, animate: false, product: false, endorse: 'none' },
+  { root: 'Inteli', domain: 'maris', size: 28, tm: false, animate: false, product: false, transparent: false, roundMark: false, endorse: 'none' },
 )
 
 /* Measured on Red Hat Display 700 for the brand book: x-height 52% of the
@@ -130,6 +142,7 @@ const LINE_WEIGHT = 0.4
 const MIN_LINE_PX = 24
 
 const uid = `wm-${useId()}`
+const base = import.meta.env.BASE_URL
 
 const svgRef = ref<SVGSVGElement | null>(null)
 const rootRef = ref<SVGTSpanElement | null>(null)
@@ -146,6 +159,10 @@ const domainColour = 'var(--mark-domain, #1b5e9e)'
 const cutColour = 'var(--mark-cut, #ffffff)'
 
 const baseline = computed(() => props.size * 0.84)
+const symbolSize = computed(() => props.size * 0.9)
+const symbolGap = computed(() => props.size * 0.15)
+const symbolY = computed(() => baseline.value - props.size * 0.8)
+const symbolAdvance = computed(() => props.roundMark ? symbolSize.value + symbolGap.value * 2 : 0)
 const cutHeight = computed(() => props.size * STEM * LINE_WEIGHT)
 const cutY = computed(() => baseline.value - props.size * X_HEIGHT * LINE_AT - cutHeight.value / 2)
 const dotClipBottom = computed(() => baseline.value - props.size * (X_HEIGHT + 0.04))
@@ -157,7 +174,7 @@ const label = computed(() => `${props.root}${props.domain}`)
 /* Estimates until the font has loaded and the glyphs can be measured. */
 const rootBox = ref({ x: 0, width: props.root.length * props.size * 0.58 })
 const lastX = ref(rootHead.value.length * props.size * 0.58)
-const textWidth = ref((props.root.length + props.domain.length) * props.size * 0.55)
+const textWidth = ref((props.root.length + props.domain.length) * props.size * 0.55 + symbolAdvance.value)
 
 const height = computed(() => {
   if (props.endorse === 'beneath') return Math.ceil(hairY.value + props.size * 0.42)
@@ -213,7 +230,7 @@ onMounted(async () => {
   }
 })
 
-watch(() => [props.root, props.domain, props.size], async () => {
+watch(() => [props.root, props.domain, props.size, props.roundMark], async () => {
   await nextTick()
   measure()
 })
@@ -237,6 +254,10 @@ onBeforeUnmount(() => {
   overflow: visible;
   font-family: var(--font-display);
 }
+
+.wm-symbol-dark { display: none; }
+[data-theme='dark'] .wm-symbol-light { display: none; }
+[data-theme='dark'] .wm-symbol-dark { display: inline; }
 
 .wm-endorse-left {
   display: inline-flex;

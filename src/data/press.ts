@@ -45,7 +45,7 @@ export const PRESS: PressRelease[] = [
     sections: [
       {
         lead: 'The vessel.',
-        text: 'InteliMARIS sensors report power, batteries, water, temperature and bilge activity over a long-range radio link, so nothing depends on Wi-Fi at the dock. Every reading carries its age — "4.2 ft · sounded 3 d ago" — because a stale number is worse than no number. Owners see the same readings aboard or away.',
+        text: 'InteliMARIS sensors report power, batteries, water, temperature and bilge activity through compatible gateways and connectivity. Every reading carries its age — "4.2 ft · sounded 3 d ago" — because a stale number is worse than no number. Owners see the same readings aboard or away.',
       },
       {
         lead: 'The marina.',

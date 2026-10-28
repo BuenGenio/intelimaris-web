@@ -96,6 +96,15 @@ export const JOURNEYS: Journey[] = [
     backend: 'The workspace catalog: one app, one shell, and the surfaces each kind of workspace has, served by the platform’s services.',
     component: defineAsyncComponent(() => import('@/components/playbook/AppScreens.vue')),
   },
+  {
+    id: 'approach-plate',
+    index: 10,
+    title: 'Explore a marine Approach Plate',
+    action: 'Explore Bahia Mar in 3D and preview a sample Approach Plate before arrival.',
+    proves: 'A shared visual briefing helps the captain and crew understand the destination before arrival. The sample illustrates approach context, without establishing navigational depths, clearances or berth availability.',
+    backend: 'The Bahia Mar survey model rendered as Gaussian splats, presented as a sample marine Approach Plate.',
+    component: defineAsyncComponent(() => import('@/components/playbook/ApproachPlate.vue')),
+  },
 ]
 
 export const findJourney = (id: string | undefined): Journey | undefined =>

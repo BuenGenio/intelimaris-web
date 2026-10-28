@@ -22,10 +22,10 @@ export interface Audience {
 export const AUDIENCES: Audience[] = [
   {
     id: 'captains', group: 'aboard', label: 'Captain / navigator', short: 'Captains & navigators',
-    intent: 'Plan the passage. Take the helm.', headline: 'Your vessel. Your passage. The detail that matters.',
-    intro: 'Build a passage around your vessel’s dimensions, inspect the route and arrive with the berth details in hand. WaterWayz™ brings the decisions before departure and the view underway together.',
-    shot: 'waterwayz-route', caption: 'A passage, its conditions and the destination in one view.',
-    journey: 'passage-planner',
+    intent: 'See the approach. Plan the passage.', headline: 'Your vessel. Your passage. The detail that matters.',
+    intro: 'Explore a sample marine Approach Plate of Bahia Mar, then build a passage around your vessel’s dimensions and inspect the route. WaterWayz™ brings destination context, planning and the view underway together.',
+    shot: 'waterwayz-route', caption: 'Bahia Mar in 3D: a sample Approach Plate for the captain and crew.',
+    journey: 'approach-plate',
     features: ['route-planning', 'navigation', 'hazard-reporting', 'dockpass', 'emergency-assistance'],
     steps: [
       { title: 'Start with your vessel', body: 'Keep length, beam, draft and air draft in the vessel workspace. Choose a departure and destination; you can plan from somewhere other than your current position.' },

@@ -3,12 +3,22 @@ import { mount, flushPromises, type VueWrapper } from '@vue/test-utils'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { nextTick } from 'vue'
 import HomeView from './HomeView.vue'
+import JourneyStage from '@/components/audience/JourneyStage.vue'
 import AudienceView from './AudienceView.vue'
 import CapabilityView from './CapabilityView.vue'
 import ContactView from './ContactView.vue'
 import { saveAudience } from '@/composables/useAudience'
 import { AUDIENCES } from '@/data/audiences'
 import { CAPABILITIES } from '@/data/capabilities'
+
+// Test role selection and journey wiring without starting canvas renderers or live feeds.
+vi.mock('@/components/audience/JourneyStage.vue', () => ({
+  default: {
+    name: 'JourneyStage',
+    props: { id: String },
+    template: '<div class="journey-stage-stub" :data-journey-id="id" />',
+  },
+}))
 
 let wrapper: VueWrapper | undefined
 beforeEach(() => { saveAudience(null); localStorage.clear() })
@@ -30,6 +40,8 @@ describe('audience journey', () => {
     const router = await setup()
     wrapper = mount(HomeView, { global: { plugins: [router] } })
     expect(wrapper.findAll('button[aria-pressed="true"]')).toHaveLength(0)
+    expect(wrapper.findComponent(JourneyStage).props('id')).toBe('approach-plate')
+    expect(wrapper.findAll('.hero-float')).toHaveLength(0)
     for (const audience of AUDIENCES) {
       const button = wrapper.findAll('.audience-chip').find(b => b.text() === audience.label.split(' / ')[0])!
       await button.trigger('click')
@@ -37,6 +49,8 @@ describe('audience journey', () => {
       expect(router.currentRoute.value.query.audience).toBe(audience.id)
       expect(wrapper.findAll('button[aria-pressed="true"]')).toHaveLength(1)
       expect(wrapper.get('#audience-preview h2').text()).toBe(audience.headline)
+      expect(wrapper.findComponent(JourneyStage).props('id')).toBe(audience.journey)
+      if (audience.id === 'captains') expect(wrapper.findAll('.hero-float')).toHaveLength(0)
       expect(wrapper.get('#audience-preview a').attributes('href')).toContain(`/for/${audience.id}`)
       expect(localStorage.getItem('intelimaris-audience')).toBe(audience.id)
       expect(wrapper.findAll('.feature-link')).toHaveLength(audience.features.length)
@@ -100,7 +114,7 @@ describe('audience journey', () => {
   it('updates copy and the journey when navigating between guides using the same view', async () => {
     const router = await setup('/for/captains')
     wrapper = mount(AudienceView, { props: { audienceId: 'captains' }, global: { plugins: [router] } })
-    expect(wrapper.find('#try-passage-planner').exists()).toBe(true)
+    expect(wrapper.find('#try-approach-plate').exists()).toBe(true)
     await wrapper.setProps({ audienceId: 'marina-owners' })
     expect(wrapper.get('h1').text()).toContain('The whole basin')
     expect(wrapper.find('#try-draw-your-water').exists()).toBe(true)

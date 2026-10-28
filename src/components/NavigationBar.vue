@@ -3,9 +3,9 @@
     <svg class="glass-filter-defs" aria-hidden="true" width="0" height="0"><defs><filter id="nav-refraction" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.12" numOctaves="1" seed="7" result="surface" /><feDisplacementMap in="SourceGraphic" in2="surface" scale="3" xChannelSelector="R" yChannelSelector="G" /></filter></defs></svg>
     <div class="nav-glass" aria-hidden="true"></div><div class="nav-refraction" aria-hidden="true"></div>
     <div class="site-nav editorial-shell">
-      <RouterLink to="/" class="site-brand" aria-label="InteliMaris home">
+      <RouterLink to="/" class="site-brand" :aria-label="`${logo?.name ?? 'InteliWaterwayz'} home`">
         <PartnerLogo v-if="logo" :logo="logo" :size="40" />
-        <Wordmark v-else :size="27" tm />
+        <Wordmark v-else domain="Waterwayz" product :size="27" tm transparent round-mark />
       </RouterLink>
       <nav class="site-desktop-nav" aria-label="Main navigation">
         <template v-for="link in MAIN_NAVIGATION" :key="link.to"><PlatformMenu v-if="link.to === '/capabilities'" /><RouterLink v-else :to="link.to">{{ link.label }}</RouterLink></template>

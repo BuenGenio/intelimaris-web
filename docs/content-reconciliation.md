@@ -26,7 +26,7 @@ turning into a hardware specification sheet.
 | Audience journeys | Keep all nine code-backed guides, public deep links, optional remembered preference and contextual contact. Choosing an audience never grants product permissions. |
 | Consumer promise | Use the PDF's connected-boating idea, direct benefits and specific CTAs. Keep detailed workflows on their dedicated pages. |
 | Brand architecture | InteliMARIS is the public marine brand of InteliMarine LLC; WaterWayz is the boater-facing experience. PWTS, InteliBilge and InteliBMS are connected-system families. |
-| Radio and software | MX MariWavz is specifically the radio network. The technology Stack is software/data infrastructure; developing AI belongs there. Gateway, uplink and compatibility still matter. |
+| Connectivity and software | Describe compatible devices, gateways and uplinks without a separate connectivity product brand. The technology Stack is software/data infrastructure; developing AI belongs there. Gateway, uplink and compatibility still matter. |
 | WaterWayz | More prominent on the homepage and in navigation. Navigation, passage planning, monitoring, discovery and arrival workflows connect through the product guides. |
 | InteliMarina + Dock Pass | Pair the consumer arrival story with real marina/PMS workflows. Existing dashboard, layout, arrivals and staff functionality is retained; finance, planning boards and other gaps stay explicit. No universal live inventory, instant booking or payment promise. |
 | Emergency Assistance | Dedicated capability page. The implementation supports device coordinates, age, copy control, vessel name and communication references. Rich vessel information packs, landside access routes and responder integrations are proposed rather than presented as operational. No dispatch claim. |
@@ -36,7 +36,7 @@ turning into a hardware specification sheet.
 | Drone / geospatial | Add a dedicated Pilot Byte collaboration overview with a link to the real survey demo. Preserve the fact that the demo uses Halifax Harbor LiDAR alongside Bahia Mar sample listing information. WaterWayz layers, occupancy surveys, access routing and deployable-drone workflows are developing concepts. |
 | InteliVision | Add a small, clearly labeled Coming soon / Concept guide. No autonomous docking, availability or delivery-date promise. |
 | Product credibility | Keep actual product screenshots, real team biographies and survey provenance. Do not invent signed pilots, testimonials, certifications, patents, range validation or safety guarantees. |
-| Trademarks | Normalize WaterWayz and MX MariWavz naming; retain the repository's existing ™ convention. Do not change InteliMARIS to ® solely on the basis of the PDF. |
+| Trademarks | Normalize WaterWayz naming; retain the repository's existing ™ convention. Do not change InteliMARIS to ® solely on the basis of the PDF. |
 | Breadcrumbs and discovery | Shared accessible breadcrumbs remain on inner pages. New pages have route metadata, sitemap entries and relevant cross-links. |
 
 ## Source checks beyond the first audience audit

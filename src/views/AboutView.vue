@@ -24,7 +24,7 @@
           <li>
             <span class="editorial-index">02</span>
             <h3>The vessel</h3>
-            <p>PWTS, InteliBilge and InteliBMS bring compatible vessel systems into the ecosystem. The MX MariWavz™ radio network links devices and gateways; software presents the useful information in WaterWayz™.</p>
+            <p>PWTS, InteliBilge and InteliBMS bring compatible vessel systems into the ecosystem. Compatible devices and gateways connect the systems; software presents the useful information in WaterWayz™.</p>
             <RouterLink to="/capabilities/monitoring" class="editorial-text-link">Explore monitoring →</RouterLink>
           </li>
           <li>
@@ -77,10 +77,9 @@ const teamBase = `${import.meta.env.BASE_URL}assets/team/`
 const team = [
   { slug: 'ron-bishop', name: 'Ron Bishop', initials: 'RB', photo: null, roleKey: 'about.team.ron.role', bioKey: 'about.team.ron.bio' },
   { slug: 'tristan-mullane', name: 'Tristan Mullane', initials: 'TM', photo: `${teamBase}tristan-mullane.webp`, roleKey: 'about.team.tristan.role', bioKey: 'about.team.tristan.bio' },
-  { slug: 'john-x', name: 'John X', initials: 'JX', photo: `${teamBase}john-x.webp`, roleKey: 'about.team.john.role', bioKey: 'about.team.john.bio' },
   { slug: 'sam-skolnik', name: 'Sam Skolnik', initials: 'SS', photo: `${teamBase}sam-skolnik.webp`, roleKey: 'about.team.sam.role', bioKey: 'about.team.sam.bio' },
   { slug: 'yevgen-trotsan', name: 'Yevgen Trotsan', initials: 'YT', photo: `${teamBase}yevgen-trotsan.webp`, roleKey: 'about.team.yevgen.role', bioKey: 'about.team.yevgen.bio' },
-  { slug: 'gary-stidston-broadbent', name: 'Gary Stidston-Broadbent', initials: 'GS', photo: null, roleKey: 'about.team.gary.role', bioKey: 'about.team.gary.bio' },
+  { slug: 'gary-stidston-broadbent', name: 'Gary Stidston-Broadbent', initials: 'GS', photo: `${teamBase}gary-stidston-broadbent.png`, roleKey: 'about.team.gary.role', bioKey: 'about.team.gary.bio' },
 ] as const
 
 </script>

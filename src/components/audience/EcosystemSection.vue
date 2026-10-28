@@ -17,8 +17,8 @@
       </li>
         <li>
       <span class="editorial-index">02 / THE LINK</span>
-      <h3>MX MariWavz™</h3>
-      <p>The radio network links compatible devices and gateways. Gateway connectivity carries their data onward.</p>
+      <h3>Device connectivity</h3>
+      <p>Compatible devices connect through gateways, which carry their data onward.</p>
       <RouterLink to="/software">Understand the connection →</RouterLink>
       </li>
         <li>

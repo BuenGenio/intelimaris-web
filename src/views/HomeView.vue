@@ -29,8 +29,8 @@
             </div>
             <JourneyStage :id="journey.id" />
           </div>
-          <p class="hero-float hero-float-a" aria-hidden="true"><span class="hero-check">✓</span> Fits your draft</p>
-          <p class="hero-float hero-float-b" aria-hidden="true">Sounded 3 d ago</p>
+          <p v-if="journey.id !== 'approach-plate'" class="hero-float hero-float-a" aria-hidden="true"><span class="hero-check">✓</span> Fits your draft</p>
+          <p v-if="journey.id !== 'approach-plate'" class="hero-float hero-float-b" aria-hidden="true">Sounded 3 d ago</p>
         </div>
       </div>
       <div id="audience-preview" class="audience-preview">
@@ -105,8 +105,8 @@ import { audienceLink, isMarinaAudience } from '@/data/audiences'
 import { findJourney, JOURNEYS } from '@/data/playbook/journeys'
 const { audience, choose } = useAudience()
 const { start } = useOnboarding()
-/* Each role tries the journey that speaks to it; before a choice, Underway at the helm leads. */
-const journey = computed(() => findJourney(audience.value?.journey) ?? findJourney('helm-view') ?? JOURNEYS[0]!)
+/* Each role tries the journey that speaks to it; the sample Approach Plate leads before a choice. */
+const journey = computed(() => findJourney(audience.value?.journey) ?? findJourney('approach-plate') ?? JOURNEYS[0]!)
 /* The WaterWayz section shows every screen of the app; when the hero is not already at the helm, it rides along there instead. */
 const secondJourney = computed(() => (journey.value.id === 'helm-view' ? 'app-screens' : 'helm-view'))
 async function onChoose(id: string) {
