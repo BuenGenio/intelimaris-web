@@ -10,6 +10,15 @@ export interface PressBlock {
   text: string
 }
 
+export interface PressImage {
+  /** path under the site base, e.g. "assets/press/x.webp" */
+  src: string
+  alt: string
+  caption?: string
+  width: number
+  height: number
+}
+
 export interface PressRelease {
   id: string
   date: string
@@ -18,13 +27,21 @@ export interface PressRelease {
   title: string
   standfirst: string
   summary: string
+  /** shown beside the headline, as on the printed release */
+  hero?: PressImage
   intro: string[]
   sections: PressBlock[]
+  /** captioned photographs that follow the sections */
+  figures?: PressImage[]
   quote: { text: string; name: string; role: string }
+  /** the sign-off line, e.g. "Your whole boating experience. Intelligently connected." */
+  tagline?: string
   cta?: { lead: string; text: string; href: string; label: string }
   availability?: string
   boilerplate: { heading: string; text: string }[]
   contact: { name: string; email: string; phone: string }
+  /** the trademark line; a default is used when absent */
+  marks?: string
   /** where the show, event or embargo notes belong */
   notes?: string[]
 }
@@ -32,58 +49,81 @@ export interface PressRelease {
 export const PRESS: PressRelease[] = [
   {
     id: 'flibs-2026',
-    date: '2026-10-01',
-    place: 'FORT LAUDERDALE, Fla.',
-    title: 'InteliMARIS brings WaterWayz to FLIBS 2026: one app for the passage, the vessel and the berth',
-    standfirst: 'Fort Lauderdale International Boat Show · October 28 – November 1 · [booth number]',
+    date: '2026-10-28',
+    place: 'FORT LAUDERDALE, FL.',
+    title: 'InteliMARIS unveils new InteliWaterwayz Demo App: experience the future of connected boating',
+    standfirst:
+      'InteliMARIS will showcase its expanding connected maritime ecosystem at the 2026 Fort Lauderdale International Boat Show, October 28 – November 1.',
     summary:
-      'InteliMARIS will show WaterWayz, its boating app, at the 2026 Fort Lauderdale International Boat Show, alongside the vessel sensors and the marina console that share one platform with it.',
+      'InteliMARIS showcases the future of connected boating at the 2026 Fort Lauderdale International Boat Show with the launch of the InteliWaterwayz Demo App, an interactive simulation of its all-in-one boating platform, launching in 2027.',
+    hero: {
+      src: 'assets/press/flibs-2026-app.webp',
+      alt: 'A phone showing the InteliWaterwayz welcome screen: “Welcome to the future of safer boating” over an aerial view of a motor yacht under way.',
+      width: 607,
+      height: 1170,
+    },
     intro: [
-      'InteliMARIS™ will show WaterWayz™, its boating app, at the 2026 Fort Lauderdale International Boat Show, October 28 through November 1, at [booth number].',
-      'WaterWayz plans a passage for the vessel it is on — its real length, draft and air draft, not a form — and refuses to draw a route it does not believe. It shows charted depth through the water, live vessel traffic, hazards other boaters have reported, and 27,000 marinas with their approach depth. A berth can be requested from the same screen.',
+      'InteliMARIS® showcases the future of connected boating with the launch of its Demo App, InteliWaterwayz®. Incorporating innovative new technology using advanced drone, sensor and mapping technology, the future of boating is more connected and secure than ever before.',
+      'InteliWaterwayz® is an all-in-one boating platform designed to bring navigation, vessel monitoring, marina discovery, booking, docking guidance and boating communities together in one connected experience. With InteliWaterwayz®, it’s smooth sailing all the wayz.',
+      'The Demo App is an interactive simulation tool that allows boaters to explore the maritime ecosystem on their own smartphone in real time.',
     ],
     sections: [
       {
-        lead: 'The vessel.',
-        text: 'InteliMARIS sensors report power, batteries, water, temperature and bilge activity through compatible gateways and connectivity. Every reading carries its age — "4.2 ft · sounded 3 d ago" — because a stale number is worse than no number. Owners see the same readings aboard or away.',
+        lead: 'The InteliWaterwayz® Demo App.',
+        text: 'The new InteliWaterwayz® Demo App simulates your boating experience and provides an overview of some of its many features and benefits. Users can seamlessly navigate through the App’s screens and can experience virtual boating through several simulated features.',
       },
       {
-        lead: 'The marina.',
-        text: 'On the shore side, marina staff draw their own berth map over satellite imagery, run arrivals and departures from a phone on the pontoon, and hold residents, short stays and staff duty in one place. Every berth carries its approach brief — entry heading, tie side, depth and datum — and a guest is only ever shown berths they fit.',
+        lead: 'Connected vessel systems.',
+        text: 'Through connected sensors and intelligent monitoring technology, the system is designed to help boat owners stay informed about important onboard conditions, including electrical systems, batteries, water, temperature, bilge activity and other vessel parameters, whether aboard or away.',
       },
       {
-        lead: 'Emergency Assistance.',
-        text: 'Last year, during a medical emergency aboard a vessel in a large Florida marina, 911 had the marina’s address and responders still struggled to find the right boat. InteliMARIS will show the Emergency Assistance concept it is developing in response: a way for a boater to pass on vessel identity, precise position and marina access details when they call for help. WaterWayz does not dispatch emergency services, and it does not replace 911, VHF Channel 16, the U.S. Coast Guard or any other emergency service.',
+        text: 'Using advanced drone technology, bathymetric surveying, LiDAR and geospatial intelligence, we aim to transform how marinas are mapped, monitored and managed.',
       },
       {
-        lead: 'Mapping the marina.',
-        text: 'With Pilot Byte, InteliMARIS is working on high-resolution aerial imagery, photogrammetry and LiDAR surveys of marinas and waterways. A survey demonstration is on the stand; automated surveys and live occupancy remain in development.',
+        lead: 'Bathymetric surveying, LiDAR and advanced geospatial mapping.',
+        text: 'Specialized bathymetric survey drones will collect underwater depth measurements, providing valuable information about marina basins, channels, approaches and surrounding waterways. High-resolution aerial imagery, photogrammetry and LiDAR technology will provide detailed digital representations of marina environments, capturing docks, slips, access routes, infrastructure and surrounding terrain. Combining these technologies has the potential to provide marina operators with a more comprehensive understanding of their facilities, both above and below the waterline.',
+      },
+      {
+        lead: 'DockPass™.',
+        text: 'Boaters can book a slip using the DockPass™ feature on the App, which assimilates all the required information to help boaters discover and find marinas or docks, identify and book suitable slips (accounting for vessel size) and make reservations. The App will then guide the boat into the correct slip for a safer arrival. Reservations are marina dependent.',
+      },
+    ],
+    figures: [
+      {
+        src: 'assets/press/flibs-2026-map.webp',
+        alt: 'A phone showing the InteliWaterwayz map over Fort Lauderdale, with marina pins, a closed bascule bridge notice, an SOS button and a Report button.',
+        caption: 'App simulation of waterway guidance and marina discovery.',
+        width: 731,
+        height: 1424,
+      },
+      {
+        src: 'assets/press/flibs-2026-drone.webp',
+        alt: 'A drone hovering over a motor yacht at a marina dock, scanning the stern with a thermal camera.',
+        caption: 'Thermal-imaging drones will scan for abnormal heat patterns while a vessel is docked in a marina.',
+        width: 712,
+        height: 712,
       },
     ],
     quote: {
-      text: 'Last year a crew in a big Florida marina waited while responders looked for the right boat. Boaters already have more information than they can use. Our job is to bring the pieces that matter to the moment they matter — the depth ahead, the berth that fits, the one thing a responder needs to know — and to say plainly when we don’t know.',
+      text: 'Boaters have access to more information than ever, but much of it remains disconnected. Our vision is to bring the important pieces together so boaters can better understand their vessel, their surroundings and what matters at that moment. By connecting onboard technology with marina intelligence, advanced mapping and the boating experience, we’re building something that goes far beyond traditional navigation.',
       name: 'Ron Bishop',
-      role: 'CEO, InteliMARIS',
+      role: 'CEO, InteliMarine LLC',
     },
+    tagline: 'Your whole boating experience. Intelligently connected.',
     cta: {
-      lead: 'Try it before the show.',
-      text: 'The WaterWayz passage planner, the berth-fit tool and an orbitable LiDAR survey are live on this site.',
-      href: '/capabilities/route-planning',
-      label: 'Plan a route for your own draft',
+      lead: 'On this site.',
+      text: 'The InteliWaterwayz app, the vessel sensors and the marina console are described in detail here.',
+      href: '/waterwayz',
+      label: 'Explore InteliWaterwayz',
     },
-    availability:
-      'WaterWayz is [available on iOS and Android / in pilot with marinas in Florida]; the marina console is [in use at X marinas / entering pilots in early 2027]. Emergency Assistance is a concept under development and has no release date.',
     boilerplate: [
       {
         heading: 'About InteliMARIS',
-        text: 'InteliMARIS builds the sensors, the app and the marina console that watch a vessel, a passage and a basin, and say what changed before it matters. It is based in Fort Lauderdale, Florida.',
-      },
-      {
-        heading: 'About Pilot Byte',
-        text: '[One sentence from Pilot Byte.]',
+        text: 'InteliMARIS® heads up a group of specialist maritime and technology businesses who create in-depth, comprehensive tools to support navigation and connectivity of their maritime ecosystem. This collaboration unveils the new innovative all-in-one boating App, InteliWaterwayz®. Launching in 2027.',
       },
     ],
-    contact: { name: '[Name]', email: 'info@intelimarine.com', phone: '[Phone]' },
+    contact: { name: 'Samantha Skolnik', email: 'info@intelimaris.com', phone: '386 383 4847' },
+    marks: 'InteliMARIS®, InteliWaterwayz® and DockPass™ are marks of InteliMarine LLC.',
   },
 ]
 

@@ -1,11 +1,16 @@
 <template>
   <main v-if="release" class="editorial-page press-page" lang="en">
     <article class="editorial-shell press-article">
-      <header class="press-head">
-        <p class="editorial-eyebrow">Press release · {{ formatPressDate(release.date) }}</p>
-        <h1>{{ release.title }}</h1>
-        <p class="press-standfirst">{{ release.standfirst }}</p>
-        <p v-if="draft" class="release-note press-draft"><strong>Draft</strong><span>Text in [brackets] is still to be confirmed before this release goes out.</span></p>
+      <header class="press-head" :class="{ 'has-hero': release.hero }">
+        <div class="press-head-copy">
+          <p class="editorial-eyebrow">Press release · {{ formatPressDate(release.date) }}</p>
+          <h1>{{ release.title }}</h1>
+          <p class="press-standfirst">{{ release.standfirst }}</p>
+          <p v-if="draft" class="release-note press-draft"><strong>Draft</strong><span>Text in [brackets] is still to be confirmed before this release goes out.</span></p>
+        </div>
+        <figure v-if="release.hero" class="press-hero">
+          <img :src="base + release.hero.src" :alt="release.hero.alt" :width="release.hero.width" :height="release.hero.height" fetchpriority="high" decoding="async" />
+        </figure>
       </header>
 
       <div class="press-body">
@@ -19,10 +24,19 @@
           {{ block.text }}
         </p>
 
+        <div v-if="release.figures?.length" class="press-figures">
+          <figure v-for="fig in release.figures" :key="fig.src" class="press-figure">
+            <img :src="base + fig.src" :alt="fig.alt" :width="fig.width" :height="fig.height" loading="lazy" decoding="async" />
+            <figcaption v-if="fig.caption">{{ fig.caption }}</figcaption>
+          </figure>
+        </div>
+
         <blockquote class="press-quote">
           <p>“{{ release.quote.text }}”</p>
           <footer>{{ release.quote.name }}, {{ release.quote.role }}</footer>
         </blockquote>
+
+        <p v-if="release.tagline" class="press-tagline">{{ release.tagline }}</p>
 
         <p v-if="release.cta" class="press-para">
           <strong>{{ release.cta.lead }}</strong>
@@ -50,7 +64,7 @@
             <a href="https://intelimaris.com">intelimaris.com</a>
           </p>
         </section>
-        <p class="press-marks">InteliMARIS™ and WaterWayz™ are trademarks of InteliMarine LLC.</p>
+        <p class="press-marks">{{ release.marks ?? 'InteliMARIS™ and WaterWayz™ are trademarks of InteliMarine LLC.' }}</p>
       </footer>
     </article>
 
@@ -73,6 +87,7 @@ import { RouterLink } from 'vue-router'
 import { PRESS, findRelease, formatPressDate, hasPlaceholders, pressLink } from '@/data/press'
 
 const props = defineProps<{ releaseId: string }>()
+const base = import.meta.env.BASE_URL
 const release = computed(() => findRelease(props.releaseId))
 const draft = computed(() => (release.value ? hasPlaceholders(release.value) : false))
 </script>
@@ -88,6 +103,61 @@ const draft = computed(() => (release.value ? hasPlaceholders(release.value) : f
   font-size: clamp(2rem, 3.6vw, 3.4rem);
   letter-spacing: -0.03em;
   line-height: 1.08;
+}
+
+.press-head.has-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(140px, 24%, 200px);
+  gap: 32px;
+  align-items: start;
+}
+
+.press-hero {
+  margin: 0;
+  padding: 10px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid var(--border-medium);
+}
+
+.press-hero img,
+.press-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.press-figures {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 24px;
+  align-items: end;
+  margin: 8px 0 34px;
+}
+
+.press-figure {
+  margin: 0;
+}
+
+.press-figure img {
+  border-radius: 14px;
+  border: 1px solid var(--border-medium);
+  background: #fff;
+}
+
+.press-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.press-tagline {
+  margin: -10px 0 30px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--domain-ink);
 }
 
 .press-standfirst {
@@ -220,6 +290,23 @@ const draft = computed(() => (release.value ? hasPlaceholders(release.value) : f
 }
 
 @media (max-width: 700px) {
+  .press-head.has-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .press-hero {
+    width: min(200px, 60%);
+  }
+
+  .press-figures {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .press-figures .press-figure:first-child {
+    width: min(260px, 70%);
+  }
+
   .press-more a {
     grid-template-columns: minmax(0, 1fr);
     gap: 4px;
