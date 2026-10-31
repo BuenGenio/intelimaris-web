@@ -5,7 +5,7 @@
     <div class="site-nav editorial-shell">
       <RouterLink to="/" class="site-brand" :aria-label="`${logo?.name ?? 'InteliWaterwayz'} home`">
         <PartnerLogo v-if="logo" :logo="logo" :size="40" />
-        <InteliWaterwayzLogo v-else :height="32" />
+        <InteliWaterwayzLogo v-else variant="blue-cyan" :height="32" />
       </RouterLink>
       <nav class="site-desktop-nav" aria-label="Main navigation">
         <template v-for="link in MAIN_NAVIGATION" :key="link.to"><PlatformMenu v-if="link.to === '/capabilities'" /><RouterLink v-else :to="link.to">{{ link.label }}</RouterLink></template>

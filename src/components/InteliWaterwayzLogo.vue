@@ -6,11 +6,7 @@
     :aria-label="label || undefined"
     :aria-hidden="label ? undefined : 'true'"
   >
-    <img v-if="variant !== 'auto'" :src="ART[variant]" alt="" decoding="async" />
-    <template v-else>
-      <img class="iw-light" :src="ART['blue-cyan']" alt="" decoding="async" />
-      <img class="iw-dark" :src="ART.reverse" alt="" decoding="async" />
-    </template>
+    <img :src="ART[variant]" alt="" decoding="async" />
   </span>
 </template>
 
@@ -19,21 +15,20 @@
    `reverse` are byte copies of the approved masters; `blue-cyan` is the RGB
    Blue master with only the WATERWAYZ lettering set to the icon's cyan
    (#30acc8), at Eugene's direction. The wrapper crops the masters' built-in
-   clear space so the visible lockup, not the canvas, is `height` tall. `auto`
-   follows the site theme: navy Inteli with cyan Waterwayz by day, the
-   all-white reverse artwork on dark. Pin a variant for a surface that stays
-   dark by day. */
+   clear space so the visible lockup, not the canvas, is `height` tall. The
+   header shows `blue-cyan` in both themes; the always-dark footer shows
+   `reverse`. */
 export type InteliWaterwayzLogoVariant = 'blue' | 'blue-cyan' | 'reverse'
 
 withDefaults(
   defineProps<{
-    variant?: InteliWaterwayzLogoVariant | 'auto'
+    variant?: InteliWaterwayzLogoVariant
     /** Height of the visible lockup in px. */
     height?: number
     /** Set when the logo stands alone; inside a link that already names it, leave it off. */
     label?: string
   }>(),
-  { variant: 'auto', height: 32, label: '' },
+  { variant: 'blue-cyan', height: 32, label: '' },
 )
 
 const base = import.meta.env.BASE_URL
@@ -71,8 +66,4 @@ const ART: Record<InteliWaterwayzLogoVariant, string> = {
   max-width: none;
   display: block;
 }
-
-.iw-dark { display: none; }
-[data-theme='dark'] .iw-light { display: none; }
-[data-theme='dark'] .iw-dark { display: block; }
 </style>
