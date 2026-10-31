@@ -2,7 +2,7 @@
   <footer class="footer chapter" data-chapter="slate" role="contentinfo">
     <div class="container-wide footer-grid">
       <div class="footer-family">
-        <RouterLink to="/" class="footer-mark" aria-label="InteliWaterwayz home"><InteliWaterwayzLogo variant="blue-inteli-white" :height="32" /></RouterLink>
+        <RouterLink to="/" class="footer-mark" aria-label="InteliWaterwayz home"><InteliWaterwayzLogo variant="reverse" :height="32" /></RouterLink>
         <p class="t-caption footer-brand-line">{{ t('footer.brand') }}</p>
         <p class="footer-sentence">Know more. Worry less.<br>Enjoy the water.</p>
       </div>

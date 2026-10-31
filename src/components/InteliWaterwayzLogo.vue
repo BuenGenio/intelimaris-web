@@ -8,20 +8,22 @@
   >
     <img v-if="variant !== 'auto'" :src="ART[variant]" alt="" decoding="async" />
     <template v-else>
-      <img class="iw-light" :src="ART.blue" alt="" decoding="async" />
-      <img class="iw-dark" :src="ART['blue-inteli-white']" alt="" decoding="async" />
+      <img class="iw-light" :src="ART['blue-cyan']" alt="" decoding="async" />
+      <img class="iw-dark" :src="ART.reverse" alt="" decoding="async" />
     </template>
   </span>
 </template>
 
 <script setup lang="ts">
-/* The supplied InteliWaterwayz® lockup, as the Experience shows it. The files
-   are byte copies of the approved 578 × 139 masters and are never recoloured
-   or redrawn; the wrapper only crops the masters' built-in clear space so the
-   visible lockup, not the canvas, is `height` tall. `auto` follows the site
-   theme: the RGB Blue artwork by day, the blue-Inteli/white-Waterwayz
-   combination on dark. Pin a variant for a surface that stays dark by day. */
-export type InteliWaterwayzLogoVariant = 'blue' | 'blue-inteli-white' | 'reverse'
+/* The supplied InteliWaterwayz® lockup on its 578 × 139 canvas. `blue` and
+   `reverse` are byte copies of the approved masters; `blue-cyan` is the RGB
+   Blue master with only the WATERWAYZ lettering set to the icon's cyan
+   (#30acc8), at Eugene's direction. The wrapper crops the masters' built-in
+   clear space so the visible lockup, not the canvas, is `height` tall. `auto`
+   follows the site theme: navy Inteli with cyan Waterwayz by day, the
+   all-white reverse artwork on dark. Pin a variant for a surface that stays
+   dark by day. */
+export type InteliWaterwayzLogoVariant = 'blue' | 'blue-cyan' | 'reverse'
 
 withDefaults(
   defineProps<{
@@ -37,7 +39,7 @@ withDefaults(
 const base = import.meta.env.BASE_URL
 const ART: Record<InteliWaterwayzLogoVariant, string> = {
   blue: `${base}assets/inteliwaterwayz-blue.png`,
-  'blue-inteli-white': `${base}assets/inteliwaterwayz-blue-inteli-white.svg`,
+  'blue-cyan': `${base}assets/inteliwaterwayz-blue-cyan.png`,
   reverse: `${base}assets/inteliwaterwayz-reverse.png`,
 }
 </script>
