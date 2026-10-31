@@ -259,6 +259,23 @@ onBeforeUnmount(() => {
 [data-theme='dark'] .wm-symbol-light { display: none; }
 [data-theme='dark'] .wm-symbol-dark { display: inline; }
 
+/* A chapter sets its own surface whatever the site theme: dark bands take
+   the disc-backed symbol, light bands the ink one. */
+.chapter[data-chapter='slate'] .wm-symbol-light,
+.chapter[data-chapter='dark'] .wm-symbol-light,
+.chapter[data-chapter='navy'] .wm-symbol-light,
+.chapter[data-chapter='black'] .wm-symbol-light,
+.chapter[data-chapter='dusk'] .wm-symbol-light,
+.chapter[data-chapter='light'] .wm-symbol-dark,
+.chapter[data-chapter='wash'] .wm-symbol-dark { display: none; }
+.chapter[data-chapter='slate'] .wm-symbol-dark,
+.chapter[data-chapter='dark'] .wm-symbol-dark,
+.chapter[data-chapter='navy'] .wm-symbol-dark,
+.chapter[data-chapter='black'] .wm-symbol-dark,
+.chapter[data-chapter='dusk'] .wm-symbol-dark,
+.chapter[data-chapter='light'] .wm-symbol-light,
+.chapter[data-chapter='wash'] .wm-symbol-light { display: inline; }
+
 .wm-endorse-left {
   display: inline-flex;
   flex-direction: column;

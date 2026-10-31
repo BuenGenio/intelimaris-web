@@ -2,17 +2,8 @@
   <footer class="footer chapter" data-chapter="slate" role="contentinfo">
     <div class="container-wide footer-grid">
       <div class="footer-family">
-        <p class="t-overline footer-label">{{ t('footer.family') }}</p>
-        <ul class="footer-family-list">
-          <li>
-            <RouterLink to="/" class="footer-mark"><Wordmark :size="22" tm /></RouterLink>
-            <span class="t-caption">{{ t('footer.family.sea') }}</span>
-          </li>
-          <li>
-            <RouterLink to="/waterwayz" class="footer-mark"><Wordmark root="Water" domain="Wayz" product :size="22" tm /></RouterLink>
-            <span class="t-caption">{{ t('footer.family.waterwayz') }}</span>
-          </li>
-        </ul>
+        <RouterLink to="/" class="footer-mark" aria-label="InteliWaterwayz home"><Wordmark domain="Waterwayz" product :size="27" tm transparent round-mark /></RouterLink>
+        <p class="t-caption footer-brand-line">{{ t('footer.brand') }}</p>
         <p class="footer-sentence">Know more. Worry less.<br>Enjoy the water.</p>
       </div>
 
@@ -38,7 +29,7 @@
     <div class="container-wide footer-bottom">
       <hr class="line" />
       <p class="t-caption">{{ t('footer.copyright') }}</p>
-      <p class="t-caption" lang="en">InteliMarine LLC d/b/a InteliMARIS™. WaterWayz™ is the connected boating experience.</p>
+      <p class="t-caption" lang="en">InteliMarine LLC d/b/a InteliMARIS™. InteliWaterwayz™ is the connected boating experience.</p>
     </div>
   </footer>
 </template>
@@ -70,29 +61,24 @@ const { t } = useI18n()
   gap: var(--space-12);
 }
 
-.footer-label {
-  margin: 0 0 var(--space-4);
-}
-
-.footer-family-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.footer-family-list li {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-}
-
+/* The same lockup as the header, so the mark reads identically at both ends. */
 .footer-mark {
   display: inline-flex;
+  max-width: 100%;
   text-decoration: none;
+}
+
+.footer-mark :deep(.wm) {
+  max-width: 100%;
+}
+
+.footer-mark :deep(.wm-svg) {
+  max-width: 100%;
+  height: auto;
+}
+
+.footer-brand-line {
+  margin: var(--space-3) 0 0;
 }
 
 .footer-sentence {

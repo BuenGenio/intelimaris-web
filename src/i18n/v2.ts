@@ -9,9 +9,7 @@ import type { Language, Translations } from './translations'
 export const v2Translations: Record<Language, Translations> = {
   en: {
     'shot.zoomAria': 'Open full size',
-    'footer.family': 'The family',
-    'footer.family.sea': 'The company and connected systems',
-    'footer.family.waterwayz': 'The connected boating experience',
+    'footer.brand': 'The company and the connected boating experience',
     'v2.closing.sentence': 'We see what is happening on the water, and tell you before it matters.',
     'shot.close': 'Close',
     'shot.panHint': 'Pinch or drag to read the full screen',
@@ -220,9 +218,7 @@ export const v2Translations: Record<Language, Translations> = {
 
   es: {
     'shot.zoomAria': 'Abrir a tamaño completo',
-    'footer.family': 'La familia',
-    'footer.family.sea': 'El mar',
-    'footer.family.waterwayz': 'La app, de Intelimaris',
+    'footer.brand': 'La empresa y la experiencia de navegación conectada',
     'v2.closing.sentence': 'Vemos lo que pasa en el agua, y te lo decimos antes de que importe.',
     'shot.close': 'Cerrar',
     'shot.panHint': 'Pellizca o arrastra para leer la pantalla completa',
@@ -431,9 +427,7 @@ export const v2Translations: Record<Language, Translations> = {
 
   el: {
     'shot.zoomAria': 'Άνοιγμα σε πλήρες μέγεθος',
-    'footer.family': 'Η οικογένεια',
-    'footer.family.sea': 'Η θάλασσα',
-    'footer.family.waterwayz': 'Η εφαρμογή, από την Intelimaris',
+    'footer.brand': 'Η εταιρεία και η εμπειρία συνδεδεμένης ναυσιπλοΐας',
     'v2.closing.sentence': 'Βλέπουμε τι συμβαίνει στο νερό, και σου το λέμε πριν μετρήσει.',
     'shot.close': 'Κλείσιμο',
     'shot.panHint': 'Κάνε pinch ή σύρε για να διαβάσεις όλη την οθόνη',
@@ -642,9 +636,7 @@ export const v2Translations: Record<Language, Translations> = {
 
   uk: {
     'shot.zoomAria': 'Відкрити в повному розмірі',
-    'footer.family': 'Родина',
-    'footer.family.sea': 'Море',
-    'footer.family.waterwayz': 'Застосунок від Intelimaris',
+    'footer.brand': 'Компанія та досвід підключеного яхтингу',
     'v2.closing.sentence': 'Ми бачимо, що відбувається на воді, і кажемо вам до того, як це матиме значення.',
     'shot.close': 'Закрити',
     'shot.panHint': 'Зведіть пальці або потягніть, щоб прочитати весь екран',
