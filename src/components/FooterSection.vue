@@ -2,7 +2,7 @@
   <footer class="footer chapter" data-chapter="slate" role="contentinfo">
     <div class="container-wide footer-grid">
       <div class="footer-family">
-        <RouterLink to="/" class="footer-mark" aria-label="InteliWaterwayz home"><Wordmark domain="Waterwayz" product :size="27" tm transparent round-mark /></RouterLink>
+        <RouterLink to="/" class="footer-mark" aria-label="InteliWaterwayz home"><InteliWaterwayzLogo variant="blue-inteli-white" :height="32" /></RouterLink>
         <p class="t-caption footer-brand-line">{{ t('footer.brand') }}</p>
         <p class="footer-sentence">Know more. Worry less.<br>Enjoy the water.</p>
       </div>
@@ -40,7 +40,7 @@ import { RouterLink } from 'vue-router'
 import { SOLUTIONS, solutionLink } from '@/data/solutions'
 import { AUDIENCES, audienceLink } from '@/data/audiences'
 import { PRESS, pressLink } from '@/data/press'
-import Wordmark from '@/components/v2/Wordmark.vue'
+import InteliWaterwayzLogo from '@/components/InteliWaterwayzLogo.vue'
 import MailLink from '@/components/MailLink.vue'
 import { useI18n } from '@/composables/useI18n'
 
@@ -66,15 +66,6 @@ const { t } = useI18n()
   display: inline-flex;
   max-width: 100%;
   text-decoration: none;
-}
-
-.footer-mark :deep(.wm) {
-  max-width: 100%;
-}
-
-.footer-mark :deep(.wm-svg) {
-  max-width: 100%;
-  height: auto;
 }
 
 .footer-brand-line {

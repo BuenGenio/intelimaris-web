@@ -5,7 +5,7 @@
     <div class="site-nav editorial-shell">
       <RouterLink to="/" class="site-brand" :aria-label="`${logo?.name ?? 'InteliWaterwayz'} home`">
         <PartnerLogo v-if="logo" :logo="logo" :size="40" />
-        <Wordmark v-else domain="Waterwayz" product :size="27" tm transparent round-mark />
+        <InteliWaterwayzLogo v-else :height="32" />
       </RouterLink>
       <nav class="site-desktop-nav" aria-label="Main navigation">
         <template v-for="link in MAIN_NAVIGATION" :key="link.to"><PlatformMenu v-if="link.to === '/capabilities'" /><RouterLink v-else :to="link.to">{{ link.label }}</RouterLink></template>
@@ -40,7 +40,7 @@ import { MAIN_NAVIGATION, PLATFORM_NAVIGATION } from '@/data/navigation'
 import SiteBreadcrumbs from '@/components/SiteBreadcrumbs.vue'
 import SitePreferences from '@/components/SitePreferences.vue'
 import RoleSwitcher from '@/components/RoleSwitcher.vue'
-import Wordmark from '@/components/v2/Wordmark.vue'
+import InteliWaterwayzLogo from '@/components/InteliWaterwayzLogo.vue'
 import PartnerLogo from '@/components/PartnerLogo.vue'
 import { useLogo } from '@/composables/useLogo'
 import { useAudience } from '@/composables/useAudience'
